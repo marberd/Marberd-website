@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Marberd Bernard — Architect & VDC Specialist. Columbia-trained. New York City.">
+<title>BIM & Revit · MARBERD</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.bim-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:52px; }
+@media(max-width:800px){.bim-stats{grid-template-columns:1fr 1fr;}}
+.bim-stat { padding:32px 24px; border:1px solid var(--border); text-align:center; background:var(--white); }
+.bim-stat-n { font-family:var(--serif); font-size:48px; font-weight:700; color:var(--black); line-height:1; }
+.bim-stat-l { font-family:var(--mono); font-size:8.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-top:8px; }
+.software-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:52px; }
+@media(max-width:700px){.software-grid{grid-template-columns:1fr 1fr;}}
+.sw-card { padding:24px 24px; border:1px solid var(--border); background:var(--white); transition:all .2s; cursor:default; }
+.sw-card:hover { border-color:rgba(184,148,106,.4); background:var(--paper); }
+.sw-cat { font-family:var(--mono); font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-dk); margin-bottom:10px; }
+.sw-name { font-size:13px; font-weight:500; color:var(--black); }
+.sw-detail { font-size:11.5px; color:var(--muted); margin-top:4px; }
+.ai-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:52px; }
+@media(max-width:900px){.ai-grid{grid-template-columns:1fr 1fr;}}
+.ai-card { padding:20px 20px; border:1px solid var(--border); background:var(--white); }
+.ai-card:hover { border-color:rgba(184,148,106,.4); }
+.ai-name { font-size:13px; font-weight:500; color:var(--black); margin-bottom:3px; }
+.ai-maker { font-family:var(--mono); font-size:8px; letter-spacing:1px; color:var(--gold-dk); }
+.ai-use { font-size:11px; color:var(--muted); margin-top:8px; line-height:1.5; }
+</style>
+</head>
+<body><div id="cur"></div><div id="cur-dot"></div>
+<nav id="main-nav">
+  <a id="nav-logo" href="index.html" title="MARBERD"><svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="academic.html">Academic</a></li>
+    <li><a href="professional.html">Professional</a></li>
+    <li><a href="bim-revit.html">BIM / Revit</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="nav-icon" href="https://linkedin.com/in/marberd-bernard" target="_blank" title="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a class="nav-icon" href="mailto:lagrandotamb@gmail.com" title="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+</nav>
+<div class="page-hero reveal">
+  <div class="page-eyebrow">BIM / Revit</div>
+  <h1 class="page-title">Building information<br><em>at scale.</em></h1>
+</div>
+<div class="content-wrap">
+  <p class="reveal" style="font-size:15px;color:var(--mid);font-weight:300;max-width:620px;line-height:1.8;">
+    BIM strategy, VDC coordination, and digital delivery — managing the full lifecycle of complex projects from early coordination through construction documentation.
+  </p>
+  <div class="bim-stats">
+    <div class="bim-stat reveal"><div class="bim-stat-n">235+</div><div class="bim-stat-l">BIM 360 / ACC Projects</div></div>
+    <div class="bim-stat reveal"><div class="bim-stat-n">25+</div><div class="bim-stat-l">JPMorgan Locations Led</div></div>
+    <div class="bim-stat reveal"><div class="bim-stat-n">119K</div><div class="bim-stat-l">SF — CLEAR HQ at 4 WTC</div></div>
+    <div class="bim-stat reveal"><div class="bim-stat-n">8+</div><div class="bim-stat-l">Years Active BIM Practice</div></div>
+  </div>
+
+  <hr class="rule">
+  <div class="sec-label">Software Stack</div>
+  <div class="software-grid">
+    <div class="sw-card reveal"><div class="sw-cat">BIM / Modeling</div><div class="sw-name">Autodesk Revit</div><div class="sw-detail">Primary BIM authoring tool · Advanced formulas, parametric families</div></div>
+    <div class="sw-card reveal"><div class="sw-cat">Cloud Coordination</div><div class="sw-name">BIM 360 / ACC</div><div class="sw-detail">235+ projects administered · User access &amp; model management</div></div>
+    <div class="sw-card reveal"><div class="sw-cat">Clash Detection</div><div class="sw-name">Navisworks</div><div class="sw-detail">Multi-discipline clash detection across MEP, structural, architectural</div></div>
+    <div class="sw-card reveal"><div class="sw-cat">Drafting</div><div class="sw-name">AutoCAD</div><div class="sw-detail">2D documentation, site plans, detail drawings</div></div>
+    <div class="sw-card reveal"><div class="sw-cat">Computational</div><div class="sw-name">Dynamo for Revit</div><div class="sw-detail">Parametric workflows, data extraction, automation scripts</div></div>
+    <div class="sw-card reveal"><div class="sw-cat">Parametric Design</div><div class="sw-name">Rhino + Grasshopper</div><div class="sw-detail">Complex geometry, generative form studies</div></div>
+    <div class="sw-card reveal"><div class="sw-cat">Visualization</div><div class="sw-name">Lumion</div><div class="sw-detail">Architectural rendering, client presentations, animations</div></div>
+    <div class="sw-card reveal"><div class="sw-cat">Visualization</div><div class="sw-name">Enscape</div><div class="sw-detail">Real-time rendering directly from Revit</div></div>
+    <div class="sw-card reveal"><div class="sw-cat">Documentation</div><div class="sw-name">Bluebeam Revu</div><div class="sw-detail">PDF markup, drawing review, field coordination</div></div>
+  </div>
+
+  <hr class="rule">
+  <div class="sec-label">AI & Emerging Technology</div>
+  <h2 class="sec-h2 reveal">Leveraging AI across<br><em>every phase.</em></h2>
+  <div class="ai-grid">
+    <div class="ai-card reveal"><div class="ai-name">Claude (Anthropic)</div><div class="ai-maker">DAILY USE</div><div class="ai-use">Research, documentation, CLI automation, project proposals</div></div>
+    <div class="ai-card reveal"><div class="ai-name">ChatGPT</div><div class="ai-maker">DAILY USE</div><div class="ai-use">Spec writing, code compliance, client communications</div></div>
+    <div class="ai-card reveal"><div class="ai-name">Autodesk Forma</div><div class="ai-maker">ACTIVE</div><div class="ai-use">AI massing studies, environmental simulation, BIM-integrated</div></div>
+    <div class="ai-card reveal"><div class="ai-name">Veras (EvolveLA)</div><div class="ai-maker">ACTIVE</div><div class="ai-use">AI rendering from Revit models for rapid client presentations</div></div>
+    <div class="ai-card reveal"><div class="ai-name">Midjourney</div><div class="ai-maker">PROFICIENT</div><div class="ai-use">Concept mood boards, material palette ideation</div></div>
+    <div class="ai-card reveal"><div class="ai-name">Hypar (Trimble)</div><div class="ai-maker">PROFICIENT</div><div class="ai-use">Parametric &amp; computational design, BIM-integrated systems</div></div>
+    <div class="ai-card reveal"><div class="ai-name">Arko.ai</div><div class="ai-maker">PROFICIENT</div><div class="ai-use">AI-assisted layout generation, space planning optimization</div></div>
+    <div class="ai-card reveal"><div class="ai-name">GitHub Copilot</div><div class="ai-maker">FAMILIAR</div><div class="ai-use">Dynamo scripting, Revit API automation</div></div>
+  </div>
+</div>
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">
+      <svg width="36" height="36" viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg>
+      <span class="foot-copy">© 2026 Marberd Bernard · New York, NY</span>
+    </div>
+    <div class="foot-links">
+      <a class="foot-link" href="about.html">About</a>
+      <a class="foot-link" href="professional.html">Work</a>
+      <a class="foot-link" href="contact.html">Contact</a>
+      <a class="foot-link" href="https://linkedin.com/in/marberd-bernard" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

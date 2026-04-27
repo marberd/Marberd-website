@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Marberd Bernard — Architect & VDC Specialist. Columbia-trained. New York City.">
+<title>Professional Work · MARBERD</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.client-strip {
+  display:flex; flex-wrap:wrap; gap:2px; margin-top:52px; margin-bottom:60px;
+}
+.client-tag {
+  padding:10px 20px; border:1px solid var(--border); background:var(--white);
+  font-family:var(--mono); font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  color:var(--mid); transition:all .2s; cursor:default;
+}
+.client-tag:hover { border-color:var(--gold); color:var(--gold-dk); }
+.work-list { display:flex; flex-direction:column; gap:0; }
+.work-item {
+  display:grid; grid-template-columns:220px 1fr; gap:48px;
+  padding:44px 0; border-bottom:1px solid var(--border); align-items:start;
+}
+@media(max-width:700px){.work-item{grid-template-columns:1fr;gap:12px;}}
+.work-meta {}
+.work-co { font-family:var(--serif); font-size:20px; font-weight:600; color:var(--black); }
+.work-role { font-family:var(--mono); font-size:9px; letter-spacing:1px; color:var(--gold-dk); text-transform:uppercase; margin-top:6px; }
+.work-period { font-size:12px; color:var(--muted); margin-top:4px; }
+.work-blist { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.work-blist li {
+  display:grid; grid-template-columns:12px 1fr; gap:10px;
+  font-size:13px; color:var(--mid); line-height:1.65;
+}
+.work-blist li::before { content:'→'; color:var(--gold); font-size:10px; padding-top:3px; }
+.work-blist strong { color:var(--text); font-weight:500; }
+.intl-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:52px; }
+@media(max-width:700px){.intl-grid{grid-template-columns:1fr;}}
+.intl-card { padding:28px 28px; border:1px solid var(--border); }
+.intl-card:hover { border-color:rgba(184,148,106,.4); background:var(--paper); }
+.intl-loc { font-family:var(--mono); font-size:9px; letter-spacing:1.5px; color:var(--gold-dk); text-transform:uppercase; margin-bottom:8px; }
+.intl-name { font-family:var(--serif); font-size:20px; font-weight:600; color:var(--black); margin-bottom:8px; }
+.intl-desc { font-size:13px; color:var(--mid); line-height:1.65; }
+</style>
+</head>
+<body><div id="cur"></div><div id="cur-dot"></div>
+<nav id="main-nav">
+  <a id="nav-logo" href="index.html" title="MARBERD"><svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="academic.html">Academic</a></li>
+    <li><a href="professional.html">Professional</a></li>
+    <li><a href="bim-revit.html">BIM / Revit</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="nav-icon" href="https://linkedin.com/in/marberd-bernard" target="_blank" title="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a class="nav-icon" href="mailto:lagrandotamb@gmail.com" title="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+</nav>
+<div class="page-hero reveal">
+  <div class="page-eyebrow">Professional</div>
+  <h1 class="page-title">Client work at<br><em>scale.</em></h1>
+</div>
+<div class="content-wrap">
+  <p class="reveal" style="font-size:15px;color:var(--mid);font-weight:300;max-width:600px;line-height:1.8;">
+    Eight years of professional practice delivering precision for some of the most recognized institutions in New York and beyond.
+  </p>
+  <div class="client-strip reveal">
+    <div class="client-tag">JPMorgan Chase</div>
+    <div class="client-tag">BMW</div>
+    <div class="client-tag">CLEAR / 4 WTC</div>
+    <div class="client-tag">Capital One</div>
+    <div class="client-tag">Rockefeller Group</div>
+    <div class="client-tag">Davis Wright Tremaine</div>
+    <div class="client-tag">First Sentier Investors</div>
+    <div class="client-tag">SA&amp;BOO · China</div>
+  </div>
+
+  <hr class="rule">
+  <div class="sec-label">Experience</div>
+
+  <div class="work-list">
+    <div class="work-item reveal">
+      <div class="work-meta">
+        <div class="work-co">TPG Architecture</div>
+        <div class="work-role">Revit Specialist / Project Architect</div>
+        <div class="work-period">April 2019 – Present · New York, NY</div>
+      </div>
+      <ul class="work-blist">
+        <li>Led BIM strategy coordinating architecture, structure, and MEP models across <strong>multiple simultaneous projects</strong>.</li>
+        <li>Delivered analysis and strategic recommendations for <strong>25+ JPMorgan Chase locations</strong> — standardizing BIM workflows firmwide.</li>
+        <li>Directed 3D modeling of complex ceiling geometries for <strong>CLEAR's 119,226 SF HQ at 4 WTC</strong>.</li>
+        <li>Developed core-and-shell models for <strong>Davis Wright Tremaine's 62,000 SF office</strong>; coordinated ceiling systems and phased drawings.</li>
+        <li>Designed <strong>FF&E packages for BMW's flagship NYC showroom</strong> — parametric furniture models and stakeholder presentations.</li>
+        <li>Administered <strong>235+ BIM 360 &amp; Autodesk Construction Cloud projects</strong>.</li>
+        <li>Led company-wide Revit training sessions, boosting team proficiency across all studio groups.</li>
+      </ul>
+    </div>
+    <div class="work-item reveal">
+      <div class="work-meta">
+        <div class="work-co">AMA Consulting Engineers</div>
+        <div class="work-role">BIM / CAD Operator</div>
+        <div class="work-period">May 2018 – 2019 · New York, NY</div>
+      </div>
+      <ul class="work-blist">
+        <li>Collaborated across <strong>100+ projects</strong> including Peloton HQ (300,000 SF) and PENN (350,000 SF).</li>
+        <li>Navisworks clash detection across architectural, structural, and MEP models.</li>
+      </ul>
+    </div>
+    <div class="work-item reveal">
+      <div class="work-meta">
+        <div class="work-co">D-YO Studio</div>
+        <div class="work-role">Assistant Architect</div>
+        <div class="work-period">Jan 2016 – 2018 · New York, NY</div>
+      </div>
+      <ul class="work-blist">
+        <li>Initiated firm-wide transition from <strong>AutoCAD to Revit</strong> — introduced material takeoffs for cost estimation.</li>
+        <li>Led construction meetings; handled <strong>DOB filing</strong>, building codes, and energy analysis.</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="rule">
+  <div class="sec-label">International Work</div>
+  <h2 class="sec-h2 reveal">Projects beyond<br><em>New York.</em></h2>
+  <div class="intl-grid">
+    <div class="intl-card reveal">
+      <div class="intl-loc">Alpena, Michigan · USA</div>
+      <div class="intl-name">130,000 SF Mixed-Use</div>
+      <div class="intl-desc">Sole designer — proposal development, fee structuring, project phasing, high-end visualization, and Michigan Building Code analysis.</div>
+    </div>
+    <div class="intl-card reveal">
+      <div class="intl-loc">Chengdu, China</div>
+      <div class="intl-name">BURTON IN99 Flagship — 370 sqm</div>
+      <div class="intl-desc">Design consultation for SA&BOO — concept refinement, layout optimization, and visual presentation support for the retail flagship store.</div>
+    </div>
+    <div class="intl-card reveal">
+      <div class="intl-loc">Dominican Republic</div>
+      <div class="intl-name">Five Ground-Up Residences</div>
+      <div class="intl-desc">Designed and managed five residential projects (avg. 4,000 SF), including a six-unit apartment building. Full delivery from concept through completion.</div>
+    </div>
+    <div class="intl-card reveal">
+      <div class="intl-loc">Utah · USA</div>
+      <div class="intl-name">Net Zero Development</div>
+      <div class="intl-desc">Master plan and unit design strategy for an MEP engineering firm. Focused on sustainability, energy performance, and zoning feasibility.</div>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">
+      <svg width="36" height="36" viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg>
+      <span class="foot-copy">© 2026 Marberd Bernard · New York, NY</span>
+    </div>
+    <div class="foot-links">
+      <a class="foot-link" href="about.html">About</a>
+      <a class="foot-link" href="professional.html">Work</a>
+      <a class="foot-link" href="contact.html">Contact</a>
+      <a class="foot-link" href="https://linkedin.com/in/marberd-bernard" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

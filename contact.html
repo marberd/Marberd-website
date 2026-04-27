@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Marberd Bernard — Architect & VDC Specialist. Columbia-trained. New York City.">
+<title>Contact · MARBERD</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+#contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:60px; align-items:start; }
+@media(max-width:800px){#contact-grid{grid-template-columns:1fr;}}
+.contact-info { display:flex; flex-direction:column; gap:2px; }
+.ci-row { padding:24px 28px; border:1px solid var(--border); background:var(--white); display:flex; gap:20px; align-items:center; transition:all .2s; }
+.ci-row:hover { border-color:rgba(184,148,106,.4); background:var(--paper); }
+.ci-icon { width:36px; height:36px; border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--gold-dk); }
+.ci-icon svg { width:14px; height:14px; }
+.ci-label { font-family:var(--mono); font-size:8.5px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
+.ci-val { font-size:14px; color:var(--text); }
+.ci-val a { color:inherit; text-decoration:none; cursor:none; }
+.ci-val a:hover { color:var(--gold-dk); }
+.avail-box { padding:28px 28px; border:1px solid rgba(184,148,106,.3); background:rgba(184,148,106,0.04); margin-top:28px; }
+.avail-label { font-family:var(--mono); font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-dk); margin-bottom:8px; }
+.avail-text { font-size:13px; color:var(--mid); line-height:1.7; }
+.contact-statement { }
+.contact-statement h2 { font-family:var(--serif); font-size:clamp(36px,5vw,56px); font-weight:300; line-height:1.1; color:var(--black); margin-bottom:20px; }
+.contact-statement h2 strong { font-weight:700; }
+.contact-statement h2 em { font-style:italic; color:var(--gold-dk); }
+.contact-statement p { font-size:14px; color:var(--mid); line-height:1.8; font-weight:300; max-width:440px; }
+</style>
+</head>
+<body><div id="cur"></div><div id="cur-dot"></div>
+<nav id="main-nav">
+  <a id="nav-logo" href="index.html" title="MARBERD"><svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="academic.html">Academic</a></li>
+    <li><a href="professional.html">Professional</a></li>
+    <li><a href="bim-revit.html">BIM / Revit</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="nav-icon" href="https://linkedin.com/in/marberd-bernard" target="_blank" title="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a class="nav-icon" href="mailto:lagrandotamb@gmail.com" title="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+</nav>
+<div class="page-hero reveal">
+  <div class="page-eyebrow">Contact</div>
+  <h1 class="page-title">Let's build something<br><em>together.</em></h1>
+</div>
+<div class="content-wrap">
+  <div id="contact-grid">
+    <div class="contact-statement reveal">
+      <h2>Open to senior VDC,<br>BIM &amp; architectural<br><em>design roles.</em></h2>
+      <p style="margin-top:24px;">Columbia-trained architect with 8+ years of proven delivery. Available for full-time, freelance, and collaborative opportunities in New York City and beyond.</p>
+      <div class="avail-box" style="margin-top:36px;">
+        <div class="avail-label">Availability</div>
+        <div class="avail-text">Available for new opportunities · Open to on-site and hybrid roles · Bilingual English / Spanish</div>
+      </div>
+    </div>
+    <div class="contact-info reveal">
+      <div class="ci-row">
+        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:lagrandotamb@gmail.com">lagrandotamb@gmail.com</a></div></div>
+      </div>
+      <div class="ci-row">
+        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.06 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg></div>
+        <div><div class="ci-label">Phone</div><div class="ci-val"><a href="tel:3477033054">347.703.3054</a></div></div>
+      </div>
+      <div class="ci-row">
+        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="ci-label">Location</div><div class="ci-val">New York, NY 10025</div></div>
+      </div>
+      <div class="ci-row">
+        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div><div class="ci-label">LinkedIn</div><div class="ci-val"><a href="https://linkedin.com/in/marberd-bernard" target="_blank">linkedin.com/in/marberd-bernard</a></div></div>
+      </div>
+      <div class="ci-row">
+        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+        <div><div class="ci-label">Portfolio</div><div class="ci-val"><a href="https://marberd.com">marberd.com</a></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">
+      <svg width="36" height="36" viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg>
+      <span class="foot-copy">© 2026 Marberd Bernard · New York, NY</span>
+    </div>
+    <div class="foot-links">
+      <a class="foot-link" href="about.html">About</a>
+      <a class="foot-link" href="professional.html">Work</a>
+      <a class="foot-link" href="contact.html">Contact</a>
+      <a class="foot-link" href="https://linkedin.com/in/marberd-bernard" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

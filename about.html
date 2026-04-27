@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Marberd Bernard — Architect & VDC Specialist. Columbia-trained. New York City.">
+<title>About · MARBERD</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.bio-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; margin-top:60px; }
+@media(max-width:900px){.bio-grid{grid-template-columns:1fr;}}
+.bio-text p { font-size:15px; line-height:1.9; color:var(--mid); font-weight:300; margin-bottom:18px; }
+.bio-text strong { color:var(--text); font-weight:500; }
+.edu-list { display:flex; flex-direction:column; gap:2px; }
+.edu-item { padding:24px 28px; border:1px solid var(--border); background:var(--white); }
+.edu-item:hover { border-color:rgba(184,148,106,0.4); }
+.edu-school { font-family:var(--serif); font-size:20px; font-weight:600; color:var(--black); }
+.edu-deg { font-size:13px; color:var(--mid); margin-top:4px; }
+.edu-loc { font-family:var(--mono); font-size:9px; letter-spacing:1px; color:var(--muted); margin-top:8px; }
+.timeline { display:flex; flex-direction:column; gap:0; }
+.tl-item { display:grid; grid-template-columns:100px 1fr; gap:24px; padding:28px 0; border-bottom:1px solid var(--border); }
+.tl-year { font-family:var(--mono); font-size:10px; letter-spacing:1px; color:var(--gold-dk); padding-top:4px; }
+.tl-co { font-size:16px; font-weight:500; color:var(--black); margin-bottom:3px; }
+.tl-role { font-family:var(--mono); font-size:9px; letter-spacing:1px; color:var(--muted); text-transform:uppercase; margin-bottom:8px; }
+.tl-desc { font-size:13px; color:var(--mid); line-height:1.7; }
+.cert-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; margin-top:0; }
+@media(max-width:700px){.cert-grid{grid-template-columns:1fr;}}
+.cert-card { padding:24px 24px; border:1px solid var(--border); background:var(--white); }
+.cert-name { font-size:13px; font-weight:500; color:var(--black); margin-bottom:4px; }
+.cert-issuer { font-family:var(--mono); font-size:8.5px; letter-spacing:1px; color:var(--gold-dk); text-transform:uppercase; }
+.cert-date { font-size:11px; color:var(--muted); margin-top:6px; }
+</style>
+</head>
+<body><div id="cur"></div><div id="cur-dot"></div>
+<nav id="main-nav">
+  <a id="nav-logo" href="index.html" title="MARBERD"><svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="academic.html">Academic</a></li>
+    <li><a href="professional.html">Professional</a></li>
+    <li><a href="bim-revit.html">BIM / Revit</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="nav-icon" href="https://linkedin.com/in/marberd-bernard" target="_blank" title="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a class="nav-icon" href="mailto:lagrandotamb@gmail.com" title="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+</nav>
+<div class="page-hero reveal">
+  <div class="page-eyebrow">About</div>
+  <h1 class="page-title">The architect behind<br><em>the work.</em></h1>
+</div>
+
+<div class="content-wrap">
+  <div class="bio-grid">
+    <div class="bio-text reveal">
+      <p><strong>Columbia-trained architect and VDC professional</strong> with 8+ years leading BIM strategy, digital delivery, and design execution across commercial, residential, and mixed-use projects.</p>
+      <p>Delivered work for marquee clients including <strong>JPMorgan Chase, BMW, CLEAR, Capital One, and Rockefeller Group</strong>. Known for bridging design intent with construction execution — standardizing BIM workflows, coordinating across trades, and leveraging AI tools to accelerate delivery.</p>
+      <p>Entrepreneurial track record spanning the U.S., China, and the Dominican Republic. Bilingual in English and Spanish.</p>
+    </div>
+    <div class="reveal">
+      <div class="edu-list">
+        <div class="edu-item">
+          <div class="edu-school">Columbia University</div>
+          <div class="edu-deg">Master of Architecture (M.Arch)</div>
+          <div class="edu-loc">New York, NY</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-school">NYC College of Technology</div>
+          <div class="edu-deg">Bachelor of Architectural Technology (B.Tech)</div>
+          <div class="edu-loc">Brooklyn, NY</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sec-label">Experience</div>
+  <h2 class="sec-h2 reveal">Where I've<br><em>worked.</em></h2>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-year">2019–<br>Present</div>
+      <div>
+        <div class="tl-co">TPG Architecture — New York, NY</div>
+        <div class="tl-role">Revit Specialist / Project Architect</div>
+        <div class="tl-desc">Led BIM strategy across architecture, structure, and MEP models for clients including JPMorgan Chase (25+ locations), BMW, CLEAR (119,226 SF at 4 WTC), Capital One, and Rockefeller Group. Administered 235+ BIM 360 & ACC projects.</div>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year">2018–<br>2024</div>
+      <div>
+        <div class="tl-co">Arch-Nimations — Virtual / International</div>
+        <div class="tl-role">Founder & Freelance Designer</div>
+        <div class="tl-desc">Led design of a 130,000 SF mixed-use development in Michigan. Consulted for SA&BOO on BURTON IN99 Flagship (Chengdu, China). Managed five ground-up residential projects in the Dominican Republic.</div>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year">2018–<br>2019</div>
+      <div>
+        <div class="tl-co">AMA Consulting Engineers — New York, NY</div>
+        <div class="tl-role">BIM / CAD Operator</div>
+        <div class="tl-desc">Collaborated across 100+ projects including Peloton HQ (300,000 SF) and PENN (350,000 SF). Navisworks clash detection across architectural, structural, and MEP models.</div>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-year">2016–<br>2018</div>
+      <div>
+        <div class="tl-co">D-YO Studio — New York, NY</div>
+        <div class="tl-role">Assistant Architect</div>
+        <div class="tl-desc">Initiated firm-wide transition from AutoCAD to Revit. Led construction meetings, DOB filing, and code compliance.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <div class="sec-label">Certifications</div>
+  <div class="cert-grid">
+    <div class="cert-card reveal"><div class="cert-name">Autodesk Certified Professional — Revit</div><div class="cert-issuer">Autodesk</div><div class="cert-date">September 2024</div></div>
+    <div class="cert-card reveal"><div class="cert-name">LEED Green Associate</div><div class="cert-issuer">USGBC</div><div class="cert-date">November 2024</div></div>
+    <div class="cert-card reveal"><div class="cert-name">Peri-Urban Water Management</div><div class="cert-issuer">Scholarship · Ahmedabad, India</div><div class="cert-date">July 2023</div></div>
+  </div>
+</div>
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">
+      <svg width="36" height="36" viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg>
+      <span class="foot-copy">© 2026 Marberd Bernard · New York, NY</span>
+    </div>
+    <div class="foot-links">
+      <a class="foot-link" href="about.html">About</a>
+      <a class="foot-link" href="professional.html">Work</a>
+      <a class="foot-link" href="contact.html">Contact</a>
+      <a class="foot-link" href="https://linkedin.com/in/marberd-bernard" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

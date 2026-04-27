@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Marberd Bernard — Architect & VDC Specialist. Columbia-trained. New York City.">
+<title>Home · MARBERD</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+/* ── HERO SECTION ─────────────── */
+#hero {
+  min-height: 100vh; position: relative; overflow: hidden;
+  display: flex; align-items: center;
+  background: #FFFFFF;
+}
+
+/* Very subtle architectural grid */
+#hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(184,148,106,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184,148,106,0.05) 1px, transparent 1px);
+  background-size: 88px 88px;
+}
+
+/* Ghost name watermark */
+#hero-ghost {
+  position: absolute; z-index: 1;
+  right: -40px; bottom: -20px;
+  font-family: var(--serif); font-size: clamp(100px,16vw,220px);
+  font-weight: 700; color: transparent;
+  -webkit-text-stroke: 1px rgba(184,148,106,0.07);
+  line-height: 1; pointer-events: none; user-select: none;
+  white-space: nowrap; letter-spacing: -4px;
+}
+
+/* Layout */
+#hero-inner {
+  position: relative; z-index: 5;
+  max-width: 1200px; margin: 0 auto; width: 100%;
+  padding: 100px 60px 80px;
+  display: grid; grid-template-columns: 1fr 480px;
+  gap: 60px; align-items: center;
+}
+@media (max-width: 960px) {
+  #hero-inner { grid-template-columns: 1fr; }
+  #hero-photo-col { display: none; }
+}
+
+/* LEFT — Text */
+#hero-text { position: relative; }
+.h-eyebrow {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 3.5px;
+  text-transform: uppercase; color: var(--gold-dk);
+  margin-bottom: 24px; display: flex; align-items: center; gap: 14px;
+  opacity: 0; animation: fadeUp .8s ease .3s forwards;
+}
+.h-eyebrow::before { content:''; width: 28px; height: 1px; background: var(--gold); }
+.h-name {
+  font-family: var(--serif);
+  font-size: clamp(64px, 9.5vw, 120px);
+  font-weight: 700; line-height: 0.88; letter-spacing: -3px;
+  color: var(--black);
+  opacity: 0; animation: fadeUp 1s cubic-bezier(.16,1,.3,1) .5s forwards;
+}
+.h-name .line2 {
+  font-weight: 300; font-style: italic;
+  color: var(--gold-dk); letter-spacing: -2px;
+}
+.h-divider {
+  width: 48px; height: 1px; background: var(--gold);
+  margin: 32px 0;
+  opacity: 0; animation: expandW .8s ease .9s forwards;
+  transform-origin: left;
+}
+@keyframes expandW { from{width:0;opacity:0;} to{width:48px;opacity:1;} }
+.h-sub {
+  font-size: 15px; font-weight: 300; line-height: 1.75;
+  color: var(--mid); max-width: 400px;
+  opacity: 0; animation: fadeUp .9s ease 1s forwards;
+}
+.h-stats {
+  display: flex; gap: 48px; margin-top: 44px;
+  opacity: 0; animation: fadeUp .9s ease 1.2s forwards;
+}
+.hstat { display: flex; flex-direction: column; gap: 4px; }
+.hstat-n {
+  font-family: var(--serif); font-size: 38px; font-weight: 600;
+  color: var(--black); line-height: 1;
+}
+.hstat-l {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--muted);
+}
+.h-links {
+  display: flex; gap: 10px; margin-top: 48px;
+  opacity: 0; animation: fadeUp .9s ease 1.4s forwards;
+}
+.h-link-primary {
+  padding: 12px 28px; background: var(--black); color: var(--white);
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 2px;
+  text-transform: uppercase; text-decoration: none; cursor: none;
+  transition: background .22s;
+}
+.h-link-primary:hover { background: var(--gold-dk); }
+.h-link-ghost {
+  padding: 12px 28px; border: 1px solid var(--border); color: var(--mid);
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 2px;
+  text-transform: uppercase; text-decoration: none; cursor: none;
+  transition: all .22s;
+}
+.h-link-ghost:hover { border-color: var(--gold); color: var(--gold-dk); }
+
+/* RIGHT — Photo column */
+#hero-photo-col { position: relative; }
+#hero-photo-name-back {
+  position: absolute; z-index: 0;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: var(--serif); font-size: 88px; font-weight: 700;
+  color: transparent; -webkit-text-stroke: 1px rgba(184,148,106,0.12);
+  white-space: nowrap; pointer-events: none; user-select: none;
+  letter-spacing: -2px;
+}
+#hero-photo-wrap {
+  position: relative; z-index: 2;
+  width: 420px; height: 540px;
+  margin: 0 auto;
+  opacity: 0; animation: photoIn 1.4s cubic-bezier(.16,1,.3,1) .8s forwards;
+}
+@keyframes photoIn {
+  0% {
+    opacity: 0;
+    clip-path: polygon(50% 50%,50% 50%,50% 50%,50% 50%,50% 50%,50% 50%,50% 50%,50% 50%);
+    filter: brightness(2.5) blur(8px);
+  }
+  30% { opacity: .7; filter: brightness(1.4) blur(2px); }
+  65% {
+    clip-path: polygon(8% -2%,92% 4%,104% 22%,100% 84%,90% 103%,10% 100%,-3% 80%,0% 16%);
+  }
+  100% {
+    opacity: 1;
+    clip-path: polygon(14% 0%,86% 0%,100% 14%,100% 86%,86% 100%,14% 100%,0% 86%,0% 14%);
+    filter: brightness(1) blur(0px);
+  }
+}
+#hero-photo-img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  display: block;
+}
+
+/* Blueprint SVG */
+#bp-svg {
+  position: absolute; inset: 0; z-index: 4;
+  pointer-events: none; opacity: 0;
+  animation: fadeBlue .6s ease 2.2s forwards;
+}
+@keyframes fadeBlue { to { opacity: .18; } }
+.bp { fill: none; stroke: #B8946A; stroke-width: 0.7;
+  stroke-dasharray: 500; stroke-dashoffset: 500;
+  animation: drawBP 2s ease 2.5s forwards; }
+.bp2 { stroke: #8A8A9A; stroke-width: 0.4; animation-delay: 2.8s; }
+@keyframes drawBP { to { stroke-dashoffset: 0; } }
+
+/* Corner marks */
+.cm {
+  position: absolute; width: 14px; height: 14px;
+  border-color: rgba(184,148,106,0.35); border-style: solid;
+}
+.cm.tl { top: 0; left: 0; border-width: 1px 0 0 1px; }
+.cm.tr { top: 0; right: 0; border-width: 1px 1px 0 0; }
+.cm.bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+.cm.br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+/* Coord label */
+.coord-label {
+  position: absolute; font-family: var(--mono); font-size: 8px;
+  color: rgba(184,148,106,0.45); letter-spacing: 1px;
+}
+.coord-label.tl { top: -20px; left: 0; }
+.coord-label.br { bottom: -20px; right: 0; }
+
+/* Scroll line */
+#scroll-ind {
+  position: absolute; bottom: 28px; left: 60px; z-index: 10;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0; animation: fadeUp .8s ease 2s forwards;
+}
+#scroll-ind span {
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted);
+}
+.scroll-line {
+  width: 40px; height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:.3;} 50%{opacity:1;} }
+
+/* Marquee */
+.marquee-wrap {
+  background: var(--black); padding: 13px 0; overflow: hidden;
+}
+.marquee-track {
+  display: flex; white-space: nowrap;
+  animation: marquee 22s linear infinite;
+}
+.marquee-item {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.35); padding: 0 28px;
+  display: flex; align-items: center; gap: 16px;
+}
+.marquee-item::after { content:'·'; color: var(--gold); }
+@keyframes marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
+</style>
+</head>
+<body><div id="cur"></div><div id="cur-dot"></div>
+<nav id="main-nav">
+  <a id="nav-logo" href="index.html" title="MARBERD"><svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="academic.html">Academic</a></li>
+    <li><a href="professional.html">Professional</a></li>
+    <li><a href="bim-revit.html">BIM / Revit</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="nav-icon" href="https://linkedin.com/in/marberd-bernard" target="_blank" title="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a class="nav-icon" href="mailto:lagrandotamb@gmail.com" title="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+</nav>
+<section id="hero">
+  <div id="hero-ghost">MB</div>
+  <div id="hero-inner">
+
+    <!-- LEFT -->
+    <div id="hero-text">
+      <div class="h-eyebrow">Architect &amp; VDC Specialist · Columbia University</div>
+      <h1 class="h-name">
+        MARBERD<br>
+        <span class="line2">Bernard.</span>
+      </h1>
+      <div class="h-divider"></div>
+      <p class="h-sub">
+        Columbia-trained architect bridging creative vision with
+        BIM technology. 8+ years delivering precision across
+        New York City and beyond.
+      </p>
+      <div class="h-stats">
+        <div class="hstat"><span class="hstat-n">8+</span><span class="hstat-l">Years</span></div>
+        <div class="hstat"><span class="hstat-n">235+</span><span class="hstat-l">Projects</span></div>
+        <div class="hstat"><span class="hstat-n">3</span><span class="hstat-l">Countries</span></div>
+      </div>
+      <div class="h-links">
+        <a class="h-link-primary" href="professional.html">View Work</a>
+        <a class="h-link-ghost" href="contact.html">Get in Touch</a>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div id="hero-photo-col">
+      <div id="hero-photo-name-back">MARBERD</div>
+      <div id="hero-photo-wrap">
+        <div class="cm tl"></div>
+        <div class="cm tr"></div>
+        <div class="cm bl"></div>
+        <div class="cm br"></div>
+        <span class="coord-label tl">40.7128° N</span>
+        <span class="coord-label br">74.0060° W</span>
+        <img id="hero-photo-img" src="assets/images/profile.jpg" alt="Marberd Bernard">
+        <svg id="bp-svg" viewBox="0 0 420 540" preserveAspectRatio="xMidYMid slice">
+          <rect class="bp" x="20" y="20" width="380" height="500"/>
+          <line class="bp" x1="20" y1="270" x2="400" y2="270"/>
+          <line class="bp" x1="210" y1="20" x2="210" y2="540"/>
+          <circle class="bp" cx="210" cy="270" r="100" fill="none"/>
+          <path class="bp2" d="M0,0 L420,540 M420,0 L0,540"/>
+          <line class="bp2" x1="20" y1="20" x2="60" y2="20"/>
+          <line class="bp2" x1="20" y1="20" x2="20" y2="60"/>
+          <line class="bp2" x1="400" y1="20" x2="360" y2="20"/>
+          <line class="bp2" x1="400" y1="20" x2="400" y2="60"/>
+          <line class="bp2" x1="20" y1="520" x2="60" y2="520"/>
+          <line class="bp2" x1="20" y1="520" x2="20" y2="480"/>
+          <line class="bp2" x1="400" y1="520" x2="360" y2="520"/>
+          <line class="bp2" x1="400" y1="520" x2="400" y2="480"/>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+  <div id="scroll-ind">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Architectural Design</span>
+    <span class="marquee-item">BIM Strategy</span>
+    <span class="marquee-item">VDC Coordination</span>
+    <span class="marquee-item">Construction Documentation</span>
+    <span class="marquee-item">Lumion · Revit · Enscape</span>
+    <span class="marquee-item">Columbia University</span>
+    <span class="marquee-item">Hudson Yards · 4 WTC</span>
+    <span class="marquee-item">Architectural Design</span>
+    <span class="marquee-item">BIM Strategy</span>
+    <span class="marquee-item">VDC Coordination</span>
+    <span class="marquee-item">Construction Documentation</span>
+    <span class="marquee-item">Lumion · Revit · Enscape</span>
+    <span class="marquee-item">Columbia University</span>
+    <span class="marquee-item">Hudson Yards · 4 WTC</span>
+  </div>
+</div>
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">
+      <svg width="36" height="36" viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg>
+      <span class="foot-copy">© 2026 Marberd Bernard · New York, NY</span>
+    </div>
+    <div class="foot-links">
+      <a class="foot-link" href="about.html">About</a>
+      <a class="foot-link" href="professional.html">Work</a>
+      <a class="foot-link" href="contact.html">Contact</a>
+      <a class="foot-link" href="https://linkedin.com/in/marberd-bernard" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

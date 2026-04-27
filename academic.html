@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Marberd Bernard — Architect & VDC Specialist. Columbia-trained. New York City.">
+<title>Academic Projects · MARBERD</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.proj-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+@media(max-width:900px){.proj-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.proj-grid{grid-template-columns:1fr;}}
+.proj-card {
+  background:var(--white); border:1px solid var(--border);
+  padding:36px 28px 28px; cursor:none;
+  transition:all .25s; position:relative; overflow:hidden;
+}
+.proj-card:hover { border-color:rgba(184,148,106,0.45); background:var(--paper); }
+.proj-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  transform:scaleX(0); transform-origin:left; transition:transform .3s;
+}
+.proj-card:hover::before { transform:scaleX(1); }
+.proj-num { font-family:var(--mono); font-size:9px; letter-spacing:2px; color:var(--muted); margin-bottom:20px; }
+.proj-type { font-family:var(--mono); font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold-dk); margin-bottom:8px; }
+.proj-name { font-family:var(--serif); font-size:22px; font-weight:600; color:var(--black); margin-bottom:8px; }
+.proj-desc { font-size:12.5px; color:var(--mid); line-height:1.7; }
+.proj-card-placeholder {
+  width:100%; aspect-ratio:4/3; background:var(--paper);
+  border:1px dashed var(--border); margin-bottom:20px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--mono); font-size:9px; color:var(--muted); letter-spacing:1px;
+}
+</style>
+</head>
+<body><div id="cur"></div><div id="cur-dot"></div>
+<nav id="main-nav">
+  <a id="nav-logo" href="index.html" title="MARBERD"><svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="academic.html">Academic</a></li>
+    <li><a href="professional.html">Professional</a></li>
+    <li><a href="bim-revit.html">BIM / Revit</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="nav-icon" href="https://linkedin.com/in/marberd-bernard" target="_blank" title="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a class="nav-icon" href="mailto:lagrandotamb@gmail.com" title="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+</nav>
+<div class="page-hero reveal">
+  <div class="page-eyebrow">Academic</div>
+  <h1 class="page-title">Studio work &<br><em>design research.</em></h1>
+</div>
+<div class="content-wrap">
+  <div class="proj-grid">
+    <div class="proj-card reveal">
+      <div class="proj-card-placeholder">[ Replace with render ]</div>
+      <div class="proj-num">01</div>
+      <div class="proj-type">Residential · Michigan</div>
+      <div class="proj-name">Alpena Residence</div>
+      <div class="proj-desc">130,000 SF mixed-use development. Sole designer — proposal development, code analysis, project phasing, and high-end visualization.</div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-card-placeholder">[ Replace with render ]</div>
+      <div class="proj-num">02</div>
+      <div class="proj-type">Recreation · Studio</div>
+      <div class="proj-name">Pool House — Core III</div>
+      <div class="proj-desc">Intimate recreational structure exploring materiality, natural light, and the relationship between interior and landscape.</div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-card-placeholder">[ Replace with render ]</div>
+      <div class="proj-num">03</div>
+      <div class="proj-type">Environmental · Waterfront</div>
+      <div class="proj-name">Mangrove HWB — Core IV</div>
+      <div class="proj-desc">Environmental design at the edge of land and water. Exploring ecological systems and resilient infrastructure.</div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-card-placeholder">[ Replace with render ]</div>
+      <div class="proj-num">04</div>
+      <div class="proj-type">Cultural · Civic</div>
+      <div class="proj-name">Water Museum — Core V</div>
+      <div class="proj-desc">Cultural institution dedicated to water as a civic resource. Program and form derived from the cycles and movement of water.</div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-card-placeholder">[ Replace with render ]</div>
+      <div class="proj-num">05</div>
+      <div class="proj-type">Workspace · Studio</div>
+      <div class="proj-name">Studio — Core VI</div>
+      <div class="proj-desc">An artist's studio exploring the relationship between productive space, light, and creative process.</div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-card-placeholder">[ Replace with render ]</div>
+      <div class="proj-num">06</div>
+      <div class="proj-type">Specialized · Technical</div>
+      <div class="proj-name">Lighting Design</div>
+      <div class="proj-desc">Standalone lighting design study. Exploring luminous environments, visual comfort, and spatial atmosphere through controlled light.</div>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">
+      <svg width="36" height="36" viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg>
+      <span class="foot-copy">© 2026 Marberd Bernard · New York, NY</span>
+    </div>
+    <div class="foot-links">
+      <a class="foot-link" href="about.html">About</a>
+      <a class="foot-link" href="professional.html">Work</a>
+      <a class="foot-link" href="contact.html">Contact</a>
+      <a class="foot-link" href="https://linkedin.com/in/marberd-bernard" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
