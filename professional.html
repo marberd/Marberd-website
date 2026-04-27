@@ -3,50 +3,186 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Marberd Bernard — Architectural Designer & VDC Specialist. Columbia-trained. New York City.">
+<meta name="description" content="Marberd Bernard — Architectural Designer & VDC Specialist. New York City.">
 <title>Professional Work · MARBERD</title>
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-.client-strip {
-  display:flex; flex-wrap:wrap; gap:2px; margin-top:52px; margin-bottom:60px;
+
+/* ── STAT STRIP ──────────────────────────── */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  margin-top: 64px;
 }
-.client-tag {
-  padding:10px 20px; border:1px solid var(--border); background:var(--white);
-  font-family:var(--mono); font-size:9px; letter-spacing:2px; text-transform:uppercase;
-  color:var(--mid); transition:all .2s; cursor:default;
+@media (max-width: 700px) { .stat-strip { grid-template-columns: repeat(2,1fr); } }
+.stat-block {
+  padding: 32px 28px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
-.client-tag:hover { border-color:var(--gold); color:var(--gold-dk); }
-.work-list { display:flex; flex-direction:column; gap:0; }
-.work-item {
-  display:grid; grid-template-columns:220px 1fr; gap:48px;
-  padding:44px 0; border-bottom:1px solid var(--border); align-items:start;
+.stat-n {
+  font-family: var(--serif);
+  font-size: clamp(38px, 5vw, 58px);
+  font-weight: 700; line-height: 1;
+  color: var(--black); letter-spacing: -2px;
 }
-@media(max-width:700px){.work-item{grid-template-columns:1fr;gap:12px;}}
-.work-meta {}
-.work-co { font-family:var(--serif); font-size:20px; font-weight:600; color:var(--black); }
-.work-role { font-family:var(--mono); font-size:9px; letter-spacing:1px; color:var(--gold-dk); text-transform:uppercase; margin-top:6px; }
-.work-period { font-size:12px; color:var(--muted); margin-top:4px; }
-.work-blist { list-style:none; display:flex; flex-direction:column; gap:8px; }
-.work-blist li {
-  display:grid; grid-template-columns:12px 1fr; gap:10px;
-  font-size:13px; color:var(--mid); line-height:1.65;
+.stat-n em { font-style: italic; color: var(--gold-dk); }
+.stat-l {
+  font-family: var(--mono); font-size: 8.5px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); margin-top: 8px;
 }
-.work-blist li::before { content:'→'; color:var(--gold); font-size:10px; padding-top:3px; }
-.work-blist strong { color:var(--text); font-weight:500; }
-.intl-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:52px; }
-@media(max-width:700px){.intl-grid{grid-template-columns:1fr;}}
-.intl-card { border:1px solid var(--border); overflow:hidden; transition:border-color .25s; }
-.intl-card:hover { border-color:rgba(184,148,106,.4); }
-.intl-card:hover .intl-img { transform:scale(1.04); }
-.intl-img-wrap { overflow:hidden; }
-.intl-img { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; transition:transform .4s cubic-bezier(.16,1,.3,1); }
-.intl-body { padding:24px 28px 28px; }
-.intl-loc { font-family:var(--mono); font-size:9px; letter-spacing:1.5px; color:var(--gold-dk); text-transform:uppercase; margin-bottom:8px; }
-.intl-name { font-family:var(--serif); font-size:20px; font-weight:600; color:var(--black); margin-bottom:8px; }
-.intl-desc { font-size:13px; color:var(--mid); line-height:1.65; }
+
+/* ── CLIENT ROW ──────────────────────────── */
+.client-row {
+  display: flex; flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  margin-top: 72px; padding-top: 28px;
+  gap: 0;
+}
+.client-row-label {
+  font-family: var(--mono); font-size: 8.5px;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--gold-dk); width: 100%;
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.client-row-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: var(--border);
+}
+.client-name {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--mid); padding: 10px 22px;
+  border: 1px solid var(--border);
+  margin: 0 2px 2px 0;
+  transition: color .2s, border-color .2s;
+}
+.client-name:hover { color: var(--gold-dk); border-color: var(--gold); }
+
+/* ── EXPERIENCE ──────────────────────────── */
+.exp-section { margin-top: 80px; }
+.exp-entry {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  padding: 52px 0;
+}
+@media (max-width: 760px) {
+  .exp-entry { grid-template-columns: 1fr; }
+  .exp-left { padding-bottom: 24px; }
+}
+.exp-left { padding-right: 40px; padding-top: 4px; }
+.exp-co {
+  font-family: var(--serif); font-size: 22px;
+  font-weight: 700; color: var(--black); line-height: 1.1;
+}
+.exp-role {
+  font-family: var(--mono); font-size: 8.5px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold-dk); margin-top: 10px;
+}
+.exp-period {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--muted); margin-top: 6px; letter-spacing: .5px;
+}
+.exp-right {}
+.exp-lead {
+  font-family: var(--serif); font-size: 18px;
+  font-weight: 300; font-style: italic;
+  color: var(--black); line-height: 1.4;
+  margin-bottom: 24px;
+}
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.exp-bullets li {
+  display: grid; grid-template-columns: 20px 1fr;
+  font-size: 13.5px; color: var(--mid); line-height: 1.7;
+}
+.exp-bullets li::before {
+  content: '—'; color: var(--gold);
+  font-size: 11px; padding-top: 5px;
+}
+.exp-bullets strong { color: var(--text); font-weight: 500; }
+
+/* ── RENDERS SHOWCASE ───────────────────── */
+.renders-section { margin-top: 80px; }
+.render-pair {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  margin-top: 2px;
+}
+@media (max-width: 700px) { .render-pair { grid-template-columns: 1fr; } }
+.render-frame { position: relative; overflow: hidden; }
+.render-frame img {
+  width: 100%; aspect-ratio: 16/9; object-fit: cover;
+  display: block;
+  transition: transform .6s cubic-bezier(.16,1,.3,1);
+}
+.render-frame:hover img { transform: scale(1.04); }
+.render-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 16px 20px;
+  background: linear-gradient(to top, rgba(17,17,24,.7) 0%, transparent 100%);
+  font-family: var(--mono); font-size: 8.5px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,.65);
+}
+
+/* ── INTERNATIONAL PROJECTS ─────────────── */
+.intl-section { margin-top: 80px; }
+.intl-list { display: flex; flex-direction: column; gap: 2px; margin-top: 2px; }
+.intl-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px; overflow: hidden;
+}
+@media (max-width: 760px) { .intl-row { grid-template-columns: 1fr; } }
+.intl-row:nth-child(even) .intl-row-img  { order: 2; }
+.intl-row:nth-child(even) .intl-row-body { order: 1; }
+.intl-row-img { overflow: hidden; }
+.intl-row-img img {
+  width: 100%; height: 100%; min-height: 260px;
+  object-fit: cover; display: block;
+  transition: transform .6s cubic-bezier(.16,1,.3,1);
+}
+.intl-row:hover .intl-row-img img { transform: scale(1.04); }
+.intl-row-body {
+  background: var(--white); border: 1px solid var(--border);
+  padding: 44px 40px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.intl-row:hover .intl-row-body {
+  border-color: rgba(184,148,106,.35);
+  background: var(--paper);
+}
+.intl-index {
+  font-family: var(--mono); font-size: 9px;
+  color: var(--muted); letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.intl-loc {
+  font-family: var(--mono); font-size: 8.5px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold-dk); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.intl-loc::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+.intl-name {
+  font-family: var(--serif); font-size: clamp(22px,3vw,30px);
+  font-weight: 600; color: var(--black);
+  line-height: 1.1; margin-bottom: 16px;
+}
+.intl-desc {
+  font-size: 13px; color: var(--mid);
+  line-height: 1.8; font-weight: 300;
+}
+
 </style>
 </head>
 <body><svg id="cur" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="cur-ring" cx="22" cy="22" r="16" stroke="#111118" stroke-width="1"/><line x1="22" y1="3" x2="22" y2="9" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="35" x2="22" y2="41" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="22" x2="9" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="22" x2="41" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/></svg><div id="cur-dot"></div>
+
 <nav id="main-nav">
   <a id="nav-logo" href="index.html" title="MARBERD"><svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -69,107 +205,181 @@
     </a>
   </div>
 </nav>
+
+<!-- ── HERO ── -->
 <div class="page-hero reveal">
   <div class="page-eyebrow">Professional</div>
-  <h1 class="page-title">Client work at<br><em>scale.</em></h1>
+  <h1 class="page-title">Eight years.<br><em>Precision at scale.</em></h1>
 </div>
+
 <div class="content-wrap">
-  <p class="reveal" style="font-size:15px;color:var(--mid);font-weight:300;max-width:600px;line-height:1.8;">
-    Eight years of professional practice delivering precision for some of the most recognized institutions in New York and beyond.
-  </p>
-  <div class="client-strip reveal">
-    <div class="client-tag">JPMorgan Chase</div>
-    <div class="client-tag">BMW</div>
-    <div class="client-tag">CLEAR / 4 WTC</div>
-    <div class="client-tag">Capital One</div>
-    <div class="client-tag">Rockefeller Group</div>
-    <div class="client-tag">Davis Wright Tremaine</div>
-    <div class="client-tag">First Sentier Investors</div>
-    <div class="client-tag">SA&amp;BOO · China</div>
-  </div>
 
-  <hr class="rule">
-  <div class="sec-label">Experience</div>
-
-  <div class="work-list">
-    <div class="work-item reveal">
-      <div class="work-meta">
-        <div class="work-co">TPG Architecture</div>
-        <div class="work-role">Revit Specialist / Project Architect</div>
-        <div class="work-period">April 2019 – Present · New York, NY</div>
-      </div>
-      <ul class="work-blist">
-        <li>Led BIM strategy coordinating architecture, structure, and MEP models across <strong>multiple simultaneous projects</strong>.</li>
-        <li>Delivered analysis and strategic recommendations for <strong>25+ JPMorgan Chase locations</strong> — standardizing BIM workflows firmwide.</li>
-        <li>Directed 3D modeling of complex ceiling geometries for <strong>CLEAR's 119,226 SF HQ at 4 WTC</strong>.</li>
-        <li>Developed core-and-shell models for <strong>Davis Wright Tremaine's 62,000 SF office</strong>; coordinated ceiling systems and phased drawings.</li>
-        <li>Designed <strong>FF&E packages for BMW's flagship NYC showroom</strong> — parametric furniture models and stakeholder presentations.</li>
-        <li>Administered <strong>235+ BIM 360 &amp; Autodesk Construction Cloud projects</strong>.</li>
-        <li>Led company-wide Revit training sessions, boosting team proficiency across all studio groups.</li>
-      </ul>
+  <!-- ── STAT STRIP ── -->
+  <div class="stat-strip reveal">
+    <div class="stat-block">
+      <div class="stat-n">8<em>+</em></div>
+      <div class="stat-l">Years of practice</div>
     </div>
-    <div class="work-item reveal">
-      <div class="work-meta">
-        <div class="work-co">AMA Consulting Engineers</div>
-        <div class="work-role">BIM / CAD Operator</div>
-        <div class="work-period">May 2018 – 2019 · New York, NY</div>
-      </div>
-      <ul class="work-blist">
-        <li>Collaborated across <strong>100+ projects</strong> including Peloton HQ (300,000 SF) and PENN (350,000 SF).</li>
-        <li>Navisworks clash detection across architectural, structural, and MEP models.</li>
-      </ul>
+    <div class="stat-block">
+      <div class="stat-n">235<em>+</em></div>
+      <div class="stat-l">BIM projects managed</div>
     </div>
-    <div class="work-item reveal">
-      <div class="work-meta">
-        <div class="work-co">D-YO Studio</div>
-        <div class="work-role">Assistant Architect</div>
-        <div class="work-period">Jan 2016 – 2018 · New York, NY</div>
-      </div>
-      <ul class="work-blist">
-        <li>Initiated firm-wide transition from <strong>AutoCAD to Revit</strong> — introduced material takeoffs for cost estimation.</li>
-        <li>Led construction meetings; handled <strong>DOB filing</strong>, building codes, and energy analysis.</li>
-      </ul>
+    <div class="stat-block">
+      <div class="stat-n">25<em>+</em></div>
+      <div class="stat-l">JPMorgan locations</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-n">119<em>K</em></div>
+      <div class="stat-l">SF at 4 WTC</div>
     </div>
   </div>
 
-  <hr class="rule">
-  <div class="sec-label">International Work</div>
-  <h2 class="sec-h2 reveal">Projects beyond<br><em>New York.</em></h2>
-  <div class="intl-grid">
-    <div class="intl-card reveal">
-      <div class="intl-img-wrap"><img class="intl-img" src="assets/images/projects/alpena-prof.jpg" alt="Alpena Michigan mixed-use exterior"></div>
-      <div class="intl-body">
-        <div class="intl-loc">Alpena, Michigan · USA</div>
-        <div class="intl-name">130,000 SF Mixed-Use</div>
-        <div class="intl-desc">Sole designer — proposal development, fee structuring, project phasing, high-end visualization, and Michigan Building Code analysis.</div>
+  <!-- ── CLIENTS ── -->
+  <div class="client-row reveal">
+    <div class="client-row-label">Select Clients</div>
+    <div class="client-name">JPMorgan Chase</div>
+    <div class="client-name">BMW</div>
+    <div class="client-name">CLEAR / 4 WTC</div>
+    <div class="client-name">Capital One</div>
+    <div class="client-name">Rockefeller Group</div>
+    <div class="client-name">Davis Wright Tremaine</div>
+    <div class="client-name">First Sentier Investors</div>
+    <div class="client-name">SA&amp;BOO · China</div>
+  </div>
+
+  <!-- ── EXPERIENCE ── -->
+  <div class="exp-section">
+    <div class="sec-label reveal">Experience</div>
+
+    <!-- TPG -->
+    <div class="exp-entry reveal">
+      <div class="exp-left">
+        <div class="exp-co">TPG Architecture</div>
+        <div class="exp-role">Revit Specialist · Project Architect</div>
+        <div class="exp-period">Apr 2019 – Present<br>New York, NY</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-lead">"Standardizing BIM workflows across one of New York's most active commercial practices."</div>
+        <ul class="exp-bullets">
+          <li>Led BIM strategy coordinating architecture, structure, and MEP models across <strong>multiple simultaneous projects</strong>.</li>
+          <li>Delivered analysis and strategic recommendations for <strong>25+ JPMorgan Chase locations</strong> — standardizing workflows firmwide.</li>
+          <li>Directed 3D modeling of complex ceiling geometries for <strong>CLEAR's 119,226 SF HQ at 4 WTC</strong>.</li>
+          <li>Developed core-and-shell models for <strong>Davis Wright Tremaine's 62,000 SF office</strong>; coordinated ceiling systems and phased drawings.</li>
+          <li>Designed <strong>FF&amp;E packages for BMW's flagship NYC showroom</strong> — parametric furniture models and stakeholder presentations.</li>
+          <li>Administered <strong>235+ BIM 360 &amp; Autodesk Construction Cloud projects</strong>.</li>
+          <li>Led company-wide Revit training sessions, raising proficiency across all studio groups.</li>
+        </ul>
       </div>
     </div>
-    <div class="intl-card reveal">
-      <div class="intl-img-wrap"><img class="intl-img" src="assets/images/projects/burton-china.jpg" alt="BURTON IN99 Flagship Chengdu"></div>
-      <div class="intl-body">
-        <div class="intl-loc">Chengdu, China</div>
-        <div class="intl-name">BURTON IN99 Flagship — 370 sqm</div>
-        <div class="intl-desc">Design consultation for SA&BOO — concept refinement, layout optimization, and visual presentation support for the retail flagship store.</div>
+
+    <!-- AMA -->
+    <div class="exp-entry reveal">
+      <div class="exp-left">
+        <div class="exp-co">AMA Consulting Engineers</div>
+        <div class="exp-role">BIM / CAD Operator</div>
+        <div class="exp-period">May 2018 – 2019<br>New York, NY</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-lead">"High-volume coordination across landmark New York projects."</div>
+        <ul class="exp-bullets">
+          <li>Collaborated across <strong>100+ projects</strong> including Peloton HQ (300,000 SF) and PENN Station (350,000 SF).</li>
+          <li>Performed Navisworks clash detection across architectural, structural, and MEP models.</li>
+        </ul>
       </div>
     </div>
-    <div class="intl-card reveal">
-      <div class="intl-img-wrap"><img class="intl-img" src="assets/images/projects/dominican-residences.jpg" alt="Dominican Republic residences"></div>
-      <div class="intl-body">
-        <div class="intl-loc">Dominican Republic</div>
-        <div class="intl-name">Five Ground-Up Residences</div>
-        <div class="intl-desc">Designed and managed five residential projects (avg. 4,000 SF), including a six-unit apartment building. Full delivery from concept through completion.</div>
+
+    <!-- D-YO -->
+    <div class="exp-entry reveal">
+      <div class="exp-left">
+        <div class="exp-co">D-YO Studio</div>
+        <div class="exp-role">Assistant Designer</div>
+        <div class="exp-period">Jan 2016 – 2018<br>New York, NY</div>
       </div>
-    </div>
-    <div class="intl-card reveal">
-      <div class="intl-img-wrap"><img class="intl-img" src="assets/images/projects/utah-netzero.jpg" alt="Utah net zero development"></div>
-      <div class="intl-body">
-        <div class="intl-loc">Utah · USA</div>
-        <div class="intl-name">Net Zero Development</div>
-        <div class="intl-desc">Master plan and unit design strategy for an MEP engineering firm. Focused on sustainability, energy performance, and zoning feasibility.</div>
+      <div class="exp-right">
+        <div class="exp-lead">"Driving digital transformation at a boutique design firm."</div>
+        <ul class="exp-bullets">
+          <li>Initiated firm-wide transition from <strong>AutoCAD to Revit</strong> — introduced material takeoffs for cost estimation.</li>
+          <li>Led construction meetings; handled <strong>DOB filing</strong>, building codes, and energy analysis.</li>
+        </ul>
       </div>
     </div>
   </div>
+
+  <!-- ── SELECTED RENDERS ── -->
+  <div class="renders-section reveal">
+    <div class="sec-label">Selected Renders — TPG Architecture</div>
+    <div class="render-pair" style="margin-top:24px;">
+      <div class="render-frame">
+        <img src="assets/images/projects/tpg-interior.jpg" alt="1290 Avenue interior">
+        <div class="render-caption">1290 Avenue of the Americas · Interior</div>
+      </div>
+      <div class="render-frame">
+        <img src="assets/images/projects/tpg-terrace.jpg" alt="1290 terrace">
+        <div class="render-caption">1290 Avenue of the Americas · Terrace</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── INTERNATIONAL ── -->
+  <div class="intl-section">
+    <div class="sec-label reveal">International Work</div>
+    <h2 class="sec-h2 reveal">Projects beyond<br><em>New York.</em></h2>
+
+    <div class="intl-list">
+
+      <div class="intl-row reveal">
+        <div class="intl-row-img">
+          <img src="assets/images/projects/alpena-prof.jpg" alt="Alpena Michigan mixed-use">
+        </div>
+        <div class="intl-row-body">
+          <div class="intl-index">01 / 04</div>
+          <div class="intl-loc">Alpena, Michigan · USA</div>
+          <div class="intl-name">130,000 SF<br>Mixed-Use Development</div>
+          <div class="intl-desc">Sole designer — proposal development, fee structuring, project phasing, high-end visualization, and Michigan Building Code analysis.</div>
+        </div>
+      </div>
+
+      <div class="intl-row reveal">
+        <div class="intl-row-img">
+          <img src="assets/images/projects/burton-china.jpg" alt="BURTON IN99 Flagship Chengdu">
+        </div>
+        <div class="intl-row-body">
+          <div class="intl-index">02 / 04</div>
+          <div class="intl-loc">Chengdu, China</div>
+          <div class="intl-name">BURTON IN99 Flagship<br>370 sqm Retail</div>
+          <div class="intl-desc">Design consultation for SA&amp;BOO — concept refinement, layout optimization, and visual presentation support for the retail flagship store.</div>
+        </div>
+      </div>
+
+      <div class="intl-row reveal">
+        <div class="intl-row-img">
+          <img src="assets/images/projects/dominican-residences.jpg" alt="Dominican Republic residences">
+        </div>
+        <div class="intl-row-body">
+          <div class="intl-index">03 / 04</div>
+          <div class="intl-loc">Dominican Republic</div>
+          <div class="intl-name">Five Ground-Up<br>Residences</div>
+          <div class="intl-desc">Designed and managed five residential projects averaging 4,000 SF each, including a six-unit apartment building. Full delivery from concept through completion.</div>
+        </div>
+      </div>
+
+      <div class="intl-row reveal">
+        <div class="intl-row-img">
+          <img src="assets/images/projects/utah-netzero.jpg" alt="Utah net zero development">
+        </div>
+        <div class="intl-row-body">
+          <div class="intl-index">04 / 04</div>
+          <div class="intl-loc">Utah · USA</div>
+          <div class="intl-name">Net Zero<br>Development</div>
+          <div class="intl-desc">Master plan and unit design strategy for an MEP engineering firm. Focused on sustainability, energy performance, and zoning feasibility.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
+
 <footer>
   <div class="foot-inner">
     <div class="foot-logo">
