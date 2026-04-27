@@ -6,17 +6,32 @@
 const cur = document.getElementById('cur');
 const curDot = document.getElementById('cur-dot');
 if (cur && curDot) {
-  let mx=0, my=0, cx=0, cy=0;
-  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
-  (function loop(){
-    cx += (mx-cx)*0.10; cy += (my-cy)*0.10;
-    cur.style.left = cx+'px'; cur.style.top = cy+'px';
-    curDot.style.left = mx+'px'; curDot.style.top = my+'px';
+  let mx = window.innerWidth/2, my = window.innerHeight/2;
+  let cx = mx, cy = my;
+
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  (function loop() {
+    cx += (mx - cx) * 0.12;
+    cy += (my - cy) * 0.12;
+    cur.style.left    = cx + 'px';
+    cur.style.top     = cy + 'px';
+    curDot.style.left = mx + 'px';
+    curDot.style.top  = my + 'px';
     requestAnimationFrame(loop);
   })();
-  document.querySelectorAll('a,button,[data-hover]').forEach(el => {
+
+  document.querySelectorAll('a, button, [data-hover]').forEach(el => {
     el.addEventListener('mouseenter', () => cur.classList.add('hovering'));
     el.addEventListener('mouseleave', () => cur.classList.remove('hovering'));
+  });
+
+  // Hide when leaving window, show on re-entry
+  document.addEventListener('mouseleave', () => {
+    cur.style.opacity = '0'; curDot.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    cur.style.opacity = '1'; curDot.style.opacity = '1';
   });
 }
 
