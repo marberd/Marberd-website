@@ -9,7 +9,7 @@
 <style>
 /* ── HERO SECTION ─────────────── */
 #hero {
-  min-height: 100vh; position: relative; overflow: hidden;
+  min-height: 100vh; position: relative; overflow: clip;
   display: flex; align-items: center;
   background: #FFFFFF;
 }
@@ -28,22 +28,23 @@
 #hero-photo-abs {
   position: absolute;
   right: 0; top: 0; bottom: 0;
-  width: 52%;
+  width: 56%;
   z-index: 3;
   opacity: 0;
+  overflow: visible;
   animation: photoFadeIn 1.4s cubic-bezier(.16,1,.3,1) .6s forwards;
   pointer-events: none;
 }
 #hero-photo-abs img {
   width: 100%; height: 100%;
-  object-fit: contain; object-position: bottom right;
+  object-fit: contain; object-position: top right;
   display: block;
 }
 /* Soft left-edge fade so photo blends into white */
 #hero-photo-abs::before {
   content: '';
   position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.08) 30%, transparent 55%);
+  background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.05) 28%, transparent 50%);
 }
 @keyframes photoFadeIn {
   0%  { opacity: 0; transform: translateX(40px) scale(1.03); filter: blur(6px); }
@@ -51,36 +52,6 @@
   100%{ opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
 }
 
-/* ── BIG NAME BEHIND PHOTO (z-index 2, under photo) ── */
-#hero-name-back {
-  position: absolute;
-  right: 2%; bottom: -14px;
-  z-index: 2;
-  font-family: var(--serif);
-  font-size: clamp(90px, 13vw, 190px);
-  font-weight: 700; line-height: 1;
-  letter-spacing: -5px;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(17,17,24,0.09);
-  pointer-events: none; user-select: none; white-space: nowrap;
-}
-
-/* ── BIG NAME IN FRONT OF PHOTO (z-index 4, over photo) ── */
-#hero-name-front {
-  position: absolute;
-  right: 2%; bottom: -14px;
-  z-index: 6;
-  font-family: var(--serif);
-  font-size: clamp(90px, 13vw, 190px);
-  font-weight: 700; line-height: 1;
-  letter-spacing: -5px;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(184,148,106,0.22);
-  pointer-events: none; user-select: none; white-space: nowrap;
-  /* Only show the BOTTOM portion — top is hidden behind photo */
-  -webkit-mask: linear-gradient(to top, black 0%, black 38%, transparent 58%);
-  mask: linear-gradient(to top, black 0%, black 38%, transparent 58%);
-}
 
 /* ── LAYOUT ── */
 #hero-inner {
@@ -238,12 +209,6 @@
     <img src="assets/images/headshot.png" alt="Marberd Bernard">
   </div>
 
-  <!-- Big name BEHIND photo -->
-  <div id="hero-name-back">BERNARD</div>
-
-  <!-- Big name IN FRONT of photo (bottom portion only via mask) -->
-  <div id="hero-name-front">BERNARD</div>
-
   <!-- Blueprint lines overlay -->
   <svg id="bp-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
     <rect class="bp" x="580" y="40" width="580" height="720"/>
@@ -264,14 +229,14 @@
 
   <div id="hero-inner">
     <div id="hero-text">
-      <div class="h-eyebrow">Architect &amp; VDC Specialist · Columbia University</div>
+      <div class="h-eyebrow">Architect &amp; VDC Specialist</div>
       <h1 class="h-name">
         MARBERD<br>
         <span class="line2">Bernard.</span>
       </h1>
       <div class="h-divider"></div>
       <p class="h-sub">
-        Columbia-trained architect bridging creative vision with
+        Design professional bridging creative vision with
         BIM technology. 8+ years delivering precision across
         New York City and beyond.
       </p>
@@ -301,14 +266,14 @@
     <span class="marquee-item">VDC Coordination</span>
     <span class="marquee-item">Construction Documentation</span>
     <span class="marquee-item">Lumion · Revit · Enscape</span>
-    <span class="marquee-item">Columbia University</span>
+    <span class="marquee-item">New York City</span>
     <span class="marquee-item">Hudson Yards · 4 WTC</span>
     <span class="marquee-item">Architectural Design</span>
     <span class="marquee-item">BIM Strategy</span>
     <span class="marquee-item">VDC Coordination</span>
     <span class="marquee-item">Construction Documentation</span>
     <span class="marquee-item">Lumion · Revit · Enscape</span>
-    <span class="marquee-item">Columbia University</span>
+    <span class="marquee-item">New York City</span>
     <span class="marquee-item">Hudson Yards · 4 WTC</span>
   </div>
 </div>

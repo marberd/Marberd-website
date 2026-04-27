@@ -6,25 +6,17 @@
 const cur = document.getElementById('cur');
 const curDot = document.getElementById('cur-dot');
 if (cur && curDot) {
-  let mx=0,my=0,cx=0,cy=0;
+  let mx=0, my=0, cx=0, cy=0;
   document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
   (function loop(){
-    cx += (mx-cx)*0.11; cy += (my-cy)*0.11;
+    cx += (mx-cx)*0.10; cy += (my-cy)*0.10;
     cur.style.left = cx+'px'; cur.style.top = cy+'px';
     curDot.style.left = mx+'px'; curDot.style.top = my+'px';
     requestAnimationFrame(loop);
   })();
   document.querySelectorAll('a,button,[data-hover]').forEach(el => {
-    el.addEventListener('mouseenter',()=>{
-      cur.style.width='52px'; cur.style.height='52px';
-      cur.style.background='rgba(184,148,106,0.08)';
-      cur.style.borderColor='rgba(184,148,106,0.8)';
-    });
-    el.addEventListener('mouseleave',()=>{
-      cur.style.width='36px'; cur.style.height='36px';
-      cur.style.background='transparent';
-      cur.style.borderColor='rgba(184,148,106,0.6)';
-    });
+    el.addEventListener('mouseenter', () => cur.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => cur.classList.remove('hovering'));
   });
 }
 
