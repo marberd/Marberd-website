@@ -26,15 +26,16 @@
 .proj-type { font-family:var(--mono); font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold-dk); margin-bottom:8px; }
 .proj-name { font-family:var(--serif); font-size:22px; font-weight:600; color:var(--black); margin-bottom:8px; }
 .proj-desc { font-size:12.5px; color:var(--mid); line-height:1.7; }
-.proj-card-placeholder {
-  width:100%; aspect-ratio:4/3; background:var(--paper);
-  border:1px dashed var(--border); margin-bottom:20px;
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--mono); font-size:9px; color:var(--muted); letter-spacing:1px;
+.proj-img {
+  width:100%; aspect-ratio:4/3; object-fit:cover;
+  display:block; margin-bottom:20px;
+  transition: transform .4s cubic-bezier(.16,1,.3,1);
 }
+.proj-card:hover .proj-img { transform: scale(1.03); }
+.proj-img-wrap { overflow:hidden; margin-bottom:20px; }
 </style>
 </head>
-<body><div id="cur"></div><div id="cur-dot"></div>
+<body><canvas id="cur-canvas"></canvas><div id="cur"><svg width="22" height="28" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2L2 22L7.5 17L11.5 26L14 25L10 16H20L2 2Z" fill="#111118" stroke="#B8946A" stroke-width="1" stroke-linejoin="round"/></svg></div><div id="cur-dot"></div>
 <nav id="main-nav">
   <a id="nav-logo" href="index.html" title="MARBERD"><svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -64,42 +65,42 @@
 <div class="content-wrap">
   <div class="proj-grid">
     <div class="proj-card reveal">
-      <div class="proj-card-placeholder">[ Replace with render ]</div>
+      <div class="proj-img-wrap"><img class="proj-img" src="assets/images/projects/alpena.jpg" alt="Alpena Residence exterior render"></div>
       <div class="proj-num">01</div>
       <div class="proj-type">Residential · Michigan</div>
       <div class="proj-name">Alpena Residence</div>
       <div class="proj-desc">130,000 SF mixed-use development. Sole designer — proposal development, code analysis, project phasing, and high-end visualization.</div>
     </div>
     <div class="proj-card reveal">
-      <div class="proj-card-placeholder">[ Replace with render ]</div>
+      <div class="proj-img-wrap"><img class="proj-img" src="assets/images/projects/pool-house.jpg" alt="Pool House render"></div>
       <div class="proj-num">02</div>
       <div class="proj-type">Recreation · Studio</div>
       <div class="proj-name">Pool House — Core III</div>
       <div class="proj-desc">Intimate recreational structure exploring materiality, natural light, and the relationship between interior and landscape.</div>
     </div>
     <div class="proj-card reveal">
-      <div class="proj-card-placeholder">[ Replace with render ]</div>
+      <div class="proj-img-wrap"><img class="proj-img" src="assets/images/projects/mangrove.jpg" alt="Mangrove HWB render"></div>
       <div class="proj-num">03</div>
       <div class="proj-type">Environmental · Waterfront</div>
       <div class="proj-name">Mangrove HWB — Core IV</div>
       <div class="proj-desc">Environmental design at the edge of land and water. Exploring ecological systems and resilient infrastructure.</div>
     </div>
     <div class="proj-card reveal">
-      <div class="proj-card-placeholder">[ Replace with render ]</div>
+      <div class="proj-img-wrap"><img class="proj-img" src="assets/images/projects/water-museum.jpg" alt="Water Museum render"></div>
       <div class="proj-num">04</div>
       <div class="proj-type">Cultural · Civic</div>
       <div class="proj-name">Water Museum — Core V</div>
       <div class="proj-desc">Cultural institution dedicated to water as a civic resource. Program and form derived from the cycles and movement of water.</div>
     </div>
     <div class="proj-card reveal">
-      <div class="proj-card-placeholder">[ Replace with render ]</div>
+      <div class="proj-img-wrap"><img class="proj-img" src="assets/images/projects/studio.jpg" alt="Studio Core VI render"></div>
       <div class="proj-num">05</div>
       <div class="proj-type">Workspace · Studio</div>
       <div class="proj-name">Studio — Core VI</div>
       <div class="proj-desc">An artist's studio exploring the relationship between productive space, light, and creative process.</div>
     </div>
     <div class="proj-card reveal">
-      <div class="proj-card-placeholder">[ Replace with render ]</div>
+      <div class="proj-img-wrap"><img class="proj-img" src="assets/images/projects/lighting.jpg" alt="Lighting Design study"></div>
       <div class="proj-num">06</div>
       <div class="proj-type">Specialized · Technical</div>
       <div class="proj-name">Lighting Design</div>

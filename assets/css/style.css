@@ -36,28 +36,21 @@ body {
 }
 
 /* ── CURSOR ─────────────────────────────── */
+#cur-canvas {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 8999;
+}
 #cur {
-  position: fixed; width: 32px; height: 32px;
-  border: 1.5px solid rgba(17,17,24,0.55);
-  border-radius: 50%; pointer-events: none; z-index: 9000;
-  top: 0; left: 0;
-  transform: translate(-50%,-50%);
-  transition: width .3s cubic-bezier(.16,1,.3,1),
-              height .3s cubic-bezier(.16,1,.3,1),
-              border-color .25s, background .25s;
-  will-change: left, top;
+  position: fixed; pointer-events: none; z-index: 9000;
+  top: 0; left: 0; will-change: left, top;
 }
-#cur.hovering {
-  width: 52px; height: 52px;
-  border-color: var(--gold);
-  background: rgba(184,148,106,0.08);
-}
+#cur svg { display: block; transition: transform .25s cubic-bezier(.16,1,.3,1); }
+#cur.hovering svg { transform: scale(1.25) rotate(-15deg); }
 #cur-dot {
-  position: fixed; width: 6px; height: 6px;
-  background: var(--gold);
-  border-radius: 50%; pointer-events: none; z-index: 9001;
-  top: 0; left: 0;
-  transform: translate(-50%,-50%);
+  position: fixed; width: 5px; height: 5px;
+  background: var(--gold); border-radius: 50%;
+  pointer-events: none; z-index: 9001;
+  top: 0; left: 0; transform: translate(-50%,-50%);
   will-change: left, top;
 }
 
