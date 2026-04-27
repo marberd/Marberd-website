@@ -24,32 +24,77 @@
   background-size: 88px 88px;
 }
 
-/* Ghost name watermark */
-#hero-ghost {
-  position: absolute; z-index: 1;
-  right: -40px; bottom: -20px;
-  font-family: var(--serif); font-size: clamp(100px,16vw,220px);
-  font-weight: 700; color: transparent;
-  -webkit-text-stroke: 1px rgba(184,148,106,0.07);
-  line-height: 1; pointer-events: none; user-select: none;
-  white-space: nowrap; letter-spacing: -4px;
+/* ── PHOTO — full-height, bleeds right edge ── */
+#hero-photo-abs {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 52%;
+  z-index: 3;
+  opacity: 0;
+  animation: photoFadeIn 1.4s cubic-bezier(.16,1,.3,1) .6s forwards;
+  pointer-events: none;
+}
+#hero-photo-abs img {
+  width: 100%; height: 100%;
+  object-fit: contain; object-position: bottom right;
+  display: block;
+}
+/* Soft left-edge fade so photo blends into white */
+#hero-photo-abs::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.08) 30%, transparent 55%);
+}
+@keyframes photoFadeIn {
+  0%  { opacity: 0; transform: translateX(40px) scale(1.03); filter: blur(6px); }
+  60% { opacity: .8; filter: blur(1px); }
+  100%{ opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
 }
 
-/* Layout */
+/* ── BIG NAME BEHIND PHOTO (z-index 2, under photo) ── */
+#hero-name-back {
+  position: absolute;
+  right: 2%; bottom: -14px;
+  z-index: 2;
+  font-family: var(--serif);
+  font-size: clamp(90px, 13vw, 190px);
+  font-weight: 700; line-height: 1;
+  letter-spacing: -5px;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(17,17,24,0.09);
+  pointer-events: none; user-select: none; white-space: nowrap;
+}
+
+/* ── BIG NAME IN FRONT OF PHOTO (z-index 4, over photo) ── */
+#hero-name-front {
+  position: absolute;
+  right: 2%; bottom: -14px;
+  z-index: 6;
+  font-family: var(--serif);
+  font-size: clamp(90px, 13vw, 190px);
+  font-weight: 700; line-height: 1;
+  letter-spacing: -5px;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(184,148,106,0.22);
+  pointer-events: none; user-select: none; white-space: nowrap;
+  /* Only show the BOTTOM portion — top is hidden behind photo */
+  -webkit-mask: linear-gradient(to top, black 0%, black 38%, transparent 58%);
+  mask: linear-gradient(to top, black 0%, black 38%, transparent 58%);
+}
+
+/* ── LAYOUT ── */
 #hero-inner {
   position: relative; z-index: 5;
   max-width: 1200px; margin: 0 auto; width: 100%;
   padding: 100px 60px 80px;
-  display: grid; grid-template-columns: 1fr 480px;
-  gap: 60px; align-items: center;
 }
-@media (max-width: 960px) {
-  #hero-inner { grid-template-columns: 1fr; }
-  #hero-photo-col { display: none; }
+@media (max-width: 820px) {
+  #hero-photo-abs { opacity: .15; width: 100%; }
+  #hero-name-back, #hero-name-front { display: none; }
 }
 
-/* LEFT — Text */
-#hero-text { position: relative; }
+/* ── LEFT TEXT ── */
+#hero-text { position: relative; max-width: 520px; }
 .h-eyebrow {
   font-family: var(--mono); font-size: 9px; letter-spacing: 3.5px;
   text-transform: uppercase; color: var(--gold-dk);
@@ -59,7 +104,7 @@
 .h-eyebrow::before { content:''; width: 28px; height: 1px; background: var(--gold); }
 .h-name {
   font-family: var(--serif);
-  font-size: clamp(64px, 9.5vw, 120px);
+  font-size: clamp(64px, 9.5vw, 118px);
   font-weight: 700; line-height: 0.88; letter-spacing: -3px;
   color: var(--black);
   opacity: 0; animation: fadeUp 1s cubic-bezier(.16,1,.3,1) .5s forwards;
@@ -112,73 +157,20 @@
 }
 .h-link-ghost:hover { border-color: var(--gold); color: var(--gold-dk); }
 
-/* RIGHT — Photo column */
-#hero-photo-col { position: relative; }
-#hero-photo-name-back {
-  position: absolute; z-index: 0;
-  top: 50%; left: 50%; transform: translate(-50%,-50%);
-  font-family: var(--serif); font-size: 88px; font-weight: 700;
-  color: transparent; -webkit-text-stroke: 1px rgba(184,148,106,0.12);
-  white-space: nowrap; pointer-events: none; user-select: none;
-  letter-spacing: -2px;
-}
-#hero-photo-wrap {
-  position: relative; z-index: 2;
-  width: 420px; height: 540px;
-  margin: 0 auto;
-  opacity: 0; animation: photoIn 1.4s cubic-bezier(.16,1,.3,1) .8s forwards;
-}
-@keyframes photoIn {
-  0% {
-    opacity: 0;
-    clip-path: polygon(50% 50%,50% 50%,50% 50%,50% 50%,50% 50%,50% 50%,50% 50%,50% 50%);
-    filter: brightness(2.5) blur(8px);
-  }
-  30% { opacity: .7; filter: brightness(1.4) blur(2px); }
-  65% {
-    clip-path: polygon(8% -2%,92% 4%,104% 22%,100% 84%,90% 103%,10% 100%,-3% 80%,0% 16%);
-  }
-  100% {
-    opacity: 1;
-    clip-path: polygon(14% 0%,86% 0%,100% 14%,100% 86%,86% 100%,14% 100%,0% 86%,0% 14%);
-    filter: brightness(1) blur(0px);
-  }
-}
-#hero-photo-img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  display: block;
-}
-
-/* Blueprint SVG */
+/* ── BLUEPRINT lines (overlay entire hero) ── */
 #bp-svg {
-  position: absolute; inset: 0; z-index: 4;
+  position: absolute; inset: 0; z-index: 7;
+  width: 100%; height: 100%;
   pointer-events: none; opacity: 0;
-  animation: fadeBlue .6s ease 2.2s forwards;
+  animation: fadeBlue .6s ease 2s forwards;
 }
-@keyframes fadeBlue { to { opacity: .18; } }
-.bp { fill: none; stroke: #B8946A; stroke-width: 0.7;
-  stroke-dasharray: 500; stroke-dashoffset: 500;
-  animation: drawBP 2s ease 2.5s forwards; }
-.bp2 { stroke: #8A8A9A; stroke-width: 0.4; animation-delay: 2.8s; }
+@keyframes fadeBlue { to { opacity: .1; } }
+.bp { fill: none; stroke: #B8946A; stroke-width: 0.6;
+  stroke-dasharray: 800; stroke-dashoffset: 800;
+  animation: drawBP 2.5s ease 2.2s forwards; }
+.bp2 { stroke: #8A8A9A; stroke-width: 0.35; animation-delay: 2.6s;
+  stroke-dasharray: 400; stroke-dashoffset: 400; }
 @keyframes drawBP { to { stroke-dashoffset: 0; } }
-
-/* Corner marks */
-.cm {
-  position: absolute; width: 14px; height: 14px;
-  border-color: rgba(184,148,106,0.35); border-style: solid;
-}
-.cm.tl { top: 0; left: 0; border-width: 1px 0 0 1px; }
-.cm.tr { top: 0; right: 0; border-width: 1px 1px 0 0; }
-.cm.bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
-.cm.br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
-
-/* Coord label */
-.coord-label {
-  position: absolute; font-family: var(--mono); font-size: 8px;
-  color: rgba(184,148,106,0.45); letter-spacing: 1px;
-}
-.coord-label.tl { top: -20px; left: 0; }
-.coord-label.br { bottom: -20px; right: 0; }
 
 /* Scroll line */
 #scroll-ind {
@@ -240,10 +232,37 @@
   </div>
 </nav>
 <section id="hero">
-  <div id="hero-ghost">MB</div>
-  <div id="hero-inner">
 
-    <!-- LEFT -->
+  <!-- Photo — full height, right side, behind name watermark -->
+  <div id="hero-photo-abs">
+    <img src="assets/images/headshot.png" alt="Marberd Bernard">
+  </div>
+
+  <!-- Big name BEHIND photo -->
+  <div id="hero-name-back">BERNARD</div>
+
+  <!-- Big name IN FRONT of photo (bottom portion only via mask) -->
+  <div id="hero-name-front">BERNARD</div>
+
+  <!-- Blueprint lines overlay -->
+  <svg id="bp-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+    <rect class="bp" x="580" y="40" width="580" height="720"/>
+    <line class="bp" x1="580" y1="400" x2="1160" y2="400"/>
+    <line class="bp" x1="870" y1="40" x2="870" y2="760"/>
+    <circle class="bp" cx="870" cy="400" r="160" fill="none"/>
+    <line class="bp2" x1="580" y1="40" x2="620" y2="40"/>
+    <line class="bp2" x1="580" y1="40" x2="580" y2="80"/>
+    <line class="bp2" x1="1160" y1="40" x2="1120" y2="40"/>
+    <line class="bp2" x1="1160" y1="40" x2="1160" y2="80"/>
+    <line class="bp2" x1="580" y1="760" x2="620" y2="760"/>
+    <line class="bp2" x1="580" y1="760" x2="580" y2="720"/>
+    <line class="bp2" x1="1160" y1="760" x2="1120" y2="760"/>
+    <line class="bp2" x1="1160" y1="760" x2="1160" y2="720"/>
+    <line class="bp2" x1="40" y1="760" x2="560" y2="760"/>
+    <text x="42" y="750" font-family="monospace" font-size="8" fill="#B8946A" opacity="0.4">40.7128° N · 74.0060° W</text>
+  </svg>
+
+  <div id="hero-inner">
     <div id="hero-text">
       <div class="h-eyebrow">Architect &amp; VDC Specialist · Columbia University</div>
       <h1 class="h-name">
@@ -266,37 +285,8 @@
         <a class="h-link-ghost" href="contact.html">Get in Touch</a>
       </div>
     </div>
-
-    <!-- RIGHT -->
-    <div id="hero-photo-col">
-      <div id="hero-photo-name-back">MARBERD</div>
-      <div id="hero-photo-wrap">
-        <div class="cm tl"></div>
-        <div class="cm tr"></div>
-        <div class="cm bl"></div>
-        <div class="cm br"></div>
-        <span class="coord-label tl">40.7128° N</span>
-        <span class="coord-label br">74.0060° W</span>
-        <img id="hero-photo-img" src="assets/images/profile.jpg" alt="Marberd Bernard">
-        <svg id="bp-svg" viewBox="0 0 420 540" preserveAspectRatio="xMidYMid slice">
-          <rect class="bp" x="20" y="20" width="380" height="500"/>
-          <line class="bp" x1="20" y1="270" x2="400" y2="270"/>
-          <line class="bp" x1="210" y1="20" x2="210" y2="540"/>
-          <circle class="bp" cx="210" cy="270" r="100" fill="none"/>
-          <path class="bp2" d="M0,0 L420,540 M420,0 L0,540"/>
-          <line class="bp2" x1="20" y1="20" x2="60" y2="20"/>
-          <line class="bp2" x1="20" y1="20" x2="20" y2="60"/>
-          <line class="bp2" x1="400" y1="20" x2="360" y2="20"/>
-          <line class="bp2" x1="400" y1="20" x2="400" y2="60"/>
-          <line class="bp2" x1="20" y1="520" x2="60" y2="520"/>
-          <line class="bp2" x1="20" y1="520" x2="20" y2="480"/>
-          <line class="bp2" x1="400" y1="520" x2="360" y2="520"/>
-          <line class="bp2" x1="400" y1="520" x2="400" y2="480"/>
-        </svg>
-      </div>
-    </div>
-
   </div>
+
   <div id="scroll-ind">
     <div class="scroll-line"></div>
     <span>Scroll</span>
