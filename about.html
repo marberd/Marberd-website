@@ -7,28 +7,418 @@
 <title>About · MARBERD</title>
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-.bio-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; margin-top:60px; }
-@media(max-width:900px){.bio-grid{grid-template-columns:1fr;}}
-.bio-text p { font-size:15px; line-height:1.9; color:var(--mid); font-weight:300; margin-bottom:18px; }
-.bio-text strong { color:var(--text); font-weight:500; }
-.edu-list { display:flex; flex-direction:column; gap:2px; }
-.edu-item { padding:24px 28px; border:1px solid var(--border); background:var(--white); }
-.edu-item:hover { border-color:rgba(184,148,106,0.4); }
-.edu-school { font-family:var(--serif); font-size:20px; font-weight:600; color:var(--black); }
-.edu-deg { font-size:13px; color:var(--mid); margin-top:4px; }
-.edu-loc { font-family:var(--mono); font-size:9px; letter-spacing:1px; color:var(--muted); margin-top:8px; }
-.timeline { display:flex; flex-direction:column; gap:0; }
-.tl-item { display:grid; grid-template-columns:100px 1fr; gap:24px; padding:28px 0; border-bottom:1px solid var(--border); }
-.tl-year { font-family:var(--mono); font-size:10px; letter-spacing:1px; color:var(--gold-dk); padding-top:4px; }
-.tl-co { font-size:16px; font-weight:500; color:var(--black); margin-bottom:3px; }
-.tl-role { font-family:var(--mono); font-size:9px; letter-spacing:1px; color:var(--muted); text-transform:uppercase; margin-bottom:8px; }
-.tl-desc { font-size:13px; color:var(--mid); line-height:1.7; }
-.cert-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; margin-top:0; }
-@media(max-width:700px){.cert-grid{grid-template-columns:1fr;}}
-.cert-card { padding:24px 24px; border:1px solid var(--border); background:var(--white); }
-.cert-name { font-size:13px; font-weight:500; color:var(--black); margin-bottom:4px; }
-.cert-issuer { font-family:var(--mono); font-size:8.5px; letter-spacing:1px; color:var(--gold-dk); text-transform:uppercase; }
-.cert-date { font-size:11px; color:var(--muted); margin-top:6px; }
+/* ── ABOUT PAGE — local tokens ── */
+:root {
+  --ab-cream:  #f5f3ef;
+  --ab-gold:   #8a6f3e;
+  --ab-black:  #1a1a1a;
+  --ab-text:   #444;
+  --ab-muted:  #888;
+  --ab-border: rgba(0,0,0,0.10);
+  --ab-border-soft: rgba(0,0,0,0.12);
+}
+
+/* ── SECTION 1: HERO ── */
+.ab-hero {
+  background: var(--ab-cream);
+  padding: 140px 48px 60px;
+}
+.ab-hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  align-items: flex-start;
+}
+.ab-hero-left  { flex: 1.1; min-width: 0; }
+.ab-hero-right { flex: 0.9; min-width: 0; }
+
+.ab-h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  margin: 0 0 0 0;
+  line-height: 1.05;
+}
+.ab-h1-line1 {
+  display: block;
+  font-size: clamp(32px, 4vw, 52px);
+  color: var(--ab-black);
+  line-height: 1.05;
+}
+.ab-h1-line2 {
+  display: block;
+  font-size: clamp(28px, 3.8vw, 48px);
+  font-style: italic;
+  color: var(--ab-gold);
+  line-height: 1.1;
+}
+.ab-gold-div {
+  width: 32px;
+  height: 1.5px;
+  background: var(--ab-gold);
+  margin: 20px 0;
+}
+.ab-body {
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--ab-text);
+  max-width: 380px;
+  margin-bottom: 20px;
+}
+.ab-body p { margin-bottom: 14px; }
+.ab-body p:last-child { margin-bottom: 0; }
+
+.ab-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+.ab-pill {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--ab-gold);
+  border: 1px solid var(--ab-gold);
+  background: none;
+  padding: 6px 14px;
+  border-radius: 0;
+  white-space: nowrap;
+}
+
+.ab-portrait-wrap {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-left: 3px solid var(--ab-gold);
+}
+.ab-portrait-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border-radius: 0;
+}
+
+/* ── SECTION 2: QUOTE BAND ── */
+.ab-quote-band {
+  background: var(--ab-black);
+  padding: 48px;
+  text-align: center;
+}
+.ab-quote-text {
+  font-family: var(--serif);
+  font-size: clamp(20px, 3vw, 28px);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ab-cream);
+  line-height: 1.4;
+  margin: 0;
+}
+.ab-quote-attr {
+  display: block;
+  margin-top: 16px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ab-gold);
+  font-style: normal;
+}
+
+/* ── SECTION 3: STATS ROW ── */
+.ab-stats {
+  background: var(--ab-cream);
+  display: flex;
+  width: 100%;
+}
+.ab-stat {
+  flex: 1;
+  padding: 32px 24px;
+  border-right: 0.5px solid rgba(0,0,0,0.1);
+}
+.ab-stat:last-child { border-right: none; }
+.ab-stat-n {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4vw, 40px);
+  color: var(--ab-black);
+  line-height: 1;
+  font-weight: 400;
+}
+.ab-stat-l {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--ab-gold);
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+.ab-stat-sub {
+  font-family: var(--sans);
+  font-size: 9px;
+  color: var(--ab-muted);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* ── SECTION 4: CERTS & EDUCATION ── */
+.ab-certs-edu {
+  background: var(--ab-cream);
+  padding: 60px 48px;
+  border-top: 0.5px solid rgba(0,0,0,0.1);
+}
+.ab-certs-edu-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.ab-col-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--ab-gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.ab-cert-row {
+  padding: 16px 0;
+  border-bottom: 0.5px solid rgba(0,0,0,0.1);
+}
+.ab-cert-row--last { border-bottom: none; }
+.ab-cert-title {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ab-black);
+}
+.ab-cert-sub {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--ab-muted);
+  margin-top: 3px;
+}
+.ab-edu-card {
+  background: #fff;
+  border: 0.5px solid var(--ab-border-soft);
+  padding: 20px;
+  margin-bottom: 12px;
+  border-radius: 0;
+}
+.ab-edu-card:last-child { margin-bottom: 0; }
+.ab-edu-school {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ab-black);
+}
+.ab-edu-degree {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: #555;
+  margin-top: 3px;
+}
+.ab-edu-year {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--ab-gold);
+  margin-top: 4px;
+}
+
+/* ── SECTION 5: CLIENTS ── */
+.ab-clients {
+  background: #fff;
+  padding: 48px;
+}
+.ab-clients-inner { max-width: 1200px; margin: 0 auto; }
+.ab-clients-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ab-clients-line {
+  width: 28px;
+  height: 1px;
+  background: var(--ab-gold);
+  flex-shrink: 0;
+}
+.ab-clients-eyebrow-text {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--ab-gold);
+  text-transform: uppercase;
+}
+.ab-clients-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin-top: 24px;
+  row-gap: 16px;
+}
+.ab-client-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--ab-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0 16px;
+}
+.ab-client-name:first-child { padding-left: 0; }
+.ab-client-div {
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  background: #ccc;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* ── SECTION 6: BEYOND THE WORK ── */
+.ab-beyond {
+  background: var(--ab-cream);
+  padding: 60px 48px;
+}
+.ab-beyond-inner { max-width: 1200px; margin: 0 auto; }
+.ab-beyond-eyebrow {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--ab-gold);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.ab-beyond-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.ab-card {
+  background: #fff;
+  border: 0.5px solid rgba(0,0,0,0.1);
+  padding: 24px;
+  border-radius: 0;
+}
+.ab-card-icon {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 14px;
+  display: block;
+}
+.ab-card-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--ab-black);
+  margin-bottom: 10px;
+}
+.ab-card-text {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--ab-muted);
+}
+.ab-lang-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.ab-lang-pill {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: var(--ab-gold);
+  border: 1px solid var(--ab-gold);
+  background: none;
+  padding: 4px 10px;
+  border-radius: 0;
+}
+.ab-card-dark {
+  grid-column: 1 / -1;
+  background: var(--ab-black);
+  border: none;
+  padding: 40px 36px;
+  border-radius: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.ab-card-dark-text {
+  font-family: var(--serif);
+  font-size: clamp(18px, 2.2vw, 26px);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ab-cream);
+  line-height: 1.35;
+  flex: 1;
+}
+.ab-card-dark-text em {
+  font-style: normal;
+  color: var(--ab-gold);
+}
+.ab-cta-link {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ab-black);
+  background: var(--ab-gold);
+  padding: 12px 24px;
+  text-decoration: none;
+  white-space: nowrap;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.ab-cta-link:hover { background: #6d5830; }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .ab-hero { padding: 110px 20px 48px; }
+  .ab-hero-inner { flex-direction: column; gap: 32px; }
+  .ab-hero-left { flex: none; width: 100%; }
+  .ab-hero-right { flex: none; width: 100%; }
+  .ab-portrait-wrap { aspect-ratio: 4 / 3; }
+  .ab-body { max-width: 100%; }
+
+  .ab-quote-band { padding: 40px 20px; }
+
+  .ab-stats { flex-direction: column; }
+  .ab-stat { border-right: none; border-bottom: 0.5px solid rgba(0,0,0,0.1); }
+  .ab-stat:last-child { border-bottom: none; }
+
+  .ab-certs-edu { padding: 48px 20px; }
+  .ab-certs-edu-inner { grid-template-columns: 1fr; gap: 36px; }
+
+  .ab-clients { padding: 40px 20px; }
+  .ab-clients-row { gap: 0; row-gap: 14px; }
+  .ab-client-name { padding: 0 10px; font-size: 10px; }
+
+  .ab-beyond { padding: 48px 20px; }
+  .ab-beyond-grid { grid-template-columns: 1fr; }
+  .ab-card-dark { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .ab-cta-link { width: 100%; justify-content: center; }
+
+  .ab-pills { gap: 8px; }
+  .ab-pill { font-size: 8px; padding: 5px 10px; }
+}
+
+@media (max-width: 480px) {
+  .ab-client-div { display: none; }
+  .ab-clients-row { row-gap: 10px; column-gap: 14px; }
+  .ab-client-name { padding: 0; }
+}
 </style>
 </head>
 <body><svg id="cur" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="cur-ring" cx="22" cy="22" r="16" stroke="#111118" stroke-width="1"/><line x1="22" y1="3" x2="22" y2="9" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="35" x2="22" y2="41" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="22" x2="9" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="22" x2="41" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/></svg><div id="cur-dot"></div>
@@ -54,82 +444,191 @@
     </a>
   </div>
 </nav>
-<div class="page-hero reveal">
-  <div class="page-eyebrow">About</div>
-  <h1 class="page-title">The architect behind<br><em>the work.</em></h1>
-</div>
 
-<div class="content-wrap">
-  <div class="bio-grid">
-    <div class="bio-text reveal">
-      <p><strong>Columbia-trained architect and VDC professional</strong> with 8+ years leading BIM strategy, digital delivery, and design execution across commercial, residential, and mixed-use projects.</p>
-      <p>Delivered work for marquee clients including <strong>JPMorgan Chase, BMW, CLEAR, Capital One, and Rockefeller Group</strong>. Known for bridging design intent with construction execution — standardizing BIM workflows, coordinating across trades, and leveraging AI tools to accelerate delivery.</p>
-      <p>Entrepreneurial track record spanning the U.S., China, and the Dominican Republic. Bilingual in English and Spanish.</p>
+<!-- ══ SECTION 1 — HERO ══════════════════════════════ -->
+<section class="ab-hero">
+  <div class="ab-hero-inner">
+
+    <div class="ab-hero-left reveal">
+      <h1 class="ab-h1">
+        <span class="ab-h1-line1">The designer behind</span>
+        <span class="ab-h1-line2">the work.</span>
+      </h1>
+      <div class="ab-gold-div"></div>
+      <div class="ab-body">
+        <p>From designing and building residences in the Dominican Republic to collaborating on complex projects in China, I bring a global perspective to every model I build.</p>
+        <p>BIM360 and ACC platform admin. Autodesk Certified in Revit Architecture (2019 and 2024). LEED Accredited. 8+ years turning complex briefs into precision built outcomes. Bilingual in English and Spanish.</p>
+      </div>
+      <div class="ab-pills">
+        <span class="ab-pill">AUTODESK CERTIFIED</span>
+        <span class="ab-pill">LEED ACCREDITED</span>
+        <span class="ab-pill">COLUMBIA M.ARCH 2024</span>
+      </div>
     </div>
+
+    <div class="ab-hero-right reveal">
+      <div class="ab-portrait-wrap">
+        <img src="assets/images/about-portrait.jpg" alt="Marberd Bernard">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ SECTION 2 — QUOTE BAND ════════════════════════ -->
+<section class="ab-quote-band">
+  <p class="ab-quote-text">"A house is a machine for living in."</p>
+  <span class="ab-quote-attr">— LE CORBUSIER</span>
+</section>
+
+<!-- ══ SECTION 3 — STATS ROW ════════════════════════ -->
+<section class="ab-stats">
+  <div class="ab-stat reveal">
+    <div class="ab-stat-n">8+</div>
+    <div class="ab-stat-l">YEARS</div>
+    <div class="ab-stat-sub">BIM since 2016 and professional since 2018</div>
+  </div>
+  <div class="ab-stat reveal">
+    <div class="ab-stat-n">300+</div>
+    <div class="ab-stat-l">PROJECTS</div>
+    <div class="ab-stat-sub">administered as BIM360 and ACC platform admin</div>
+  </div>
+  <div class="ab-stat reveal">
+    <div class="ab-stat-n">3</div>
+    <div class="ab-stat-l">COUNTRIES</div>
+    <div class="ab-stat-sub">US&nbsp;&nbsp;&nbsp;Dominican Republic&nbsp;&nbsp;&nbsp;China</div>
+  </div>
+</section>
+
+<!-- ══ SECTION 4 — CERTIFICATIONS & EDUCATION ════════ -->
+<section class="ab-certs-edu">
+  <div class="ab-certs-edu-inner">
+
     <div class="reveal">
-      <div class="edu-list">
-        <div class="edu-item">
-          <div class="edu-school">Columbia University</div>
-          <div class="edu-deg">Master of Architecture (M.Arch)</div>
-          <div class="edu-loc">New York, NY</div>
+      <div class="ab-col-label">CERTIFICATIONS</div>
+      <div class="ab-cert-row">
+        <div class="ab-cert-title">Autodesk Certified Professional</div>
+        <div class="ab-cert-sub">Revit Architecture&nbsp;&nbsp;2019 and 2024</div>
+      </div>
+      <div class="ab-cert-row">
+        <div class="ab-cert-title">LEED Accredited Professional</div>
+        <div class="ab-cert-sub">U.S. Green Building Council&nbsp;&nbsp;2024</div>
+      </div>
+      <div class="ab-cert-row ab-cert-row--last">
+        <div class="ab-cert-title">BIM360 and ACC Platform Admin</div>
+        <div class="ab-cert-sub">Autodesk Construction Cloud&nbsp;&nbsp;since 2018</div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="ab-col-label">EDUCATION</div>
+      <div class="ab-edu-card">
+        <div class="ab-edu-school">Columbia University</div>
+        <div class="ab-edu-degree">Master of Architecture (M.Arch)</div>
+        <div class="ab-edu-year">NEW YORK, NY&nbsp;&nbsp;2024</div>
+      </div>
+      <div class="ab-edu-card">
+        <div class="ab-edu-school">NYC College of Technology</div>
+        <div class="ab-edu-degree">Bachelor of Architectural Technology (B.Tech)</div>
+        <div class="ab-edu-year">BROOKLYN, NY&nbsp;&nbsp;2018</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ SECTION 5 — CLIENTS ═══════════════════════════ -->
+<section class="ab-clients">
+  <div class="ab-clients-inner">
+    <div class="ab-clients-eyebrow reveal">
+      <div class="ab-clients-line"></div>
+      <span class="ab-clients-eyebrow-text">SELECTED CLIENTS&nbsp;&nbsp;VIA TPG ARCHITECTURE</span>
+    </div>
+    <div class="ab-clients-row reveal">
+      <span class="ab-client-name">JPMORGAN CHASE</span>
+      <span class="ab-client-div" aria-hidden="true"></span>
+      <span class="ab-client-name">BMW</span>
+      <span class="ab-client-div" aria-hidden="true"></span>
+      <span class="ab-client-name">CLEAR</span>
+      <span class="ab-client-div" aria-hidden="true"></span>
+      <span class="ab-client-name">CAPITAL ONE</span>
+      <span class="ab-client-div" aria-hidden="true"></span>
+      <span class="ab-client-name">MLS</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 6 — BEYOND THE WORK ══════════════════ -->
+<section class="ab-beyond">
+  <div class="ab-beyond-inner">
+    <div class="ab-beyond-eyebrow">BEYOND THE WORK</div>
+    <div class="ab-beyond-grid">
+
+      <!-- CARD 1: Choir Director -->
+      <div class="ab-card reveal">
+        <svg class="ab-card-icon" viewBox="0 0 22 22" fill="none" stroke="#8a6f3e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="14" cy="4" r="2"/>
+          <path d="M14 6v8"/>
+          <path d="M14 10l-6 2v4"/>
+          <circle cx="8" cy="18" r="2"/>
+          <circle cx="14" cy="16" r="2"/>
+        </svg>
+        <div class="ab-card-title">Choir Director</div>
+        <p class="ab-card-text">Leading the Spanish choir at The Church of St. Catherine of Genoa, New York since 2021. Music as architecture: structure, rhythm, and humanity in every rehearsal.</p>
+      </div>
+
+      <!-- CARD 2: Painter -->
+      <div class="ab-card reveal">
+        <svg class="ab-card-icon" viewBox="0 0 22 22" fill="none" stroke="#8a6f3e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 17l9-9 4 4-9 9-4-4z"/>
+          <path d="M12 8l2-2 2 2-2 2-2-2z"/>
+          <path d="M18 3l1 1-1 1-1-1 1-1z"/>
+          <path d="M3 21l1-3"/>
+        </svg>
+        <div class="ab-card-title">Painter</div>
+        <p class="ab-card-text">Visual art as a second language. The same eye that reads a Revit model finds meaning in color, form, and composition on canvas.</p>
+      </div>
+
+      <!-- CARD 3: Polyglot -->
+      <div class="ab-card reveal">
+        <svg class="ab-card-icon" viewBox="0 0 22 22" fill="none" stroke="#8a6f3e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="9"/>
+          <path d="M11 2a14 14 0 010 18M11 2a14 14 0 000 18"/>
+          <path d="M2 11h18"/>
+        </svg>
+        <div class="ab-card-title">Polyglot</div>
+        <p class="ab-card-text">Four languages are not just a skill, they are a worldview. Every project benefits from the ability to think, negotiate, and connect across cultures.</p>
+        <div class="ab-lang-pills">
+          <span class="ab-lang-pill">ENGLISH</span>
+          <span class="ab-lang-pill">ESPAÑOL</span>
+          <span class="ab-lang-pill">ITALIANO</span>
+          <span class="ab-lang-pill">ΕΛΛΗΝΙΚΆ</span>
         </div>
-        <div class="edu-item">
-          <div class="edu-school">NYC College of Technology</div>
-          <div class="edu-deg">Bachelor of Architectural Technology (B.Tech)</div>
-          <div class="edu-loc">Brooklyn, NY</div>
-        </div>
       </div>
+
+      <!-- CARD 4: Dancer -->
+      <div class="ab-card reveal">
+        <svg class="ab-card-icon" viewBox="0 0 22 22" fill="none" stroke="#8a6f3e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13" cy="3.5" r="1.5"/>
+          <path d="M11 6l-3 5 3 2"/>
+          <path d="M11 6l2 3 3 1"/>
+          <path d="M8 11l-1 5"/>
+          <path d="M14 10l1 4-2 3"/>
+        </svg>
+        <div class="ab-card-title">Dancer</div>
+        <p class="ab-card-text">Movement, timing, and spatial awareness on the floor and in the model. Dance is the discipline of knowing where your body is in space at all times.</p>
+      </div>
+
+      <!-- FULL-WIDTH DARK CARD -->
+      <div class="ab-card-dark reveal">
+        <p class="ab-card-dark-text">Currently open to senior design and BIM specialist roles in New York. <em>Ready to contribute from day one.</em></p>
+        <a class="ab-cta-link" href="contact.html">Get in Touch</a>
+      </div>
+
     </div>
   </div>
+</section>
 
-  <hr class="rule">
-
-  <div class="sec-label">Experience</div>
-  <h2 class="sec-h2 reveal">Where I've<br><em>worked.</em></h2>
-  <div class="timeline">
-    <div class="tl-item reveal">
-      <div class="tl-year">2019–<br>Present</div>
-      <div>
-        <div class="tl-co">TPG Architecture — New York, NY</div>
-        <div class="tl-role">Revit Specialist / Project Architect</div>
-        <div class="tl-desc">Led BIM strategy across architecture, structure, and MEP models for clients including JPMorgan Chase (25+ locations), BMW, CLEAR (119,226 SF at 4 WTC), Capital One, and Rockefeller Group. Administered 235+ BIM 360 & ACC projects.</div>
-      </div>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-year">2018–<br>2024</div>
-      <div>
-        <div class="tl-co">Arch-Nimations — Virtual / International</div>
-        <div class="tl-role">Founder & Freelance Designer</div>
-        <div class="tl-desc">Led design of a 130,000 SF mixed-use development in Michigan. Consulted for SA&BOO on BURTON IN99 Flagship (Chengdu, China). Managed five ground-up residential projects in the Dominican Republic.</div>
-      </div>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-year">2018–<br>2019</div>
-      <div>
-        <div class="tl-co">AMA Consulting Engineers — New York, NY</div>
-        <div class="tl-role">BIM / CAD Operator</div>
-        <div class="tl-desc">Collaborated across 100+ projects including Peloton HQ (300,000 SF) and PENN (350,000 SF). Navisworks clash detection across architectural, structural, and MEP models.</div>
-      </div>
-    </div>
-    <div class="tl-item reveal">
-      <div class="tl-year">2016–<br>2018</div>
-      <div>
-        <div class="tl-co">D-YO Studio — New York, NY</div>
-        <div class="tl-role">Assistant Architect</div>
-        <div class="tl-desc">Initiated firm-wide transition from AutoCAD to Revit. Led construction meetings, DOB filing, and code compliance.</div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="rule">
-
-  <div class="sec-label">Certifications</div>
-  <div class="cert-grid">
-    <div class="cert-card reveal"><div class="cert-name">Autodesk Certified Professional — Revit</div><div class="cert-issuer">Autodesk</div><div class="cert-date">September 2024</div></div>
-    <div class="cert-card reveal"><div class="cert-name">LEED Green Associate</div><div class="cert-issuer">USGBC</div><div class="cert-date">November 2024</div></div>
-    <div class="cert-card reveal"><div class="cert-name">Peri-Urban Water Management</div><div class="cert-issuer">Scholarship · Ahmedabad, India</div><div class="cert-date">July 2023</div></div>
-  </div>
-</div>
 <footer>
   <div class="foot-inner">
     <div class="foot-logo">
