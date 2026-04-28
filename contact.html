@@ -3,11 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Marberd Bernard — Architectural Designer & VDC Specialist. Columbia-trained. New York City.">
+<meta name="description" content="Marberd Bernard — Architectural Designer & VDC Specialist. New York City.">
 <title>Contact · MARBERD</title>
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-/* GRID */
+
+/* ── PAGE-LOAD ANIMATIONS ──────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .load-fade {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: loadFadeUp .6s ease-out forwards;
+  }
+  .load-fade.d200 { animation-delay: 200ms; }
+  .load-fade.d400 { animation-delay: 400ms; }
+  .load-fade.d500 { animation-delay: 500ms; }
+
+  @keyframes loadFadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .load-line {
+    transform-origin: left center;
+    transform: scaleX(0);
+    animation: loadLine .6s ease-out 200ms forwards;
+  }
+  @keyframes loadLine {
+    to { transform: scaleX(1); }
+  }
+}
+/* Ensure visible when motion reduced */
+@media (prefers-reduced-motion: reduce) {
+  .load-fade { opacity: 1; transform: none; }
+  .load-line { transform: none; }
+}
+
+/* ── PULL QUOTE ────────────────────────────────────────── */
+.pull-quote-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 60px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.pull-quote {
+  font-family: var(--serif);
+  font-size: clamp(26px, 4vw, 44px);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--gold-dk);
+  letter-spacing: -.5px;
+}
+.pull-quote em { font-style: italic; }
+@media (max-width: 768px) { .pull-quote { font-size: 1.4rem; } }
+
+/* ── GRID ──────────────────────────────────────────────── */
 #contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -15,12 +65,14 @@
   margin-top: 60px;
   align-items: start;
 }
-@media (max-width: 800px) { #contact-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) {
+  #contact-grid { grid-template-columns: 1fr; gap: 48px; }
+}
 
-/* STATEMENT */
+/* ── STATEMENT ─────────────────────────────────────────── */
 .contact-statement h2 {
   font-family: var(--serif);
-  font-size: clamp(34px, 5vw, 52px);
+  font-size: clamp(32px, 4.5vw, 50px);
   font-weight: 300;
   line-height: 1.15;
   color: var(--black);
@@ -41,15 +93,123 @@
   color: var(--mid);
   line-height: 1.75;
   font-weight: 300;
-  max-width: 440px;
+  max-width: 460px;
 }
 
-/* AVAILABILITY BOX */
+/* ── FORM ──────────────────────────────────────────────── */
+.contact-form {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.form-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.form-input,
+.form-textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--text);
+  width: 100%;
+  outline: none;
+  transition: border-color .2s;
+  resize: none;
+}
+.form-input:focus,
+.form-textarea:focus {
+  border-bottom-color: var(--gold-dk);
+}
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--muted);
+  font-size: 14px;
+}
+.form-btn {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 13px 36px;
+  background: var(--gold-dk);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 3px;
+  cursor: none;
+  transition: background .22s;
+}
+.form-btn:hover { background: var(--black); }
+@media (max-width: 768px) {
+  .form-btn { align-self: stretch; text-align: center; }
+  .form-input, .form-textarea { font-size: 16px; }
+}
+
+/* ── CONTACT CARDS ─────────────────────────────────────── */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border);
+}
+.ci-link {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  text-decoration: none;
+  transition: background .2s;
+}
+.ci-link:last-child { border-bottom: none; }
+.ci-link:hover { background: var(--paper); }
+.ci-link:hover .ci-label { color: var(--gold-dk); }
+.ci-link:hover .ci-icon { border-color: var(--gold); }
+.ci-icon {
+  width: 36px; height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: var(--gold-dk);
+  transition: border-color .2s;
+}
+.ci-icon svg { width: 14px; height: 14px; }
+.ci-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3px;
+  transition: color .2s;
+}
+.ci-val {
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* ── AVAILABILITY ──────────────────────────────────────── */
 .avail-box {
   padding: 24px 28px;
   border: 1px solid rgba(184,148,106,.3);
   background: rgba(184,148,106,0.04);
-  margin-top: 32px;
+  margin-top: 2px;
 }
 .avail-label {
   font-family: var(--mono);
@@ -65,49 +225,18 @@
   line-height: 1.7;
 }
 
-/* CONTACT INFO CARDS */
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border: 1px solid var(--border);
+/* ── DIVIDER ───────────────────────────────────────────── */
+.contact-rule {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+  display: block;
 }
-.ci-row {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  padding: 22px 24px;
-  border-bottom: 1px solid var(--border);
-  background: var(--white);
-  transition: background .2s, border-color .2s;
-}
-.ci-row:last-child { border-bottom: none; }
-.ci-row:hover { background: var(--paper); }
-.ci-icon {
-  width: 36px; height: 36px;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  color: var(--gold-dk);
-  transition: border-color .2s;
-}
-.ci-row:hover .ci-icon { border-color: var(--gold); }
-.ci-icon svg { width: 14px; height: 14px; }
-.ci-label {
-  font-family: var(--mono);
-  font-size: 8px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 3px;
-}
-.ci-val { font-size: 14px; color: var(--text); }
-.ci-val a { color: inherit; text-decoration: none; cursor: none; transition: color .2s; }
-.ci-val a:hover { color: var(--gold-dk); }
+
 </style>
 </head>
 <body><svg id="cur" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="cur-ring" cx="22" cy="22" r="16" stroke="#111118" stroke-width="1"/><line x1="22" y1="3" x2="22" y2="9" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="35" x2="22" y2="41" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="22" x2="9" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="22" x2="41" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/></svg><div id="cur-dot"></div>
+
 <nav id="main-nav">
   <a id="nav-logo" href="index.html" title="MARBERD"><svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -130,36 +259,102 @@
     </a>
   </div>
 </nav>
-<div class="page-hero reveal">
+
+<!-- HERO -->
+<div class="page-hero load-fade">
   <div class="page-eyebrow">Contact</div>
   <h1 class="page-title">Let's build something<br><em>together.</em></h1>
 </div>
-<div class="content-wrap">
+
+<!-- ANIMATED DIVIDER -->
+<hr class="contact-rule load-line">
+
+<!-- PULL QUOTE -->
+<div class="pull-quote-wrap load-fade d200">
+  <p class="pull-quote">8+ years. 3 cities.<br><em>Every project on time.</em></p>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content-wrap load-fade d400">
   <div id="contact-grid">
-    <div class="contact-statement reveal">
+
+    <!-- LEFT: statement + form -->
+    <div class="contact-statement">
       <h2>Open to senior VDC,<br>BIM Manager &amp; architectural<br><em>design</em> <span class="roles">roles.</span></h2>
-      <p style="margin-top:24px;">Columbia-trained architectural designer with 8+ years of proven delivery. Available for full-time, freelance, and collaborative opportunities in New York City and beyond.</p>
-      <div class="avail-box" style="margin-top:36px;">
+
+      <p style="margin-top:20px;">
+        Whether you're scaling a complex fit-out in Revit or building a BIM
+        workflow from the ground up, I'm ready to contribute from day one.
+        Columbia-trained architectural designer with 8+ years of proven delivery
+        across New York, Michigan, and internationally — open to hybrid and
+        on-site senior roles.
+      </p>
+
+      <!-- FORM (Netlify handles submission automatically) -->
+      <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="display:none;"><input name="bot-field"></p>
+
+        <div class="form-field">
+          <label class="form-label" for="cf-name">Name</label>
+          <input class="form-input" id="cf-name" name="name" type="text" placeholder="Your name" required>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="cf-email">Email</label>
+          <input class="form-input" id="cf-email" name="email" type="email" placeholder="your@email.com" required>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="cf-msg">Message</label>
+          <textarea class="form-textarea" id="cf-msg" name="message" rows="4" placeholder="Tell me about the project or role…" required></textarea>
+        </div>
+
+        <button class="form-btn" type="submit">Send Message</button>
+      </form>
+    </div>
+
+    <!-- RIGHT: cards + availability -->
+    <div class="load-fade d500">
+      <div class="contact-info">
+        <a class="ci-link" href="mailto:marberdb@gmail.com">
+          <div class="ci-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Email</div>
+            <div class="ci-val">marberdb@gmail.com</div>
+          </div>
+        </a>
+        <a class="ci-link" href="https://linkedin.com/in/marberd-bernard" target="_blank" rel="noopener">
+          <div class="ci-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">LinkedIn</div>
+            <div class="ci-val">linkedin.com/in/marberd-bernard</div>
+          </div>
+        </a>
+        <a class="ci-link" href="https://archnimations.com" target="_blank" rel="noopener">
+          <div class="ci-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Freelance</div>
+            <div class="ci-val">archnimations.com</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="avail-box">
         <div class="avail-label">Availability</div>
-        <div class="avail-text">Available for new opportunities · Open to on-site and hybrid roles · Bilingual English / Spanish</div>
+        <div class="avail-text">Open to new opportunities · On-site &amp; hybrid · Bilingual English / Spanish</div>
       </div>
     </div>
-    <div class="contact-info reveal">
-      <div class="ci-row">
-        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-        <div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:marberdb@gmail.com">marberdb@gmail.com</a></div></div>
-      </div>
-      <div class="ci-row">
-        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
-        <div><div class="ci-label">LinkedIn</div><div class="ci-val"><a href="https://linkedin.com/in/marberd-bernard" target="_blank">linkedin.com/in/marberd-bernard</a></div></div>
-      </div>
-      <div class="ci-row">
-        <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
-        <div><div class="ci-label">Freelance</div><div class="ci-val"><a href="https://www.archnimations.com" target="_blank">archnimations.com</a></div></div>
-      </div>
-    </div>
+
   </div>
 </div>
+
 <footer>
   <div class="foot-inner">
     <div class="foot-logo">
