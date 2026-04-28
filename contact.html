@@ -7,25 +7,104 @@
 <title>Contact · MARBERD</title>
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-#contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:60px; align-items:start; }
-@media(max-width:800px){#contact-grid{grid-template-columns:1fr;}}
-.contact-info { display:flex; flex-direction:column; gap:2px; }
-.ci-row { padding:24px 28px; border:1px solid var(--border); background:var(--white); display:flex; gap:20px; align-items:center; transition:all .2s; }
-.ci-row:hover { border-color:rgba(184,148,106,.4); background:var(--paper); }
-.ci-icon { width:36px; height:36px; border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--gold-dk); }
-.ci-icon svg { width:14px; height:14px; }
-.ci-label { font-family:var(--mono); font-size:8.5px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:2px; }
-.ci-val { font-size:14px; color:var(--text); }
-.ci-val a { color:inherit; text-decoration:none; cursor:none; }
-.ci-val a:hover { color:var(--gold-dk); }
-.avail-box { padding:28px 28px; border:1px solid rgba(184,148,106,.3); background:rgba(184,148,106,0.04); margin-top:28px; }
-.avail-label { font-family:var(--mono); font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-dk); margin-bottom:8px; }
-.avail-text { font-size:13px; color:var(--mid); line-height:1.7; }
-.contact-statement { }
-.contact-statement h2 { font-family:var(--serif); font-size:clamp(36px,5vw,56px); font-weight:300; line-height:1.1; color:var(--black); margin-bottom:20px; }
-.contact-statement h2 strong { font-weight:700; }
-.contact-statement h2 em { font-style:italic; color:var(--gold-dk); }
-.contact-statement p { font-size:14px; color:var(--mid); line-height:1.8; font-weight:300; max-width:440px; }
+/* GRID */
+#contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-top: 60px;
+  align-items: start;
+}
+@media (max-width: 800px) { #contact-grid { grid-template-columns: 1fr; } }
+
+/* STATEMENT */
+.contact-statement h2 {
+  font-family: var(--serif);
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--black);
+  margin-bottom: 20px;
+}
+.contact-statement h2 em {
+  font-style: italic;
+  color: var(--gold-dk);
+  font-weight: 300;
+}
+.contact-statement h2 .roles {
+  font-style: normal;
+  color: var(--black);
+  font-weight: 300;
+}
+.contact-statement p {
+  font-size: 1.05rem;
+  color: var(--mid);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 440px;
+}
+
+/* AVAILABILITY BOX */
+.avail-box {
+  padding: 24px 28px;
+  border: 1px solid rgba(184,148,106,.3);
+  background: rgba(184,148,106,0.04);
+  margin-top: 32px;
+}
+.avail-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-bottom: 8px;
+}
+.avail-text {
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.7;
+}
+
+/* CONTACT INFO CARDS */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border);
+}
+.ci-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--white);
+  transition: background .2s, border-color .2s;
+}
+.ci-row:last-child { border-bottom: none; }
+.ci-row:hover { background: var(--paper); }
+.ci-icon {
+  width: 36px; height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: var(--gold-dk);
+  transition: border-color .2s;
+}
+.ci-row:hover .ci-icon { border-color: var(--gold); }
+.ci-icon svg { width: 14px; height: 14px; }
+.ci-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+.ci-val { font-size: 14px; color: var(--text); }
+.ci-val a { color: inherit; text-decoration: none; cursor: none; transition: color .2s; }
+.ci-val a:hover { color: var(--gold-dk); }
 </style>
 </head>
 <body><svg id="cur" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="cur-ring" cx="22" cy="22" r="16" stroke="#111118" stroke-width="1"/><line x1="22" y1="3" x2="22" y2="9" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="35" x2="22" y2="41" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="22" x2="9" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="22" x2="41" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/></svg><div id="cur-dot"></div>
@@ -58,8 +137,8 @@
 <div class="content-wrap">
   <div id="contact-grid">
     <div class="contact-statement reveal">
-      <h2>Open to senior VDC,<br>BIM Manager &amp; architectural<br><em>design roles.</em></h2>
-      <p style="margin-top:24px;">Columbia-trained architect with 8+ years of proven delivery. Available for full-time, freelance, and collaborative opportunities in New York City and beyond.</p>
+      <h2>Open to senior VDC,<br>BIM Manager &amp; architectural<br><em>design</em> <span class="roles">roles.</span></h2>
+      <p style="margin-top:24px;">Columbia-trained architectural designer with 8+ years of proven delivery. Available for full-time, freelance, and collaborative opportunities in New York City and beyond.</p>
       <div class="avail-box" style="margin-top:36px;">
         <div class="avail-label">Availability</div>
         <div class="avail-text">Available for new opportunities · Open to on-site and hybrid roles · Bilingual English / Spanish</div>
