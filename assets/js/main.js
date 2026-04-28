@@ -66,6 +66,65 @@ if (nav) {
   });
 })();
 
+// ── MOBILE NAV ──────────────────
+(function () {
+  const nav = document.getElementById('main-nav');
+  if (!nav) return;
+
+  // Inject hamburger button into nav
+  const burger = document.createElement('button');
+  burger.id = 'nav-burger';
+  burger.setAttribute('aria-label', 'Open navigation');
+  burger.setAttribute('aria-expanded', 'false');
+  burger.innerHTML = '<span></span><span></span><span></span>';
+  nav.appendChild(burger);
+
+  // Inject full-screen overlay into body
+  const overlay = document.createElement('div');
+  overlay.id = 'nav-overlay';
+  overlay.innerHTML =
+    '<nav class="overlay-nav">' +
+      '<a href="about.html">About</a>' +
+      '<a href="academic.html">Academic</a>' +
+      '<a href="professional.html">Professional</a>' +
+      '<a href="bim-revit.html">BIM / Revit</a>' +
+      '<a href="contact.html">Contact</a>' +
+    '</nav>';
+  document.body.appendChild(overlay);
+
+  // Mark active link in overlay
+  const path = window.location.pathname.split('/').pop() || 'index.html';
+  overlay.querySelectorAll('a').forEach(a => {
+    if (a.getAttribute('href') === path) a.classList.add('active');
+  });
+
+  function openMenu() {
+    overlay.classList.add('open');
+    burger.classList.add('open');
+    burger.setAttribute('aria-expanded', 'true');
+    burger.setAttribute('aria-label', 'Close navigation');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    overlay.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Open navigation');
+    document.body.style.overflow = '';
+  }
+
+  burger.addEventListener('click', () => {
+    overlay.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  // Close when tapping a link
+  overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  // Close when tapping outside the nav panel (on the backdrop)
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeMenu(); });
+})();
+
 // ── SCROLL REVEAL ───────────────
 const revealObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });

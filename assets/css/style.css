@@ -204,6 +204,73 @@ footer {
 }
 .card:hover { border-color: rgba(184,148,106,0.45); background: var(--paper); }
 
+/* ── HAMBURGER BUTTON ───────────────────── */
+#nav-burger {
+  display: none; /* shown only via mobile media query */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px; height: 44px;
+  background: none; border: none;
+  cursor: none; padding: 0; flex-shrink: 0;
+}
+#nav-burger span {
+  display: block;
+  width: 22px; height: 1.5px;
+  background: var(--black);
+  transition: transform .3s ease, opacity .3s ease;
+  transform-origin: center;
+}
+#nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+#nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+#nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── MOBILE NAV OVERLAY ─────────────────── */
+#nav-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  z-index: 450; /* below nav (500) so logo/icons stay accessible */
+  background: rgba(250,250,248,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding-top: 68px; /* clear the nav bar */
+  align-items: center; justify-content: center;
+}
+#nav-overlay.open { display: flex; }
+.overlay-nav {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 0; width: 100%;
+}
+.overlay-nav a {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--mid); text-decoration: none;
+  padding: 18px 40px; width: 100%; text-align: center;
+  min-height: 56px; display: flex; align-items: center; justify-content: center;
+  transition: color .2s;
+  border-bottom: 1px solid var(--border);
+}
+.overlay-nav a:first-child { border-top: 1px solid var(--border); }
+.overlay-nav a:hover,
+.overlay-nav a.active { color: var(--gold-dk); }
+
+/* ── MOBILE — GLOBAL ────────────────────── */
+@media (max-width: 768px) {
+  html { overflow-x: hidden; }
+
+  /* Nav: hide center links, show burger, logo pushes icons+burger right */
+  nav { padding: 0 8px 0 16px; }
+  .nav-links { display: none; }
+  #nav-logo { margin-right: auto; }
+  .nav-right { gap: 6px; }
+  #nav-burger { display: flex; }
+
+  /* Shared page hero padding */
+  .page-hero { padding: 110px 20px 48px; }
+  .content-wrap { padding: 48px 20px; }
+}
+
 /* ── SCROLL REVEAL ──────────────────────── */
 .reveal {
   opacity: 0; transform: translateY(22px);
