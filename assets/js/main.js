@@ -125,6 +125,28 @@ if (nav) {
   overlay.addEventListener('click', e => { if (e.target === overlay) closeMenu(); });
 })();
 
+// ── HERO FRAME SEQUENCE ─────────
+(function () {
+  var f1 = document.getElementById('hf1');
+  var f2 = document.getElementById('hf2');
+  var f3 = document.getElementById('hf3');
+  if (!f1) return;
+
+  var hero = document.getElementById('hero');
+
+  function update() {
+    var heroH = hero ? hero.offsetHeight : window.innerHeight;
+    var p     = Math.min(1, Math.max(0, window.scrollY / heroH));
+    var pos   = p * 2; // 0 = frame1, 1 = frame2, 2 = frame3
+    f1.style.opacity = Math.max(0, 1 - pos);
+    f2.style.opacity = Math.max(0, 1 - Math.abs(pos - 1));
+    f3.style.opacity = Math.max(0, pos - 1);
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
 // ── SCROLL REVEAL ───────────────
 const revealObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });

@@ -6,6 +6,9 @@
 <meta name="description" content="Marberd Bernard — Architectural Designer & VDC Specialist. Columbia-trained. New York City.">
 <title>Home · MARBERD</title>
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="preload" as="image" href="assets/images/hero-frame-1.jpg">
+<link rel="preload" as="image" href="assets/images/hero-frame-2.jpg">
+<link rel="preload" as="image" href="assets/images/hero-frame-3.jpg">
 <style>
 /* ── HERO SECTION ─────────────── */
 #hero {
@@ -35,15 +38,22 @@
   animation: photoFadeIn 1.4s cubic-bezier(.16,1,.3,1) .6s forwards;
   pointer-events: none;
 }
-#hero-photo-abs img {
+/* Stacked sequence frames */
+.hf {
+  position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover; object-position: center center;
   display: block;
+  filter: grayscale(100%) contrast(1.08);
+  will-change: opacity;
 }
-/* Soft left-edge fade so photo blends into white */
+#hf1 { z-index: 3; }
+#hf2 { z-index: 2; opacity: 0; }
+#hf3 { z-index: 1; opacity: 0; }
+/* Soft left-edge fade — above all frames */
 #hero-photo-abs::before {
   content: '';
-  position: absolute; inset: 0; z-index: 1;
+  position: absolute; inset: 0; z-index: 4;
   background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.05) 28%, transparent 50%);
 }
 @keyframes photoFadeIn {
@@ -201,8 +211,7 @@
     /* Fade top edge only so photo blends with white content above */
     background: linear-gradient(to bottom, #ffffff 0%, rgba(255,255,255,0.1) 30%, transparent 55%);
   }
-  #hero-photo-abs img {
-    object-fit: cover;
+  .hf {
     object-position: center 20%;
   }
 
@@ -287,9 +296,11 @@
 </nav>
 <section id="hero">
 
-  <!-- Photo — full height, right side, behind name watermark -->
+  <!-- Scroll-driven photo sequence — camera arc left → center → right -->
   <div id="hero-photo-abs">
-    <img src="assets/images/landing-photo.jpg" alt="Marberd Bernard">
+    <img class="hf" id="hf1" src="assets/images/hero-frame-1.jpg" alt="Marberd Bernard">
+    <img class="hf" id="hf2" src="assets/images/hero-frame-2.jpg" alt="">
+    <img class="hf" id="hf3" src="assets/images/hero-frame-3.jpg" alt="">
   </div>
 
   <!-- Blueprint lines overlay -->
