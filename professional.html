@@ -8,6 +8,215 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
 
+/* ── LOCAL DESIGN TOKENS ── */
+:root {
+  --pr-gold:   #8a6f3e;
+  --pr-black:  #1a1a1a;
+  --pr-cream:  #f5f3ef;
+  --pr-panel:  #efece6;
+}
+
+/* ══ SECTION 1 — HERO ════════════════════════════════ */
+.pr-hero-section {
+  background: var(--pr-cream);
+  border-bottom: 1px solid var(--border);
+}
+.pr-hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  padding: 140px 60px 80px 132px; /* 132 = 72px rail + 60px gap */
+}
+
+/* Vertical rail */
+.pr-rail {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 72px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  pointer-events: none;
+}
+.pr-rail-line {
+  width: 1px;
+  height: 200px;
+  background: var(--pr-gold);
+  opacity: 0.45;
+  flex-shrink: 0;
+}
+.pr-rail-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  color: var(--pr-gold);
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Hero copy */
+.pr-hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--pr-gold);
+  margin-bottom: 18px;
+  display: block;
+}
+.pr-hero-heading {
+  font-family: var(--serif);
+  font-size: clamp(44px, 6vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: var(--pr-black);
+  margin: 0;
+}
+.pr-hero-heading em {
+  font-style: italic;
+  color: var(--pr-gold);
+  display: block;
+  line-height: 1.1;
+}
+
+/* ══ SECTION 2 — WORDMARKS ═══════════════════════════ */
+.pr-wm-section {
+  background: var(--pr-cream);
+  padding: 80px 60px;
+  border-bottom: 1px solid var(--border);
+}
+.pr-wm-inner { max-width: 1200px; margin: 0 auto; }
+
+.pr-wm-eyebrow {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pr-gold);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pr-wm-eyebrow::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--pr-gold);
+  flex-shrink: 0;
+}
+.pr-wm-heading {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--pr-black);
+  letter-spacing: -0.5px;
+  margin-bottom: 52px;
+}
+
+.pr-wm-wall {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px 0;
+}
+.pr-wm-name {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(26, 26, 26, 0.4);
+  white-space: nowrap;
+}
+.pr-wm-sep {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1;
+  color: var(--pr-gold);
+  opacity: 1;
+  user-select: none;
+  flex-shrink: 0;
+  padding: 0 4px;
+}
+
+/* ══ SECTION 3 — EXPERIENCE ══════════════════════════ */
+/* Override global gold vars to match design spec */
+.p-exp-role         { color: var(--pr-gold); }
+.p-exp-bullets li::before { color: var(--pr-gold); }
+.p-section-label    { color: var(--pr-gold); }
+.p-section-label::after { background: rgba(138,111,62,0.2); }
+
+/* Expand button — inline, underlined */
+.bullet-expand {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  display: inline;
+  text-decoration: underline;
+  text-decoration-color: var(--pr-gold);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: color 0.15s, text-decoration-thickness 0.15s;
+  border-radius: 0;
+}
+.bullet-expand:hover {
+  color: var(--pr-gold);
+  text-decoration-thickness: 2px;
+}
+.bullet-expand[aria-expanded="true"] {
+  color: var(--pr-gold);
+  text-decoration-thickness: 2px;
+}
+
+/* Expand panel — grid height animation */
+.bullet-panel-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.bullet-panel-wrap.open {
+  grid-template-rows: 1fr;
+}
+.bullet-panel-inner { overflow: hidden; }
+.bullet-panel-content {
+  background: var(--pr-panel);
+  border-left: 2px solid var(--pr-gold);
+  padding: 20px 24px;
+  margin: 12px 0 8px 0;
+  border-radius: 0;
+}
+.bpc-text {
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.65;
+  color: #444;
+  margin: 0 0 8px;
+  font-weight: 400;
+}
+.bpc-metric {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--pr-gold);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Keep existing STAT / CLIENTS / BANNER classes removed — */
+/* reuse existing .p-exp-entry, .p-renders, .p-intl-* */
+
 /* STAT STRIP */
 .p-stats {
   display: flex;
@@ -37,41 +246,6 @@
   color: var(--muted);
   margin-top: 8px;
 }
-@media (max-width: 680px) {
-  .p-stats { flex-wrap: wrap; }
-  .p-stat { flex: 0 0 50%; border-bottom: 1px solid var(--border); }
-}
-
-/* CLIENTS */
-.p-clients {
-  margin-top: 64px;
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
-}
-.p-clients-label {
-  font-family: var(--mono);
-  font-size: 8px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--gold-dk);
-  margin-bottom: 18px;
-}
-.p-clients-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px;
-}
-.p-client {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--mid);
-  padding: 9px 18px;
-  border: 1px solid var(--border);
-  transition: color .2s, border-color .2s;
-}
-.p-client:hover { color: var(--gold-dk); border-color: rgba(184,148,106,.5); }
 
 /* DIVIDER LABEL */
 .p-section-head {
@@ -85,7 +259,6 @@
   font-size: 8px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--gold-dk);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -129,7 +302,6 @@
   font-size: 8px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--gold-dk);
   margin-top: 10px;
   line-height: 1.6;
 }
@@ -161,14 +333,19 @@
 }
 .p-exp-bullets li {
   display: flex;
-  gap: 14px;
+  flex-direction: column;
+  gap: 0;
   font-size: 13.5px;
   color: var(--mid);
   line-height: 1.7;
 }
-.p-exp-bullets li::before {
+.p-exp-bullets li > span {
+  display: flex;
+  gap: 14px;
+}
+.p-exp-bullets li > span::before {
   content: '—';
-  color: var(--gold);
+  color: var(--pr-gold);
   flex-shrink: 0;
   font-size: 11px;
   margin-top: 5px;
@@ -206,34 +383,6 @@
   color: rgba(255,255,255,.6);
 }
 @media (max-width: 680px) { .p-renders { flex-direction: column; } }
-
-/* PRESENTING BANNER */
-.p-banner {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  max-height: 540px;
-}
-.p-banner img {
-  width: 100%;
-  height: 100%;
-  max-height: 540px;
-  object-fit: cover;
-  object-position: center 20%;
-  display: block;
-  filter: grayscale(18%) contrast(1.04);
-}
-.p-banner-caption {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 28px 52px;
-  background: linear-gradient(to top, rgba(17,17,24,.72) 0%, transparent 100%);
-  font-family: var(--mono);
-  font-size: 8px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.55);
-}
 
 /* INTERNATIONAL PROJECTS */
 .p-intl-grid {
@@ -279,7 +428,7 @@
 }
 .p-intl-row:hover .p-intl-body {
   background: var(--paper);
-  border-color: rgba(184,148,106,.35);
+  border-color: rgba(138,111,62,.35);
 }
 .p-intl-idx {
   font-family: var(--mono);
@@ -293,7 +442,7 @@
   font-size: 8px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--gold-dk);
+  color: var(--pr-gold);
   margin-bottom: 14px;
   display: flex;
   align-items: center;
@@ -303,7 +452,7 @@
   content: '';
   width: 18px;
   height: 1px;
-  background: var(--gold);
+  background: var(--pr-gold);
   flex-shrink: 0;
 }
 .p-intl-name {
@@ -319,6 +468,14 @@
   color: var(--mid);
   line-height: 1.75;
   font-weight: 300;
+}
+
+/* ══ MOBILE ══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .pr-hero-inner { padding: 110px 20px 56px 20px; }
+  .pr-rail       { display: none; }
+  .pr-wm-section { padding: 56px 20px; }
+  .pr-wm-wall    { justify-content: flex-start; gap: 20px; }
 }
 
 </style>
@@ -348,79 +505,106 @@
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="page-hero reveal">
-  <div class="page-eyebrow">Professional</div>
-  <h1 class="page-title">Eight years.<br><em>Precision at scale.</em></h1>
-</div>
+<!-- ══ SECTION 1 — HERO ══════════════════════════════ -->
+<section class="pr-hero-section">
+  <div class="pr-hero-inner reveal">
+    <div class="pr-rail" aria-hidden="true">
+      <span class="pr-rail-line"></span>
+      <span class="pr-rail-text">Practice</span>
+    </div>
+    <span class="pr-hero-eyebrow">Professional</span>
+    <h1 class="pr-hero-heading">
+      Eight years.
+      <em>Precision at scale.</em>
+    </h1>
+  </div>
+</section>
 
-<div class="p-banner reveal">
-  <img src="assets/images/presenting.jpg" alt="Marberd Bernard presenting BIM model to stakeholders">
-  <div class="p-banner-caption">BIM coordination review · TPG Architecture · New York</div>
-</div>
+<!-- ══ SECTION 2 — SELECT CLIENTS ════════════════════ -->
+<section class="pr-wm-section">
+  <div class="pr-wm-inner">
+    <div class="pr-wm-eyebrow reveal">Select Clients</div>
+    <div class="pr-wm-heading reveal">
+      Trusted by firms<br>that demand precision.
+    </div>
+    <div class="pr-wm-wall reveal" role="list" aria-label="Select clients">
+      <span class="pr-wm-name" role="listitem">JPMorgan Chase</span>
+      <span class="pr-wm-sep" aria-hidden="true">·</span>
+      <span class="pr-wm-name" role="listitem">BMW</span>
+      <span class="pr-wm-sep" aria-hidden="true">·</span>
+      <span class="pr-wm-name" role="listitem">CLEAR</span>
+      <span class="pr-wm-sep" aria-hidden="true">·</span>
+      <span class="pr-wm-name" role="listitem">Capital One</span>
+      <span class="pr-wm-sep" aria-hidden="true">·</span>
+      <span class="pr-wm-name" role="listitem">MLS</span>
+    </div>
+  </div>
+</section>
 
+<!-- ══ SECTIONS 3–5 — EXPERIENCE, RENDERS, INTERNATIONAL ══ -->
 <div class="content-wrap">
-
-  <!-- STATS -->
-  <div class="p-stats reveal">
-    <div class="p-stat">
-      <div class="p-stat-n">8<span>+</span></div>
-      <div class="p-stat-l">Years of practice</div>
-    </div>
-    <div class="p-stat">
-      <div class="p-stat-n">235<span>+</span></div>
-      <div class="p-stat-l">BIM projects managed</div>
-    </div>
-    <div class="p-stat">
-      <div class="p-stat-n">25<span>+</span></div>
-      <div class="p-stat-l">JPMorgan locations</div>
-    </div>
-    <div class="p-stat">
-      <div class="p-stat-n">119<span>K SF</span></div>
-      <div class="p-stat-l">CLEAR HQ at 4 WTC</div>
-    </div>
-  </div>
-
-  <!-- CLIENTS -->
-  <div class="p-clients reveal">
-    <div class="p-clients-label">Select Clients</div>
-    <div class="p-clients-list">
-      <div class="p-client">JPMorgan Chase</div>
-      <div class="p-client">BMW</div>
-      <div class="p-client">CLEAR / 4 WTC</div>
-      <div class="p-client">Capital One</div>
-      <div class="p-client">Rockefeller Group</div>
-      <div class="p-client">Davis Wright Tremaine</div>
-      <div class="p-client">First Sentier Investors</div>
-      <div class="p-client">SA&amp;BOO · China</div>
-    </div>
-  </div>
 
   <!-- EXPERIENCE -->
   <div class="p-section-head reveal">
     <div class="p-section-label">Experience</div>
   </div>
 
+  <!-- TPG Architecture -->
   <div class="p-exp-entry reveal">
     <div class="p-exp-left">
       <div class="p-exp-co">TPG Architecture</div>
-      <div class="p-exp-role">Revit Specialist<br>Project Architect</div>
+      <div class="p-exp-role">Revit Specialist<br>Project Designer</div>
       <div class="p-exp-period">Apr 2019 – Present<br>New York, NY</div>
     </div>
     <div class="p-exp-right">
       <div class="p-exp-lead">"Standardizing BIM workflows across one of New York's most active commercial practices."</div>
       <ul class="p-exp-bullets">
-        <li>Led BIM strategy coordinating architecture, structure, and MEP across <strong>multiple simultaneous projects</strong>.</li>
-        <li>Delivered strategic recommendations for <strong>25+ JPMorgan Chase locations</strong> — standardizing workflows firmwide.</li>
-        <li>Directed 3D modeling of complex ceiling geometries for <strong>CLEAR's 119,226 SF HQ at 4 WTC</strong>.</li>
-        <li>Developed core-and-shell models for <strong>Davis Wright Tremaine's 62,000 SF office</strong>; coordinated ceiling systems and phased drawings.</li>
-        <li>Designed <strong>FF&amp;E packages for BMW's flagship NYC showroom</strong> — parametric furniture models and stakeholder presentations.</li>
-        <li>Administered <strong>235+ BIM 360 &amp; Autodesk Construction Cloud projects</strong>.</li>
-        <li>Led company-wide Revit training, raising proficiency across all studio groups.</li>
+        <li>
+          <span>Led BIM strategy coordinating architecture, structure, and MEP across multiple simultaneous projects.</span>
+        </li>
+        <li>
+          <span>Delivered strategic recommendations for <button class="bullet-expand"
+            aria-expanded="false"
+            data-panel-text="Standardized BIM templates, family libraries, and coordination workflows across the JPMorgan portfolio. Work spanned branch fitouts, executive floors, and client meeting environments across the eastern United States."
+            data-panel-metric="25+ locations · ongoing program">25+ JPMorgan Chase locations</button> — standardizing workflows firmwide.</span>
+          <div class="bullet-panel-wrap"><div class="bullet-panel-inner"></div></div>
+        </li>
+        <li>
+          <span>Directed 3D modeling of complex ceiling geometries for <button class="bullet-expand"
+            aria-expanded="false"
+            data-panel-text="Directed three dimensional modeling of complex ceiling geometries and coordinated architectural systems with structure and MEP for CLEAR's headquarters at 4 World Trade Center. Required tight tolerances against existing tower conditions."
+            data-panel-metric="119,226 SF · 4 WTC · completed">CLEAR's 119,226 SF HQ at 4 WTC</button>.</span>
+          <div class="bullet-panel-wrap"><div class="bullet-panel-inner"></div></div>
+        </li>
+        <li>
+          <span>Developed core and shell models for <button class="bullet-expand"
+            aria-expanded="false"
+            data-panel-text="Developed core and shell models, coordinated ceiling systems across multiple floors, and produced phased drawing sets for the law firm relocation. Coordination required reconciling existing landlord conditions with full tenant fitout scope."
+            data-panel-metric="62,000 SF · law firm relocation">Davis Wright Tremaine's 62,000 SF office</button>; coordinated ceiling systems and phased drawings.</span>
+          <div class="bullet-panel-wrap"><div class="bullet-panel-inner"></div></div>
+        </li>
+        <li>
+          <span>Designed <button class="bullet-expand"
+            aria-expanded="false"
+            data-panel-text="Designed parametric furniture models and produced stakeholder presentations for BMW's flagship Manhattan showroom. Coordination touched brand standards, ownership review, and showroom operations."
+            data-panel-metric="BMW flagship · NYC">FF&amp;E packages for BMW's flagship NYC showroom</button> — parametric furniture models and stakeholder presentations.</span>
+          <div class="bullet-panel-wrap"><div class="bullet-panel-inner"></div></div>
+        </li>
+        <li>
+          <span>Administered <button class="bullet-expand"
+            aria-expanded="false"
+            data-panel-text="Administered project setup, permissions, model coordination, and issue tracking across the firm's full Autodesk Construction Cloud and BIM 360 environment. Acted as platform admin since 2018."
+            data-panel-metric="235+ projects · platform admin since 2018">235+ BIM 360 &amp; Autodesk Construction Cloud projects</button>.</span>
+          <div class="bullet-panel-wrap"><div class="bullet-panel-inner"></div></div>
+        </li>
+        <li>
+          <span>Led company wide Revit training, raising proficiency across all studio groups.</span>
+        </li>
       </ul>
     </div>
   </div>
 
+  <!-- AMA Consulting Engineers -->
   <div class="p-exp-entry reveal">
     <div class="p-exp-left">
       <div class="p-exp-co">AMA Consulting Engineers</div>
@@ -428,14 +612,23 @@
       <div class="p-exp-period">May 2018 – 2019<br>New York, NY</div>
     </div>
     <div class="p-exp-right">
-      <div class="p-exp-lead">"High-volume coordination across landmark New York projects."</div>
+      <div class="p-exp-lead">"High volume coordination across landmark New York projects."</div>
       <ul class="p-exp-bullets">
-        <li>Collaborated across <strong>100+ projects</strong> including Peloton HQ (300,000 SF) and PENN Station (350,000 SF).</li>
-        <li>Navisworks clash detection across architectural, structural, and MEP models.</li>
+        <li>
+          <span>Collaborated across <button class="bullet-expand"
+            aria-expanded="false"
+            data-panel-text="High volume MEP coordination across landmark New York buildings, including Peloton's 300,000 SF headquarters and Penn Station infrastructure work. Navisworks clash detection across architectural, structural, and mechanical models."
+            data-panel-metric="Peloton HQ 300,000 SF · Penn Station 350,000 SF">100+ projects</button> including Peloton HQ (300,000 SF) and Penn Station (350,000 SF).</span>
+          <div class="bullet-panel-wrap"><div class="bullet-panel-inner"></div></div>
+        </li>
+        <li>
+          <span>Navisworks clash detection across architectural, structural, and MEP models.</span>
+        </li>
       </ul>
     </div>
   </div>
 
+  <!-- D-YO Studio -->
   <div class="p-exp-entry reveal">
     <div class="p-exp-left">
       <div class="p-exp-co">D-YO Studio</div>
@@ -445,13 +638,21 @@
     <div class="p-exp-right">
       <div class="p-exp-lead">"Driving digital transformation at a boutique design firm."</div>
       <ul class="p-exp-bullets">
-        <li>Initiated firm-wide transition from <strong>AutoCAD to Revit</strong> — introduced material takeoffs for cost estimation.</li>
-        <li>Led construction meetings; handled <strong>DOB filing</strong>, building codes, and energy analysis.</li>
+        <li>
+          <span>Initiated firm wide transition from <button class="bullet-expand"
+            aria-expanded="false"
+            data-panel-text="Initiated and executed the firm wide transition from AutoCAD to Revit, introduced material takeoffs to support cost estimation, and led construction meetings. Also handled DOB filing, building code review, and energy analysis for the firm's residential and small commercial work."
+            data-panel-metric="Firm wide platform migration">AutoCAD to Revit</button> — introduced material takeoffs for cost estimation.</span>
+          <div class="bullet-panel-wrap"><div class="bullet-panel-inner"></div></div>
+        </li>
+        <li>
+          <span>Led construction meetings; handled DOB filing, building codes, and energy analysis.</span>
+        </li>
       </ul>
     </div>
   </div>
 
-  <!-- RENDERS -->
+  <!-- ══ SECTION 4 — SELECTED RENDERS ══ -->
   <div class="p-section-head reveal" style="margin-top:72px;">
     <div class="p-section-label">Selected Renders — TPG Architecture</div>
   </div>
@@ -466,7 +667,7 @@
     </div>
   </div>
 
-  <!-- INTERNATIONAL -->
+  <!-- ══ SECTION 5 — INTERNATIONAL WORK ══ -->
   <div class="p-section-head reveal" style="margin-top:72px;">
     <div class="p-section-label">International Work</div>
   </div>
@@ -524,26 +725,104 @@
 
   </div>
 
-</div>
+</div><!-- /content-wrap -->
 
-<footer>
-  <div class="foot-inner">
-    <div class="foot-logo">
-      <svg width="36" height="36" viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-</svg>
-      <span class="foot-copy">© 2026 Marberd Bernard · New York, NY</span>
-    </div>
-    <div class="foot-links">
-      <a class="foot-link" href="about.html">About</a>
-      <a class="foot-link" href="professional.html">Work</a>
-      <a class="foot-link" href="contact.html">Contact</a>
-      <a class="foot-link" href="https://linkedin.com/in/marberd-bernard" target="_blank">LinkedIn</a>
-    </div>
-  </div>
+<!-- ══ SECTION 6 — MINIMAL FOOTER ════════════════════ -->
+<footer class="footer-minimal">
+  <div class="footer-rule"></div>
+  <p>© 2026 Marberd Bernard · New York, NY</p>
 </footer>
+
 <script src="assets/js/main.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var active = null; // { btn, panelWrap }
+
+  function buildPanelContent(wrap, text, metric) {
+    var inner = wrap.querySelector('.bullet-panel-inner');
+    var content = document.createElement('div');
+    content.className = 'bullet-panel-content';
+
+    var p = document.createElement('p');
+    p.className = 'bpc-text';
+    p.textContent = text;
+    content.appendChild(p);
+
+    if (metric) {
+      var m = document.createElement('p');
+      m.className = 'bpc-metric';
+      m.textContent = metric;
+      content.appendChild(m);
+    }
+
+    inner.appendChild(content);
+  }
+
+  function clearPanelContent(wrap) {
+    var inner = wrap.querySelector('.bullet-panel-inner');
+    if (inner) inner.innerHTML = '';
+  }
+
+  function closeActive(cb) {
+    if (!active) { if (cb) cb(); return; }
+    var btn  = active.btn;
+    var wrap = active.panelWrap;
+    active = null;
+    btn.setAttribute('aria-expanded', 'false');
+    wrap.classList.remove('open');
+
+    // Wait for CSS transition (300ms) then clear content
+    setTimeout(function () {
+      clearPanelContent(wrap);
+      if (cb) cb();
+    }, 310);
+  }
+
+  function openPanel(btn) {
+    var li = btn.closest('li');
+    if (!li) return;
+
+    var wrap = li.querySelector('.bullet-panel-wrap');
+    if (!wrap) return;
+
+    var text   = btn.getAttribute('data-panel-text');
+    var metric = btn.getAttribute('data-panel-metric') || '';
+
+    buildPanelContent(wrap, text, metric);
+
+    // Force reflow so the transition fires
+    wrap.getBoundingClientRect();
+    wrap.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+
+    active = { btn: btn, panelWrap: wrap };
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.bullet-expand');
+    if (!btn) return;
+
+    // Toggle off if same button
+    if (active && active.btn === btn) {
+      closeActive();
+      return;
+    }
+
+    // Close previous, then open new
+    if (active) {
+      closeActive(function () { openPanel(btn); });
+    } else {
+      openPanel(btn);
+    }
+  });
+
+  // Keyboard: Enter / Space on buttons is native; add Escape to close
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && active) closeActive();
+  });
+}());
+</script>
 </body>
 </html>

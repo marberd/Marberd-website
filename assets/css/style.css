@@ -271,6 +271,28 @@ footer {
   .content-wrap { padding: 48px 20px; }
 }
 
+/* ── MINIMAL FOOTER ─────────────────────── */
+.footer-minimal {
+  padding: 60px 60px 40px;
+  text-align: center;
+}
+.footer-rule {
+  max-width: 1200px;
+  margin: 0 auto 32px;
+  height: 1px;
+  background: rgba(138, 111, 62, 0.4);
+}
+.footer-minimal p {
+  font-family: var(--serif);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .footer-minimal { padding: 40px 20px 32px; }
+}
+
 /* ── SCROLL REVEAL ──────────────────────── */
 .reveal {
   opacity: 0; transform: translateY(22px);
