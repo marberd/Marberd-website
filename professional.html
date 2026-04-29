@@ -470,6 +470,41 @@
   font-weight: 300;
 }
 
+/* TPG role descriptor */
+.pr-role-desc {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--pr-gold);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+
+/* Independent Practice lead + link */
+.pr-intl-lead {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--mid);
+  max-width: 640px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+.pr-archnim-link {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--pr-gold);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 28px;
+  cursor: none;
+  transition: opacity 0.2s;
+}
+.pr-archnim-link:hover { opacity: 0.65; }
+
 /* ══ MOBILE ══════════════════════════════════════════ */
 @media (max-width: 768px) {
   .pr-hero-inner { padding: 110px 20px 56px 20px; }
@@ -553,20 +588,28 @@
   <div class="p-exp-entry reveal">
     <div class="p-exp-left">
       <div class="p-exp-co">TPG Architecture</div>
-      <div class="p-exp-role">Revit Specialist<br>Project Designer</div>
+      <div class="p-exp-role">BIM Manager · Project Lead</div>
       <div class="p-exp-period">Apr 2019 – Present<br>New York, NY</div>
     </div>
     <div class="p-exp-right">
+      <div class="pr-role-desc">Firmwide BIM lead. Embedded across studio teams for senior technical and project delivery work.</div>
       <div class="p-exp-lead">"Standardizing BIM workflows across one of New York's most active commercial practices."</div>
       <ul class="p-exp-bullets">
         <li>
           <span>Led BIM strategy coordinating architecture, structure, and MEP across multiple simultaneous projects.</span>
         </li>
         <li>
+          <span>Integrated project manager feedback into Revit models and developed millwork and construction documentation for <button class="bullet-expand"
+            aria-expanded="false"
+            data-panel-text="Integrated project manager feedback into Revit models and produced millwork details and full construction documentation for Capital One retail branches across the New York region. Each branch averaged 30,000 SF."
+            data-panel-metric="Capital One · NYC and Upstate NY · 30,000 SF avg">Capital One branches across NYC and Upstate New York</button>, averaging 30,000 SF each.</span>
+          <div class="bullet-panel-wrap"><div class="bullet-panel-inner"></div></div>
+        </li>
+        <li>
           <span>Delivered strategic recommendations for <button class="bullet-expand"
             aria-expanded="false"
             data-panel-text="Standardized BIM templates, family libraries, and coordination workflows across the JPMorgan portfolio. Work spanned branch fitouts, executive floors, and client meeting environments across the eastern United States."
-            data-panel-metric="25+ locations · ongoing program">25+ JPMorgan Chase locations</button> — standardizing workflows firmwide.</span>
+            data-panel-metric="25+ locations · ongoing program">25+ JPMorgan Chase locations</button>, standardizing workflows firmwide.</span>
           <div class="bullet-panel-wrap"><div class="bullet-panel-inner"></div></div>
         </li>
         <li>
@@ -587,14 +630,28 @@
           <span>Designed <button class="bullet-expand"
             aria-expanded="false"
             data-panel-text="Designed parametric furniture models and produced stakeholder presentations for BMW's flagship Manhattan showroom. Coordination touched brand standards, ownership review, and showroom operations."
-            data-panel-metric="BMW flagship · NYC">FF&amp;E packages for BMW's flagship NYC showroom</button> — parametric furniture models and stakeholder presentations.</span>
+            data-panel-metric="BMW flagship · NYC">FF&amp;E packages for BMW's flagship NYC showroom</button>, including parametric furniture models and stakeholder presentations.</span>
+          <div class="bullet-panel-wrap"><div class="bullet-panel-inner"></div></div>
+        </li>
+        <li>
+          <span>Modeled existing architectural and structural conditions for <button class="bullet-expand"
+            aria-expanded="false"
+            data-panel-text="Modeled existing architectural and structural conditions, produced casework elevations, and delivered photorealistic Enscape renderings for client presentations."
+            data-panel-metric="21,000 SF · First Sentier Investors · NYC">First Sentier Investors' 21,000 SF NYC office</button>; produced casework elevations and Enscape renderings for client presentations.</span>
+          <div class="bullet-panel-wrap"><div class="bullet-panel-inner"></div></div>
+        </li>
+        <li>
+          <span>Applied advanced Revit formulas to calculate seating capacity and egress distances for a <button class="bullet-expand"
+            aria-expanded="false"
+            data-panel-text="Applied advanced Revit formulas to calculate seating capacity and egress distances, supporting code compliance and spatial planning across the floor plate."
+            data-panel-metric="45,200 SF · Rockefeller Group">45,200 SF Rockefeller Group project</button>, supporting code compliance and spatial planning.</span>
           <div class="bullet-panel-wrap"><div class="bullet-panel-inner"></div></div>
         </li>
         <li>
           <span>Administered <button class="bullet-expand"
             aria-expanded="false"
             data-panel-text="Administered project setup, permissions, model coordination, and issue tracking across the firm's full Autodesk Construction Cloud and BIM 360 environment. Acted as platform admin since 2018."
-            data-panel-metric="235+ projects · platform admin since 2018">235+ BIM 360 &amp; Autodesk Construction Cloud projects</button>.</span>
+            data-panel-metric="300+ projects · platform admin since 2018">300+ BIM 360 and Autodesk Construction Cloud projects</button>.</span>
           <div class="bullet-panel-wrap"><div class="bullet-panel-inner"></div></div>
         </li>
         <li>
@@ -667,11 +724,13 @@
     </div>
   </div>
 
-  <!-- ══ SECTION 5 — INTERNATIONAL WORK ══ -->
+  <!-- ══ SECTION 5 — INDEPENDENT PRACTICE ══ -->
   <div class="p-section-head reveal" style="margin-top:72px;">
-    <div class="p-section-label">International Work</div>
+    <div class="p-section-label">Independent Practice &nbsp;·&nbsp; 2018 to 2024</div>
   </div>
-  <h2 class="sec-h2 reveal" style="margin-top:20px;">Projects beyond<br><em>New York.</em></h2>
+  <h2 class="sec-h2 reveal" style="margin-top:20px;">Independent practice as<br><em>Archnimations.</em></h2>
+  <p class="pr-intl-lead reveal">Selected projects delivered through Archnimations, my independent practice from 2018 to 2024. Direct client work across three countries, spanning residential, retail, and large scale mixed use.</p>
+  <a class="pr-archnim-link reveal" href="https://archnimations.com" target="_blank" rel="noopener">archnimations.com &nbsp;→</a>
 
   <div class="p-intl-grid">
 
@@ -695,7 +754,7 @@
         <div class="p-intl-idx">02 / 04</div>
         <div class="p-intl-loc">Chengdu, China</div>
         <div class="p-intl-name">BURTON IN99 Flagship — 370 sqm</div>
-        <div class="p-intl-desc">Design consultation for SA&amp;BOO — concept refinement, layout optimization, and visual presentation support for the retail flagship store.</div>
+        <div class="p-intl-desc">Design consultation through Archnimations for Chinese firm SA&amp;BOO. Concept refinement, layout optimization, and visual presentation support for the retail flagship store.</div>
       </div>
     </div>
 
