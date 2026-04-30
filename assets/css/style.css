@@ -106,7 +106,6 @@ nav.scrolled {
 .site-logo {
   height: 38px;
   width: auto;
-  mix-blend-mode: multiply;
   transition: opacity 0.36s ease, transform 0.36s ease;
   display: block;
 }
