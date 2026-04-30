@@ -20,22 +20,35 @@
   position: absolute;
   inset: 0;
   background-image: url('assets/images/hero-meeting.jpg');
-  background-size: cover;
+  background-size: auto 100%;
   background-position: right center;
-  z-index: 1;
-}
-.hero__gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(245,243,239,0.98) 0%,
-    rgba(245,243,239,0.88) 35%,
-    rgba(245,243,239,0.5)  52%,
-    rgba(245,243,239,0)    70%,
-    rgba(245,243,239,0)    100%
-  );
+  background-repeat: no-repeat;
   z-index: 2;
+  opacity: 0;
+  animation: heroEnter 1.4s cubic-bezier(0.16,1,0.3,1) 0.4s forwards;
+}
+.hero__bloom {
+  position: absolute;
+  inset: -50px;
+  background-image: url('assets/images/hero-meeting.jpg');
+  background-size: auto 110%;
+  background-position: right center;
+  background-repeat: no-repeat;
+  filter: blur(45px) brightness(1.5) saturate(0.2);
+  mix-blend-mode: screen;
+  z-index: 1;
+  opacity: 0;
+  animation: bloomEnter 2.2s ease 1s forwards;
+}
+.hero__gradient { display: none; }
+@keyframes heroEnter {
+  0%   { opacity: 0; transform: translateX(55px) scale(1.04); filter: blur(12px); }
+  55%  { opacity: 1; filter: blur(1px); }
+  100% { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+}
+@keyframes bloomEnter {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 .hero__content {
   position: relative;
@@ -140,15 +153,8 @@
 /* ── MOBILE ─────────────────── */
 @media (max-width: 768px) {
   .hero         { height: auto; min-height: 100svh; }
-  .hero__photo  { background-position: center 20%; }
-  .hero__gradient {
-    background: linear-gradient(
-      to bottom,
-      rgba(245,243,239,0.4)  0%,
-      rgba(245,243,239,0.85) 50%,
-      rgba(245,243,239,0.98) 100%
-    );
-  }
+  .hero__photo  { background-position: center bottom; background-size: auto 80%; }
+  .hero__bloom  { background-position: center bottom; background-size: auto 90%; }
   .hero__content {
     max-width: 100%;
     padding: 0 20px 60px;
@@ -192,8 +198,8 @@
   </div>
 </nav>
 <section id="hero" class="hero">
+  <div class="hero__bloom" aria-hidden="true"></div>
   <div class="hero__photo" aria-hidden="true"></div>
-  <div class="hero__gradient" aria-hidden="true"></div>
   <div class="hero__content">
     <p class="hero__eyebrow">
       <span class="hero__rule" aria-hidden="true"></span>
