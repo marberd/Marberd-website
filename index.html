@@ -25,7 +25,7 @@
   background-repeat: no-repeat;
   z-index: 2;
   opacity: 0;
-  animation: heroEnter 1.4s cubic-bezier(0.16,1,0.3,1) 0.4s forwards;
+  animation: heroSettle 2.6s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;
 }
 .hero__bloom {
   position: absolute;
@@ -38,17 +38,25 @@
   mix-blend-mode: screen;
   z-index: 1;
   opacity: 0;
-  animation: bloomEnter 2.2s ease 1s forwards;
+  animation: bloomSettle 3s ease 0.6s forwards;
 }
 .hero__gradient { display: none; }
-@keyframes heroEnter {
-  0%   { opacity: 0; transform: translateX(55px) scale(1.04); filter: blur(12px); }
-  55%  { opacity: 1; filter: blur(1px); }
-  100% { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+@keyframes heroSettle {
+  0%   { opacity:0; transform:scale(1.08) translateX(48px);
+         filter:brightness(2.8) saturate(0) blur(22px) contrast(0.75); }
+  18%  { opacity:1; transform:scale(1.05) translateX(26px);
+         filter:brightness(2.0) saturate(0.06) blur(12px) contrast(0.85); }
+  50%  { transform:scale(1.02) translateX(9px);
+         filter:brightness(1.25) saturate(0.45) blur(2.5px) contrast(0.97); }
+  80%  { transform:scale(1.004) translateX(2px);
+         filter:brightness(1.04) saturate(0.88) blur(0.4px) contrast(1); }
+  100% { opacity:1; transform:scale(1) translateX(0);
+         filter:brightness(1) saturate(1) blur(0) contrast(1); }
 }
-@keyframes bloomEnter {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
+@keyframes bloomSettle {
+  0%   { opacity:0; filter:blur(55px) brightness(2.5) saturate(0); }
+  40%  { opacity:0.7; filter:blur(50px) brightness(1.8) saturate(0.1); }
+  100% { opacity:1; filter:blur(45px) brightness(1.5) saturate(0.2); }
 }
 .hero__content {
   position: relative;
@@ -178,11 +186,7 @@
 </head>
 <body><svg id="cur" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="cur-ring" cx="22" cy="22" r="16" stroke="#111118" stroke-width="1"/><line x1="22" y1="3" x2="22" y2="9" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="35" x2="22" y2="41" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="22" x2="9" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="22" x2="41" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/></svg><div id="cur-dot"></div>
 <nav id="main-nav">
-  <a id="nav-logo" href="index.html" title="MARBERD"><svg viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M8 78 L8 20 L26 52 L44 20 L44 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M52 20 L52 78 M52 20 Q80 18 80 34 Q80 47 52 48 M52 48 Q84 48 84 63 Q84 80 52 78" stroke="#B8946A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M6 88 Q30 94 52 88 Q68 83 94 88" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-</svg></a>
+  <a id="nav-logo" href="index.html" title="MARBERD"><img src="assets/images/logo.png" class="site-logo" alt="MARBERD"></a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
     <li><a href="academic.html">Academic</a></li>

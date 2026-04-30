@@ -97,6 +97,17 @@ nav.scrolled {
   cursor: none; flex-shrink: 0;
 }
 #nav-logo svg { width: 48px; height: 48px; }
+.site-logo {
+  height: 38px;
+  width: auto;
+  mix-blend-mode: multiply;
+  filter: sepia(1) saturate(1.5) brightness(1.05);
+  transition: filter 0.38s ease, transform 0.38s ease;
+}
+.site-logo:hover {
+  filter: none;
+  transform: scale(1.04);
+}
 .nav-links {
   display: flex; gap: 40px; list-style: none;
   margin: 0 auto;
