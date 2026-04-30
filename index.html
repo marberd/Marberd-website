@@ -25,7 +25,8 @@
   background-repeat: no-repeat;
   z-index: 2;
   opacity: 0;
-  animation: heroSettle 2.6s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;
+  will-change: transform, filter, opacity;
+  animation: heroSettle 2.4s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;
 }
 .hero__bloom {
   position: absolute;
@@ -34,29 +35,29 @@
   background-size: auto 110%;
   background-position: right center;
   background-repeat: no-repeat;
-  filter: blur(45px) brightness(1.5) saturate(0.2);
+  filter: blur(32px) brightness(1.5) saturate(0.2);
   mix-blend-mode: screen;
   z-index: 1;
   opacity: 0;
-  animation: bloomSettle 3s ease 0.6s forwards;
+  will-change: opacity;
+  animation: bloomFade 2s ease 1s forwards;
 }
 .hero__gradient { display: none; }
 @keyframes heroSettle {
-  0%   { opacity:0; transform:scale(1.08) translateX(48px);
-         filter:brightness(2.8) saturate(0) blur(22px) contrast(0.75); }
-  18%  { opacity:1; transform:scale(1.05) translateX(26px);
-         filter:brightness(2.0) saturate(0.06) blur(12px) contrast(0.85); }
-  50%  { transform:scale(1.02) translateX(9px);
-         filter:brightness(1.25) saturate(0.45) blur(2.5px) contrast(0.97); }
-  80%  { transform:scale(1.004) translateX(2px);
-         filter:brightness(1.04) saturate(0.88) blur(0.4px) contrast(1); }
-  100% { opacity:1; transform:scale(1) translateX(0);
-         filter:brightness(1) saturate(1) blur(0) contrast(1); }
+  0%   { opacity:0;   transform:scale(1.07) translateX(44px);
+         filter:brightness(2.6) saturate(0) contrast(0.72); }
+  20%  { opacity:1;   transform:scale(1.04) translateX(22px);
+         filter:brightness(1.9) saturate(0.07) contrast(0.86); }
+  55%  {              transform:scale(1.015) translateX(7px);
+         filter:brightness(1.18) saturate(0.52) contrast(0.97); }
+  82%  {              transform:scale(1.003) translateX(1px);
+         filter:brightness(1.03) saturate(0.9) contrast(1); }
+  100% { opacity:1;   transform:scale(1) translateX(0);
+         filter:brightness(1) saturate(1) contrast(1); }
 }
-@keyframes bloomSettle {
-  0%   { opacity:0; filter:blur(55px) brightness(2.5) saturate(0); }
-  40%  { opacity:0.7; filter:blur(50px) brightness(1.8) saturate(0.1); }
-  100% { opacity:1; filter:blur(45px) brightness(1.5) saturate(0.2); }
+@keyframes bloomFade {
+  0%   { opacity:0; }
+  100% { opacity:1; }
 }
 .hero__content {
   position: relative;
@@ -186,7 +187,7 @@
 </head>
 <body><svg id="cur" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="cur-ring" cx="22" cy="22" r="16" stroke="#111118" stroke-width="1"/><line x1="22" y1="3" x2="22" y2="9" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="35" x2="22" y2="41" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="22" x2="9" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="22" x2="41" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/></svg><div id="cur-dot"></div>
 <nav id="main-nav">
-  <a id="nav-logo" href="index.html" title="MARBERD"><img src="assets/images/logo.png" class="site-logo" alt="MARBERD"></a>
+  <a id="nav-logo" href="index.html" title="MARBERD"><span class="logo-wrap"><img src="assets/images/logo-gold.png" class="site-logo site-logo--gold" alt="MARBERD"><img src="assets/images/logo.png" class="site-logo site-logo--color" aria-hidden="true"></span></a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
     <li><a href="academic.html">Academic</a></li>

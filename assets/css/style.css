@@ -97,15 +97,27 @@ nav.scrolled {
   cursor: none; flex-shrink: 0;
 }
 #nav-logo svg { width: 48px; height: 48px; }
+.logo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 38px;
+}
 .site-logo {
   height: 38px;
   width: auto;
   mix-blend-mode: multiply;
-  filter: sepia(1) saturate(1.5) brightness(1.05);
-  transition: filter 0.38s ease, transform 0.38s ease;
+  transition: opacity 0.36s ease, transform 0.36s ease;
+  display: block;
 }
-.site-logo:hover {
-  filter: none;
+.site-logo--color {
+  position: absolute;
+  top: 0; left: 0;
+  opacity: 0;
+}
+#nav-logo:hover .site-logo--gold { opacity: 0; }
+#nav-logo:hover .site-logo--color {
+  opacity: 1;
   transform: scale(1.04);
 }
 .nav-links {
