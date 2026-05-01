@@ -18,8 +18,8 @@
 
   (function tick() {
     // Lagged ring follows mouse at 13% per frame
-    cx += (mx - cx) * 0.13;
-    cy += (my - cy) * 0.13;
+    cx += (mx - cx) * 0.22;
+    cy += (my - cy) * 0.22;
     cur.style.left    = cx + 'px';
     cur.style.top     = cy + 'px';
     // Dot snaps exactly

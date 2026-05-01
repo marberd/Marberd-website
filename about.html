@@ -7,7 +7,7 @@
 <title>About · MARBERD</title>
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-/* ── ABOUT PAGE — local tokens ── */
+/* ── ABOUT PAGE ── */
 :root {
   --ab-cream:  #f5f3ef;
   --ab-gold:   #8a6f3e;
@@ -20,93 +20,98 @@
 
 /* ── SECTION 1: HERO ── */
 .ab-hero {
-  background: var(--ab-cream);
-  padding: 140px 48px 60px;
+  background: var(--black);
+  padding: 130px 60px 72px;
+  min-height: 62vh;
+  display: flex;
+  align-items: flex-end;
 }
 .ab-hero-inner {
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  gap: 48px;
-  align-items: flex-start;
+  width: 100%;
 }
-.ab-hero-left  { flex: 1.1; min-width: 0; }
-.ab-hero-right { flex: 0.9; min-width: 0; }
-
+.ab-eyebrow {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 36px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ab-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
 .ab-h1 {
   font-family: var(--serif);
-  font-weight: 400;
-  margin: 0 0 0 0;
-  line-height: 1.05;
+  margin: 0 0 36px;
 }
-.ab-h1-line1 {
+.ab-h1-name {
   display: block;
-  font-size: clamp(32px, 4vw, 52px);
-  color: var(--ab-black);
-  line-height: 1.05;
+  font-size: clamp(64px, 9.5vw, 128px);
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -3px;
+  line-height: 0.9;
 }
-.ab-h1-line2 {
+.ab-h1-role {
   display: block;
-  font-size: clamp(28px, 3.8vw, 48px);
+  font-size: clamp(28px, 4.5vw, 60px);
   font-style: italic;
-  color: var(--ab-gold);
-  line-height: 1.1;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin-top: 14px;
 }
-.ab-gold-div {
-  width: 32px;
-  height: 1.5px;
-  background: var(--ab-gold);
-  margin: 20px 0;
+.ab-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin: 0 0 36px;
+}
+.ab-hero-columns {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 52px;
+  align-items: start;
 }
 .ab-body {
   font-family: var(--sans);
-  font-size: 13px;
-  line-height: 1.8;
-  color: var(--ab-text);
-  max-width: 380px;
-  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.5);
 }
 .ab-body p { margin-bottom: 14px; }
 .ab-body p:last-child { margin-bottom: 0; }
-
 .ab-pills {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 4px;
 }
 .ab-pill {
   font-family: var(--mono);
   font-size: 9px;
   letter-spacing: 0.15em;
-  color: var(--ab-gold);
-  border: 1px solid var(--ab-gold);
+  color: var(--gold);
+  border: 1px solid rgba(184,148,106,0.4);
   background: none;
-  padding: 6px 14px;
-  border-radius: 0;
+  padding: 8px 14px;
   white-space: nowrap;
-}
-
-.ab-portrait-wrap {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  border-left: 3px solid var(--ab-gold);
-}
-.ab-portrait-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-  border-radius: 0;
 }
 
 /* ── SECTION 2: QUOTE BAND ── */
 .ab-quote-band {
-  background: var(--ab-black);
-  padding: 48px;
+  background: var(--ab-cream);
+  padding: 56px 60px;
   text-align: center;
 }
 .ab-quote-text {
@@ -114,7 +119,7 @@
   font-size: clamp(20px, 3vw, 28px);
   font-style: italic;
   font-weight: 400;
-  color: var(--ab-cream);
+  color: var(--ab-black);
   line-height: 1.4;
   margin: 0;
 }
@@ -130,19 +135,19 @@
 
 /* ── SECTION 3: STATS ROW ── */
 .ab-stats {
-  background: var(--ab-cream);
+  background: var(--white);
   display: flex;
   width: 100%;
 }
 .ab-stat {
   flex: 1;
-  padding: 32px 24px;
+  padding: 40px 32px;
   border-right: 0.5px solid rgba(0,0,0,0.1);
 }
 .ab-stat:last-child { border-right: none; }
 .ab-stat-n {
   font-family: var(--serif);
-  font-size: clamp(32px, 4vw, 40px);
+  font-size: clamp(36px, 4.5vw, 48px);
   color: var(--ab-black);
   line-height: 1;
   font-weight: 400;
@@ -166,7 +171,7 @@
 /* ── SECTION 4: CERTS & EDUCATION ── */
 .ab-certs-edu {
   background: var(--ab-cream);
-  padding: 60px 48px;
+  padding: 64px 60px;
   border-top: 0.5px solid rgba(0,0,0,0.1);
 }
 .ab-certs-edu-inner {
@@ -174,7 +179,7 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  gap: 60px;
 }
 .ab-col-label {
   font-family: var(--mono);
@@ -206,7 +211,6 @@
   border: 0.5px solid var(--ab-border-soft);
   padding: 20px;
   margin-bottom: 12px;
-  border-radius: 0;
 }
 .ab-edu-card:last-child { margin-bottom: 0; }
 .ab-edu-school {
@@ -232,7 +236,7 @@
 /* ── SECTION 5: CLIENTS ── */
 .ab-clients {
   background: #fff;
-  padding: 48px;
+  padding: 52px 60px;
 }
 .ab-clients-inner { max-width: 1200px; margin: 0 auto; }
 .ab-clients-eyebrow {
@@ -283,7 +287,7 @@
 /* ── SECTION 6: BEYOND THE WORK ── */
 .ab-beyond {
   background: var(--ab-cream);
-  padding: 60px 48px;
+  padding: 64px 60px;
 }
 .ab-beyond-inner { max-width: 1200px; margin: 0 auto; }
 .ab-beyond-eyebrow {
@@ -302,8 +306,7 @@
 .ab-card {
   background: #fff;
   border: 0.5px solid rgba(0,0,0,0.1);
-  padding: 24px;
-  border-radius: 0;
+  padding: 28px;
 }
 .ab-card-icon {
   width: 22px;
@@ -313,7 +316,7 @@
 }
 .ab-card-title {
   font-family: var(--serif);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 400;
   color: var(--ab-black);
   margin-bottom: 10px;
@@ -338,14 +341,12 @@
   border: 1px solid var(--ab-gold);
   background: none;
   padding: 4px 10px;
-  border-radius: 0;
 }
 .ab-card-dark {
   grid-column: 1 / -1;
   background: var(--ab-black);
   border: none;
-  padding: 40px 36px;
-  border-radius: 0;
+  padding: 40px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -380,22 +381,20 @@
   align-items: center;
   transition: background 0.2s;
   flex-shrink: 0;
+  cursor: none;
 }
 .ab-cta-link:hover { background: #6d5830; }
 
 /* ── MOBILE ── */
 @media (max-width: 768px) {
-  .ab-hero { padding: 110px 20px 48px; }
-  .ab-hero-inner { flex-direction: column; gap: 32px; }
-  .ab-hero-left { flex: none; width: 100%; }
-  .ab-hero-right { flex: none; width: 100%; }
-  .ab-portrait-wrap { aspect-ratio: 4 / 3; }
-  .ab-body { max-width: 100%; }
+  .ab-hero { padding: 110px 20px 52px; min-height: unset; align-items: flex-start; }
+  .ab-h1-name { letter-spacing: -2px; }
+  .ab-hero-columns { grid-template-columns: 1fr; gap: 28px; }
 
   .ab-quote-band { padding: 40px 20px; }
 
   .ab-stats { flex-direction: column; }
-  .ab-stat { border-right: none; border-bottom: 0.5px solid rgba(0,0,0,0.1); }
+  .ab-stat { border-right: none; border-bottom: 0.5px solid rgba(0,0,0,0.1); padding: 28px 20px; }
   .ab-stat:last-child { border-bottom: none; }
 
   .ab-certs-edu { padding: 48px 20px; }
@@ -407,11 +406,11 @@
 
   .ab-beyond { padding: 48px 20px; }
   .ab-beyond-grid { grid-template-columns: 1fr; }
-  .ab-card-dark { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .ab-card-dark { flex-direction: column; align-items: flex-start; gap: 20px; padding: 28px 20px; }
   .ab-cta-link { width: 100%; justify-content: center; }
 
   .ab-pills { gap: 8px; }
-  .ab-pill { font-size: 8px; padding: 5px 10px; }
+  .ab-pill { font-size: 8px; padding: 6px 12px; }
 }
 
 @media (max-width: 480px) {
@@ -444,30 +443,24 @@
 <!-- ══ SECTION 1 — HERO ══════════════════════════════ -->
 <section class="ab-hero">
   <div class="ab-hero-inner">
-
-    <div class="ab-hero-left reveal">
-      <h1 class="ab-h1">
-        <span class="ab-h1-line1">The designer behind</span>
-        <span class="ab-h1-line2">the work.</span>
-      </h1>
-      <div class="ab-gold-div"></div>
-      <div class="ab-body">
+    <div class="ab-eyebrow reveal">About</div>
+    <h1 class="ab-h1 reveal">
+      <span class="ab-h1-name">Marberd Bernard.</span>
+      <span class="ab-h1-role">Architect &amp; VDC Specialist.</span>
+    </h1>
+    <div class="ab-divider"></div>
+    <div class="ab-hero-columns">
+      <div class="ab-body reveal">
         <p>From designing and building residences in the Dominican Republic to collaborating on complex projects in China, I bring a global perspective to every model I build.</p>
+        <p>Columbia-trained. Revit-certified. Fluent in four languages and the shared language of structure, space, and precision.</p>
       </div>
-      <div class="ab-pills">
+      <div class="ab-pills reveal">
         <span class="ab-pill">AUTODESK CERTIFIED</span>
         <span class="ab-pill">LEED GREEN ASSOC.</span>
         <span class="ab-pill">COLUMBIA M.ARCH 2024</span>
         <span class="ab-pill">INDIA SCHOLARSHIP 2023</span>
       </div>
     </div>
-
-    <div class="ab-hero-right reveal">
-      <div class="ab-portrait-wrap">
-        <img src="assets/images/about-portrait.jpg" alt="Marberd Bernard">
-      </div>
-    </div>
-
   </div>
 </section>
 
