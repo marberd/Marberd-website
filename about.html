@@ -504,20 +504,25 @@
 
 /* ── MOBILE ── */
 @media (max-width: 768px) {
-  .ab-hero { padding: 110px 20px 0; min-height: unset; }
-  .ab-h1 { margin-bottom: 32px; }
-  .ab-h1-name { letter-spacing: -2px; }
+  .ab-hero { padding: 90px 20px 0; min-height: unset; }
+  .ab-h1 { margin-bottom: 28px; }
+  .ab-h1-name { letter-spacing: -1.5px; }
+  .ab-h1-role { margin-top: 10px; }
   .ab-hero-lower { grid-template-columns: 1fr; }
-  .ab-hero-text { padding-bottom: 36px; }
+  .ab-hero-text { padding-bottom: 32px; }
   .ab-hero-portrait { justify-content: center; margin-top: 12px; }
-  .ab-portrait-img { max-width: 280px; }
-  .ab-hero-columns { grid-template-columns: 1fr; gap: 28px; }
+  .ab-portrait-img { max-width: 260px; }
+  .ab-hero-columns { grid-template-columns: 1fr; gap: 24px; }
+  .ab-body { font-size: 15px; }
+  .ab-eyebrow { margin-bottom: 24px; }
 
-  .ab-story { padding: 60px 20px 72px; }
+  .ab-story { padding: 56px 20px 64px; }
   .ab-story-text { max-width: 100%; }
-  .ab-sketch { float: none; width: 100%; margin: 32px 0; }
-  .ab-portrait-float { float: none; width: 65%; margin: 0 auto 28px; }
+  .ab-story-headline { margin-bottom: 28px; }
+  .ab-sketch { float: none; width: 90%; margin: 28px auto; }
+  .ab-portrait-float { float: none; width: 60%; display: block; margin: 0 auto 28px; }
   .ab-reader-paths { gap: 24px; flex-direction: column; }
+  .ab-lede { font-size: 17px; }
 
   .ab-quote-band { padding: 40px 20px; }
 
@@ -531,6 +536,28 @@
 
   .ab-pills { gap: 8px; }
   .ab-pill { font-size: 8px; padding: 6px 12px; }
+}
+
+/* ── SMALL PHONES (≤480px) ── */
+@media (max-width: 480px) {
+  .ab-h1-name {
+    font-size: clamp(34px, 10.5vw, 56px);
+    letter-spacing: -1px;
+  }
+  .ab-h1-role {
+    font-size: clamp(18px, 5.5vw, 28px);
+  }
+  .ab-story-headline {
+    font-size: clamp(32px, 9.5vw, 48px);
+  }
+  .ab-hero { padding: 80px 16px 0; }
+  .ab-story { padding: 48px 16px 56px; }
+  .ab-quote-band { padding: 32px 16px; }
+  .ab-certs-edu { padding: 40px 16px; }
+  .ab-beyond { padding: 40px 16px; }
+  .ab-lede { font-size: 16px; }
+  .ab-portrait-float { width: 75%; }
+  .ab-sketch { width: 100%; }
 }
 </style>
 </head>
