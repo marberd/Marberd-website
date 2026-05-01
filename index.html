@@ -72,9 +72,6 @@
   animation: fadeUp .9s ease .3s forwards;
 }
 .hero__eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 14px;
   font-family: var(--mono);
   font-size: 9px;
   letter-spacing: 0.2em;
@@ -82,12 +79,13 @@
   color: var(--gold-dk);
   margin: 16px 0 24px;
 }
-.hero__rule {
-  display: inline-block;
+.hero__eyebrow::before {
+  content: '';
+  display: block;
   width: 28px;
   height: 1px;
   background: var(--gold);
-  flex-shrink: 0;
+  margin-bottom: 10px;
 }
 .hero__headline {
   display: flex;
@@ -128,14 +126,13 @@
   max-width: 380px;
   align-self: flex-start;
   margin: 0 0 28px;
-  padding-left: 42px;
 }
-.hero__stats    { display: flex; gap: 0; margin-bottom: 32px; padding-left: 42px; }
+.hero__stats    { display: flex; gap: 0; margin-bottom: 32px; }
 .hstat          { display: flex; flex-direction: column; gap: 6px; padding-right: 36px; }
 .hstat:not(:first-child) { padding-left: 36px; border-left: 1px solid var(--border); }
 .hstat-n        { font-family: var(--serif); font-size: 38px; font-weight: 600; color: var(--black); line-height: 1; }
 .hstat-l        { font-family: var(--mono); font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
-.hero__links    { display: flex; gap: 10px; padding-left: 42px; }
+.hero__links    { display: flex; gap: 10px; }
 .h-link-primary {
   padding: 12px 28px; background: var(--black); color: var(--white);
   font-family: var(--mono); font-size: 9.5px; letter-spacing: 2px;
@@ -304,13 +301,12 @@
       #FAFAF8 78%
     );
   }
-  /* Reset desktop indents — too tight on narrow screens */
-  .hero__subhead { font-size: 15px; max-width: 100%; padding-left: 0; }
-  .hero__stats   { flex-wrap: wrap; padding-left: 0; gap: 0; }
+  .hero__subhead { font-size: 15px; max-width: 100%; }
+  .hero__stats   { flex-wrap: wrap; gap: 0; }
   .hstat         { flex: 1 1 28%; min-width: 80px; padding: 0 16px 0 0; border: none; }
   .hstat:not(:first-child) { padding-left: 16px; border-left: 1px solid var(--border); }
   .hstat-n       { font-size: 26px; }
-  .hero__links   { flex-direction: column; gap: 10px; padding-left: 0; }
+  .hero__links   { flex-direction: column; gap: 10px; }
   .h-link-primary,
   .h-link-ghost {
     width: 100%; text-align: center; padding: 13px 20px;
@@ -355,10 +351,7 @@
       <span class="hero__name">Marberd</span>
       <span class="hero__surname">Bernard.</span>
     </h1>
-    <p class="hero__eyebrow">
-      <span class="hero__rule" aria-hidden="true"></span>
-      Architectural Designer &amp; VDC Specialist
-    </p>
+    <p class="hero__eyebrow">Architectural Designer &amp; VDC Specialist</p>
     <p class="hero__subhead">
       With a Master of Architecture from Columbia University, Marberd bridges design instinct, BIM/VDC expertise, and visual storytelling to deliver complex projects with precision.
     </p>
