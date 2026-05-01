@@ -285,8 +285,10 @@ footer {
   nav { padding: 0 8px 0 16px; }
   .nav-links { display: none; }
   #nav-logo { margin-right: auto; }
-  .nav-right { gap: 6px; }
+  .nav-right { gap: 4px; }
   #nav-burger { display: flex; }
+  /* Larger touch targets on mobile */
+  .nav-icon { width: 44px; height: 44px; }
 
   /* Shared page hero padding */
   .page-hero { padding: 110px 20px 48px; }
