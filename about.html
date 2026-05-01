@@ -18,18 +18,36 @@
   --ab-border-soft: rgba(0,0,0,0.12);
 }
 
-/* ── SECTION 1: HERO ── */
+/* ── HERO ── */
 .ab-hero {
   background: var(--black);
-  padding: 130px 60px 72px;
+  padding: 130px 60px 0;
   min-height: 62vh;
   display: flex;
   align-items: flex-end;
+  overflow: hidden;
 }
 .ab-hero-inner {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+}
+.ab-hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 0.72fr;
+  gap: 0;
+  align-items: flex-end;
+}
+.ab-hero-left { min-width: 0; padding-bottom: 72px; }
+.ab-hero-portrait {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.ab-portrait-img {
+  width: 100%;
+  max-width: 460px;
+  display: block;
 }
 .ab-eyebrow {
   font-family: var(--mono);
@@ -108,7 +126,7 @@
   white-space: nowrap;
 }
 
-/* ── SECTION 2: QUOTE BAND ── */
+/* ── QUOTE BAND ── */
 .ab-quote-band {
   background: var(--ab-cream);
   padding: 56px 60px;
@@ -133,42 +151,7 @@
   font-style: normal;
 }
 
-/* ── SECTION 3: STATS ROW ── */
-.ab-stats {
-  background: var(--white);
-  display: flex;
-  width: 100%;
-}
-.ab-stat {
-  flex: 1;
-  padding: 40px 32px;
-  border-right: 0.5px solid rgba(0,0,0,0.1);
-}
-.ab-stat:last-child { border-right: none; }
-.ab-stat-n {
-  font-family: var(--serif);
-  font-size: clamp(36px, 4.5vw, 48px);
-  color: var(--ab-black);
-  line-height: 1;
-  font-weight: 400;
-}
-.ab-stat-l {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  color: var(--ab-gold);
-  margin-top: 8px;
-  text-transform: uppercase;
-}
-.ab-stat-sub {
-  font-family: var(--sans);
-  font-size: 9px;
-  color: var(--ab-muted);
-  margin-top: 6px;
-  line-height: 1.5;
-}
-
-/* ── SECTION 4: CERTS & EDUCATION ── */
+/* ── CERTIFICATIONS & EDUCATION ── */
 .ab-certs-edu {
   background: var(--ab-cream);
   padding: 64px 60px;
@@ -233,58 +216,7 @@
   margin-top: 4px;
 }
 
-/* ── SECTION 5: CLIENTS ── */
-.ab-clients {
-  background: #fff;
-  padding: 52px 60px;
-}
-.ab-clients-inner { max-width: 1200px; margin: 0 auto; }
-.ab-clients-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.ab-clients-line {
-  width: 28px;
-  height: 1px;
-  background: var(--ab-gold);
-  flex-shrink: 0;
-}
-.ab-clients-eyebrow-text {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  color: var(--ab-gold);
-  text-transform: uppercase;
-}
-.ab-clients-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0;
-  margin-top: 24px;
-  row-gap: 16px;
-}
-.ab-client-name {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  color: var(--ab-muted);
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 0 16px;
-}
-.ab-client-name:first-child { padding-left: 0; }
-.ab-client-div {
-  display: inline-block;
-  width: 1px;
-  height: 16px;
-  background: #ccc;
-  vertical-align: middle;
-  flex-shrink: 0;
-}
-
-/* ── SECTION 6: BEYOND THE WORK ── */
+/* ── BEYOND THE WORK ── */
 .ab-beyond {
   background: var(--ab-cream);
   padding: 64px 60px;
@@ -385,7 +317,7 @@
 }
 .ab-cta-link:hover { background: #6d5830; }
 
-/* ── STORY INTRO SECTION ── */
+/* ── STORY SECTION ── */
 .ab-story {
   background: var(--white);
   padding: 88px 60px 80px;
@@ -413,12 +345,7 @@
   color: var(--gold-dk);
   text-transform: uppercase;
 }
-.ab-story-grid {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 72px;
-  align-items: start;
-}
+.ab-story-text { max-width: 680px; }
 .ab-story-headline {
   font-family: var(--serif);
   font-size: clamp(40px, 5.5vw, 72px);
@@ -443,11 +370,54 @@
   font-size: 18px;
   line-height: 1.75;
   color: var(--text);
-  margin: 0 0 20px;
+  margin: 0 0 24px;
   font-weight: 400;
 }
 .ab-lede em { font-style: italic; }
-.ab-lede:last-of-type { margin-bottom: 0; }
+.ab-story-beat {
+  margin-top: 40px;
+}
+.ab-story-beat p {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--text);
+  font-weight: 400;
+  font-style: italic;
+  margin: 0 0 14px;
+}
+.ab-story-beat p:last-child { margin-bottom: 0; }
+.ab-sketch {
+  display: block;
+  width: 52%;
+  margin: 52px 0;
+  transform: rotate(-2.5deg);
+}
+.ab-sketch img {
+  width: 100%;
+  display: block;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  border: 5px solid #f5f1e8;
+}
+.ab-sketch figcaption {
+  text-align: center;
+  margin-top: 18px;
+  transform: rotate(2.5deg);
+}
+.ab-sketch-rule {
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 10px;
+  display: block;
+}
+.ab-sketch figcaption span {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text);
+  opacity: 0.6;
+}
 .ab-reader-paths {
   margin-top: 52px;
   display: flex;
@@ -479,57 +449,26 @@
   color: var(--gold-dk);
   text-transform: uppercase;
 }
-.ab-portrait-frame {
-  position: relative;
-  padding-bottom: 16px;
-  padding-right: 16px;
-}
-.ab-portrait-box {
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-  background: var(--paper);
-}
-.ab-portrait-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-}
-.ab-est-tag {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background: var(--black);
-  color: var(--white);
-  padding: 8px 18px;
-  font-family: var(--serif);
-  font-size: 12px;
-  letter-spacing: 0.15em;
-}
 
 /* ── MOBILE ── */
 @media (max-width: 768px) {
-  .ab-hero { padding: 110px 20px 52px; min-height: unset; align-items: flex-start; }
+  .ab-hero { padding: 110px 20px 0; min-height: unset; }
+  .ab-hero-layout { grid-template-columns: 1fr; }
+  .ab-hero-left { padding-bottom: 40px; }
+  .ab-hero-portrait { justify-content: center; margin-top: 16px; }
+  .ab-portrait-img { max-width: 300px; }
   .ab-h1-name { letter-spacing: -2px; }
   .ab-hero-columns { grid-template-columns: 1fr; gap: 28px; }
+
   .ab-story { padding: 60px 20px 72px; }
-  .ab-story-grid { grid-template-columns: 1fr; gap: 52px; }
-  .ab-portrait-frame { order: -1; max-width: 360px; padding-bottom: 12px; padding-right: 12px; }
+  .ab-story-text { max-width: 100%; }
+  .ab-sketch { width: 80%; margin: 40px 0; }
   .ab-reader-paths { gap: 24px; flex-direction: column; }
 
   .ab-quote-band { padding: 40px 20px; }
 
-  .ab-stats { flex-direction: column; }
-  .ab-stat { border-right: none; border-bottom: 0.5px solid rgba(0,0,0,0.1); padding: 28px 20px; }
-  .ab-stat:last-child { border-bottom: none; }
-
   .ab-certs-edu { padding: 48px 20px; }
   .ab-certs-edu-inner { grid-template-columns: 1fr; gap: 36px; }
-
-  .ab-clients { padding: 40px 20px; }
-  .ab-clients-row { gap: 0; row-gap: 14px; }
-  .ab-client-name { padding: 0 10px; font-size: 10px; }
 
   .ab-beyond { padding: 48px 20px; }
   .ab-beyond-grid { grid-template-columns: 1fr; }
@@ -538,12 +477,6 @@
 
   .ab-pills { gap: 8px; }
   .ab-pill { font-size: 8px; padding: 6px 12px; }
-}
-
-@media (max-width: 480px) {
-  .ab-client-div { display: none; }
-  .ab-clients-row { row-gap: 10px; column-gap: 14px; }
-  .ab-client-name { padding: 0; }
 }
 </style>
 </head>
@@ -570,65 +503,102 @@
 <!-- ══ SECTION 1 — HERO ══════════════════════════════ -->
 <section class="ab-hero">
   <div class="ab-hero-inner">
-    <div class="ab-eyebrow reveal">About</div>
-    <h1 class="ab-h1 reveal">
-      <span class="ab-h1-name">Marberd Bernard.</span>
-      <span class="ab-h1-role">Architect &amp; VDC Specialist.</span>
-    </h1>
-    <div class="ab-divider"></div>
-    <div class="ab-hero-columns">
-      <div class="ab-body reveal">
-        <p>From designing and building residences in the Dominican Republic to collaborating on complex projects in China, I bring a global perspective to every model I build.</p>
-        <p>Columbia-trained. Revit-certified. Fluent in four languages and the shared language of structure, space, and precision.</p>
+    <div class="ab-hero-layout">
+      <div class="ab-hero-left">
+        <div class="ab-eyebrow reveal">About</div>
+        <h1 class="ab-h1 reveal">
+          <span class="ab-h1-name">Marberd Bernard.</span>
+          <span class="ab-h1-role">Architect &amp; VDC Specialist.</span>
+        </h1>
+        <div class="ab-divider"></div>
+        <div class="ab-hero-columns">
+          <div class="ab-body reveal">
+            <p>From designing and building residences in the Dominican Republic to collaborating on complex projects in China, I bring a global perspective to every model I build.</p>
+            <p>Columbia-trained. Revit-certified. Fluent in four languages and the shared language of structure, space, and precision.</p>
+          </div>
+          <div class="ab-pills reveal">
+            <span class="ab-pill">AUTODESK CERTIFIED</span>
+            <span class="ab-pill">LEED GREEN ASSOC.</span>
+            <span class="ab-pill">COLUMBIA M.ARCH 2024</span>
+            <span class="ab-pill">INDIA SCHOLARSHIP 2023</span>
+          </div>
+        </div>
       </div>
-      <div class="ab-pills reveal">
-        <span class="ab-pill">AUTODESK CERTIFIED</span>
-        <span class="ab-pill">LEED GREEN ASSOC.</span>
-        <span class="ab-pill">COLUMBIA M.ARCH 2024</span>
-        <span class="ab-pill">INDIA SCHOLARSHIP 2023</span>
+      <div class="ab-hero-portrait">
+        <img src="assets/images/about.png" alt="Marberd Bernard" class="ab-portrait-img">
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ SECTION: STORY INTRO ══════════════════════════ -->
+<!-- ══ SECTION: STORY ══════════════════════════════════ -->
 <section class="ab-story">
   <div class="ab-story-inner">
     <div class="ab-origin-label reveal">
       <span class="ab-origin-rule"></span>
       <span class="ab-origin-text">Origin</span>
     </div>
-    <div class="ab-story-grid">
-      <div>
-        <h2 class="ab-story-headline reveal">
-          It all began<br>
-          when my<br>
-          neighbor&rsquo;s<br>
-          house <span class="accent">blew up.</span>
-        </h2>
-        <div class="ab-story-divider"></div>
-        <p class="ab-lede reveal">
-          I was young, but old enough to understand that buildings were not just walls, roofs, and windows. They were <em>safety, memory, family, identity</em> &mdash; and the fragile frame around everyday life.
-        </p>
-        <p class="ab-lede reveal">
-          That moment stayed with me. It became the first page of a much larger story.
-        </p>
-        <div class="ab-reader-paths reveal">
-          <a href="#ab-education" class="ab-path-link">
-            <span class="ab-path-rule"></span>
-            <span class="ab-path-label">Continue my story</span>
-          </a>
-          <a href="#ab-skills" class="ab-path-link">
-            <span class="ab-path-rule"></span>
-            <span class="ab-path-label">Skip to my work</span>
-          </a>
-        </div>
+    <div class="ab-story-text">
+      <h2 class="ab-story-headline reveal">
+        It all began<br>
+        when my<br>
+        neighbor&rsquo;s<br>
+        house <span class="accent">blew up.</span>
+      </h2>
+      <div class="ab-story-divider"></div>
+      <p class="ab-lede reveal">
+        I was young, but old enough to understand that buildings were not just walls, roofs, and windows. They were <em>safety, memory, family, identity</em> &mdash; and the fragile frame around everyday life.
+      </p>
+      <p class="ab-lede reveal">
+        That moment stayed with me. It became the first page of a much larger story.
+      </p>
+      <p class="ab-lede reveal">
+        I was eight years old.
+      </p>
+      <p class="ab-lede reveal">
+        Pieces of his wooden house landed in my grandmother&rsquo;s yard, and while the adults saw debris, cleanup, and probably a very stressful neighborhood situation, <em>I saw inventory.</em>
+      </p>
+      <p class="ab-lede reveal">
+        There were boards. There was open space. There was a sheet nearby.
+      </p>
+      <p class="ab-lede reveal">
+        <em>Naturally, I became a developer.</em>
+      </p>
+      <p class="ab-lede reveal">
+        I gathered the wood, claimed a corner of the yard, and began assembling what I considered, at the time, a highly ambitious residential project. I leaned boards where they seemed to belong, moved pieces around with great authority, threw a sheet over the top for a roof, and sketched the whole thing with the confidence of someone who had absolutely no idea what she was doing.
+      </p>
+      <figure class="ab-sketch reveal">
+        <img src="assets/images/kid-sketch.png" alt="Childhood architectural sketch">
+        <figcaption>
+          <span class="ab-sketch-rule"></span>
+          <span>My first set of plans. Eight years old, no permit.</span>
+        </figcaption>
+      </figure>
+      <p class="ab-lede reveal">
+        My neighbor survived, thankfully. His house did not.
+      </p>
+      <p class="ab-lede reveal">
+        Long before I knew the language of plans, sections, elevations, structure, material reuse, or adaptive design, I was already doing <em>the thing.</em> I was studying what was available, imagining what it could become, testing ideas, drawing badly, building anyway, and convincing myself the final result was intentional.
+      </p>
+      <p class="ab-lede reveal">
+        That little playhouse was my first project. It had no permit, no budget, no consultant team, and almost certainly no structural logic. But it had a concept. It had personality. It had a roof, technically. And it had something I still chase in every project: the transformation of fragments into possibility.
+      </p>
+      <p class="ab-lede reveal">
+        Architecture, for me, did not begin as an abstract dream. It began in a yard, with salvaged wood, a sheet, and an eight-year-old girl who somehow understood that space could be made, claimed, imagined, and rebuilt.
+      </p>
+      <div class="ab-story-beat reveal">
+        <p>That was the first page.</p>
+        <p>The rest is still being designed.</p>
       </div>
-      <div class="ab-portrait-frame reveal">
-        <div class="ab-portrait-box">
-          <img src="assets/images/about.png" alt="Marberd Bernard">
-        </div>
-        <div class="ab-est-tag">Est. 2014</div>
+      <div class="ab-reader-paths reveal">
+        <a href="#ab-education" class="ab-path-link">
+          <span class="ab-path-rule"></span>
+          <span class="ab-path-label">Continue my story</span>
+        </a>
+        <a href="#ab-beyond" class="ab-path-link">
+          <span class="ab-path-rule"></span>
+          <span class="ab-path-label">Skip to my work</span>
+        </a>
       </div>
     </div>
   </div>
@@ -640,24 +610,6 @@
   <span class="ab-quote-attr">— LE CORBUSIER</span>
 </section>
 
-<!-- ══ SECTION 3 — STATS ROW ════════════════════════ -->
-<section class="ab-stats">
-  <div class="ab-stat reveal">
-    <div class="ab-stat-n">8+</div>
-    <div class="ab-stat-l">YEARS</div>
-    <div class="ab-stat-sub">BIM since 2016 and professional since 2018</div>
-  </div>
-  <div class="ab-stat reveal">
-    <div class="ab-stat-n">300+</div>
-    <div class="ab-stat-l">PROJECTS</div>
-    <div class="ab-stat-sub">administered as BIM360 and ACC platform admin</div>
-  </div>
-  <div class="ab-stat reveal">
-    <div class="ab-stat-n">3</div>
-    <div class="ab-stat-l">COUNTRIES</div>
-    <div class="ab-stat-sub">US&nbsp;&nbsp;&nbsp;Dominican Republic&nbsp;&nbsp;&nbsp;China</div>
-  </div>
-</section>
 
 <!-- ══ SECTION 4 — CERTIFICATIONS & EDUCATION ════════ --><span id="ab-education" style="display:block;position:relative;top:-80px;visibility:hidden"></span>
 <section class="ab-certs-edu">
@@ -672,10 +624,6 @@
       <div class="ab-cert-row">
         <div class="ab-cert-title">LEED Green Associate</div>
         <div class="ab-cert-sub">U.S. Green Building Council&nbsp;&nbsp;November 2024</div>
-      </div>
-      <div class="ab-cert-row">
-        <div class="ab-cert-title">BIM360 and ACC Platform Admin</div>
-        <div class="ab-cert-sub">Autodesk Construction Cloud&nbsp;&nbsp;since 2018</div>
       </div>
       <div class="ab-cert-row ab-cert-row--last">
         <div class="ab-cert-title">Peri-Urban Water Management Workshop</div>
@@ -700,28 +648,7 @@
   </div>
 </section>
 
-<!-- ══ SECTION 5 — CLIENTS ═══════════════════════════ --><span id="ab-skills" style="display:block;position:relative;top:-80px;visibility:hidden"></span>
-<section class="ab-clients">
-  <div class="ab-clients-inner">
-    <div class="ab-clients-eyebrow reveal">
-      <div class="ab-clients-line"></div>
-      <span class="ab-clients-eyebrow-text">SELECTED CLIENTS&nbsp;&nbsp;VIA TPG ARCHITECTURE</span>
-    </div>
-    <div class="ab-clients-row reveal">
-      <span class="ab-client-name">JPMORGAN CHASE</span>
-      <span class="ab-client-div" aria-hidden="true"></span>
-      <span class="ab-client-name">BMW</span>
-      <span class="ab-client-div" aria-hidden="true"></span>
-      <span class="ab-client-name">CLEAR</span>
-      <span class="ab-client-div" aria-hidden="true"></span>
-      <span class="ab-client-name">CAPITAL ONE</span>
-      <span class="ab-client-div" aria-hidden="true"></span>
-      <span class="ab-client-name">MLS</span>
-    </div>
-  </div>
-</section>
-
-<!-- ══ SECTION 6 — BEYOND THE WORK ══════════════════ -->
+<!-- ══ SECTION 6 — BEYOND THE WORK ══════════════════ --><span id="ab-beyond" style="display:block;position:relative;top:-80px;visibility:hidden"></span>
 <section class="ab-beyond">
   <div class="ab-beyond-inner">
     <div class="ab-beyond-eyebrow">BEYOND THE WORK</div>
@@ -740,7 +667,22 @@
         <p class="ab-card-text">Leading the Spanish choir at The Church of St. Catherine of Genoa, New York since 2021. Music as architecture: structure, rhythm, and humanity in every rehearsal.</p>
       </div>
 
-      <!-- CARD 2: Painter -->
+      <!-- CARD 2: Traveler -->
+      <div class="ab-card reveal">
+        <svg class="ab-card-icon" viewBox="0 0 22 22" fill="none" stroke="#8a6f3e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="8" width="14" height="11"/>
+          <path d="M8 8V6h6v2"/>
+          <line x1="4" y1="13" x2="18" y2="13"/>
+        </svg>
+        <div class="ab-card-title">Traveler</div>
+        <p class="ab-card-text">Twenty-two countries and counting. Travel is fieldwork for an architect. Every city is a built argument about how people should live, gather, and move, and every culture leaves its fingerprints on the way space is made. The notebooks fill faster than the passport stamps.</p>
+        <div class="ab-lang-pills">
+          <span class="ab-lang-pill">22 COUNTRIES</span>
+          <span class="ab-lang-pill">5 CONTINENTS</span>
+        </div>
+      </div>
+
+      <!-- CARD 3: Painter -->
       <div class="ab-card reveal">
         <svg class="ab-card-icon" viewBox="0 0 22 22" fill="none" stroke="#8a6f3e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 17l9-9 4 4-9 9-4-4z"/>
