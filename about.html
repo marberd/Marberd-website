@@ -32,13 +32,36 @@
   margin: 0 auto;
   width: 100%;
 }
-.ab-hero-layout {
+/* Headline spans full width; text + portrait sit below in a tighter grid */
+.ab-h1 {
+  font-family: var(--serif);
+  margin: 0 0 48px;
+}
+.ab-h1-name {
+  display: block;
+  font-size: clamp(64px, 9.5vw, 128px);
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -3px;
+  line-height: 0.9;
+}
+.ab-h1-role {
+  display: block;
+  font-size: clamp(28px, 4.5vw, 60px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin-top: 14px;
+}
+.ab-hero-lower {
   display: grid;
-  grid-template-columns: 1fr 0.72fr;
+  grid-template-columns: 1fr 0.68fr;
   gap: 0;
   align-items: flex-end;
 }
-.ab-hero-left { min-width: 0; padding-bottom: 72px; }
+.ab-hero-text { padding-bottom: 72px; }
 .ab-hero-portrait {
   display: flex;
   align-items: flex-end;
@@ -67,28 +90,6 @@
   height: 1px;
   background: var(--gold);
   flex-shrink: 0;
-}
-.ab-h1 {
-  font-family: var(--serif);
-  margin: 0 0 36px;
-}
-.ab-h1-name {
-  display: block;
-  font-size: clamp(64px, 9.5vw, 128px);
-  font-weight: 700;
-  color: var(--white);
-  letter-spacing: -3px;
-  line-height: 0.9;
-}
-.ab-h1-role {
-  display: block;
-  font-size: clamp(28px, 4.5vw, 60px);
-  font-style: italic;
-  font-weight: 300;
-  color: var(--gold);
-  letter-spacing: -0.5px;
-  line-height: 1.2;
-  margin-top: 14px;
 }
 .ab-divider {
   width: 100%;
@@ -345,7 +346,7 @@
   color: var(--gold-dk);
   text-transform: uppercase;
 }
-.ab-story-text { max-width: 680px; }
+.ab-story-text { max-width: 720px; }
 .ab-story-headline {
   font-family: var(--serif);
   font-size: clamp(40px, 5.5vw, 72px);
@@ -374,7 +375,87 @@
   font-weight: 400;
 }
 .ab-lede em { font-style: italic; }
+
+/* Collapsible story */
+.ab-story-expandable {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+}
+.ab-story-toggle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: none;
+  border: none;
+  padding: 20px 0 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  cursor: none;
+  transition: opacity 0.2s;
+}
+.ab-story-toggle:hover { opacity: 0.6; }
+.ab-story-toggle-rule {
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+  transition: width 0.3s ease;
+}
+.ab-story-toggle:hover .ab-story-toggle-rule { width: 44px; }
+
+/* Sketch — editorial right float */
+.ab-sketch {
+  float: right;
+  width: 44%;
+  margin: 4px 0 28px 40px;
+  clear: right;
+}
+.ab-sketch img {
+  width: 100%;
+  display: block;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.11);
+}
+.ab-sketch figcaption {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ab-sketch-rule {
+  width: 20px;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 8px;
+  display: block;
+}
+.ab-sketch figcaption span {
+  font-family: var(--serif);
+  font-size: 12px;
+  font-style: italic;
+  color: var(--text);
+  opacity: 0.55;
+  text-align: center;
+}
+
+/* Portrait — secondary editorial left float */
+.ab-portrait-float {
+  float: left;
+  width: 33%;
+  margin: 4px 40px 20px 0;
+  clear: left;
+}
+.ab-portrait-float img {
+  width: 100%;
+  display: block;
+}
+
 .ab-story-beat {
+  clear: both;
   margin-top: 40px;
 }
 .ab-story-beat p {
@@ -387,38 +468,9 @@
   margin: 0 0 14px;
 }
 .ab-story-beat p:last-child { margin-bottom: 0; }
-.ab-sketch {
-  display: block;
-  width: 52%;
-  margin: 52px 0;
-  transform: rotate(-2.5deg);
-}
-.ab-sketch img {
-  width: 100%;
-  display: block;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-  border: 5px solid #f5f1e8;
-}
-.ab-sketch figcaption {
-  text-align: center;
-  margin-top: 18px;
-  transform: rotate(2.5deg);
-}
-.ab-sketch-rule {
-  width: 24px;
-  height: 1px;
-  background: var(--gold);
-  margin: 0 auto 10px;
-  display: block;
-}
-.ab-sketch figcaption span {
-  font-family: var(--serif);
-  font-size: 13px;
-  font-style: italic;
-  color: var(--text);
-  opacity: 0.6;
-}
+
 .ab-reader-paths {
+  clear: both;
   margin-top: 52px;
   display: flex;
   gap: 40px;
@@ -453,16 +505,18 @@
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   .ab-hero { padding: 110px 20px 0; min-height: unset; }
-  .ab-hero-layout { grid-template-columns: 1fr; }
-  .ab-hero-left { padding-bottom: 40px; }
-  .ab-hero-portrait { justify-content: center; margin-top: 16px; }
-  .ab-portrait-img { max-width: 300px; }
+  .ab-h1 { margin-bottom: 32px; }
   .ab-h1-name { letter-spacing: -2px; }
+  .ab-hero-lower { grid-template-columns: 1fr; }
+  .ab-hero-text { padding-bottom: 36px; }
+  .ab-hero-portrait { justify-content: center; margin-top: 12px; }
+  .ab-portrait-img { max-width: 280px; }
   .ab-hero-columns { grid-template-columns: 1fr; gap: 28px; }
 
   .ab-story { padding: 60px 20px 72px; }
   .ab-story-text { max-width: 100%; }
-  .ab-sketch { width: 80%; margin: 40px 0; }
+  .ab-sketch { float: none; width: 100%; margin: 32px 0; }
+  .ab-portrait-float { float: none; width: 65%; margin: 0 auto 28px; }
   .ab-reader-paths { gap: 24px; flex-direction: column; }
 
   .ab-quote-band { padding: 40px 20px; }
@@ -503,13 +557,13 @@
 <!-- ══ SECTION 1 — HERO ══════════════════════════════ -->
 <section class="ab-hero">
   <div class="ab-hero-inner">
-    <div class="ab-hero-layout">
-      <div class="ab-hero-left">
-        <div class="ab-eyebrow reveal">About</div>
-        <h1 class="ab-h1 reveal">
-          <span class="ab-h1-name">Marberd Bernard.</span>
-          <span class="ab-h1-role">Architect &amp; VDC Specialist.</span>
-        </h1>
+    <div class="ab-eyebrow reveal">About</div>
+    <h1 class="ab-h1 reveal">
+      <span class="ab-h1-name">Marberd Bernard.</span>
+      <span class="ab-h1-role">Architect &amp; VDC Specialist.</span>
+    </h1>
+    <div class="ab-hero-lower">
+      <div class="ab-hero-text">
         <div class="ab-divider"></div>
         <div class="ab-hero-columns">
           <div class="ab-body reveal">
@@ -539,6 +593,7 @@
       <span class="ab-origin-text">Origin</span>
     </div>
     <div class="ab-story-text">
+
       <h2 class="ab-story-headline reveal">
         It all began<br>
         when my<br>
@@ -546,6 +601,8 @@
         house <span class="accent">blew up.</span>
       </h2>
       <div class="ab-story-divider"></div>
+
+      <!-- Always-visible preview -->
       <p class="ab-lede reveal">
         I was young, but old enough to understand that buildings were not just walls, roofs, and windows. They were <em>safety, memory, family, identity</em> &mdash; and the fragile frame around everyday life.
       </p>
@@ -558,48 +615,68 @@
       <p class="ab-lede reveal">
         Pieces of his wooden house landed in my grandmother&rsquo;s yard, and while the adults saw debris, cleanup, and probably a very stressful neighborhood situation, <em>I saw inventory.</em>
       </p>
-      <p class="ab-lede reveal">
-        There were boards. There was open space. There was a sheet nearby.
-      </p>
-      <p class="ab-lede reveal">
-        <em>Naturally, I became a developer.</em>
-      </p>
-      <p class="ab-lede reveal">
-        I gathered the wood, claimed a corner of the yard, and began assembling what I considered, at the time, a highly ambitious residential project. I leaned boards where they seemed to belong, moved pieces around with great authority, threw a sheet over the top for a roof, and sketched the whole thing with the confidence of someone who had absolutely no idea what she was doing.
-      </p>
-      <figure class="ab-sketch reveal">
-        <img src="assets/images/kid-sketch.png" alt="Childhood architectural sketch">
-        <figcaption>
-          <span class="ab-sketch-rule"></span>
-          <span>My first set of plans. Eight years old, no permit.</span>
-        </figcaption>
-      </figure>
-      <p class="ab-lede reveal">
-        My neighbor survived, thankfully. His house did not.
-      </p>
-      <p class="ab-lede reveal">
-        Long before I knew the language of plans, sections, elevations, structure, material reuse, or adaptive design, I was already doing <em>the thing.</em> I was studying what was available, imagining what it could become, testing ideas, drawing badly, building anyway, and convincing myself the final result was intentional.
-      </p>
-      <p class="ab-lede reveal">
-        That little playhouse was my first project. It had no permit, no budget, no consultant team, and almost certainly no structural logic. But it had a concept. It had personality. It had a roof, technically. And it had something I still chase in every project: the transformation of fragments into possibility.
-      </p>
-      <p class="ab-lede reveal">
-        Architecture, for me, did not begin as an abstract dream. It began in a yard, with salvaged wood, a sheet, and an eight-year-old girl who somehow understood that space could be made, claimed, imagined, and rebuilt.
-      </p>
-      <div class="ab-story-beat reveal">
-        <p>That was the first page.</p>
-        <p>The rest is still being designed.</p>
-      </div>
-      <div class="ab-reader-paths reveal">
-        <a href="#ab-education" class="ab-path-link">
-          <span class="ab-path-rule"></span>
-          <span class="ab-path-label">Continue my story</span>
-        </a>
-        <a href="#ab-beyond" class="ab-path-link">
-          <span class="ab-path-rule"></span>
-          <span class="ab-path-label">Skip to my work</span>
-        </a>
-      </div>
+
+      <!-- "See more" toggle -->
+      <button class="ab-story-toggle" id="story-toggle" onclick="toggleStory()" aria-expanded="false">
+        <span class="ab-story-toggle-rule"></span>
+        <span id="story-toggle-label">See more</span>
+      </button>
+
+      <!-- Expandable continuation -->
+      <div class="ab-story-expandable" id="story-expandable" aria-hidden="true">
+        <p class="ab-lede">
+          There were boards. There was open space. There was a sheet nearby.
+        </p>
+        <p class="ab-lede">
+          <em>Naturally, I became a developer.</em>
+        </p>
+        <p class="ab-lede">
+          I gathered the wood, claimed a corner of the yard, and began assembling what I considered, at the time, a highly ambitious residential project. I leaned boards where they seemed to belong, moved pieces around with great authority, threw a sheet over the top for a roof, and sketched the whole thing with the confidence of someone who had absolutely no idea what she was doing.
+        </p>
+
+        <figure class="ab-sketch">
+          <img src="assets/images/kid-sketch.png" alt="Childhood architectural sketch">
+          <figcaption>
+            <span class="ab-sketch-rule"></span>
+            <span>My first set of plans. Eight years old, no permit.</span>
+          </figcaption>
+        </figure>
+
+        <p class="ab-lede">
+          My neighbor survived, thankfully. His house did not.
+        </p>
+        <p class="ab-lede">
+          Long before I knew the language of plans, sections, elevations, structure, material reuse, or adaptive design, I was already doing <em>the thing.</em> I was studying what was available, imagining what it could become, testing ideas, drawing badly, building anyway, and convincing myself the final result was intentional.
+        </p>
+
+        <figure class="ab-portrait-float">
+          <img src="assets/images/about.png" alt="Marberd Bernard">
+        </figure>
+
+        <p class="ab-lede">
+          That little playhouse was my first project. It had no permit, no budget, no consultant team, and almost certainly no structural logic. But it had a concept. It had personality. It had a roof, technically. And it had something I still chase in every project: the transformation of fragments into possibility.
+        </p>
+        <p class="ab-lede">
+          Architecture, for me, did not begin as an abstract dream. It began in a yard, with salvaged wood, a sheet, and an eight-year-old girl who somehow understood that space could be made, claimed, imagined, and rebuilt.
+        </p>
+
+        <div class="ab-story-beat">
+          <p>That was the first page.</p>
+          <p>The rest is still being designed.</p>
+        </div>
+
+        <div class="ab-reader-paths">
+          <a href="#ab-education" class="ab-path-link">
+            <span class="ab-path-rule"></span>
+            <span class="ab-path-label">Continue my story</span>
+          </a>
+          <a href="#ab-beyond" class="ab-path-link">
+            <span class="ab-path-rule"></span>
+            <span class="ab-path-label">Skip to my work</span>
+          </a>
+        </div>
+      </div><!-- /expandable -->
+
     </div>
   </div>
 </section>
@@ -746,5 +823,50 @@
   <p>© 2026 Marberd Bernard · New York, NY</p>
 </footer>
 <script src="assets/js/main.js"></script>
+<noscript><style>
+  .ab-story-expandable { max-height: none !important; opacity: 1 !important; overflow: visible !important; }
+  .ab-story-toggle { display: none; }
+</style></noscript>
+<script>
+(function () {
+  var el    = document.getElementById('story-expandable');
+  var btn   = document.getElementById('story-toggle');
+  var label = document.getElementById('story-toggle-label');
+  var open  = false;
+
+  window.toggleStory = function () {
+    if (open) {
+      // Collapse: pin current height, then animate to 0
+      el.style.transition = 'none';
+      el.style.maxHeight  = el.scrollHeight + 'px';
+      el.style.opacity    = '1';
+      el.offsetHeight; // force reflow
+      el.style.transition = 'max-height 0.45s ease, opacity 0.25s ease';
+      el.style.maxHeight  = '0';
+      el.style.opacity    = '0';
+      btn.setAttribute('aria-expanded', 'false');
+      el.setAttribute('aria-hidden', 'true');
+      label.textContent = 'See more';
+      open = false;
+    } else {
+      // Expand: animate to natural height
+      el.style.transition = 'max-height 0.55s ease, opacity 0.4s ease';
+      el.style.maxHeight  = el.scrollHeight + 'px';
+      el.style.opacity    = '1';
+      btn.setAttribute('aria-expanded', 'true');
+      el.setAttribute('aria-hidden', 'false');
+      label.textContent = 'Read less';
+      open = true;
+      // After animation ends, release max-height so content can reflow freely
+      el.addEventListener('transitionend', function clear(e) {
+        if (e.propertyName === 'max-height' && open) {
+          el.style.maxHeight = 'none';
+          el.removeEventListener('transitionend', clear);
+        }
+      });
+    }
+  };
+})();
+</script>
 </body>
 </html>
