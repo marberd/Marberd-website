@@ -71,6 +71,8 @@
   width: 100%;
   max-width: 460px;
   display: block;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
 }
 .ab-eyebrow {
   font-family: var(--mono);
@@ -550,7 +552,7 @@
   .ab-story-headline {
     font-size: clamp(32px, 9.5vw, 48px);
   }
-  .ab-hero { padding: 80px 16px 0; }
+  .ab-hero { padding: 88px 16px 0; }
   .ab-story { padding: 48px 16px 56px; }
   .ab-quote-band { padding: 32px 16px; }
   .ab-certs-edu { padding: 40px 16px; }
@@ -606,7 +608,7 @@
         </div>
       </div>
       <div class="ab-hero-portrait">
-        <img src="assets/images/about.png" alt="Marberd Bernard" class="ab-portrait-img">
+        <img src="assets/images/about.png" alt="Marberd Bernard" class="ab-portrait-img" fetchpriority="high">
       </div>
     </div>
   </div>
@@ -662,7 +664,7 @@
         </p>
 
         <figure class="ab-sketch">
-          <img src="assets/images/kid-sketch.png" alt="Childhood architectural sketch">
+          <img src="assets/images/kid-sketch.png" alt="Childhood architectural sketch" loading="lazy">
           <figcaption>
             <span class="ab-sketch-rule"></span>
             <span>My first set of plans. Eight years old, no permit.</span>
@@ -677,7 +679,7 @@
         </p>
 
         <figure class="ab-portrait-float">
-          <img src="assets/images/about.png" alt="Marberd Bernard">
+          <img src="assets/images/about-portrait.jpg" alt="Marberd Bernard" loading="lazy">
         </figure>
 
         <p class="ab-lede">
