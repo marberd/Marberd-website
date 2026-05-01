@@ -385,11 +385,138 @@
 }
 .ab-cta-link:hover { background: #6d5830; }
 
+/* ── STORY INTRO SECTION ── */
+.ab-story {
+  background: var(--white);
+  padding: 88px 60px 80px;
+}
+.ab-story-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.ab-origin-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 52px;
+}
+.ab-origin-rule {
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.ab-origin-text {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: var(--gold-dk);
+  text-transform: uppercase;
+}
+.ab-story-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+.ab-story-headline {
+  font-family: var(--serif);
+  font-size: clamp(40px, 5.5vw, 72px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0 0 40px;
+  color: var(--black);
+}
+.ab-story-headline .accent {
+  font-style: italic;
+  color: var(--gold-dk);
+}
+.ab-story-divider {
+  width: 48px;
+  height: 1px;
+  background: var(--border);
+  margin: 0 0 32px;
+}
+.ab-lede {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--text);
+  margin: 0 0 20px;
+  font-weight: 400;
+}
+.ab-lede em { font-style: italic; }
+.ab-lede:last-of-type { margin-bottom: 0; }
+.ab-reader-paths {
+  margin-top: 52px;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.ab-path-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--text);
+  cursor: none;
+  transition: opacity 0.2s ease;
+}
+.ab-path-link:hover { opacity: 0.6; }
+.ab-path-rule {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+  flex-shrink: 0;
+}
+.ab-path-link:hover .ab-path-rule { width: 56px; }
+.ab-path-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--gold-dk);
+  text-transform: uppercase;
+}
+.ab-portrait-frame {
+  position: relative;
+  padding-bottom: 16px;
+  padding-right: 16px;
+}
+.ab-portrait-box {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--paper);
+}
+.ab-portrait-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.ab-est-tag {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--black);
+  color: var(--white);
+  padding: 8px 18px;
+  font-family: var(--serif);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+}
+
 /* ── MOBILE ── */
 @media (max-width: 768px) {
   .ab-hero { padding: 110px 20px 52px; min-height: unset; align-items: flex-start; }
   .ab-h1-name { letter-spacing: -2px; }
   .ab-hero-columns { grid-template-columns: 1fr; gap: 28px; }
+  .ab-story { padding: 60px 20px 72px; }
+  .ab-story-grid { grid-template-columns: 1fr; gap: 52px; }
+  .ab-portrait-frame { order: -1; max-width: 360px; padding-bottom: 12px; padding-right: 12px; }
+  .ab-reader-paths { gap: 24px; flex-direction: column; }
 
   .ab-quote-band { padding: 40px 20px; }
 
@@ -464,6 +591,49 @@
   </div>
 </section>
 
+<!-- ══ SECTION: STORY INTRO ══════════════════════════ -->
+<section class="ab-story">
+  <div class="ab-story-inner">
+    <div class="ab-origin-label reveal">
+      <span class="ab-origin-rule"></span>
+      <span class="ab-origin-text">Origin</span>
+    </div>
+    <div class="ab-story-grid">
+      <div>
+        <h2 class="ab-story-headline reveal">
+          It all began<br>
+          when my<br>
+          neighbor&rsquo;s<br>
+          house <span class="accent">blew up.</span>
+        </h2>
+        <div class="ab-story-divider"></div>
+        <p class="ab-lede reveal">
+          I was young, but old enough to understand that buildings were not just walls, roofs, and windows. They were <em>safety, memory, family, identity</em> &mdash; and the fragile frame around everyday life.
+        </p>
+        <p class="ab-lede reveal">
+          That moment stayed with me. It became the first page of a much larger story.
+        </p>
+        <div class="ab-reader-paths reveal">
+          <a href="#ab-education" class="ab-path-link">
+            <span class="ab-path-rule"></span>
+            <span class="ab-path-label">Continue my story</span>
+          </a>
+          <a href="#ab-skills" class="ab-path-link">
+            <span class="ab-path-rule"></span>
+            <span class="ab-path-label">Skip to my work</span>
+          </a>
+        </div>
+      </div>
+      <div class="ab-portrait-frame reveal">
+        <div class="ab-portrait-box">
+          <img src="assets/images/about.png" alt="Marberd Bernard">
+        </div>
+        <div class="ab-est-tag">Est. 2014</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ SECTION 2 — QUOTE BAND ════════════════════════ -->
 <section class="ab-quote-band">
   <p class="ab-quote-text">"A house is a machine for living in."</p>
@@ -489,7 +659,7 @@
   </div>
 </section>
 
-<!-- ══ SECTION 4 — CERTIFICATIONS & EDUCATION ════════ -->
+<!-- ══ SECTION 4 — CERTIFICATIONS & EDUCATION ════════ --><span id="ab-education" style="display:block;position:relative;top:-80px;visibility:hidden"></span>
 <section class="ab-certs-edu">
   <div class="ab-certs-edu-inner">
 
@@ -530,7 +700,7 @@
   </div>
 </section>
 
-<!-- ══ SECTION 5 — CLIENTS ═══════════════════════════ -->
+<!-- ══ SECTION 5 — CLIENTS ═══════════════════════════ --><span id="ab-skills" style="display:block;position:relative;top:-80px;visibility:hidden"></span>
 <section class="ab-clients">
   <div class="ab-clients-inner">
     <div class="ab-clients-eyebrow reveal">
