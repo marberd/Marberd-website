@@ -163,29 +163,6 @@
 @keyframes marquee { from{transform:translateX(0);}  to{transform:translateX(-50%);} }
 @keyframes fadeUp  { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:translateY(0);} }
 
-/* ── CAPABILITIES STRIP ─────── */
-.intro-strip {
-  padding: 72px 60px;
-  border-bottom: 1px solid var(--border);
-}
-.intro-inner {
-  max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-}
-.intro-statement {
-  font-family: var(--serif);
-  font-size: clamp(22px, 2.5vw, 30px);
-  font-weight: 300; line-height: 1.45;
-  color: var(--black); letter-spacing: -0.3px;
-}
-.intro-caps { display: flex; flex-wrap: wrap; gap: 10px; }
-.cap-tag {
-  font-family: var(--mono); font-size: 9px;
-  letter-spacing: 2px; text-transform: uppercase;
-  color: var(--mid); border: 1px solid var(--border);
-  padding: 8px 14px; transition: border-color .2s, color .2s;
-}
-.cap-tag:hover { border-color: var(--gold); color: var(--gold-dk); }
 
 /* ── SELECTED WORK ──────────── */
 .work-strip { padding: 80px 60px; background: var(--paper); }
@@ -272,8 +249,6 @@
 
 /* ── MOBILE — NEW SECTIONS ─── */
 @media (max-width: 768px) {
-  .intro-strip { padding: 52px 20px; }
-  .intro-inner { grid-template-columns: 1fr; gap: 32px; }
   .work-strip { padding: 56px 20px; }
   .work-grid { grid-template-columns: 1fr; gap: 2px; }
   .work-header { margin-bottom: 32px; }
@@ -387,21 +362,6 @@
     <span class="marquee-item">Hudson Yards · 4 WTC</span>
   </div>
 </div>
-<!-- CAPABILITIES STRIP -->
-<section class="intro-strip reveal">
-  <div class="intro-inner">
-    <p class="intro-statement">Bridging design instinct, BIM precision, and visual storytelling &mdash; from concept sketch to construction document.</p>
-    <div class="intro-caps">
-      <span class="cap-tag">Architectural Design</span>
-      <span class="cap-tag">BIM / Revit</span>
-      <span class="cap-tag">VDC Coordination</span>
-      <span class="cap-tag">Construction Documentation</span>
-      <span class="cap-tag">Visual Storytelling</span>
-      <span class="cap-tag">Columbia M.Arch</span>
-    </div>
-  </div>
-</section>
-
 <!-- SELECTED WORK -->
 <section class="work-strip">
   <div class="work-inner">
