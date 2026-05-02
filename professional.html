@@ -137,14 +137,22 @@
 @keyframes pr-rise  { to { opacity: 1; transform: translateY(0); } }
 @keyframes pr-fade  { to { opacity: 1; } }
 
-/* Nav on dark hero */
-#main-nav:not(.scrolled) .nav-links a          { color: rgba(255,255,255,0.45); }
-#main-nav:not(.scrolled) .nav-links a:hover    { color: rgba(255,255,255,0.9); }
-#main-nav:not(.scrolled) .nav-links a.active   { color: var(--gold); }
-#main-nav:not(.scrolled) .nav-links a::after   { background: rgba(255,255,255,0.35); }
-#main-nav:not(.scrolled) .nav-links a.active::after { background: var(--gold); }
-#main-nav:not(.scrolled) .nav-icon            { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.38); }
-#main-nav:not(.scrolled) .nav-icon:hover      { border-color: var(--gold); color: var(--gold); }
+/* Nav — white on dark hero by default */
+#main-nav .nav-links a          { color: rgba(255,255,255,0.55); }
+#main-nav .nav-links a:hover    { color: rgba(255,255,255,0.95); }
+#main-nav .nav-links a.active   { color: var(--gold); }
+#main-nav .nav-links a::after   { background: rgba(255,255,255,0.35); }
+#main-nav .nav-links a.active::after { background: var(--gold); }
+#main-nav .nav-icon             { border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.45); }
+#main-nav .nav-icon:hover       { border-color: var(--gold); color: var(--gold); }
+/* Restore dark text once scrolled onto light sections */
+#main-nav.scrolled .nav-links a          { color: var(--mid); }
+#main-nav.scrolled .nav-links a:hover    { color: var(--black); }
+#main-nav.scrolled .nav-links a.active   { color: var(--gold-dk); }
+#main-nav.scrolled .nav-links a::after   { background: var(--gold); }
+#main-nav.scrolled .nav-links a.active::after { background: var(--gold-dk); }
+#main-nav.scrolled .nav-icon            { border-color: var(--border); color: var(--muted); }
+#main-nav.scrolled .nav-icon:hover      { border-color: var(--gold); color: var(--gold-dk); }
 
 /* ── STATS STRIP ─────────────────────── */
 .pr-stats {
