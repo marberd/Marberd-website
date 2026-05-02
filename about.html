@@ -328,7 +328,12 @@
 .ab-story-inner {
   max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 80px;
+  align-items: start;
 }
+.ab-story-text { min-width: 0; }
 .ab-origin-label {
   display: flex;
   align-items: center;
@@ -348,7 +353,6 @@
   color: var(--gold-dk);
   text-transform: uppercase;
 }
-.ab-story-text { max-width: 720px; }
 .ab-story-headline {
   font-family: var(--serif);
   font-size: clamp(40px, 5.5vw, 72px);
@@ -410,54 +414,69 @@
 }
 .ab-story-toggle:hover .ab-story-toggle-rule { width: 44px; }
 
-/* Sketch — editorial right float */
-.ab-sketch {
-  float: right;
-  width: 44%;
-  margin: 4px 0 28px 40px;
-  clear: right;
+/* Pinned sketch — right column */
+.ab-story-aside {
+  position: sticky;
+  top: 100px;
 }
-.ab-sketch img {
+.ab-pin-frame {
+  position: relative;
+  background: #fff;
+  padding: 14px 14px 48px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.06);
+  transform: rotate(1.8deg);
+  transform-origin: center top;
+  transition: transform 0.4s cubic-bezier(.16,1,.3,1), box-shadow 0.4s ease;
+  cursor: none;
+}
+.ab-pin-frame:hover {
+  transform: rotate(0deg);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.16), 0 4px 12px rgba(0,0,0,0.07);
+}
+/* push-pin dot */
+.ab-pin-frame::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: var(--gold-dk);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  z-index: 1;
+}
+.ab-pin-frame img {
   width: 100%;
   display: block;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.11);
 }
-.ab-sketch figcaption {
-  margin-top: 12px;
+.ab-pin-caption {
+  position: absolute;
+  bottom: 0;
+  left: 14px; right: 14px;
+  height: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
-.ab-sketch-rule {
-  width: 20px;
+.ab-pin-caption-rule {
+  width: 16px;
   height: 1px;
   background: var(--gold);
-  margin-bottom: 8px;
   display: block;
 }
-.ab-sketch figcaption span {
+.ab-pin-caption span {
   font-family: var(--serif);
-  font-size: 12px;
+  font-size: 10px;
   font-style: italic;
-  color: var(--text);
-  opacity: 0.55;
+  color: var(--mid);
   text-align: center;
 }
 
-/* Portrait — secondary editorial left float */
-.ab-portrait-float {
-  float: left;
-  width: 33%;
-  margin: 4px 40px 20px 0;
-  clear: left;
-}
-.ab-portrait-float img {
-  width: 100%;
-  display: block;
-}
-
 .ab-story-beat {
-  clear: both;
   margin-top: 40px;
 }
 .ab-story-beat p {
@@ -472,7 +491,6 @@
 .ab-story-beat p:last-child { margin-bottom: 0; }
 
 .ab-reader-paths {
-  clear: both;
   margin-top: 52px;
   display: flex;
   gap: 40px;
@@ -586,11 +604,12 @@
 <!-- ══ SECTION: STORY ══════════════════════════════════ -->
 <section class="ab-story">
   <div class="ab-story-inner">
-    <div class="ab-origin-label reveal">
-      <span class="ab-origin-rule"></span>
-      <span class="ab-origin-text">Origin</span>
-    </div>
+    <!-- Left: all text content -->
     <div class="ab-story-text">
+      <div class="ab-origin-label reveal">
+        <span class="ab-origin-rule"></span>
+        <span class="ab-origin-text">Origin</span>
+      </div>
 
       <h2 class="ab-story-headline reveal">
         It all began<br>
