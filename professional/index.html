@@ -27,9 +27,10 @@
   background: var(--black);
   min-height: 72vh;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 60px 64px;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 0;
   position: relative;
   overflow: hidden;
 }
@@ -60,7 +61,7 @@
 .pr-hero-content {
   position: relative;
   z-index: 1;
-  max-width: 1080px;
+  max-width: 100%;
 }
 .pr-eyebrow {
   display: flex;
@@ -97,11 +98,11 @@
   transform: translateY(64px);
 }
 .pr-h1-line:nth-child(1) .pr-h1-inner {
-  font-size: clamp(48px, 7.5vw, 108px);
+  font-size: clamp(44px, 5vw, 82px);
   animation: pr-rise 1s 0.28s cubic-bezier(.16,1,.3,1) forwards;
 }
 .pr-h1-line:nth-child(2) .pr-h1-inner {
-  font-size: clamp(36px, 6vw, 84px);
+  font-size: clamp(34px, 4vw, 66px);
   font-style: italic;
   color: var(--gold);
   animation: pr-rise 1s 0.44s cubic-bezier(.16,1,.3,1) forwards;
@@ -507,7 +508,12 @@
 
 /* ── MOBILE ───────────────────────────── */
 @media (max-width: 900px) {
-  .pr-hero { padding: 0 24px 56px; min-height: 70vh; }
+  /* Collapse split layout back to single column */
+  .pr-hero { flex-direction: column; align-items: flex-start; padding: 0; min-height: 70vh; }
+  .pr-hero-left { flex: none; width: 100%; padding: 0 24px 56px; min-height: 70vh;
+                  display: flex; flex-direction: column; justify-content: flex-end; }
+  .pr-hero-reel { display: none; }
+
   .pr-hero-meta { gap: 0; }
   .pr-meta-item { padding-right: 28px; margin-right: 28px; }
 
@@ -523,7 +529,7 @@
   .pr-stat { min-width: 50%; border-bottom: 1px solid var(--border); }
 }
 @media (max-width: 600px) {
-  .pr-hero { padding: 0 20px 48px; }
+  .pr-hero-left { padding: 0 20px 48px; }
   .pr-meta-item:last-child { display: none; }
   .pr-stat { min-width: 100%; }
 }
@@ -535,6 +541,112 @@
   transition: opacity .7s ease, transform .72s cubic-bezier(.16,1,.3,1);
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ══ HERO LEFT COLUMN ═══════════════════════════════════════ */
+.pr-hero-left {
+  flex: 0 0 52%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 0 64px 60px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ══ PROJECT REEL ════════════════════════════════════════════ */
+.pr-hero-reel {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-left: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Scrolling track — contains cards × 2 for seamless loop */
+.pr-reel-track {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 20px;
+  will-change: transform;
+  animation: pr-reel-scroll 34s linear infinite;
+}
+.pr-hero-reel:hover .pr-reel-track {
+  animation-play-state: paused;
+}
+
+/* Individual card */
+.pr-reel-card {
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+.pr-reel-card:hover {
+  box-shadow: inset 0 0 0 1px rgba(184,150,62,0.7);
+}
+
+/* Image — grayscale by default, color on hover */
+.pr-reel-card-img {
+  width: 100%;
+  height: 164px;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%);
+  transition: filter 0.4s ease;
+}
+.pr-reel-card:hover .pr-reel-card-img {
+  filter: grayscale(0%);
+}
+
+/* Label overlay — always visible, subtle gradient backing */
+.pr-reel-card-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 32px 14px 11px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.66));
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.pr-reel-card-name {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.76);
+  line-height: 1.4;
+}
+.pr-reel-card-year {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+/* Top and bottom edge fades blend into hero black */
+.pr-reel-fade {
+  position: absolute;
+  left: 0; right: 0;
+  height: 110px;
+  pointer-events: none;
+  z-index: 3;
+}
+.pr-reel-fade--top {
+  top: 0;
+  background: linear-gradient(to bottom, var(--black), transparent);
+}
+.pr-reel-fade--bot {
+  bottom: 0;
+  background: linear-gradient(to top, var(--black), transparent);
+}
+
+/* Seamless scroll: track is 2× items so -50% = one full set */
+@keyframes pr-reel-scroll {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
 
 </style>
 </head>
@@ -569,26 +681,38 @@
 <!-- ══ HERO ════════════════════════════════════════════ -->
 <section class="pr-hero">
   <div class="pr-hero-ghost" aria-hidden="true">8</div>
-  <div class="pr-hero-content">
-    <h1 class="pr-h1">
-      <span class="pr-h1-line"><span class="pr-h1-inner">Eight years.</span></span>
-      <span class="pr-h1-line"><span class="pr-h1-inner">Precision at scale.</span></span>
-    </h1>
-    <div class="pr-hero-meta">
-      <div class="pr-meta-item">
-        <span class="pr-meta-label">Current Role</span>
-        <span class="pr-meta-value">BIM Manager · TPG Architecture</span>
-      </div>
-      <div class="pr-meta-item">
-        <span class="pr-meta-label">Certification</span>
-        <span class="pr-meta-value">Autodesk Certified Professional</span>
-      </div>
-      <div class="pr-meta-item">
-        <span class="pr-meta-label">Focus</span>
-        <span class="pr-meta-value">VDC · BIM · Computational Design</span>
+
+  <!-- Left: headline + meta -->
+  <div class="pr-hero-left">
+    <div class="pr-hero-content">
+      <h1 class="pr-h1">
+        <span class="pr-h1-line"><span class="pr-h1-inner">Eight years.</span></span>
+        <span class="pr-h1-line"><span class="pr-h1-inner">Precision at scale.</span></span>
+      </h1>
+      <div class="pr-hero-meta">
+        <div class="pr-meta-item">
+          <span class="pr-meta-label">Current Role</span>
+          <span class="pr-meta-value">BIM Manager · TPG Architecture</span>
+        </div>
+        <div class="pr-meta-item">
+          <span class="pr-meta-label">Certification</span>
+          <span class="pr-meta-value">Autodesk Certified Professional</span>
+        </div>
+        <div class="pr-meta-item">
+          <span class="pr-meta-label">Focus</span>
+          <span class="pr-meta-value">VDC · BIM · Computational Design</span>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Right: project reel (populated by JS) -->
+  <div class="pr-hero-reel" id="pr-reel" aria-hidden="true">
+    <div class="pr-reel-fade pr-reel-fade--top"></div>
+    <div class="pr-reel-track" id="pr-reel-track"></div>
+    <div class="pr-reel-fade pr-reel-fade--bot"></div>
+  </div>
+
 </section>
 
 <!-- ══ STATS ═══════════════════════════════════════════ -->
@@ -612,7 +736,7 @@
 </div>
 
 <!-- ══ SELECTED WORK GRID (DYO-style) ══════════════════ -->
-<div class="pr-work">
+<div class="pr-work" id="tpg-renders">
   <div class="pr-sec">
     <div class="pr-sec-label reveal">Selected Renders — TPG Architecture</div>
   </div>
@@ -640,7 +764,7 @@
 </div>
 
 <!-- D-YO Studio collaboration -->
-<div class="pr-work">
+<div class="pr-work" id="dyo-collab">
   <div class="pr-sec">
     <div class="pr-sec-label reveal">Collaboration — D-YO Studio</div>
   </div>
@@ -659,7 +783,7 @@
 </div>
 
 <!-- Independent Practice grid -->
-<div class="pr-work">
+<div class="pr-work" id="archnimations">
   <div class="pr-sec">
     <div class="pr-sec-label reveal">Independent Practice — Archnimations · 2018–2024</div>
   </div>
@@ -826,6 +950,100 @@
 </footer>
 
 <script src="../assets/js/main.js"></script>
+
+<!-- ══ PROJECT REEL ══════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ─── Edit this array to update reel content ─────────────── */
+  var REEL_PROJECTS = [
+    {
+      name: '1290 Avenue of the Americas',
+      year: '2023',
+      img:  '../assets/images/projects/tpg-interior.jpg',
+      target: '#tpg-renders'
+    },
+    {
+      name: '1290 Avenue — Terrace',
+      year: '2023',
+      img:  '../assets/images/projects/tpg-terrace.jpg',
+      target: '#tpg-renders'
+    },
+    {
+      name: 'Maoya Hotel',
+      year: '2022',
+      img:  '../assets/images/projects/maoya-hotel.jpg',
+      target: '#dyo-collab'
+    },
+    {
+      name: '130K SF Mixed-Use Development',
+      year: '2021',
+      img:  '../assets/images/projects/alpena-prof.jpg',
+      target: '#archnimations'
+    },
+    {
+      name: 'BURTON IN99 Flagship',
+      year: '2020',
+      img:  '../assets/images/projects/burton-china.jpg',
+      target: '#archnimations'
+    },
+    {
+      name: 'Five Ground-Up Residences',
+      year: '2019',
+      img:  '../assets/images/projects/dominican-residences.jpg',
+      target: '#archnimations'
+    },
+    {
+      name: 'Net Zero Development',
+      year: '2018',
+      img:  '../assets/images/projects/utah-netzero.jpg',
+      target: '#archnimations'
+    }
+  ];
+  /* ─────────────────────────────────────────────────────────── */
+
+  var track = document.getElementById('pr-reel-track');
+  var reel  = document.getElementById('pr-reel');
+  if (!track || !reel) return;
+
+  function makeCard(p) {
+    var card = document.createElement('div');
+    card.className    = 'pr-reel-card';
+    card.dataset.target = p.target;
+    card.innerHTML =
+      '<img class="pr-reel-card-img" src="' + p.img + '" alt="' + p.name + '" loading="lazy">' +
+      '<div class="pr-reel-card-overlay">' +
+        '<span class="pr-reel-card-name">' + p.name + '</span>' +
+        '<span class="pr-reel-card-year">' + p.year + '</span>' +
+      '</div>';
+    return card;
+  }
+
+  /* Duplicate list for seamless infinite loop */
+  REEL_PROJECTS.concat(REEL_PROJECTS).forEach(function (p) {
+    track.appendChild(makeCard(p));
+  });
+
+  /* Hover: pause scroll */
+  reel.addEventListener('mouseenter', function () {
+    track.style.animationPlayState = 'paused';
+  });
+  reel.addEventListener('mouseleave', function () {
+    track.style.animationPlayState = 'running';
+  });
+
+  /* Click: smooth-scroll to project section */
+  reel.addEventListener('click', function (e) {
+    var card = e.target.closest('.pr-reel-card');
+    if (!card) return;
+    var el = document.querySelector(card.dataset.target);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}());
+</script>
+
 <script>
 (function () {
   'use strict';
