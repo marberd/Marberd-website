@@ -10,6 +10,7 @@
 /* ── HERO ─────────────────────── */
 .hero {
   position: relative;
+  z-index: 1; /* own stacking context — keeps hero children below the fixed nav (z-index:500) */
   width: 100%;
   height: 75vh;
   min-height: 600px;
@@ -25,6 +26,7 @@
   background-repeat: no-repeat;
   z-index: 2;
   opacity: 0;
+  pointer-events: none; /* decorative — never intercepts clicks */
   will-change: transform, filter, opacity;
   animation: heroSettle 2.4s cubic-bezier(0.22,1,0.36,1) 0.2s forwards;
 }
@@ -39,6 +41,7 @@
   mix-blend-mode: screen;
   z-index: 1;
   opacity: 0;
+  pointer-events: none; /* decorative — never intercepts clicks */
   will-change: opacity;
   animation: bloomFade 2s ease 1s forwards;
 }
