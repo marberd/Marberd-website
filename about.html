@@ -412,6 +412,11 @@
   font-weight: 400;
 }
 .ab-lede em { font-style: italic; }
+.ab-lede-cols {
+  column-count: 2;
+  column-gap: 36px;
+  margin-bottom: 4px;
+}
 
 /* Collapsible story */
 .ab-story-expandable {
@@ -575,6 +580,7 @@
   .ab-pin-frame { max-width: 220px; margin: 0 auto; transform: rotate(1deg); }
   .ab-reader-paths { gap: 24px; flex-direction: column; }
   .ab-lede { font-size: 17px; }
+  .ab-lede-cols { column-count: 1; }
 
   .ab-quote-band { padding: 40px 20px; }
 
@@ -646,18 +652,20 @@
       <div class="ab-story-divider"></div>
 
       <!-- Always-visible preview -->
-      <p class="ab-lede reveal">
-        I was young, but old enough to understand that buildings were not just walls, roofs, and windows. They were <em>safety, memory, family, identity</em> &mdash; and the fragile frame around everyday life.
-      </p>
-      <p class="ab-lede reveal">
-        That moment stayed with me. It became the first page of a much larger story.
-      </p>
-      <p class="ab-lede reveal">
-        I was eight years old.
-      </p>
-      <p class="ab-lede reveal">
-        Pieces of his wooden house landed in my grandmother&rsquo;s yard, and while the adults saw debris, cleanup, and probably a very stressful neighborhood situation, <em>I saw inventory.</em>
-      </p>
+      <div class="ab-lede-cols">
+        <p class="ab-lede reveal">
+          I was young, but old enough to understand that buildings were not just walls, roofs, and windows. They were <em>safety, memory, family, identity</em> &mdash; and the fragile frame around everyday life.
+        </p>
+        <p class="ab-lede reveal">
+          That moment stayed with me. It became the first page of a much larger story.
+        </p>
+        <p class="ab-lede reveal">
+          I was eight years old.
+        </p>
+        <p class="ab-lede reveal">
+          Pieces of his wooden house landed in my grandmother&rsquo;s yard, and while the adults saw debris, cleanup, and probably a very stressful neighborhood situation, <em>I saw inventory.</em>
+        </p>
+      </div>
 
       <!-- "See more" toggle -->
       <button class="ab-story-toggle" id="story-toggle" onclick="toggleStory()" aria-expanded="false">
