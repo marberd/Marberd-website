@@ -67,6 +67,63 @@
 @media (max-width: 768px) {
   .bim-video-wrap { grid-template-columns: 1fr; gap: 32px; }
 }
+.bim-yt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 40px;
+}
+.bim-yt-card {}
+.bim-yt-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--black);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.bim-yt-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.bim-yt-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-top: 12px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bim-yt-label::before {
+  content: '';
+  width: 16px; height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.bim-yt-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--black);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.bim-yt-desc {
+  font-size: 12.5px;
+  color: var(--mid);
+  line-height: 1.65;
+}
+@media (max-width: 768px) {
+  .bim-yt-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body><svg id="cur" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="cur-ring" cx="22" cy="22" r="16" stroke="#111118" stroke-width="1"/><line x1="22" y1="3" x2="22" y2="9" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="35" x2="22" y2="41" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="22" x2="9" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="22" x2="41" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/></svg><div id="cur-dot"></div>
@@ -117,6 +174,32 @@
       </video>
       <p class="bim-video-cap">Office-wide Revit Essentials training session</p>
     </div>
+  </div>
+
+  <hr class="rule">
+  <div class="sec-label reveal">Advanced Problem Solving</div>
+  <h2 class="sec-h2 reveal">Solutions that aren't<br><em>in the manual.</em></h2>
+  <p class="reveal" style="font-size:14px;color:var(--mid);line-height:1.8;font-weight:300;max-width:600px;">Beyond standard workflows — documented solutions to complex Revit problems that lack public documentation. The kind of troubleshooting that separates a BIM operator from a BIM strategist.</p>
+  <div class="bim-yt-grid">
+
+    <div class="bim-yt-card reveal">
+      <div class="bim-yt-embed">
+        <iframe src="https://www.youtube.com/embed/A4yAIlgU5RE?start=32" title="Revit Advanced Troubleshooting" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="bim-yt-label">Revit · Advanced Workflow</div>
+      <div class="bim-yt-title">Undocumented Revit Solution</div>
+      <p class="bim-yt-desc">A fix for a complex Revit issue with no publicly available documentation — the kind of problem-solving that only comes from deep hands-on experience with the platform.</p>
+    </div>
+
+    <div class="bim-yt-card reveal">
+      <div class="bim-yt-embed">
+        <iframe src="https://www.youtube.com/embed/z1Y50ZdU_UA" title="Revit Advanced Troubleshooting" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="bim-yt-label">Revit · Problem Solving</div>
+      <div class="bim-yt-title">Undocumented Revit Solution</div>
+      <p class="bim-yt-desc">Another deep-dive into a non-trivial Revit challenge. Documented and shared to contribute back to the community — and to demonstrate what mastery of the tool actually looks like.</p>
+    </div>
+
   </div>
 
   <hr class="rule">
