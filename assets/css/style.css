@@ -260,6 +260,8 @@ footer {
   align-items: center; justify-content: center;
 }
 #nav-overlay.open { display: flex; }
+/* Hard-lock: overlay must never show on desktop regardless of JS state */
+@media (min-width: 769px) { #nav-overlay { display: none !important; } }
 .overlay-nav {
   display: flex; flex-direction: column;
   align-items: center; gap: 0; width: 100%;
