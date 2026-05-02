@@ -22,7 +22,7 @@
   --mono:    'Space Mono', monospace;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   background: var(--white);
@@ -31,7 +31,6 @@ body {
   font-size: 15px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
   cursor: none !important;
 }
 *, *::before, *::after { cursor: none !important; }
