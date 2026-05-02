@@ -15,7 +15,9 @@
   min-height: 600px;
   overflow: hidden;
   background: var(--white);
+  pointer-events: none; /* hero is display-only; CTA buttons re-enable below */
 }
+.h-link-primary, .h-link-ghost { pointer-events: auto; }
 .hero__photo {
   position: absolute;
   inset: 0;
@@ -213,9 +215,7 @@
 }
 .foot-expanded-inner {
   max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr auto auto; gap: 60px;
-  align-items: start;
-  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 32px;
 }
 .foot-brand { display: flex; flex-direction: column; gap: 10px; }
 .foot-brand-name {
@@ -226,34 +226,13 @@
   font-family: var(--mono); font-size: 9px; letter-spacing: 1.5px;
   color: rgba(255,255,255,0.2); text-transform: uppercase;
 }
-.foot-col-label {
-  font-family: var(--mono); font-size: 8px; letter-spacing: 2px;
-  text-transform: uppercase; color: rgba(255,255,255,0.2);
-  margin-bottom: 16px;
-}
-.foot-nav-links { display: flex; flex-direction: column; gap: 10px; }
-.foot-nav-links a {
-  font-family: var(--mono); font-size: 9.5px; letter-spacing: 1.5px;
-  text-transform: uppercase; color: rgba(255,255,255,0.4);
-  text-decoration: none; cursor: none; transition: color .2s;
-}
-.foot-nav-links a:hover { color: var(--gold); }
-.foot-social-links { display: flex; flex-direction: column; gap: 10px; }
-.foot-social-links a {
-  font-family: var(--mono); font-size: 9.5px; letter-spacing: 1.5px;
-  text-transform: uppercase; color: rgba(255,255,255,0.4);
-  text-decoration: none; cursor: none; transition: color .2s;
-}
-.foot-social-links a:hover { color: var(--gold); }
 
 /* ── MOBILE — NEW SECTIONS ─── */
 @media (max-width: 768px) {
   .work-strip { padding: 56px 20px; }
   .work-grid { grid-template-columns: 1fr; gap: 2px; }
   .work-header { margin-bottom: 32px; }
-  .foot-expanded { padding: 48px 20px 36px; }
-  .foot-expanded-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
-  .foot-brand { grid-column: 1 / -1; }
+  .foot-expanded { padding: 40px 20px 32px; }
 }
 
 /* ── MOBILE ─────────────────── */
@@ -409,23 +388,6 @@
     <div class="foot-brand">
       <span class="foot-brand-name">Marberd Bernard</span>
       <span class="foot-brand-copy">&copy; 2026 &nbsp;&middot;&nbsp; New York, NY</span>
-    </div>
-    <div>
-      <div class="foot-col-label">Navigation</div>
-      <nav class="foot-nav-links">
-        <a href="about.html">About</a>
-        <a href="academic.html">Academic</a>
-        <a href="professional.html">Professional</a>
-        <a href="bim-revit.html">BIM / Revit</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-    <div>
-      <div class="foot-col-label">Connect</div>
-      <div class="foot-social-links">
-        <a href="https://linkedin.com/in/marberd-bernard" target="_blank">LinkedIn</a>
-        <a href="mailto:marberdb@gmail.com">Email</a>
-      </div>
     </div>
   </div>
 </footer>
