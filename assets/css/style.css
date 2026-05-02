@@ -35,6 +35,7 @@ body {
   cursor: none !important;
 }
 *, *::before, *::after { cursor: none !important; }
+a, button { touch-action: manipulation; }
 
 /* ── CURSOR ─────────────────────────────── */
 #cur {
