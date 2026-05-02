@@ -339,24 +339,6 @@
 .bu-top { clip-path: inset(0 0 52% 0); }
 .bu-bot { clip-path: inset(48% 0 0 0); }
 
-/* Slash line sweeps in then fades */
-.blew-up-word.fire::before {
-  content: '';
-  position: absolute;
-  left: -6px; right: -6px;
-  top: 46%;
-  height: 2px;
-  background: var(--gold-dk);
-  transform-origin: left center;
-  transform: rotate(-6deg) scaleX(0);
-  animation:
-    bu-slash-in  0.16s 0.15s ease-out forwards,
-    bu-slash-out 0.22s 0.60s ease-in  forwards;
-  z-index: 2;
-}
-@keyframes bu-slash-in  { to { transform: rotate(-6deg) scaleX(1); } }
-@keyframes bu-slash-out { to { opacity: 0; } }
-
 /* Top half: cut loose, flies up, holds, drops back */
 .bu-top.animate {
   animation: bu-top-fly 1.8s 0.32s cubic-bezier(.4,0,.2,1) forwards;
@@ -404,10 +386,10 @@
 }
 .ab-story-headline {
   font-family: var(--serif);
-  font-size: clamp(40px, 5.5vw, 72px);
+  font-size: clamp(26px, 3.2vw, 44px);
   font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -0.015em;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   margin: 0 0 28px;
   color: var(--black);
 }
@@ -618,7 +600,7 @@
     font-size: clamp(18px, 5.5vw, 28px);
   }
   .ab-story-headline {
-    font-size: clamp(32px, 9.5vw, 48px);
+    font-size: clamp(22px, 6vw, 32px);
   }
   .ab-hero { padding: 88px 16px 0; }
   .ab-story { padding: 80px 16px 48px; }
@@ -660,12 +642,7 @@
         <span class="ab-origin-text">Origin</span>
       </div>
 
-      <h2 class="ab-story-headline reveal">
-        It all began<br>
-        when my<br>
-        neighbor&rsquo;s<br>
-        house <span class="accent"><span class="blew-up-word">blew up.</span></span>
-      </h2>
+      <h2 class="ab-story-headline reveal">It all began when my neighbor&rsquo;s house <span class="accent"><span class="blew-up-word">blew up.</span></span></h2>
       <div class="ab-story-divider"></div>
 
       <!-- Always-visible preview -->
