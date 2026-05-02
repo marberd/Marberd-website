@@ -26,6 +26,47 @@
   margin: 0 auto;
   position: relative;
   padding: 140px 60px 80px 132px; /* 132 = 72px rail + 60px gap */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.pr-hero-copy { min-width: 0; }
+
+/* Video block */
+.pr-hero-video-wrap {
+  position: relative;
+}
+.pr-hero-video-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--pr-gold);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pr-hero-video-label::before {
+  content: '';
+  width: 20px; height: 1px;
+  background: var(--pr-gold);
+  flex-shrink: 0;
+}
+.pr-hero-video {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--border);
+  background: var(--pr-black);
+}
+.pr-hero-video-caption {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 10px;
 }
 
 /* Vertical rail */
@@ -507,7 +548,11 @@
 
 /* ══ MOBILE ══════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .pr-hero-inner { padding: 110px 20px 56px 20px; }
+  .pr-hero-inner {
+    padding: 110px 20px 56px 20px;
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
   .pr-rail       { display: none; }
   .pr-wm-section { padding: 56px 20px; }
   .pr-wm-wall    { justify-content: flex-start; gap: 20px; }
@@ -543,11 +588,25 @@
       <span class="pr-rail-line"></span>
       <span class="pr-rail-text">Practice</span>
     </div>
-    <span class="pr-hero-eyebrow">Professional</span>
-    <h1 class="pr-hero-heading">
-      Eight years.
-      <em>Precision at scale.</em>
-    </h1>
+
+    <!-- Left: text -->
+    <div class="pr-hero-copy">
+      <span class="pr-hero-eyebrow">Professional</span>
+      <h1 class="pr-hero-heading">
+        Eight years.
+        <em>Precision at scale.</em>
+      </h1>
+    </div>
+
+    <!-- Right: training video -->
+    <div class="pr-hero-video-wrap">
+      <div class="pr-hero-video-label">Revit Training · Annual</div>
+      <video class="pr-hero-video" controls preload="metadata">
+        <source src="assets/videos/revit-training.mp4" type="video/mp4">
+      </video>
+      <p class="pr-hero-video-caption">Office-wide Revit Essentials training session</p>
+    </div>
+
   </div>
 </section>
 
