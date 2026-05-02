@@ -320,6 +320,23 @@
 }
 .ab-cta-link:hover { background: #6d5830; }
 
+/* ── BLEW UP ANIMATION ── */
+.blew-up-word {
+  display: inline-block;
+  transform-origin: center center;
+}
+@keyframes blew-up-anim {
+  0%   { transform: scale(1);   opacity: 1; filter: blur(0px);  letter-spacing: 0; }
+  18%  { transform: scale(1.6); opacity: 1; filter: blur(0px);  letter-spacing: 0.04em; }
+  42%  { transform: scale(5.5); opacity: 0; filter: blur(12px); letter-spacing: 0.2em; }
+  43%  { transform: scale(0.8); opacity: 0; filter: blur(0px);  letter-spacing: 0; }
+  72%  { transform: scale(1.04);opacity: 1; filter: blur(0px); }
+  100% { transform: scale(1);   opacity: 1; filter: blur(0px); }
+}
+.blew-up-word.fire {
+  animation: blew-up-anim 1.1s cubic-bezier(.16,1,.3,1) forwards;
+}
+
 /* ── STORY SECTION ── */
 .ab-story {
   background: var(--white);
@@ -537,10 +554,11 @@
   .ab-eyebrow { margin-bottom: 24px; }
 
   .ab-story { padding: 108px 20px 64px; }
+  .ab-story-inner { grid-template-columns: 1fr; gap: 0; }
   .ab-story-text { max-width: 100%; }
   .ab-story-headline { margin-bottom: 28px; }
-  .ab-sketch { float: none; width: 90%; margin: 28px auto; }
-  .ab-portrait-float { float: none; width: 60%; display: block; margin: 0 auto 28px; }
+  .ab-story-aside { order: -1; position: static; margin-bottom: 40px; }
+  .ab-pin-frame { max-width: 220px; margin: 0 auto; transform: rotate(1deg); }
   .ab-reader-paths { gap: 24px; flex-direction: column; }
   .ab-lede { font-size: 17px; }
 
@@ -576,8 +594,7 @@
   .ab-certs-edu { padding: 40px 16px; }
   .ab-beyond { padding: 40px 16px; }
   .ab-lede { font-size: 16px; }
-  .ab-portrait-float { width: 75%; }
-  .ab-sketch { width: 100%; }
+  .ab-pin-frame { max-width: 180px; }
 }
 </style>
 </head>
@@ -615,7 +632,7 @@
         It all began<br>
         when my<br>
         neighbor&rsquo;s<br>
-        house <span class="accent">blew up.</span>
+        house <span class="accent"><span class="blew-up-word">blew up.</span></span>
       </h2>
       <div class="ab-story-divider"></div>
 
@@ -651,14 +668,6 @@
           I gathered the wood, claimed a corner of the yard, and began assembling what I considered, at the time, a highly ambitious residential project. I leaned boards where they seemed to belong, moved pieces around with great authority, threw a sheet over the top for a roof, and sketched the whole thing with the confidence of someone who had absolutely no idea what she was doing.
         </p>
 
-        <figure class="ab-sketch">
-          <img src="assets/images/kid-sketch.png" alt="Childhood architectural sketch" loading="lazy">
-          <figcaption>
-            <span class="ab-sketch-rule"></span>
-            <span>My first set of plans. Eight years old, no permit.</span>
-          </figcaption>
-        </figure>
-
         <p class="ab-lede">
           My neighbor survived, thankfully. His house did not.
         </p>
@@ -690,8 +699,20 @@
         </div>
       </div><!-- /expandable -->
 
-    </div>
-  </div>
+    </div><!-- /ab-story-text -->
+
+    <!-- Right column: pinned sketch -->
+    <aside class="ab-story-aside">
+      <div class="ab-pin-frame">
+        <img src="assets/images/kid-sketch.png" alt="Childhood architectural sketch">
+        <div class="ab-pin-caption">
+          <span class="ab-pin-caption-rule"></span>
+          <span>My first set of plans. Eight years old, no permit.</span>
+        </div>
+      </div>
+    </aside>
+
+  </div><!-- /ab-story-inner -->
 </section>
 
 <!-- ══ SECTION 2 — QUOTE BAND ════════════════════════ -->
@@ -836,6 +857,23 @@
   <p>© 2026 Marberd Bernard · New York, NY</p>
 </footer>
 <script src="assets/js/main.js"></script>
+<script>
+(function () {
+  var word = document.querySelector('.blew-up-word');
+  if (!word) return;
+  var fired = false;
+  var obs = new IntersectionObserver(function (entries) {
+    if (!fired && entries[0].isIntersecting) {
+      fired = true;
+      obs.disconnect();
+      setTimeout(function () {
+        word.classList.add('fire');
+      }, 600); // slight delay after headline enters view
+    }
+  }, { threshold: 0.7 });
+  obs.observe(word.closest('h2') || word);
+})();
+</script>
 <noscript><style>
   .ab-story-expandable { max-height: none !important; opacity: 1 !important; overflow: visible !important; }
   .ab-story-toggle { display: none; }
