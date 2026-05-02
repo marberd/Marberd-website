@@ -26,6 +26,47 @@
 .ai-name { font-size:13px; font-weight:500; color:var(--black); margin-bottom:3px; }
 .ai-maker { font-family:var(--mono); font-size:8px; letter-spacing:1px; color:var(--gold-dk); }
 .ai-use { font-size:11px; color:var(--muted); margin-top:8px; line-height:1.5; }
+.bim-video-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  margin-top: 40px;
+}
+.bim-video-tag {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bim-video-tag::before {
+  content: '';
+  width: 20px; height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.bim-video {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--border);
+  background: var(--black);
+}
+.bim-video-cap {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 10px;
+}
+@media (max-width: 768px) {
+  .bim-video-wrap { grid-template-columns: 1fr; gap: 32px; }
+}
 </style>
 </head>
 <body><svg id="cur" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="cur-ring" cx="22" cy="22" r="16" stroke="#111118" stroke-width="1"/><line x1="22" y1="3" x2="22" y2="9" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="35" x2="22" y2="41" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="22" x2="9" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="22" x2="41" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/></svg><div id="cur-dot"></div>
@@ -60,6 +101,22 @@
     <div class="bim-stat reveal"><div class="bim-stat-n">25+</div><div class="bim-stat-l">JPMorgan Locations Led</div></div>
     <div class="bim-stat reveal"><div class="bim-stat-n">119K</div><div class="bim-stat-l">SF — CLEAR HQ at 4 WTC</div></div>
     <div class="bim-stat reveal"><div class="bim-stat-n">8+</div><div class="bim-stat-l">Years Active BIM Practice</div></div>
+  </div>
+
+  <hr class="rule">
+  <div class="sec-label reveal">Training &amp; Leadership</div>
+  <div class="bim-video-wrap reveal">
+    <div class="bim-video-copy">
+      <h2 class="sec-h2" style="margin-bottom:16px;">Annual Revit<br><em>essentials training.</em></h2>
+      <p style="font-size:14px;color:var(--mid);line-height:1.8;font-weight:300;max-width:480px;">Office-wide training session led annually for all studio teams at TPG Architecture. From model setup and BIM standards to advanced coordination workflows — building shared precision across every project.</p>
+    </div>
+    <div class="bim-video-frame">
+      <div class="bim-video-tag">Revit Training · Annual</div>
+      <video class="bim-video" controls preload="metadata">
+        <source src="assets/videos/revit-training.mp4" type="video/mp4">
+      </video>
+      <p class="bim-video-cap">Office-wide Revit Essentials training session</p>
+    </div>
   </div>
 
   <hr class="rule">
