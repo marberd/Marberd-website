@@ -323,18 +323,50 @@
 /* ── BLEW UP ANIMATION ── */
 .blew-up-word {
   display: inline-block;
-  transform-origin: center center;
+  position: relative;
 }
-@keyframes blew-up-anim {
-  0%   { transform: scale(1);   opacity: 1; filter: blur(0px);  letter-spacing: 0; }
-  18%  { transform: scale(1.6); opacity: 1; filter: blur(0px);  letter-spacing: 0.04em; }
-  42%  { transform: scale(5.5); opacity: 0; filter: blur(12px); letter-spacing: 0.2em; }
-  43%  { transform: scale(0.8); opacity: 0; filter: blur(0px);  letter-spacing: 0; }
-  72%  { transform: scale(1.04);opacity: 1; filter: blur(0px); }
-  100% { transform: scale(1);   opacity: 1; filter: blur(0px); }
+/* Invisible spacer holds the layout width/height during animation */
+.bu-spacer { visibility: hidden; }
+/* Both halves sit on top of the spacer */
+.bu-top,
+.bu-bot {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  color: inherit;
 }
-.blew-up-word.fire {
-  animation: blew-up-anim 1.7s cubic-bezier(.16,1,.3,1) forwards;
+.bu-top { clip-path: inset(0 0 52% 0); }
+.bu-bot { clip-path: inset(48% 0 0 0); }
+
+/* Slash line sweeps in then fades */
+.blew-up-word.fire::before {
+  content: '';
+  position: absolute;
+  left: -6px; right: -6px;
+  top: 46%;
+  height: 2px;
+  background: var(--gold-dk);
+  transform-origin: left center;
+  transform: rotate(-6deg) scaleX(0);
+  animation:
+    bu-slash-in  0.16s 0.15s ease-out forwards,
+    bu-slash-out 0.22s 0.60s ease-in  forwards;
+  z-index: 2;
+}
+@keyframes bu-slash-in  { to { transform: rotate(-6deg) scaleX(1); } }
+@keyframes bu-slash-out { to { opacity: 0; } }
+
+/* Top half: cut loose, flies up, holds, drops back */
+.bu-top.animate {
+  animation: bu-top-fly 1.8s 0.32s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes bu-top-fly {
+  0%   { transform: translateY(0)     rotate(0deg);   opacity: 1; }
+  28%  { transform: translateY(-240%) rotate(-9deg);  opacity: 0; }
+  57%  { transform: translateY(-240%) rotate(-9deg);  opacity: 0; }
+  88%  { transform: translateY(6%)    rotate(1.5deg); opacity: 1; }
+  100% { transform: translateY(0)     rotate(0deg);   opacity: 1; }
 }
 
 /* ── STORY SECTION ── */
@@ -862,13 +894,36 @@
   var word = document.querySelector('.blew-up-word');
   if (!word) return;
   var fired = false;
+
+  function fire() {
+    if (fired) return;
+    fired = true;
+    var txt = word.textContent;
+    word.setAttribute('aria-label', txt);
+    word.innerHTML =
+      '<span class="bu-spacer" aria-hidden="true">' + txt + '</span>' +
+      '<span class="bu-top"    aria-hidden="true">' + txt + '</span>' +
+      '<span class="bu-bot"    aria-hidden="true">' + txt + '</span>';
+    word.classList.add('fire');
+    // Double rAF ensures the browser has painted before we add .animate
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        var top = word.querySelector('.bu-top');
+        if (top) top.classList.add('animate');
+      });
+    });
+    // Restore plain text after full animation completes
+    setTimeout(function () {
+      word.innerHTML = txt;
+      word.classList.remove('fire');
+      word.removeAttribute('aria-label');
+    }, 2800);
+  }
+
   var obs = new IntersectionObserver(function (entries) {
-    if (!fired && entries[0].isIntersecting) {
-      fired = true;
+    if (entries[0].isIntersecting) {
       obs.disconnect();
-      setTimeout(function () {
-        word.classList.add('fire');
-      }, 600); // slight delay after headline enters view
+      setTimeout(fire, 500);
     }
   }, { threshold: 0.7 });
   obs.observe(word.closest('h2') || word);
