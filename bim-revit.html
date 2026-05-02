@@ -7,105 +7,381 @@
 <title>BIM & Revit · MARBERD</title>
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-/* ── Page-level spacing overrides ── */
-.page-hero    { padding-top: 108px; padding-bottom: 40px; }
-.content-wrap { padding-top: 40px; padding-bottom: 52px; }
-.rule         { margin: 28px 0; }
-.sec-h2       { margin-bottom: 20px; }
 
-/* ── Stats ── */
-.bim-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:20px; }
-.bim-stat  { padding:22px 18px; border:1px solid var(--border); text-align:center; background:var(--white); }
-.bim-stat-n { font-family:var(--serif); font-size:42px; font-weight:700; color:var(--black); line-height:1; }
-.bim-stat-l { font-family:var(--mono); font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-top:6px; }
+/* ══ NAV: white base for dark hero, scrolled restores dark ══ */
+#main-nav .nav-links a { color: rgba(255,255,255,0.55); }
+#main-nav .nav-links a:hover { color: var(--white); }
+#main-nav .nav-links a.active { color: var(--gold-lt); }
+#main-nav .nav-links a.active::after { background: var(--gold-lt); }
+#main-nav .nav-icon { color: rgba(255,255,255,0.45); border-color: rgba(255,255,255,0.15); }
+#main-nav .nav-icon:hover { border-color: var(--gold); color: var(--gold-lt); }
+#main-nav.scrolled .nav-links a { color: var(--mid); }
+#main-nav.scrolled .nav-links a:hover { color: var(--black); }
+#main-nav.scrolled .nav-links a.active { color: var(--gold-dk); }
+#main-nav.scrolled .nav-links a.active::after { background: var(--gold-dk); }
+#main-nav.scrolled .nav-icon { color: var(--muted); border-color: var(--border); }
+#main-nav.scrolled .nav-icon:hover { border-color: var(--gold); color: var(--gold-dk); }
+#nav-burger span { background: rgba(255,255,255,0.7); }
+#main-nav.scrolled #nav-burger span { background: var(--black); }
 
-/* ── Software stack ── */
-.software-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:20px; }
-.sw-card  { padding:16px 18px; border:1px solid var(--border); background:var(--white); transition:all .2s; cursor:default; }
-.sw-card:hover { border-color:rgba(184,148,106,.4); background:var(--paper); }
-.sw-cat   { font-family:var(--mono); font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--gold-dk); margin-bottom:8px; }
-.sw-name  { font-size:13px; font-weight:500; color:var(--black); }
-.sw-detail{ font-size:11px; color:var(--muted); margin-top:3px; }
+/* ══ HERO ══ */
+.bim-hero {
+  position: relative;
+  background: var(--black);
+  min-height: 74vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 60px 76px;
+  overflow: hidden;
+}
+.bim-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(184,148,106,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184,148,106,0.055) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+.bim-hero-ghost {
+  position: absolute;
+  right: 40px; bottom: -32px;
+  font-family: var(--serif);
+  font-size: clamp(200px, 26vw, 380px);
+  font-weight: 700;
+  color: rgba(255,255,255,0.028);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -10px;
+}
+.bim-hero-content {
+  position: relative; z-index: 1;
+  max-width: 760px;
+}
+.bim-hero-eyebrow {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 28px; display: flex; align-items: center; gap: 12px;
+  opacity: 0; animation: bimRise .7s ease .08s forwards;
+}
+.bim-hero-eyebrow::before { content:''; width:24px; height:1px; background:var(--gold); }
+.bim-hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(52px, 7.5vw, 96px);
+  font-weight: 400; line-height: .96; color: var(--white);
+  letter-spacing: -2.5px; margin-bottom: 32px;
+  opacity: 0; animation: bimRise .85s ease .28s forwards;
+}
+.bim-hero-h1 em { font-style: italic; color: var(--gold-lt); }
+.bim-hero-sub {
+  font-size: 15px; font-weight: 300;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.85; max-width: 540px;
+  opacity: 0; animation: bimRise .85s ease .48s forwards;
+}
+@keyframes bimRise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-/* ── AI grid ── */
-.ai-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; margin-top:20px; }
-.ai-card { padding:14px 16px; border:1px solid var(--border); background:var(--white); }
-.ai-card:hover { border-color:rgba(184,148,106,.4); }
-.ai-name  { font-size:13px; font-weight:500; color:var(--black); margin-bottom:2px; }
-.ai-maker { font-family:var(--mono); font-size:8px; letter-spacing:1px; color:var(--gold-dk); }
-.ai-use   { font-size:11px; color:var(--muted); margin-top:6px; line-height:1.5; }
+/* ══ STATS BAND ══ */
+.bim-stats-band {
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+}
+.bim-stats-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 64px 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.bim-stat {
+  padding: 0 48px;
+  border-right: 1px solid var(--border);
+}
+.bim-stat:first-child { padding-left: 0; }
+.bim-stat:last-child  { border-right: none; }
+.bim-stat-n {
+  font-family: var(--serif);
+  font-size: clamp(56px, 6.5vw, 84px);
+  font-weight: 300; color: var(--black);
+  line-height: 1; margin-bottom: 12px;
+}
+.bim-stat-n em { font-style: italic; color: var(--gold-dk); }
+.bim-stat-l {
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); line-height: 1.7;
+}
 
-/* ── Training video ── */
-.bim-video-wrap {
+/* ══ MAIN CONTENT WRAPPER ══ */
+.bim-wrap {
+  max-width: 1200px; margin: 0 auto;
+  padding: 88px 60px 96px;
+}
+.bim-section {
+  padding: 80px 0;
+  border-top: 1px solid var(--border);
+}
+.bim-section:first-child { border-top: none; padding-top: 0; }
+.bim-sec-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold-dk);
+  margin-bottom: 52px; display: flex; align-items: center; gap: 12px;
+}
+.bim-sec-label::after {
+  content: ''; height: 1px;
+  background: rgba(184,148,106,0.25);
+  flex: 1; max-width: 64px;
+}
+
+/* ══ TRAINING SECTION ══ */
+.bim-training-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-  margin-top: 20px;
+  gap: 80px;
+  align-items: start;
 }
-.bim-video-tag {
-  font-family: var(--mono); font-size: 8px; letter-spacing: 2.5px;
-  text-transform: uppercase; color: var(--gold-dk);
-  margin-bottom: 8px; display: flex; align-items: center; gap: 10px;
+.bim-training-copy h2 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 400; line-height: 1.02;
+  color: var(--black); letter-spacing: -.5px;
+  margin-bottom: 28px;
 }
-.bim-video-tag::before { content:''; width:20px; height:1px; background:var(--gold); flex-shrink:0; }
-.bim-video { width:100%; display:block; border:1px solid var(--border); background:var(--black); }
-.bim-video-cap { font-family:var(--mono); font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-top:8px; }
+.bim-training-copy h2 em { font-style: italic; color: var(--gold-dk); }
+.bim-training-copy p {
+  font-size: 14px; color: var(--mid);
+  line-height: 1.88; font-weight: 300;
+  max-width: 460px;
+}
+.bim-video-frame {
+  background: var(--black);
+}
+.bim-video {
+  width: 100%; display: block;
+  aspect-ratio: 16/9; object-fit: cover;
+}
+.bim-video-cap {
+  padding: 14px 20px;
+  font-family: var(--mono); font-size: 7.5px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
 
-/* ── YouTube + sidebar layout ── */
-.bim-yt-layout { display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:20px; align-items:start; }
-.bim-yt-stack  { display:flex; flex-direction:column; gap:14px; }
-.bim-yt-sidebar { position:sticky; top:88px; }
-.bim-yt-embed  { position:relative; width:100%; aspect-ratio:16/9; background:var(--black); border:1px solid var(--border); overflow:hidden; }
-.bim-yt-embed iframe { position:absolute; inset:0; width:100%; height:100%; border:none; display:block; }
-.bim-yt-label  { font-family:var(--mono); font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dk); margin-top:8px; margin-bottom:2px; display:flex; align-items:center; gap:8px; }
+/* ══ PROBLEM SOLVING ══ */
+.bim-solve-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.bim-yt-stack { display: flex; flex-direction: column; gap: 48px; }
+.bim-yt-embed {
+  position: relative; width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--black);
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.bim-yt-embed iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: none; display: block;
+}
+.bim-yt-label {
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold-dk); margin-bottom: 7px;
+  display: flex; align-items: center; gap: 8px;
+}
 .bim-yt-label::before { content:''; width:14px; height:1px; background:var(--gold); flex-shrink:0; }
-.bim-yt-title  { font-family:var(--serif); font-size:14px; font-weight:400; color:var(--black); line-height:1.25; margin-bottom:3px; }
-.bim-yt-desc   { font-size:11.5px; color:var(--mid); line-height:1.55; }
-/* Expertise list in sidebar */
-.bim-exp-head  { font-family:var(--serif); font-size:clamp(22px,2.4vw,30px); font-weight:400; color:var(--black); line-height:1.1; margin-bottom:20px; }
-.bim-exp-head em { font-style:italic; color:var(--gold-dk); }
-.bim-exp-list  { display:flex; flex-direction:column; gap:0; }
-.bim-exp-item  { padding:13px 0; border-bottom:1px solid var(--border); }
-.bim-exp-item:first-child { border-top:1px solid var(--border); }
-.bim-exp-area  { font-size:13px; font-weight:500; color:var(--black); margin-bottom:3px; }
-.bim-exp-detail{ font-family:var(--mono); font-size:8.5px; letter-spacing:0.08em; color:var(--muted); line-height:1.5; }
+.bim-yt-title {
+  font-family: var(--serif); font-size: 20px;
+  font-weight: 400; color: var(--black); line-height: 1.2;
+  margin-bottom: 8px;
+}
+.bim-yt-desc { font-size: 12.5px; color: var(--mid); line-height: 1.7; }
 
-/* ── Section intro line (replaces bulky sec-h2) ── */
-.sec-intro { font-size:13px; color:var(--mid); line-height:1.65; max-width:560px; margin:4px 0 20px; }
+/* Expertise sidebar */
+.bim-exp-sticky { position: sticky; top: 88px; }
+.bim-exp-head {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.2vw, 42px);
+  font-weight: 400; line-height: 1.05;
+  color: var(--black); margin-bottom: 40px;
+}
+.bim-exp-head em { font-style: italic; color: var(--gold-dk); }
+.bim-exp-list { display: flex; flex-direction: column; }
+.bim-exp-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.bim-exp-item:first-child { border-top: 1px solid var(--border); }
+.bim-exp-num {
+  font-family: var(--mono); font-size: 8.5px;
+  letter-spacing: 1px; color: var(--gold);
+  padding-top: 3px;
+}
+.bim-exp-area {
+  font-size: 13px; font-weight: 500;
+  color: var(--black); margin-bottom: 5px;
+}
+.bim-exp-detail {
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: .06em; color: var(--muted); line-height: 1.6;
+}
 
-/* ── Mobile ── */
-@media (max-width: 800px) {
-  .bim-stats { grid-template-columns:1fr 1fr; }
+/* ══ SOFTWARE STACK — RULED TABLE ══ */
+.sw-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.sw-table thead tr {
+  border-bottom: 1px solid var(--border);
+}
+.sw-table thead th {
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); font-weight: 400;
+  padding: 0 0 16px; text-align: left;
+}
+.sw-table thead th + th { padding-left: 28px; }
+.sw-table tbody tr {
+  border-bottom: 1px solid rgba(226,222,214,0.55);
+  transition: background .18s;
+}
+.sw-table tbody tr:hover { background: var(--paper); }
+.sw-table tbody td {
+  padding: 20px 0;
+  vertical-align: top;
+}
+.sw-table tbody td + td { padding-left: 28px; }
+.sw-td-cat {
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold-dk); white-space: nowrap;
+  width: 170px;
+}
+.sw-td-name {
+  font-size: 14px; font-weight: 500; color: var(--black);
+  white-space: nowrap; width: 220px;
+}
+.sw-td-detail {
+  font-size: 12.5px; color: var(--mid); line-height: 1.65;
+}
+
+/* ══ AI BAND — DARK ══ */
+.bim-ai-band {
+  background: var(--black);
+}
+.bim-ai-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 88px 60px 96px;
+}
+.bim-ai-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 60px;
+  flex-wrap: wrap; gap: 28px;
+}
+.bim-ai-left {}
+.bim-ai-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 18px; display: flex; align-items: center; gap: 12px;
+}
+.bim-ai-label::after { content:''; width:32px; height:1px; background:rgba(184,148,106,0.35); }
+.bim-ai-h2 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4.5vw, 58px);
+  font-weight: 400; line-height: 1;
+  color: var(--white); letter-spacing: -.8px;
+}
+.bim-ai-h2 em { font-style: italic; color: var(--gold-lt); }
+.bim-ai-sub {
+  font-size: 13px; color: rgba(255,255,255,0.32);
+  max-width: 260px; line-height: 1.75; text-align: right;
+}
+.bim-ai-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.ai-card {
+  background: var(--black);
+  padding: 32px 26px;
+  transition: background .2s;
+}
+.ai-card:hover { background: rgba(184,148,106,0.07); }
+.ai-name {
+  font-size: 14px; font-weight: 500;
+  color: var(--white); margin-bottom: 7px;
+}
+.ai-maker {
+  font-family: var(--mono); font-size: 7.5px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px;
+}
+.ai-use {
+  font-size: 11.5px; color: rgba(255,255,255,0.32);
+  line-height: 1.7;
+}
+
+/* ══ MOBILE ══ */
+@media (max-width: 900px) {
+  .bim-training-grid,
+  .bim-solve-grid { grid-template-columns: 1fr; gap: 52px; }
+  .bim-stats-inner { grid-template-columns: 1fr 1fr; gap: 0; }
+  .bim-stat:nth-child(2) { border-right: none; }
+  .bim-stat:nth-child(3) { border-right: 1px solid var(--border); padding-left: 0; }
+  .bim-stat:nth-child(3),
+  .bim-stat:nth-child(4) { padding-top: 40px; }
+  .bim-ai-grid { grid-template-columns: repeat(2, 1fr); }
+  .bim-exp-sticky { position: static; }
 }
 @media (max-width: 768px) {
-  .page-hero    { padding: 88px 20px 32px; }
-  .content-wrap { padding: 28px 20px 40px; }
-  .rule         { margin: 24px 0; }
-  .bim-stat     { padding: 16px 12px; }
-  .bim-stat-n   { font-size: 32px; }
-  .bim-video-wrap { grid-template-columns:1fr; gap:24px; }
-  .bim-yt-layout  { grid-template-columns:1fr; }
-  .bim-yt-sidebar { position:static; }
-}
-@media (max-width: 700px) {
-  .software-grid { grid-template-columns:1fr 1fr; }
+  .bim-hero { padding: 0 20px 60px; min-height: 58vh; }
+  .bim-hero-ghost { display: none; }
+  .bim-stats-inner { padding: 48px 20px; }
+  .bim-stat { padding: 0 20px; }
+  .bim-stat:first-child { padding-left: 0; }
+  .bim-wrap { padding: 52px 20px 72px; }
+  .bim-section { padding: 60px 0; }
+  .bim-ai-inner { padding: 64px 20px 72px; }
+  .bim-ai-head-row { flex-direction: column; align-items: flex-start; }
+  .bim-ai-sub { text-align: left; max-width: 100%; }
+  .sw-td-cat,
+  .sw-td-name { white-space: normal; width: auto; }
+  .bim-sec-label { margin-bottom: 36px; }
 }
 @media (max-width: 600px) {
-  .ai-grid { grid-template-columns:1fr 1fr; }
-  .sw-card { padding:12px 14px; }
-  .ai-card { padding:12px 12px; }
+  .bim-stats-inner { grid-template-columns: 1fr 1fr; }
+  .bim-ai-grid { grid-template-columns: 1fr 1fr; }
+  .sw-table thead th:nth-child(3),
+  .sw-table tbody td:nth-child(3) { display: none; }
 }
 </style>
 </head>
 <body><svg id="cur" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="cur-ring" cx="22" cy="22" r="16" stroke="#111118" stroke-width="1"/><line x1="22" y1="3" x2="22" y2="9" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="35" x2="22" y2="41" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="22" x2="9" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="22" x2="41" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/></svg><div id="cur-dot"></div>
+
 <nav id="main-nav">
   <a id="nav-logo" href="index.html" title="MARBERD"><span class="logo-wrap"><img src="assets/images/logo-gold.png" class="site-logo site-logo--gold" alt="MARBERD"><img src="assets/images/logo.png" class="site-logo site-logo--color" aria-hidden="true"></span></a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
     <li><a href="academic.html">Academic</a></li>
     <li><a href="professional.html">Professional</a></li>
-    <li><a href="bim-revit.html">BIM / Revit</a></li>
+    <li><a href="bim-revit.html" class="active">BIM / Revit</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-right">
@@ -116,128 +392,257 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
     </a>
   </div>
+  <button id="nav-burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-<div class="page-hero reveal">
-  <div class="page-eyebrow">BIM / Revit</div>
-  <h1 class="page-title">Building information<br><em>at scale.</em></h1>
+<div id="nav-overlay">
+  <nav class="overlay-nav">
+    <a href="about.html">About</a>
+    <a href="academic.html">Academic</a>
+    <a href="professional.html">Professional</a>
+    <a href="bim-revit.html" class="active">BIM / Revit</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 </div>
-<div class="content-wrap">
-  <p class="reveal" style="font-size:15px;color:var(--mid);font-weight:300;max-width:620px;line-height:1.8;">
-    BIM strategy, VDC coordination, and digital delivery — managing the full lifecycle of complex projects from early coordination through construction documentation.
-  </p>
-  <div class="bim-stats">
-    <div class="bim-stat reveal"><div class="bim-stat-n">300+</div><div class="bim-stat-l">BIM 360 / ACC Projects</div></div>
-    <div class="bim-stat reveal"><div class="bim-stat-n">25+</div><div class="bim-stat-l">JPMorgan Locations Led</div></div>
-    <div class="bim-stat reveal"><div class="bim-stat-n">119K</div><div class="bim-stat-l">SF — CLEAR HQ at 4 WTC</div></div>
-    <div class="bim-stat reveal"><div class="bim-stat-n">8+</div><div class="bim-stat-l">Years Active BIM Practice</div></div>
+
+<!-- ── HERO ── -->
+<section class="bim-hero">
+  <div class="bim-hero-ghost">300</div>
+  <div class="bim-hero-content">
+    <div class="bim-hero-eyebrow">BIM / Revit</div>
+    <h1 class="bim-hero-h1">Building information<br><em>at scale.</em></h1>
+    <p class="bim-hero-sub">BIM strategy, VDC coordination, and digital delivery — managing the full lifecycle of complex projects from early coordination through construction documentation.</p>
   </div>
+</section>
 
-  <hr class="rule">
-  <div class="sec-label reveal">Training &amp; Leadership</div>
-  <div class="bim-video-wrap reveal">
-    <div class="bim-video-copy">
-      <h2 class="sec-h2" style="margin-bottom:16px;">Annual Revit<br><em>essentials training.</em></h2>
-      <p style="font-size:14px;color:var(--mid);line-height:1.8;font-weight:300;max-width:480px;">Office-wide training session led annually for all studio teams at TPG Architecture. From model setup and BIM standards to advanced coordination workflows — building shared precision across every project.</p>
+<!-- ── STATS BAND ── -->
+<div class="bim-stats-band">
+  <div class="bim-stats-inner">
+    <div class="bim-stat reveal">
+      <div class="bim-stat-n">300<em>+</em></div>
+      <div class="bim-stat-l">BIM 360 / ACC<br>Projects Administered</div>
     </div>
-    <div class="bim-video-frame">
-      <div class="bim-video-tag">Revit Training · Annual</div>
-      <video class="bim-video" controls preload="metadata">
-        <source src="assets/videos/revit-training.mp4" type="video/mp4">
-      </video>
-      <p class="bim-video-cap">Office-wide Revit Essentials training session</p>
+    <div class="bim-stat reveal">
+      <div class="bim-stat-n">25<em>+</em></div>
+      <div class="bim-stat-l">JPMorgan Chase<br>Locations Led</div>
     </div>
-  </div>
-
-  <hr class="rule">
-  <div class="sec-label reveal">Advanced Problem Solving</div>
-  <p class="sec-intro reveal">Undocumented fixes for complex Revit problems — the kind of troubleshooting that separates a BIM operator from a BIM strategist.</p>
-  <div class="bim-yt-layout">
-
-    <!-- Left: stacked videos -->
-    <div class="bim-yt-stack reveal">
-      <div>
-        <div class="bim-yt-embed">
-          <iframe src="https://www.youtube.com/embed/A4yAIlgU5RE?start=32" title="Revit Advanced Troubleshooting" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="bim-yt-label">Revit · Advanced Workflow</div>
-        <div class="bim-yt-title">Undocumented Revit Solution</div>
-        <p class="bim-yt-desc">A fix with no publicly available documentation — the kind of problem-solving that only comes from deep platform experience.</p>
-      </div>
-      <div>
-        <div class="bim-yt-embed">
-          <iframe src="https://www.youtube.com/embed/z1Y50ZdU_UA" title="Revit Advanced Troubleshooting" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="bim-yt-label">Revit · Problem Solving</div>
-        <div class="bim-yt-title">Undocumented Revit Solution</div>
-        <p class="bim-yt-desc">Another deep-dive into a non-trivial challenge — documented and shared to demonstrate what mastery of the tool actually looks like.</p>
-      </div>
+    <div class="bim-stat reveal">
+      <div class="bim-stat-n">119<em>K</em></div>
+      <div class="bim-stat-l">SF — CLEAR HQ<br>at 4 World Trade Center</div>
     </div>
-
-    <!-- Right: expertise breakdown -->
-    <div class="bim-yt-sidebar reveal">
-      <h3 class="bim-exp-head">Deep expertise.<br><em>Proven in practice.</em></h3>
-      <div class="bim-exp-list">
-        <div class="bim-exp-item">
-          <div class="bim-exp-area">Parametric Family Engineering</div>
-          <div class="bim-exp-detail">Complex nested families, formula-driven geometry, adaptive components</div>
-        </div>
-        <div class="bim-exp-item">
-          <div class="bim-exp-area">BIM 360 / ACC Administration</div>
-          <div class="bim-exp-detail">300+ projects — setup, permissions, model coordination, issue tracking</div>
-        </div>
-        <div class="bim-exp-item">
-          <div class="bim-exp-area">Multi-discipline Coordination</div>
-          <div class="bim-exp-detail">Architecture, structure, and MEP federated models across complex commercial projects</div>
-        </div>
-        <div class="bim-exp-item">
-          <div class="bim-exp-area">Construction Documentation</div>
-          <div class="bim-exp-detail">Full CD sets, phased drawings, millwork details, casework elevations</div>
-        </div>
-        <div class="bim-exp-item">
-          <div class="bim-exp-area">Dynamo Automation</div>
-          <div class="bim-exp-detail">Parametric workflows, data extraction, repetitive task scripting</div>
-        </div>
-        <div class="bim-exp-item">
-          <div class="bim-exp-area">Clash Detection</div>
-          <div class="bim-exp-detail">Navisworks-based MEP coordination across 100+ projects at AMA and TPG</div>
-        </div>
-        <div class="bim-exp-item">
-          <div class="bim-exp-area">Firmwide Training</div>
-          <div class="bim-exp-detail">Annual Revit Essentials program — raising proficiency across all studio groups</div>
-        </div>
-      </div>
+    <div class="bim-stat reveal">
+      <div class="bim-stat-n">8<em>+</em></div>
+      <div class="bim-stat-l">Years Active<br>BIM Practice</div>
     </div>
-
-  </div>
-
-  <hr class="rule">
-  <div class="sec-label">Software Stack</div>
-  <div class="software-grid">
-    <div class="sw-card reveal"><div class="sw-cat">BIM / Modeling</div><div class="sw-name">Autodesk Revit</div><div class="sw-detail">Primary BIM authoring tool · Advanced formulas, parametric families</div></div>
-    <div class="sw-card reveal"><div class="sw-cat">Cloud Coordination</div><div class="sw-name">BIM 360 / ACC</div><div class="sw-detail">300+ projects administered · User access &amp; model management</div></div>
-    <div class="sw-card reveal"><div class="sw-cat">Clash Detection</div><div class="sw-name">Navisworks</div><div class="sw-detail">Multi-discipline clash detection across MEP, structural, architectural</div></div>
-    <div class="sw-card reveal"><div class="sw-cat">Drafting</div><div class="sw-name">AutoCAD</div><div class="sw-detail">2D documentation, site plans, detail drawings</div></div>
-    <div class="sw-card reveal"><div class="sw-cat">Computational</div><div class="sw-name">Dynamo for Revit</div><div class="sw-detail">Parametric workflows, data extraction, automation scripts</div></div>
-    <div class="sw-card reveal"><div class="sw-cat">Parametric Design</div><div class="sw-name">Rhino + Grasshopper</div><div class="sw-detail">Complex geometry, generative form studies</div></div>
-    <div class="sw-card reveal"><div class="sw-cat">Visualization</div><div class="sw-name">Lumion</div><div class="sw-detail">Architectural rendering, client presentations, animations</div></div>
-    <div class="sw-card reveal"><div class="sw-cat">Visualization</div><div class="sw-name">Enscape</div><div class="sw-detail">Real-time rendering directly from Revit</div></div>
-    <div class="sw-card reveal"><div class="sw-cat">Documentation</div><div class="sw-name">Bluebeam Revu</div><div class="sw-detail">PDF markup, drawing review, field coordination</div></div>
-  </div>
-
-  <hr class="rule">
-  <div class="sec-label">AI & Emerging Technology</div>
-  <p class="sec-intro reveal">Active integration across research, visualization, design automation, and project delivery.</p>
-  <div class="ai-grid">
-    <div class="ai-card reveal"><div class="ai-name">Claude (Anthropic)</div><div class="ai-maker">DAILY USE</div><div class="ai-use">Research, documentation, CLI automation, project proposals</div></div>
-    <div class="ai-card reveal"><div class="ai-name">ChatGPT</div><div class="ai-maker">DAILY USE</div><div class="ai-use">Spec writing, code compliance, client communications</div></div>
-    <div class="ai-card reveal"><div class="ai-name">Autodesk Forma</div><div class="ai-maker">ACTIVE</div><div class="ai-use">AI massing studies, environmental simulation, BIM-integrated</div></div>
-    <div class="ai-card reveal"><div class="ai-name">Veras (EvolveLA)</div><div class="ai-maker">ACTIVE</div><div class="ai-use">AI rendering from Revit models for rapid client presentations</div></div>
-    <div class="ai-card reveal"><div class="ai-name">Midjourney</div><div class="ai-maker">PROFICIENT</div><div class="ai-use">Concept mood boards, material palette ideation</div></div>
-    <div class="ai-card reveal"><div class="ai-name">Hypar (Trimble)</div><div class="ai-maker">PROFICIENT</div><div class="ai-use">Parametric &amp; computational design, BIM-integrated systems</div></div>
-    <div class="ai-card reveal"><div class="ai-name">Arko.ai</div><div class="ai-maker">PROFICIENT</div><div class="ai-use">AI-assisted layout generation, space planning optimization</div></div>
-    <div class="ai-card reveal"><div class="ai-name">GitHub Copilot</div><div class="ai-maker">FAMILIAR</div><div class="ai-use">Dynamo scripting, Revit API automation</div></div>
   </div>
 </div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="bim-wrap">
+
+  <!-- Training & Leadership -->
+  <div class="bim-section">
+    <div class="bim-sec-label reveal">Training &amp; Leadership</div>
+    <div class="bim-training-grid">
+      <div class="bim-training-copy reveal">
+        <h2>Annual Revit<br><em>essentials training.</em></h2>
+        <p>Office-wide training session led annually for all studio teams at TPG Architecture. From model setup and BIM standards to advanced coordination workflows — building shared precision across every project.</p>
+      </div>
+      <div class="reveal">
+        <div class="bim-video-frame">
+          <video class="bim-video" controls preload="metadata">
+            <source src="assets/videos/revit-training.mp4" type="video/mp4">
+          </video>
+          <p class="bim-video-cap">Revit Essentials · Annual Office-Wide Training</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Advanced Problem Solving -->
+  <div class="bim-section">
+    <div class="bim-sec-label reveal">Advanced Problem Solving</div>
+    <div class="bim-solve-grid">
+
+      <!-- Videos -->
+      <div class="bim-yt-stack reveal">
+        <div class="bim-yt-item">
+          <div class="bim-yt-embed">
+            <iframe src="https://www.youtube.com/embed/A4yAIlgU5RE?start=32" title="Revit Advanced Workflow" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="bim-yt-label">Revit · Advanced Workflow</div>
+          <div class="bim-yt-title">Undocumented Revit Solution</div>
+          <p class="bim-yt-desc">A fix with no publicly available documentation — the kind of problem-solving that only comes from deep platform experience.</p>
+        </div>
+        <div class="bim-yt-item">
+          <div class="bim-yt-embed">
+            <iframe src="https://www.youtube.com/embed/z1Y50ZdU_UA" title="Revit Problem Solving" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="bim-yt-label">Revit · Problem Solving</div>
+          <div class="bim-yt-title">Undocumented Revit Solution</div>
+          <p class="bim-yt-desc">Another deep-dive into a non-trivial challenge — documented and shared to demonstrate what mastery of the tool actually looks like.</p>
+        </div>
+      </div>
+
+      <!-- Expertise -->
+      <div class="reveal">
+        <div class="bim-exp-sticky">
+          <h3 class="bim-exp-head">Deep expertise.<br><em>Proven in practice.</em></h3>
+          <div class="bim-exp-list">
+            <div class="bim-exp-item">
+              <span class="bim-exp-num">01</span>
+              <div><div class="bim-exp-area">Parametric Family Engineering</div><div class="bim-exp-detail">Complex nested families, formula-driven geometry, adaptive components</div></div>
+            </div>
+            <div class="bim-exp-item">
+              <span class="bim-exp-num">02</span>
+              <div><div class="bim-exp-area">BIM 360 / ACC Administration</div><div class="bim-exp-detail">300+ projects — setup, permissions, model coordination, issue tracking</div></div>
+            </div>
+            <div class="bim-exp-item">
+              <span class="bim-exp-num">03</span>
+              <div><div class="bim-exp-area">Multi-discipline Coordination</div><div class="bim-exp-detail">Architecture, structure, and MEP federated models across complex commercial projects</div></div>
+            </div>
+            <div class="bim-exp-item">
+              <span class="bim-exp-num">04</span>
+              <div><div class="bim-exp-area">Construction Documentation</div><div class="bim-exp-detail">Full CD sets, phased drawings, millwork details, casework elevations</div></div>
+            </div>
+            <div class="bim-exp-item">
+              <span class="bim-exp-num">05</span>
+              <div><div class="bim-exp-area">Dynamo Automation</div><div class="bim-exp-detail">Parametric workflows, data extraction, repetitive task scripting</div></div>
+            </div>
+            <div class="bim-exp-item">
+              <span class="bim-exp-num">06</span>
+              <div><div class="bim-exp-area">Clash Detection</div><div class="bim-exp-detail">Navisworks-based MEP coordination across 100+ projects at AMA and TPG</div></div>
+            </div>
+            <div class="bim-exp-item">
+              <span class="bim-exp-num">07</span>
+              <div><div class="bim-exp-area">Firmwide Training</div><div class="bim-exp-detail">Annual Revit Essentials program — raising proficiency across all studio groups</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Software Stack -->
+  <div class="bim-section">
+    <div class="bim-sec-label reveal">Software Stack</div>
+    <table class="sw-table reveal">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Tool</th>
+          <th>Application</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="sw-td-cat">BIM / Modeling</td>
+          <td class="sw-td-name">Autodesk Revit</td>
+          <td class="sw-td-detail">Primary BIM authoring — advanced formulas, parametric families, firmwide standards</td>
+        </tr>
+        <tr>
+          <td class="sw-td-cat">Cloud Coordination</td>
+          <td class="sw-td-name">BIM 360 / ACC</td>
+          <td class="sw-td-detail">300+ projects administered — user access, model management, issue tracking</td>
+        </tr>
+        <tr>
+          <td class="sw-td-cat">Clash Detection</td>
+          <td class="sw-td-name">Navisworks</td>
+          <td class="sw-td-detail">Multi-discipline coordination across MEP, structural, and architectural models</td>
+        </tr>
+        <tr>
+          <td class="sw-td-cat">Drafting</td>
+          <td class="sw-td-name">AutoCAD</td>
+          <td class="sw-td-detail">2D documentation, site plans, detail drawings</td>
+        </tr>
+        <tr>
+          <td class="sw-td-cat">Computational</td>
+          <td class="sw-td-name">Dynamo for Revit</td>
+          <td class="sw-td-detail">Parametric workflows, data extraction, automation scripts</td>
+        </tr>
+        <tr>
+          <td class="sw-td-cat">Parametric Design</td>
+          <td class="sw-td-name">Rhino + Grasshopper</td>
+          <td class="sw-td-detail">Complex geometry, generative form studies</td>
+        </tr>
+        <tr>
+          <td class="sw-td-cat">Visualization</td>
+          <td class="sw-td-name">Lumion</td>
+          <td class="sw-td-detail">Architectural rendering, client presentations, animations</td>
+        </tr>
+        <tr>
+          <td class="sw-td-cat">Visualization</td>
+          <td class="sw-td-name">Enscape</td>
+          <td class="sw-td-detail">Real-time rendering directly from Revit models</td>
+        </tr>
+        <tr>
+          <td class="sw-td-cat">Documentation</td>
+          <td class="sw-td-name">Bluebeam Revu</td>
+          <td class="sw-td-detail">PDF markup, drawing review, field coordination</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- /bim-wrap -->
+
+<!-- ── AI BAND — DARK ── -->
+<div class="bim-ai-band">
+  <div class="bim-ai-inner">
+    <div class="bim-ai-head-row reveal">
+      <div class="bim-ai-left">
+        <div class="bim-ai-label">AI &amp; Emerging Technology</div>
+        <h2 class="bim-ai-h2">Actively integrated<br><em>across every phase.</em></h2>
+      </div>
+      <p class="bim-ai-sub">Research, visualization, design automation, and project delivery — not experimental, operational.</p>
+    </div>
+    <div class="bim-ai-grid">
+      <div class="ai-card reveal">
+        <div class="ai-name">Claude (Anthropic)</div>
+        <div class="ai-maker">Daily Use</div>
+        <div class="ai-use">Research, documentation, CLI automation, project proposals</div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">ChatGPT</div>
+        <div class="ai-maker">Daily Use</div>
+        <div class="ai-use">Spec writing, code compliance, client communications</div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">Autodesk Forma</div>
+        <div class="ai-maker">Active</div>
+        <div class="ai-use">AI massing studies, environmental simulation, BIM-integrated</div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">Veras (EvolveLA)</div>
+        <div class="ai-maker">Active</div>
+        <div class="ai-use">AI rendering from Revit models for rapid client presentations</div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">Midjourney</div>
+        <div class="ai-maker">Proficient</div>
+        <div class="ai-use">Concept mood boards, material palette ideation</div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">Hypar (Trimble)</div>
+        <div class="ai-maker">Proficient</div>
+        <div class="ai-use">Parametric &amp; computational design, BIM-integrated systems</div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">Arko.ai</div>
+        <div class="ai-maker">Proficient</div>
+        <div class="ai-use">AI-assisted layout generation, space planning optimization</div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">GitHub Copilot</div>
+        <div class="ai-maker">Familiar</div>
+        <div class="ai-use">Dynamo scripting, Revit API automation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer class="footer-minimal">
   <div class="footer-rule"></div>
   <p>© 2026 Marberd Bernard · New York, NY</p>
