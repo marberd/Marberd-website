@@ -15,14 +15,23 @@
 /* ── HERO ─────────────────────────────── */
 .ac-hero {
   background: var(--black);
-  min-height: 100vh;
+  min-height: 72vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 60px 72px;
+  padding: 0 60px 64px;
   position: relative;
   overflow: hidden;
 }
+
+/* Nav links readable on dark hero */
+#main-nav:not(.scrolled) .nav-links a { color: rgba(255,255,255,0.48); }
+#main-nav:not(.scrolled) .nav-links a:hover { color: rgba(255,255,255,0.9); }
+#main-nav:not(.scrolled) .nav-links a.active { color: var(--gold); }
+#main-nav:not(.scrolled) .nav-links a::after { background: rgba(255,255,255,0.4); }
+#main-nav:not(.scrolled) .nav-links a.active::after { background: var(--gold); }
+#main-nav:not(.scrolled) .nav-icon { border-color: rgba(255,255,255,0.16); color: rgba(255,255,255,0.4); }
+#main-nav:not(.scrolled) .nav-icon:hover { border-color: var(--gold); color: var(--gold); }
 
 /* Blueprint grid overlay */
 .ac-hero::before {
@@ -362,7 +371,7 @@
 
 /* ── MOBILE ───────────────────────────── */
 @media (max-width: 900px) {
-  .ac-hero { padding: 0 24px 56px; min-height: 90vh; }
+  .ac-hero { padding: 0 24px 52px; min-height: 68vh; }
   .ac-scroll-cue { display: none; }
   .ac-meta { gap: 0; }
   .ac-meta-item { padding-right: 28px; margin-right: 28px; }
