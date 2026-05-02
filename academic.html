@@ -195,49 +195,6 @@
 @keyframes ac-rise    { to { opacity: 1; transform: translateY(0); } }
 @keyframes ac-fade    { to { opacity: 1; } }
 
-/* ── PROJECT INDEX STRIP ──────────────── */
-.ac-index {
-  background: var(--paper);
-  border-bottom: 1px solid var(--border);
-  overflow-x: auto;
-  scrollbar-width: none;
-  padding: 0 60px;
-}
-.ac-index::-webkit-scrollbar { display: none; }
-
-.ac-index-inner {
-  display: flex;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: max-content;
-  min-width: 100%;
-}
-.ac-index-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 18px 36px 18px 0;
-  margin-right: 36px;
-  border-right: 1px solid var(--border);
-  text-decoration: none;
-  flex-shrink: 0;
-  transition: opacity 0.2s;
-}
-.ac-index-link:last-child { border-right: none; margin-right: 0; }
-.ac-index-link:hover { opacity: 0.5; }
-.ac-index-n {
-  font-family: var(--mono);
-  font-size: 8.5px;
-  letter-spacing: 0.18em;
-  color: var(--gold-dk);
-}
-.ac-index-t {
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  color: var(--text);
-}
 
 /* ── PROJECT MOSAIC ───────────────────── */
 .ac-projects {
@@ -463,32 +420,6 @@
     <div class="ac-scroll-cue-line"></div>
   </div>
 </section>
-
-<!-- ══ PROJECT INDEX STRIP ═══════════════════════════ -->
-<nav class="ac-index" aria-label="Project index">
-  <div class="ac-index-inner">
-    <a href="#proj-01" class="ac-index-link">
-      <span class="ac-index-n">01</span>
-      <span class="ac-index-t">Pool House</span>
-    </a>
-    <a href="#proj-02" class="ac-index-link">
-      <span class="ac-index-n">02</span>
-      <span class="ac-index-t">Mangrove HWB</span>
-    </a>
-    <a href="#proj-03" class="ac-index-link">
-      <span class="ac-index-n">03</span>
-      <span class="ac-index-t">Water Museum</span>
-    </a>
-    <a href="#proj-04" class="ac-index-link">
-      <span class="ac-index-n">04</span>
-      <span class="ac-index-t">Studio</span>
-    </a>
-    <a href="#proj-05" class="ac-index-link">
-      <span class="ac-index-n">05</span>
-      <span class="ac-index-t">Lighting Design</span>
-    </a>
-  </div>
-</nav>
 
 <!-- ══ PROJECT MOSAIC ════════════════════════════════ -->
 <section class="ac-projects">
