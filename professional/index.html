@@ -135,63 +135,6 @@
 #main-nav.scrolled .nav-icon            { border-color: var(--border); color: var(--muted); }
 #main-nav.scrolled .nav-icon:hover      { border-color: var(--gold); color: var(--gold-dk); }
 
-/* ── SECTION LABEL ───────────────────── */
-.pr-sec {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 60px;
-}
-.pr-sec-label {
-  font-family: var(--mono);
-  font-size: 8.5px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--gold-dk);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 56px 0 36px;
-  border-top: 1px solid var(--border);
-}
-.pr-sec-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-/* ── CLIENTS ─────────────────────────── */
-.pr-clients {
-  background: var(--white);
-  padding-bottom: 72px;
-}
-.pr-clients-wall {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 60px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 28px 0;
-}
-.pr-client-name {
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(26,26,26,0.35);
-  white-space: nowrap;
-}
-.pr-client-sep {
-  font-family: var(--serif);
-  font-size: 20px;
-  color: var(--gold);
-  padding: 0 6px;
-  flex-shrink: 0;
-  user-select: none;
-}
-
 /* ── HERO COLUMNS ─────────────────────── */
 .pr-hero-left {
   flex: 0 0 62%;
@@ -616,8 +559,6 @@
                   display: flex; flex-direction: column; justify-content: flex-end; }
   .pr-hero-reel { display: none; }
   .pr-meta-item { padding-right: 28px; margin-right: 28px; }
-  .pr-sec { padding: 0 24px; }
-  .pr-clients-wall { padding: 0 24px; }
   .pr-wexp-inner { padding: 48px 24px 64px; }
   .pr-wexp-role  { grid-template-columns: 1fr; gap: 24px; }
   .pr-wexp-vd    { display: none; }
@@ -760,6 +701,57 @@
 
     <div class="pr-wexp-group" style="margin-top:48px;">Previous</div>
 
+    <div class="pr-wexp-role" id="wexp-archnim">
+      <div class="pr-wexp-l">
+        <div class="pr-wexp-co">Archnimations</div>
+        <div class="pr-wexp-rt">Independent Architectural Designer</div>
+        <div class="pr-wexp-pd">2018 – 2024 · New York, NY</div>
+        <div class="pr-wexp-tags">
+          <span class="pr-wtag">Revit</span>
+          <span class="pr-wtag">Rhino</span>
+          <span class="pr-wtag">Lumion</span>
+          <span class="pr-wtag">AutoCAD</span>
+          <span class="pr-wtag">Enscape</span>
+          <span class="pr-wtag">Visualization</span>
+        </div>
+      </div>
+      <div class="pr-wexp-vd"><span class="pr-wexp-dot"></span></div>
+      <div class="pr-wexp-r">
+        <div class="pr-wexp-imgrow">
+          <div class="pr-wexp-imgs">
+            <div class="pr-wexp-imgcard" data-modal="archnim-alpena">
+              <img src="../assets/images/projects/alpena-prof.jpg" alt="Alpena Mixed-Use" loading="lazy">
+            </div>
+            <div class="pr-wexp-imgcard" data-modal="archnim-burton">
+              <img src="../assets/images/projects/burton-china.jpg" alt="BURTON IN99 Flagship" loading="lazy">
+            </div>
+            <div class="pr-wexp-imgcard" data-modal="archnim-residences">
+              <img src="../assets/images/projects/dominican-residences.jpg" alt="Dominican Residences" loading="lazy">
+            </div>
+            <div class="pr-wexp-imgcard" data-modal="archnim-netzero">
+              <img src="../assets/images/projects/utah-netzero.jpg" alt="Utah Net Zero" loading="lazy">
+            </div>
+          </div>
+          <button class="pr-wexp-cta" data-modal="archnim-alpena" aria-label="Expand project details">
+            <span class="pr-wexp-cta-vr"></span>
+            <span class="pr-wexp-cta-body">
+              <span class="pr-wexp-cta-arrow">↑</span>
+              <span class="pr-wexp-cta-text">expand project</span>
+            </span>
+          </button>
+        </div>
+        <div class="pr-wexp-brule"></div>
+        <ul class="pr-wexp-bul">
+          <li>Ran an independent design and visualization practice over six years, delivering architectural services across residential, commercial, and mixed-use typologies in the US, China, and the Dominican Republic.</li>
+          <li>Designed and produced full visualization package for a 130,000 SF mixed-use development in Alpena, MI — Revit documentation, Lumion renders, and site coordination drawings.</li>
+          <li>Developed concept and design development drawings for the BURTON IN99 flagship retail store in China, incorporating brand standards into a high-finish interior environment.</li>
+          <li>Designed five ground-up single-family residences in the Dominican Republic — from schematic design through construction documentation, coordinating with local builders on materials and site constraints.</li>
+          <li>Produced net-zero residential master plan for a Utah development — passive solar orientation, high-performance envelope detailing, and energy modeling integrated into the design workflow.</li>
+          <li>Managed all client relationships, project scoping, scheduling, and deliverables independently across concurrent engagements.</li>
+        </ul>
+      </div>
+    </div>
+
     <div class="pr-wexp-role" id="wexp-ama">
       <div class="pr-wexp-l">
         <div class="pr-wexp-co">AMA Consulting Engineers</div>
@@ -821,24 +813,6 @@
   </div>
 </section>
 
-<!-- ══ CLIENTS ══════════════════════════════════════════ -->
-<div class="pr-clients">
-  <div class="pr-sec">
-    <div class="pr-sec-label reveal">Select Clients</div>
-  </div>
-  <div class="pr-clients-wall reveal" role="list" aria-label="Select clients">
-    <span class="pr-client-name" role="listitem">JPMorgan Chase</span>
-    <span class="pr-client-sep" aria-hidden="true">·</span>
-    <span class="pr-client-name" role="listitem">BMW</span>
-    <span class="pr-client-sep" aria-hidden="true">·</span>
-    <span class="pr-client-name" role="listitem">CLEAR</span>
-    <span class="pr-client-sep" aria-hidden="true">·</span>
-    <span class="pr-client-name" role="listitem">Capital One</span>
-    <span class="pr-client-sep" aria-hidden="true">·</span>
-    <span class="pr-client-name" role="listitem">MLS</span>
-  </div>
-</div>
-
 <!-- ══ FOOTER ═══════════════════════════════════════════ -->
 <footer class="footer-minimal">
   <div class="footer-rule"></div>
@@ -892,6 +866,42 @@
       ],
       desc: 'Three-level terraced boutique hotel on the Maoya Grasslands, Sichuan, China. Road-facing side integrated into the hillside; guest areas open to the grasslands through full-height curtain wall glazing. Design collaboration with D-YO Studio.',
       tags: ['Boutique Hotel', 'Design Collaboration', 'Rhino', 'Visualization', 'Sichuan, China']
+    },
+    'archnim-alpena': {
+      company: 'Archnimations',
+      title:   'Alpena Mixed-Use Development',
+      images:  [
+        '../assets/images/projects/alpena-prof.jpg'
+      ],
+      desc: '130,000 SF mixed-use development in Alpena, MI. Full visualization package including Revit documentation, Lumion renders, and site coordination drawings delivered as independent practice engagement.',
+      tags: ['Mixed-Use', 'Independent Practice', 'Revit', 'Lumion', '130,000 SF', 'Alpena, MI']
+    },
+    'archnim-burton': {
+      company: 'Archnimations',
+      title:   'BURTON IN99 Flagship',
+      images:  [
+        '../assets/images/projects/burton-china.jpg'
+      ],
+      desc: 'Concept and design development for the BURTON IN99 flagship retail store in China. Brand standards integrated into a high-finish interior environment through schematic drawings and visualization.',
+      tags: ['Retail', 'Independent Practice', 'Rhino', 'Visualization', 'China']
+    },
+    'archnim-residences': {
+      company: 'Archnimations',
+      title:   'Five Ground-Up Residences',
+      images:  [
+        '../assets/images/projects/dominican-residences.jpg'
+      ],
+      desc: 'Five single-family ground-up residences in the Dominican Republic — schematic design through construction documentation, coordinating with local builders on materials, site constraints, and regional code requirements.',
+      tags: ['Residential', 'Ground-Up', 'Independent Practice', 'AutoCAD', 'Revit', 'Dominican Republic']
+    },
+    'archnim-netzero': {
+      company: 'Archnimations',
+      title:   'Utah Net-Zero Development',
+      images:  [
+        '../assets/images/projects/utah-netzero.jpg'
+      ],
+      desc: 'Net-zero residential master plan for a Utah development. Passive solar orientation, high-performance envelope detailing, and energy modeling integrated into the design workflow from early schematic phase.',
+      tags: ['Residential', 'Net Zero', 'Sustainability', 'Independent Practice', 'Enscape', 'Utah']
     }
   };
 
@@ -900,10 +910,10 @@
     { name: '1290 Avenue of the Americas', year: '2023', img: '../assets/images/projects/tpg-interior.jpg',         modal: 'tpg-1290'  },
     { name: '1290 Avenue — Terrace',       year: '2023', img: '../assets/images/projects/tpg-terrace.jpg',          modal: 'tpg-1290'  },
     { name: 'Maoya Hotel',                 year: '2022', img: '../assets/images/projects/maoya-hotel.jpg',          modal: 'dyo-maoya' },
-    { name: '130K SF Mixed-Use',           year: '2021', img: '../assets/images/projects/alpena-prof.jpg',          modal: null },
-    { name: 'BURTON IN99 Flagship',        year: '2020', img: '../assets/images/projects/burton-china.jpg',         modal: null },
-    { name: 'Five Ground-Up Residences',   year: '2019', img: '../assets/images/projects/dominican-residences.jpg', modal: null },
-    { name: 'Net Zero Development',        year: '2018', img: '../assets/images/projects/utah-netzero.jpg',         modal: null }
+    { name: '130K SF Mixed-Use',           year: '2021', img: '../assets/images/projects/alpena-prof.jpg',          modal: 'archnim-alpena'     },
+    { name: 'BURTON IN99 Flagship',        year: '2020', img: '../assets/images/projects/burton-china.jpg',         modal: 'archnim-burton'     },
+    { name: 'Five Ground-Up Residences',   year: '2019', img: '../assets/images/projects/dominican-residences.jpg', modal: 'archnim-residences' },
+    { name: 'Net Zero Development',        year: '2018', img: '../assets/images/projects/utah-netzero.jpg',         modal: 'archnim-netzero'    }
   ];
 
   /* ── MODAL ─────────────────────────────────────────────── */
