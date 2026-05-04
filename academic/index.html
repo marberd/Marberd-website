@@ -70,7 +70,7 @@
   position: relative; z-index: 5;
   display: flex; flex-direction: column;
   justify-content: flex-end;
-  padding-bottom: 88px;
+  padding-bottom: 180px;
 }
 .ac-h1 {
   font-family: var(--serif);
@@ -404,6 +404,17 @@
   cursor: none; transition: background 0.2s;
 }
 .ac-gallery-dot.active { background: var(--gold); }
+.ac-gallery-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 3; background: rgba(0,0,0,0.48); border: 0.5px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.7); font-size: 18px; line-height: 1;
+  width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+  cursor: none; transition: background 0.2s, color 0.2s; border-radius: 2px;
+}
+.ac-gallery-nav:hover { background: rgba(0,0,0,0.72); color: var(--white); }
+.ac-gallery-nav.hidden { display: none; }
+.ac-gallery-prev { left: 14px; }
+.ac-gallery-next { right: 14px; }
 .ac-modal-body { padding: 36px 40px 44px; }
 .ac-modal-num {
   font-family: var(--mono); font-size: 9px; letter-spacing: 0.28em;
@@ -461,6 +472,64 @@
 }
 .ac-modal-source-link:hover { color: var(--gold-lt); }
 .ac-modal-source-link::after { content: '↗'; font-size: 10px; }
+
+/* ── INSTAGRAM ────────────────────────── */
+.ac-ig-section {
+  background: var(--black);
+  padding: 100px 60px 80px;
+  border-top: 0.5px solid #1e1e1e;
+}
+.ac-ig-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 40px;
+  max-width: 1200px; margin-left: auto; margin-right: auto;
+}
+.ac-ig-title {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(28px, 3.5vw, 46px);
+  color: var(--white); line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.ac-ig-title em { font-style: italic; color: var(--gold); }
+.ac-ig-handle {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); text-decoration: none;
+  transition: color 0.2s; margin-bottom: 4px;
+}
+.ac-ig-handle:hover { color: var(--gold); }
+.ac-ig-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+  max-width: 1200px; margin: 0 auto 40px;
+}
+.ac-ig-cell {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #181818;
+}
+.ac-ig-cell img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.5s cubic-bezier(0.2,0.8,0.2,1), opacity 0.3s;
+  opacity: 0.75;
+}
+.ac-ig-cell:hover img { transform: scale(1.06); opacity: 1; }
+.ac-ig-footer {
+  text-align: center; max-width: 1200px; margin: 0 auto;
+}
+.ac-ig-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--gold); text-decoration: none;
+  border: 0.5px solid var(--gold); padding: 14px 32px;
+  transition: background 0.25s, color 0.25s;
+  border-radius: 1px;
+}
+.ac-ig-cta:hover { background: var(--gold); color: var(--black); }
+.ac-ig-cta::after { content: '↗'; font-size: 12px; }
 
 /* ── KEYFRAMES ────────────────────────── */
 @keyframes ac-rise { to { opacity: 1; transform: translateY(0); } }
@@ -858,6 +927,25 @@
   </div>
 </section>
 
+<!-- ══ INSTAGRAM ══════════════════════════════════════════ -->
+<section class="ac-ig-section reveal">
+  <div class="ac-ig-header">
+    <h2 class="ac-ig-title">Follow the <em>process.</em></h2>
+    <a class="ac-ig-handle" href="https://www.instagram.com/marberd/" target="_blank" rel="noopener noreferrer">@marberd</a>
+  </div>
+  <div class="ac-ig-grid">
+    <div class="ac-ig-cell"><img src="../assets/images/academic/mangrove/mangrove-hero.jpg" alt="" loading="lazy"></div>
+    <div class="ac-ig-cell"><img src="../assets/images/projects/pool-house.jpg" alt="" loading="lazy"></div>
+    <div class="ac-ig-cell"><img src="../assets/images/academic/mangrove/mangrove-aerial.jpg" alt="" loading="lazy"></div>
+    <div class="ac-ig-cell"><img src="../assets/images/projects/water-museum.jpg" alt="" loading="lazy"></div>
+    <div class="ac-ig-cell"><img src="../assets/images/academic/mangrove/mangrove-section.jpg" alt="" loading="lazy"></div>
+    <div class="ac-ig-cell"><img src="../assets/images/projects/lighting.jpg" alt="" loading="lazy"></div>
+  </div>
+  <div class="ac-ig-footer">
+    <a class="ac-ig-cta" href="https://www.instagram.com/marberd/" target="_blank" rel="noopener noreferrer">Follow on Instagram</a>
+  </div>
+</section>
+
 <!-- ══ FOOTER ═══════════════════════════════════════════ -->
 <footer class="footer-minimal">
   <div class="footer-rule"></div>
@@ -869,6 +957,8 @@
   <div class="ac-modal-panel">
     <button class="ac-modal-close" id="ac-modal-close" aria-label="Close">✕</button>
     <div class="ac-modal-gallery" id="ac-modal-gallery">
+      <button class="ac-gallery-nav ac-gallery-prev hidden" id="ac-gallery-prev" aria-label="Previous image">&#8249;</button>
+      <button class="ac-gallery-nav ac-gallery-next hidden" id="ac-gallery-next" aria-label="Next image">&#8250;</button>
       <div class="ac-gallery-dots" id="ac-gallery-dots"></div>
     </div>
     <div class="ac-modal-body">
@@ -1007,16 +1097,23 @@
   var closeBtn  = document.getElementById('ac-modal-close');
   var gallery   = document.getElementById('ac-modal-gallery');
   var dotsEl    = document.getElementById('ac-gallery-dots');
+  var prevBtn   = document.getElementById('ac-gallery-prev');
+  var nextBtn   = document.getElementById('ac-gallery-next');
   var activeGalleryIdx = 0;
   var currentImgs = [];
 
   function setGallerySlide(idx) {
     var imgs = gallery.querySelectorAll('.ac-gallery-img');
     var dots = dotsEl.querySelectorAll('.ac-gallery-dot');
+    var total = imgs.length;
+    idx = (idx + total) % total;
     imgs.forEach(function (img, i) { img.classList.toggle('active', i === idx); });
     dots.forEach(function (dot, i) { dot.classList.toggle('active', i === idx); });
     activeGalleryIdx = idx;
   }
+
+  prevBtn.addEventListener('click', function () { setGallerySlide(activeGalleryIdx - 1); });
+  nextBtn.addEventListener('click', function () { setGallerySlide(activeGalleryIdx + 1); });
 
   function openModal(projectIdx) {
     var p = PROJECTS[projectIdx];
@@ -1042,15 +1139,19 @@
     /* gallery */
     gallery.querySelectorAll('.ac-gallery-img, .ac-gallery-ph').forEach(function (el) { el.remove(); });
     dotsEl.innerHTML = '';
+    activeGalleryIdx = 0;
 
     if (p.imgs && p.imgs.length > 0) {
       p.imgs.forEach(function (src, i) {
         var img = document.createElement('img');
         img.className = 'ac-gallery-img' + (i === 0 ? ' active' : '');
         img.src = src; img.alt = p.n;
-        gallery.insertBefore(img, dotsEl);
+        gallery.insertBefore(img, prevBtn);
       });
-      if (p.imgs.length > 1) {
+      var multi = p.imgs.length > 1;
+      prevBtn.classList.toggle('hidden', !multi);
+      nextBtn.classList.toggle('hidden', !multi);
+      if (multi) {
         p.imgs.forEach(function (_, i) {
           var dot = document.createElement('div');
           dot.className = 'ac-gallery-dot' + (i === 0 ? ' active' : '');
@@ -1062,7 +1163,9 @@
       var ph = document.createElement('div');
       ph.className = 'ac-gallery-ph';
       ph.innerHTML = '<span class="ac-gallery-ph-text">' + p.n + '</span>';
-      gallery.insertBefore(ph, dotsEl);
+      gallery.insertBefore(ph, prevBtn);
+      prevBtn.classList.add('hidden');
+      nextBtn.classList.add('hidden');
     }
 
     /* source link */
