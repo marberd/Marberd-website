@@ -12,7 +12,7 @@
 <style>
 
 /* ══════════════════════════════════════════
-   ACADEMIC PAGE
+   ACADEMIC PAGE — CASCADE
 ══════════════════════════════════════════ */
 
 /* ── NAV on dark hero ─────────────────── */
@@ -34,18 +34,17 @@
 /* ── HERO ─────────────────────────────── */
 .ac-hero {
   background: var(--black);
-  min-height: 72vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 60px 88px;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 60px;
+  padding: 140px 60px 60px;
   position: relative;
   overflow: hidden;
 }
 .ac-hero::before {
   content: '';
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background-image:
     linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
@@ -55,368 +54,423 @@
 }
 .ac-ghost {
   position: absolute;
-  right: -0.04em;
-  bottom: -0.18em;
+  right: -0.04em; bottom: -0.18em;
   font-family: var(--serif);
   font-size: clamp(180px, 26vw, 360px);
   font-weight: 700;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.04);
+  -webkit-text-stroke: 1px rgba(255,255,255,0.03);
   line-height: 1;
-  pointer-events: none;
-  user-select: none;
+  pointer-events: none; user-select: none;
   letter-spacing: -0.04em;
 }
-.ac-hero-content { position: relative; z-index: 1; max-width: 1080px; }
+
+/* ── HERO LEFT ────────────────────────── */
+.ac-hero-left {
+  position: relative; z-index: 5;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 40px;
+}
 .ac-h1 {
   font-family: var(--serif);
-  font-weight: 400;
-  line-height: 0.93;
-  letter-spacing: -0.025em;
+  font-weight: 300;
+  font-size: clamp(56px, 7.8vw, 120px);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
   color: var(--white);
-  margin: 0 0 56px;
+  opacity: 0;
+  animation: ac-rise 1s 0.28s cubic-bezier(.16,1,.3,1) forwards;
 }
-.ac-h1-line { display: block; overflow: hidden; }
-.ac-h1-inner { display: block; opacity: 0; transform: translateY(72px); }
-.ac-h1-line:nth-child(1) .ac-h1-inner {
-  font-size: clamp(60px, 7.5vw, 118px);
-  animation: ac-rise 1s 0.3s cubic-bezier(.16,1,.3,1) forwards;
-}
-.ac-h1-line:nth-child(2) .ac-h1-inner {
-  font-size: clamp(46px, 6vw, 94px);
+.ac-h1-line1 { display: block; }
+.ac-h1-line2 {
+  display: block;
   font-style: italic;
   color: var(--gold);
-  animation: ac-rise 1s 0.46s cubic-bezier(.16,1,.3,1) forwards;
+  margin-top: -4px;
 }
-.ac-meta {
-  display: flex;
-  gap: 0;
-  flex-wrap: wrap;
+.ac-hero-meta {
+  margin-top: 72px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px;
+  max-width: 580px;
   opacity: 0;
-  animation: ac-fade 0.7s 0.78s ease forwards;
+  animation: ac-fade 0.7s 0.6s ease forwards;
 }
-.ac-meta-item {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding-right: 48px;
-  margin-right: 48px;
-  border-right: 1px solid rgba(255,255,255,0.1);
-}
-.ac-meta-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
-.ac-meta-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
-.ac-meta-value { font-family: var(--sans); font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.65); }
-.ac-meta-sub { font-family: var(--sans); font-size: 10px; font-weight: 300; color: rgba(255,255,255,0.28); line-height: 1.5; margin-top: 3px; }
-.ac-scroll-cue {
-  position: absolute; right: 60px; bottom: 72px;
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
-  z-index: 1; opacity: 0;
-  animation: ac-fade 0.6s 1.1s ease forwards;
-}
-.ac-scroll-cue-label { font-family: var(--mono); font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.2); writing-mode: vertical-rl; }
-.ac-scroll-cue-line { width: 1px; height: 52px; background: linear-gradient(to bottom, rgba(184,148,106,0.5), transparent); animation: ac-pulse 2.2s 1.8s ease-in-out infinite; }
-@keyframes ac-pulse { 0%,100%{transform:scaleY(1);opacity:0.5} 50%{transform:scaleY(0.3);opacity:0.1} }
-@keyframes ac-rise    { to { opacity: 1; transform: translateY(0); } }
-@keyframes ac-fade    { to { opacity: 1; } }
-
-/* ── CREDENTIAL STRIP ────────────────── */
-.ac-credential {
-  background: var(--black);
-  padding: 18px 60px;
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  border-top: 0.5px solid rgba(255,255,255,0.06);
-}
-.ac-credential::before { content: ''; width: 32px; height: 1px; background: var(--gold); flex-shrink: 0; }
-@media (max-width: 900px) { .ac-credential { padding: 16px 24px; } }
-@media (max-width: 600px) { .ac-credential { padding: 14px 20px; } }
-
-/* ── STREAM SECTION ───────────────────── */
-.ac-stream {
-  background: var(--black);
-  padding: 80px 0 120px;
-}
-.ac-stream-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 60px;
-  display: flex;
-  flex-direction: column;
-  gap: 72px;
-}
-
-/* ── FLIP CARD ────────────────────────── */
-.ac-entry {
-  display: flex;
-  flex-direction: column;
-  opacity: 0;
-  transform: translateY(36px);
-  transition: opacity 0.7s ease, transform 0.75s cubic-bezier(.16,1,.3,1);
-}
-.ac-entry.visible { opacity: 1; transform: translateY(0); }
-
-/* Serpentine offsets */
-.ac-entry:nth-child(1) { align-self: flex-start; margin-left: 0; }
-.ac-entry:nth-child(2) { align-self: flex-end;   margin-right: 0; }
-.ac-entry:nth-child(3) { align-self: flex-start; margin-left: 6%; }
-.ac-entry:nth-child(5) { align-self: flex-end;   margin-right: 4%; }
-
-/* Stagger delays */
-.ac-entry:nth-child(1) { transition-delay: 0s; }
-.ac-entry:nth-child(2) { transition-delay: 0.08s; }
-.ac-entry:nth-child(3) { transition-delay: 0.05s; }
-.ac-entry:nth-child(5) { transition-delay: 0.05s; }
-
-/* "Click to expand" prompt */
-.ac-prompt {
+.ac-meta-label {
   font-family: var(--mono);
   font-size: 8px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(184,148,106,0.5);
-  margin-bottom: 10px;
-  opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  align-self: flex-start;
+  color: rgba(255,255,255,0.22);
+  margin-bottom: 6px;
 }
-.ac-entry:nth-child(even) .ac-prompt { align-self: flex-end; }
-.ac-entry:hover .ac-prompt { opacity: 1; transform: translateY(0); }
-
-/* 3D flip wrapper */
-.ac-flip {
-  width: 440px;
-  height: 320px;
-  perspective: 1000px;
-  cursor: none;
-  flex-shrink: 0;
+.ac-meta-value {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.62);
 }
-.ac-flip-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.65s cubic-bezier(.16,1,.3,1);
-}
-.ac-entry:hover .ac-flip-inner { transform: rotateY(180deg); }
-
-.ac-flip-front,
-.ac-flip-back {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-/* Front — image */
-.ac-flip-front { overflow: hidden; }
-.ac-flip-front img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-  transition: transform 0.6s cubic-bezier(.16,1,.3,1);
-}
-.ac-flip-num {
-  position: absolute;
-  top: 16px; left: 18px;
+.ac-hero-footer {
+  margin-top: 72px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
   font-family: var(--mono);
   font-size: 9px;
-  letter-spacing: 0.2em;
-  color: rgba(255,255,255,0.4);
-  z-index: 2;
-}
-
-/* Back — info */
-.ac-flip-back {
-  background: #141414;
-  border: 0.5px solid #2a2a2a;
-  transform: rotateY(180deg);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 32px 30px;
-  gap: 0;
-}
-.ac-back-type {
-  font-family: var(--mono);
-  font-size: 8px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 12px;
+  color: rgba(255,255,255,0.22);
+  opacity: 0;
+  animation: ac-fade 0.6s 0.8s ease forwards;
 }
-.ac-back-title {
-  font-family: var(--serif);
-  font-size: clamp(22px, 2.2vw, 28px);
-  font-weight: 400;
-  color: var(--white);
-  line-height: 1.1;
-  margin-bottom: 14px;
-}
-.ac-back-desc {
-  font-family: var(--sans);
-  font-size: 12px;
-  line-height: 1.7;
-  color: rgba(255,255,255,0.5);
-  margin-bottom: 20px;
-}
-.ac-back-themes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-.ac-back-tag {
-  font-family: var(--sans);
-  font-size: 8px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #505050;
-  border: 0.5px solid #2a2a2a;
-  border-radius: 2px;
-  padding: 3px 7px;
+.ac-hero-footer::before {
+  content: '';
+  width: 32px; height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
 }
 
-/* ── QUOTE ────────────────────────────── */
-.ac-quote-wrap {
-  padding: 100px 60px;
-  max-width: 1200px;
-  margin: 0 auto;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.16,1,.3,1);
+/* ── HERO RIGHT (phase-0 cards) ───────── */
+.ac-hero-right {
+  position: relative;
+  align-self: stretch;
+  min-height: 680px;
+  z-index: 2;
 }
-.ac-quote-wrap.visible { opacity: 1; transform: translateY(0); }
-.ac-quote-rule { height: 0.5px; background: rgba(184,148,106,0.2); margin-bottom: 56px; }
-.ac-quote {
-  font-family: var(--serif);
-  font-size: clamp(26px, 3.5vw, 48px);
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.25;
-  color: var(--white);
-  letter-spacing: -0.01em;
-  max-width: 860px;
+.ac-phase0-card {
+  position: absolute;
+  width: 380px; height: 280px;
+  will-change: transform;
 }
-.ac-quote em { font-style: normal; color: var(--gold); }
-.ac-quote-attr {
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
+.ac-phase0-card:nth-child(1) { top: 60px;  right: 20px;  --base-rot: -1.8deg; transform: rotate(-1.8deg); }
+.ac-phase0-card:nth-child(2) { top: 200px; right: 95px;  --base-rot:  1.2deg; transform: rotate(1.2deg);  }
+.ac-phase0-card:nth-child(3) { top: 350px; right: 30px;  --base-rot: -0.6deg; transform: rotate(-0.6deg); }
+
+/* ── CARD SYSTEM ──────────────────────── */
+.ac-card {
+  position: relative;
+  width: 100%; height: 100%;
+  cursor: none;
+}
+.ac-card-inner {
+  position: relative;
+  width: 100%; height: 100%;
+  transition: transform 0.7s cubic-bezier(0.2,0.8,0.2,1);
+}
+.ac-card:hover .ac-card-inner { transform: translateY(-6px); }
+
+.ac-card-face {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  transition: opacity 0.5s cubic-bezier(0.2,0.8,0.2,1), transform 0.5s cubic-bezier(0.2,0.8,0.2,1);
+}
+.ac-card-front {
+  background: #141414;
+  border: 0.5px solid rgba(255,255,255,0.06);
+  z-index: 2; opacity: 1; transform: scale(1);
+}
+.ac-card:hover .ac-card-front { opacity: 0; transform: scale(1.025); }
+
+.ac-card-front img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  filter: grayscale(30%) brightness(0.55);
+  transition: filter 0.4s ease;
+}
+.ac-card:hover .ac-card-front img { filter: grayscale(0%) brightness(0.72); }
+
+.ac-card-ph {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(232,228,220,0.045) 0px, rgba(232,228,220,0.045) 12px,
+    rgba(232,228,220,0.012) 12px, rgba(232,228,220,0.012) 24px
+  );
+}
+.ac-card-front-corner {
+  position: absolute; top: 18px; left: 20px;
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: rgba(255,255,255,0.28); z-index: 2;
+}
+.ac-card-front-frame {
+  position: absolute; inset: 14px;
+  border: 0.5px solid rgba(255,255,255,0.04);
+  pointer-events: none; z-index: 2;
+}
+.ac-card-front-label {
+  position: absolute; bottom: 18px; left: 20px; right: 20px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  z-index: 2;
+}
+.ac-card-front-title {
+  font-family: var(--serif); font-size: 17px; font-weight: 400;
+  color: rgba(255,255,255,0.68); line-height: 1.1;
+}
+.ac-card-front-tag {
+  font-family: var(--mono); font-size: 7.5px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+  text-align: right; flex-shrink: 0; margin-left: 10px;
+}
+
+.ac-card-hint {
+  position: absolute; bottom: -28px; left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono); font-size: 8.5px;
+  letter-spacing: 0.26em; text-transform: uppercase;
   color: rgba(255,255,255,0.2);
-  margin-top: 36px;
+  opacity: 0; transition: opacity 0.4s ease;
+  white-space: nowrap; display: flex; align-items: center; gap: 10px;
 }
-.ac-quote-rule-bot { height: 0.5px; background: rgba(184,148,106,0.2); margin-top: 56px; }
+.ac-card-hint::before { content: ''; width: 16px; height: 1px; background: var(--gold); }
+.ac-card:hover .ac-card-hint { opacity: 1; }
+
+.ac-card-back {
+  background: #141414;
+  border: 0.5px solid rgba(184,148,106,0.22);
+  padding: 26px 24px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  z-index: 1; opacity: 0; transform: translateY(8px);
+  transition: opacity 0.5s cubic-bezier(0.2,0.8,0.2,1), transform 0.5s cubic-bezier(0.2,0.8,0.2,1);
+}
+.ac-card:hover .ac-card-back { opacity: 1; transform: translateY(0); z-index: 3; }
+
+.ac-back-top {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+}
+.ac-back-num {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; color: var(--gold);
+}
+.ac-back-tag {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.28); text-align: right;
+}
+.ac-back-title {
+  font-family: var(--serif); font-size: 24px; font-weight: 400;
+  line-height: 1.1; color: var(--white); margin-top: 12px;
+}
+.ac-back-title em { font-style: italic; color: var(--gold); }
+.ac-back-studio {
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(255,255,255,0.28); margin-top: 8px;
+}
+.ac-back-desc {
+  font-family: var(--sans); font-size: 11px; line-height: 1.65;
+  color: rgba(255,255,255,0.55); margin-top: 10px;
+}
+.ac-back-cta {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 14px; padding-top: 12px;
+  border-top: 0.5px solid rgba(255,255,255,0.06);
+}
+.ac-back-tools {
+  font-family: var(--mono); font-size: 7.5px; letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.18);
+}
+.ac-back-expand {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ── CASCADE SECTION ──────────────────── */
+.ac-cascade-section {
+  background: var(--black);
+  padding: 60px 0 100px;
+}
+.ac-cascade-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 60px;
+  display: flex; flex-direction: column; gap: 80px;
+}
+.ac-cascade-slot {
+  width: 380px; height: 280px; flex-shrink: 0;
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.75s cubic-bezier(.16,1,.3,1);
+}
+.ac-cascade-slot.visible { opacity: 1; transform: translateY(0); }
+
+/* S-curve positioning */
+.ac-cascade-slot:nth-child(1) { margin-left: 0; }
+.ac-cascade-slot:nth-child(2) { margin-left: auto; }
+.ac-cascade-slot:nth-child(3) { margin-left: 10%; }
+.ac-cascade-slot:nth-child(4) { margin-left: auto; margin-right: 6%; }
+.ac-cascade-slot:nth-child(5) { margin-left: 20%; }
+.ac-cascade-slot:nth-child(6) { margin-left: auto; }
+
+/* slight resting rotations per card */
+.ac-cascade-slot:nth-child(1) .ac-card-inner { transform: rotate(-0.8deg); }
+.ac-cascade-slot:nth-child(2) .ac-card-inner { transform: rotate(1.4deg); }
+.ac-cascade-slot:nth-child(3) .ac-card-inner { transform: rotate(-1.2deg); }
+.ac-cascade-slot:nth-child(4) .ac-card-inner { transform: rotate(0.6deg); }
+.ac-cascade-slot:nth-child(5) .ac-card-inner { transform: rotate(-0.4deg); }
+.ac-cascade-slot:nth-child(6) .ac-card-inner { transform: rotate(1.0deg); }
+.ac-cascade-slot:hover .ac-card-inner { transform: rotate(0deg) translateY(-6px) !important; }
+
+/* ── QUOTE ────────────────────────────── */
+.ac-quote-section {
+  background: var(--black);
+  padding: 100px 60px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ac-quote-frame {
+  max-width: 900px; text-align: center;
+  position: relative; padding: 56px 40px;
+}
+.ac-quote-frame::before, .ac-quote-frame::after {
+  content: '';
+  position: absolute; width: 80px; height: 1px;
+  background: var(--gold); left: 50%; transform: translateX(-50%);
+}
+.ac-quote-frame::before { top: 0; }
+.ac-quote-frame::after  { bottom: 0; }
+.ac-quote-text {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3.5vw, 44px);
+  font-weight: 400; font-style: italic;
+  line-height: 1.25; color: var(--white); letter-spacing: -0.01em;
+}
+.ac-quote-text em { font-style: normal; color: var(--gold); }
+.ac-quote-attr {
+  font-family: var(--mono); font-size: 9px;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: rgba(255,255,255,0.18); margin-top: 36px;
+}
 
 /* ── MODAL ────────────────────────────── */
 .ac-modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(0,0,0,0.88);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.9);
+  display: flex; align-items: center; justify-content: center;
   padding: 24px;
-  opacity: 0;
-  visibility: hidden;
+  opacity: 0; visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 .ac-modal-overlay.open { opacity: 1; visibility: visible; }
 .ac-modal-panel {
-  background: #111;
-  border: 0.5px solid #222;
-  border-radius: 2px;
-  max-width: 840px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
+  background: #111; border: 0.5px solid #222;
+  border-radius: 2px; max-width: 840px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  position: relative;
   transform: translateY(20px);
   transition: transform 0.35s cubic-bezier(.16,1,.3,1);
 }
 .ac-modal-overlay.open .ac-modal-panel { transform: translateY(0); }
-.ac-modal-img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  display: block;
+.ac-modal-close {
+  position: absolute; top: 18px; right: 22px;
+  background: none; border: none;
+  color: rgba(255,255,255,0.28); font-size: 18px;
+  cursor: none; transition: color 0.2s; line-height: 1; z-index: 2;
 }
+.ac-modal-close:hover { color: var(--white); }
+.ac-modal-gallery {
+  position: relative; width: 100%;
+  aspect-ratio: 16 / 9; overflow: hidden;
+  background: #0a0a0a;
+}
+.ac-gallery-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  opacity: 0; transition: opacity 0.4s ease;
+}
+.ac-gallery-img.active { opacity: 1; }
+.ac-gallery-ph {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(232,228,220,0.05) 0px, rgba(232,228,220,0.05) 14px,
+    rgba(232,228,220,0.02) 14px, rgba(232,228,220,0.02) 28px
+  );
+  display: flex; align-items: center; justify-content: center;
+}
+.ac-gallery-ph-text {
+  font-family: var(--serif); font-size: 36px;
+  font-weight: 300; font-style: italic;
+  color: rgba(255,255,255,0.08);
+}
+.ac-gallery-dots {
+  position: absolute; bottom: 14px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 7px; z-index: 2;
+}
+.ac-gallery-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  cursor: none; transition: background 0.2s;
+}
+.ac-gallery-dot.active { background: var(--gold); }
 .ac-modal-body { padding: 36px 40px 44px; }
-.ac-modal-type {
-  font-family: var(--mono);
-  font-size: 8.5px;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 14px;
+.ac-modal-num {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
+}
+.ac-modal-cat {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 14px;
 }
 .ac-modal-title {
-  font-family: var(--serif);
-  font-size: clamp(28px, 3.5vw, 42px);
-  font-weight: 400;
-  color: var(--white);
-  line-height: 1.05;
+  font-family: var(--serif); font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 400; color: var(--white); line-height: 1.05; margin-bottom: 24px;
+}
+.ac-modal-title em { font-style: italic; color: var(--gold); }
+.ac-modal-rule { height: 0.5px; background: #222; margin-bottom: 22px; }
+.ac-modal-desc {
+  font-family: var(--sans); font-size: 14px;
+  line-height: 1.8; color: rgba(255,255,255,0.55); margin-bottom: 22px;
+}
+.ac-modal-meta-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
   margin-bottom: 24px;
 }
-.ac-modal-rule { height: 0.5px; background: #222; margin-bottom: 24px; }
-.ac-modal-desc {
-  font-family: var(--sans);
-  font-size: 14px;
-  line-height: 1.8;
-  color: rgba(255,255,255,0.6);
-  margin-bottom: 28px;
+.ac-modal-meta-label {
+  font-family: var(--mono); font-size: 7.5px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(255,255,255,0.2); margin-bottom: 5px;
+}
+.ac-modal-meta-val {
+  font-family: var(--sans); font-size: 12px; color: rgba(255,255,255,0.5);
 }
 .ac-modal-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .ac-modal-tag {
-  font-family: var(--sans);
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #505050;
-  border: 0.5px solid #2a2a2a;
-  border-radius: 2px;
-  padding: 4px 9px;
+  font-family: var(--sans); font-size: 8px;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: #505050; border: 0.5px solid #2a2a2a;
+  border-radius: 2px; padding: 4px 9px;
 }
-.ac-modal-close {
-  position: absolute;
-  top: 20px; right: 24px;
-  background: none; border: none;
-  color: rgba(255,255,255,0.3);
-  font-size: 20px;
-  cursor: none;
-  transition: color 0.2s;
-  line-height: 1;
-  z-index: 2;
-}
-.ac-modal-close:hover { color: var(--white); }
-.ac-modal-panel { position: relative; }
+
+/* ── KEYFRAMES ────────────────────────── */
+@keyframes ac-rise { to { opacity: 1; transform: translateY(0); } }
+@keyframes ac-fade { to { opacity: 1; } }
+
+/* ── SCROLL REVEAL ────────────────────── */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .72s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ── MOBILE ───────────────────────────── */
-@media (max-width: 900px) {
-  .ac-hero { padding: 0 24px 52px; min-height: 68vh; }
-  .ac-scroll-cue { display: none; }
-  .ac-meta-item { padding-right: 28px; margin-right: 28px; }
-  .ac-stream-inner { padding: 0 24px; gap: 48px; }
-  .ac-entry:nth-child(n) { align-self: stretch; margin-left: 0; margin-right: 0; }
-  .ac-flip { width: 100%; height: 56vw; min-height: 240px; }
-  /* On mobile: show back by default on click, handled by JS toggle */
-  .ac-prompt { opacity: 1; transform: none; }
-  .ac-quote-wrap { padding: 64px 24px; }
+@media (max-width: 960px) {
+  .ac-hero { grid-template-columns: 1fr; padding: 120px 24px 52px; min-height: auto; }
+  .ac-hero-right { display: none; }
+  .ac-hero-meta { grid-template-columns: repeat(2, 1fr); }
+  .ac-cascade-inner { padding: 0 24px; gap: 56px; }
+  .ac-cascade-slot { width: 100%; height: 60vw; min-height: 240px; }
+  .ac-cascade-slot:nth-child(n) { margin-left: 0; margin-right: 0; }
+  .ac-cascade-slot .ac-card-inner { transform: none !important; }
+  .ac-quote-section { padding: 72px 24px; }
   .ac-modal-body { padding: 24px 20px 32px; }
+  .ac-modal-meta-row { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 600px) {
-  .ac-hero { padding: 0 20px 48px; }
-  .ac-meta-item:last-child { display: none; }
-  .ac-flip { height: 64vw; }
+  .ac-hero { padding: 110px 20px 48px; }
+  .ac-hero-meta { grid-template-columns: 1fr 1fr; }
+  .ac-cascade-inner { padding: 0 20px; }
+  .ac-modal-meta-row { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ac-flip-inner { transition: none; }
-  .ac-entry { transition: opacity 0.3s ease; }
+  .ac-h1, .ac-hero-meta, .ac-hero-footer { animation: none; opacity: 1; }
+  .ac-card-front, .ac-card-back { transition: none; }
+  .ac-cascade-slot { transition: opacity 0.3s ease; }
 }
 
 </style>
@@ -449,172 +503,333 @@
   </div>
 </nav>
 
-<!-- ══ HERO ════════════════════════════════════════════ -->
+<!-- ══ HERO ══════════════════════════════════════════════ -->
 <section class="ac-hero">
-  <div class="ac-ghost" aria-hidden="true">5</div>
-  <div class="ac-hero-content">
+  <div class="ac-ghost" aria-hidden="true">9</div>
+
+  <div class="ac-hero-left">
     <h1 class="ac-h1">
-      <span class="ac-h1-line"><span class="ac-h1-inner">Studio Work</span></span>
-      <span class="ac-h1-line"><span class="ac-h1-inner">&amp; design research.</span></span>
+      <span class="ac-h1-line1">Studio Work</span>
+      <span class="ac-h1-line2">&amp; design research.</span>
     </h1>
-    <div class="ac-meta">
-      <div class="ac-meta-item">
-        <span class="ac-meta-label">Institution</span>
-        <span class="ac-meta-value">Columbia University</span>
+    <div class="ac-hero-meta">
+      <div>
+        <div class="ac-meta-label">Institution</div>
+        <div class="ac-meta-value">Columbia University</div>
       </div>
-      <div class="ac-meta-item">
-        <span class="ac-meta-label">Program</span>
-        <span class="ac-meta-value">GSAPP</span>
-        <span class="ac-meta-sub">Graduate School of Architecture,<br>Planning and Preservation</span>
+      <div>
+        <div class="ac-meta-label">Program</div>
+        <div class="ac-meta-value">GSAPP</div>
       </div>
-      <div class="ac-meta-item">
-        <span class="ac-meta-label">Program Length</span>
-        <span class="ac-meta-value">3-Year Program</span>
+      <div>
+        <div class="ac-meta-label">Duration</div>
+        <div class="ac-meta-value">3-Year M.Arch</div>
       </div>
     </div>
+    <div class="ac-hero-footer">Columbia GSAPP · M.Arch · 2024</div>
   </div>
-  <div class="ac-scroll-cue" aria-hidden="true">
-    <span class="ac-scroll-cue-label">Scroll</span>
-    <div class="ac-scroll-cue-line"></div>
+
+  <!-- Phase 0: first 3 project cards stacked in right column -->
+  <div class="ac-hero-right" id="ac-hero-right" aria-hidden="true">
+    <!-- Card 1 -->
+    <div class="ac-phase0-card">
+      <div class="ac-card" data-project="0">
+        <div class="ac-card-inner">
+          <div class="ac-card-face ac-card-front">
+            <img src="../assets/images/projects/pool-house.jpg" alt="Threshold Conditions">
+            <span class="ac-card-front-corner">N° 01</span>
+            <div class="ac-card-front-frame"></div>
+            <div class="ac-card-front-label">
+              <span class="ac-card-front-title">Threshold <em>Conditions</em></span>
+              <span class="ac-card-front-tag">Core Studio</span>
+            </div>
+          </div>
+          <div class="ac-card-face ac-card-back">
+            <div class="ac-back-top">
+              <span class="ac-back-num">N° 01</span>
+              <span class="ac-back-tag">Housing Typology</span>
+            </div>
+            <div class="ac-back-title">Threshold <em>Conditions</em></div>
+            <div class="ac-back-studio">Core Studio I · Fall 2022</div>
+            <p class="ac-back-desc">A study of liminal space in dense urban housing — vestibules, stairwells, and shared landings reframed as primary architecture rather than residual circulation.</p>
+            <div class="ac-back-cta">
+              <span class="ac-back-tools">Rhino · Grasshopper · V-Ray</span>
+              <span class="ac-back-expand">Expand ↗</span>
+            </div>
+          </div>
+        </div>
+        <div class="ac-card-hint">View project</div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="ac-phase0-card">
+      <div class="ac-card" data-project="1">
+        <div class="ac-card-inner">
+          <div class="ac-card-face ac-card-front">
+            <img src="../assets/images/projects/mangrove.jpg" alt="Sediment Lines">
+            <span class="ac-card-front-corner">N° 02</span>
+            <div class="ac-card-front-frame"></div>
+            <div class="ac-card-front-label">
+              <span class="ac-card-front-title">Sediment <em>Lines</em></span>
+              <span class="ac-card-front-tag">Design Research</span>
+            </div>
+          </div>
+          <div class="ac-card-face ac-card-back">
+            <div class="ac-back-top">
+              <span class="ac-back-num">N° 02</span>
+              <span class="ac-back-tag">Coastal / Climate</span>
+            </div>
+            <div class="ac-back-title">Sediment <em>Lines</em></div>
+            <div class="ac-back-studio">Advanced Studio V · Spring 2023</div>
+            <p class="ac-back-desc">A geomorphological reading of the Hudson estuary — mapping where land becomes water and water becomes infrastructure.</p>
+            <div class="ac-back-cta">
+              <span class="ac-back-tools">QGIS · Rhino · Illustrator</span>
+              <span class="ac-back-expand">Expand ↗</span>
+            </div>
+          </div>
+        </div>
+        <div class="ac-card-hint">View project</div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="ac-phase0-card">
+      <div class="ac-card" data-project="2">
+        <div class="ac-card-inner">
+          <div class="ac-card-face ac-card-front">
+            <div class="ac-card-ph"></div>
+            <span class="ac-card-front-corner">N° 03</span>
+            <div class="ac-card-front-frame"></div>
+            <div class="ac-card-front-label">
+              <span class="ac-card-front-title">A Library for <em>Slow Reading</em></span>
+              <span class="ac-card-front-tag">Civic</span>
+            </div>
+          </div>
+          <div class="ac-card-face ac-card-back">
+            <div class="ac-back-top">
+              <span class="ac-back-num">N° 03</span>
+              <span class="ac-back-tag">Civic Architecture</span>
+            </div>
+            <div class="ac-back-title">A Library for <em>Slow Reading</em></div>
+            <div class="ac-back-studio">Core Studio II · Spring 2023</div>
+            <p class="ac-back-desc">Twelve cloister-like rooms arranged around a central courtyard — each tuned to a different acoustic and light condition. A meditation on attention as a civic resource.</p>
+            <div class="ac-back-cta">
+              <span class="ac-back-tools">Rhino · V-Ray · InDesign</span>
+              <span class="ac-back-expand">Expand ↗</span>
+            </div>
+          </div>
+        </div>
+        <div class="ac-card-hint">View project</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ══ CREDENTIAL STRIP ══════════════════════════════ -->
-<div class="ac-credential">Columbia GSAPP · M.Arch · 2024</div>
+<!-- ══ CASCADE — Projects 4–9 ════════════════════════════ -->
+<section class="ac-cascade-section">
+  <div class="ac-cascade-inner" id="ac-cascade">
 
-<!-- ══ PROJECT STREAM ════════════════════════════════ -->
-<section class="ac-stream">
-  <div class="ac-stream-inner" id="ac-stream">
-
-    <!-- 01 Pool House -->
-    <div class="ac-entry" data-project="0">
-      <span class="ac-prompt">— Click to expand</span>
-      <div class="ac-flip" role="button" aria-label="Pool House — click to expand" tabindex="0" data-project="0">
-        <div class="ac-flip-inner">
-          <div class="ac-flip-front">
-            <span class="ac-flip-num">01</span>
-            <img src="../assets/images/projects/pool-house.jpg" alt="Pool House — Core III">
+    <!-- Card 4 -->
+    <div class="ac-cascade-slot">
+      <div class="ac-card" data-project="3">
+        <div class="ac-card-inner">
+          <div class="ac-card-face ac-card-front">
+            <div class="ac-card-ph"></div>
+            <span class="ac-card-front-corner">N° 04</span>
+            <div class="ac-card-front-frame"></div>
+            <div class="ac-card-front-label">
+              <span class="ac-card-front-title">After the <em>Grid</em></span>
+              <span class="ac-card-front-tag">Urban Design</span>
+            </div>
           </div>
-          <div class="ac-flip-back">
-            <div class="ac-back-type">Recreation · Core Studio III</div>
-            <div class="ac-back-title">Pool House</div>
-            <p class="ac-back-desc">Intimate recreational structure exploring materiality, natural light, and the dialogue between interior threshold and open landscape.</p>
-            <div class="ac-back-themes">
-              <span class="ac-back-tag">Materiality</span>
-              <span class="ac-back-tag">Natural Light</span>
-              <span class="ac-back-tag">Threshold</span>
+          <div class="ac-card-face ac-card-back">
+            <div class="ac-back-top">
+              <span class="ac-back-num">N° 04</span>
+              <span class="ac-back-tag">Manhattan / Speculation</span>
+            </div>
+            <div class="ac-back-title">After the <em>Grid</em></div>
+            <div class="ac-back-studio">Urban Design Studio · Fall 2023</div>
+            <p class="ac-back-desc">A speculative atlas of New York imagined without the 1811 Commissioners' Plan — eight alternative urbanisms drawn at the same scale.</p>
+            <div class="ac-back-cta">
+              <span class="ac-back-tools">QGIS · Illustrator · Photoshop</span>
+              <span class="ac-back-expand">Expand ↗</span>
             </div>
           </div>
         </div>
+        <div class="ac-card-hint">View project</div>
       </div>
     </div>
 
-    <!-- 02 Mangrove HWB -->
-    <div class="ac-entry" data-project="1">
-      <span class="ac-prompt">— Click to expand</span>
-      <div class="ac-flip" role="button" aria-label="Mangrove HWB — click to expand" tabindex="0" data-project="1">
-        <div class="ac-flip-inner">
-          <div class="ac-flip-front">
-            <span class="ac-flip-num">02</span>
-            <img src="../assets/images/projects/mangrove.jpg" alt="Mangrove HWB — Core IV">
+    <!-- Card 5 -->
+    <div class="ac-cascade-slot">
+      <div class="ac-card" data-project="4">
+        <div class="ac-card-inner">
+          <div class="ac-card-face ac-card-front">
+            <div class="ac-card-ph"></div>
+            <span class="ac-card-front-corner">N° 05</span>
+            <div class="ac-card-front-frame"></div>
+            <div class="ac-card-front-label">
+              <span class="ac-card-front-title">Brick, <em>Reconsidered</em></span>
+              <span class="ac-card-front-tag">Materials</span>
+            </div>
           </div>
-          <div class="ac-flip-back">
-            <div class="ac-back-type">Environmental · Core Studio IV</div>
-            <div class="ac-back-title">Mangrove HWB</div>
-            <p class="ac-back-desc">Environmental design at the edge of land and water — ecological systems, resilient infrastructure, and waterfront coexistence.</p>
-            <div class="ac-back-themes">
-              <span class="ac-back-tag">Ecology</span>
-              <span class="ac-back-tag">Waterfront</span>
-              <span class="ac-back-tag">Resilience</span>
+          <div class="ac-card-face ac-card-back">
+            <div class="ac-back-top">
+              <span class="ac-back-num">N° 05</span>
+              <span class="ac-back-tag">Construction</span>
+            </div>
+            <div class="ac-back-title">Brick, <em>Reconsidered</em></div>
+            <div class="ac-back-studio">Material Practice · Fall 2023</div>
+            <p class="ac-back-desc">A taxonomy of fired earth — twenty-eight bricks from twelve regions, each tested against compression, water absorption, and embodied carbon. The thesis: the most sustainable brick is the one already in the wall.</p>
+            <div class="ac-back-cta">
+              <span class="ac-back-tools">Excel · Rhino · InDesign</span>
+              <span class="ac-back-expand">Expand ↗</span>
             </div>
           </div>
         </div>
+        <div class="ac-card-hint">View project</div>
       </div>
     </div>
 
-    <!-- 03 Water Museum -->
-    <div class="ac-entry" data-project="2">
-      <span class="ac-prompt">— Click to expand</span>
-      <div class="ac-flip" role="button" aria-label="Water Museum — click to expand" tabindex="0" data-project="2">
-        <div class="ac-flip-inner">
-          <div class="ac-flip-front">
-            <span class="ac-flip-num">03</span>
-            <img src="../assets/images/projects/water-museum.jpg" alt="Water Museum — Core V">
+    <!-- Card 6 -->
+    <div class="ac-cascade-slot">
+      <div class="ac-card" data-project="5">
+        <div class="ac-card-inner">
+          <div class="ac-card-face ac-card-front">
+            <img src="../assets/images/projects/water-museum.jpg" alt="Quiet Infrastructure">
+            <span class="ac-card-front-corner">N° 06</span>
+            <div class="ac-card-front-frame"></div>
+            <div class="ac-card-front-label">
+              <span class="ac-card-front-title">Quiet <em>Infrastructure</em></span>
+              <span class="ac-card-front-tag">Thesis Prep</span>
+            </div>
           </div>
-          <div class="ac-flip-back">
-            <div class="ac-back-type">Cultural · Civic · Core Studio V</div>
-            <div class="ac-back-title">Water Museum</div>
-            <p class="ac-back-desc">Cultural institution dedicated to water as civic resource. Program and form derived from the cycles, scarcity, and movement of water.</p>
-            <div class="ac-back-themes">
-              <span class="ac-back-tag">Civic</span>
-              <span class="ac-back-tag">Infrastructure</span>
-              <span class="ac-back-tag">Water</span>
+          <div class="ac-card-face ac-card-back">
+            <div class="ac-back-top">
+              <span class="ac-back-num">N° 06</span>
+              <span class="ac-back-tag">Civic Systems</span>
+            </div>
+            <div class="ac-back-title">Quiet <em>Infrastructure</em></div>
+            <div class="ac-back-studio">Pre-Thesis · Spring 2024</div>
+            <p class="ac-back-desc">Where does municipal water actually live? A cross-section of New York's water tunnel system rendered at the scale of the human body. Argues for the gentle visibility of essential systems.</p>
+            <div class="ac-back-cta">
+              <span class="ac-back-tools">Rhino · AutoCAD · V-Ray</span>
+              <span class="ac-back-expand">Expand ↗</span>
             </div>
           </div>
         </div>
+        <div class="ac-card-hint">View project</div>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- ══ QUOTE ══════════════════════════════════════════ -->
-<div class="ac-quote-wrap" id="ac-quote">
-  <div class="ac-quote-rule"></div>
-  <blockquote class="ac-quote">
-    "I research what exists, <em>design what is missing,</em> and build the systems that bring complex ideas into form."
-  </blockquote>
-  <div class="ac-quote-attr">Marberd Bernard · Columbia GSAPP · M.Arch 2024</div>
-  <div class="ac-quote-rule-bot"></div>
+<!-- ══ QUOTE ══════════════════════════════════════════════ -->
+<div class="ac-quote-section reveal" id="ac-quote">
+  <div class="ac-quote-frame">
+    <p class="ac-quote-text">
+      "I research what exists, <em>design what is missing,</em> and build the systems that bring complex ideas into form."
+    </p>
+    <div class="ac-quote-attr">Marberd Bernard · Columbia GSAPP · M.Arch 2024</div>
+  </div>
 </div>
 
-<!-- ══ PROJECT STREAM (continued) ════════════════════ -->
-<section class="ac-stream" style="padding-top:0;">
-  <div class="ac-stream-inner" id="ac-stream-2">
+<!-- ══ CASCADE (continued) ═══════════════════════════════ -->
+<section class="ac-cascade-section" style="padding-top:0;">
+  <div class="ac-cascade-inner" id="ac-cascade-2">
 
-    <!-- 04 Studio -->
-    <div class="ac-entry" data-project="3">
-      <span class="ac-prompt">— Click to expand</span>
-      <div class="ac-flip" role="button" aria-label="Studio — click to expand" tabindex="0" data-project="3">
-        <div class="ac-flip-inner">
-          <div class="ac-flip-front">
-            <span class="ac-flip-num">04</span>
-            <img src="../assets/images/projects/studio.jpg" alt="Studio — Core VI">
+    <!-- Card 7 -->
+    <div class="ac-cascade-slot">
+      <div class="ac-card" data-project="6">
+        <div class="ac-card-inner">
+          <div class="ac-card-face ac-card-front">
+            <img src="../assets/images/projects/studio.jpg" alt="House for a Translator">
+            <span class="ac-card-front-corner">N° 07</span>
+            <div class="ac-card-front-frame"></div>
+            <div class="ac-card-front-label">
+              <span class="ac-card-front-title">House for a <em>Translator</em></span>
+              <span class="ac-card-front-tag">Studio</span>
+            </div>
           </div>
-          <div class="ac-flip-back">
-            <div class="ac-back-type">Workspace · Core Studio VI</div>
-            <div class="ac-back-title">Studio</div>
-            <p class="ac-back-desc">An artist's studio exploring the relationship between productive space, controlled light, and the rhythms of creative process.</p>
-            <div class="ac-back-themes">
-              <span class="ac-back-tag">Light</span>
-              <span class="ac-back-tag">Process</span>
-              <span class="ac-back-tag">Workspace</span>
+          <div class="ac-card-face ac-card-back">
+            <div class="ac-back-top">
+              <span class="ac-back-num">N° 07</span>
+              <span class="ac-back-tag">Domestic Space</span>
+            </div>
+            <div class="ac-back-title">House for a <em>Translator</em></div>
+            <div class="ac-back-studio">Advanced Studio VI · Spring 2024</div>
+            <p class="ac-back-desc">A small house organized around two desks — one facing morning light, one facing evening — connected by a long shelving wall holding two languages of books. The plan refuses the open plan.</p>
+            <div class="ac-back-cta">
+              <span class="ac-back-tools">Rhino · InDesign · V-Ray</span>
+              <span class="ac-back-expand">Expand ↗</span>
             </div>
           </div>
         </div>
+        <div class="ac-card-hint">View project</div>
       </div>
     </div>
 
-    <!-- 05 Lighting Design -->
-    <div class="ac-entry" data-project="4">
-      <span class="ac-prompt">— Click to expand</span>
-      <div class="ac-flip" role="button" aria-label="Lighting Design — click to expand" tabindex="0" data-project="4">
-        <div class="ac-flip-inner">
-          <div class="ac-flip-front">
-            <span class="ac-flip-num">05</span>
-            <img src="../assets/images/projects/lighting.jpg" alt="Lighting Design">
+    <!-- Card 8 -->
+    <div class="ac-cascade-slot">
+      <div class="ac-card" data-project="7">
+        <div class="ac-card-inner">
+          <div class="ac-card-face ac-card-front">
+            <img src="../assets/images/projects/lighting.jpg" alt="Field Notation">
+            <span class="ac-card-front-corner">N° 08</span>
+            <div class="ac-card-front-frame"></div>
+            <div class="ac-card-front-label">
+              <span class="ac-card-front-title">Field <em>Notation</em></span>
+              <span class="ac-card-front-tag">Independent Study</span>
+            </div>
           </div>
-          <div class="ac-flip-back">
-            <div class="ac-back-type">Specialized · Technical</div>
-            <div class="ac-back-title">Lighting Design</div>
-            <p class="ac-back-desc">Standalone lighting study — luminous environments, visual comfort, and spatial atmosphere through precision-controlled light.</p>
-            <div class="ac-back-themes">
-              <span class="ac-back-tag">Luminance</span>
-              <span class="ac-back-tag">Atmosphere</span>
-              <span class="ac-back-tag">Technical</span>
+          <div class="ac-card-face ac-card-back">
+            <div class="ac-back-top">
+              <span class="ac-back-num">N° 08</span>
+              <span class="ac-back-tag">Drawing as Research</span>
+            </div>
+            <div class="ac-back-title">Field <em>Notation</em></div>
+            <div class="ac-back-studio">Visualization · Summer 2024</div>
+            <p class="ac-back-desc">Eighteen drawings made on site over three weeks in northern Portugal — a study of how representation precedes design. The drawings are the project.</p>
+            <div class="ac-back-cta">
+              <span class="ac-back-tools">Graphite · Watercolor · Procreate</span>
+              <span class="ac-back-expand">Expand ↗</span>
             </div>
           </div>
         </div>
+        <div class="ac-card-hint">View project</div>
+      </div>
+    </div>
+
+    <!-- Card 9 -->
+    <div class="ac-cascade-slot">
+      <div class="ac-card" data-project="8">
+        <div class="ac-card-inner">
+          <div class="ac-card-face ac-card-front">
+            <div class="ac-card-ph"></div>
+            <span class="ac-card-front-corner">N° 09</span>
+            <div class="ac-card-front-frame"></div>
+            <div class="ac-card-front-label">
+              <span class="ac-card-front-title">On <em>Repair</em></span>
+              <span class="ac-card-front-tag">M.Arch Thesis</span>
+            </div>
+          </div>
+          <div class="ac-card-face ac-card-back">
+            <div class="ac-back-top">
+              <span class="ac-back-num">N° 09</span>
+              <span class="ac-back-tag">Adaptive Reuse</span>
+            </div>
+            <div class="ac-back-title">On <em>Repair</em></div>
+            <div class="ac-back-studio">M.Arch Thesis · Fall 2024</div>
+            <p class="ac-back-desc">A thesis on architectural repair as ethical practice — three abandoned masonry buildings reimagined through additive, subtractive, and substitutive operations. Repair is design at its most demanding.</p>
+            <div class="ac-back-cta">
+              <span class="ac-back-tools">Rhino · Grasshopper · V-Ray · InDesign</span>
+              <span class="ac-back-expand">Expand ↗</span>
+            </div>
+          </div>
+        </div>
+        <div class="ac-card-hint">View project</div>
       </div>
     </div>
 
@@ -631,12 +846,29 @@
 <div class="ac-modal-overlay" id="ac-modal" role="dialog" aria-modal="true">
   <div class="ac-modal-panel">
     <button class="ac-modal-close" id="ac-modal-close" aria-label="Close">✕</button>
-    <img class="ac-modal-img" id="ac-modal-img" src="" alt="">
+    <div class="ac-modal-gallery" id="ac-modal-gallery">
+      <div class="ac-gallery-dots" id="ac-gallery-dots"></div>
+    </div>
     <div class="ac-modal-body">
-      <div class="ac-modal-type" id="ac-modal-type"></div>
+      <div class="ac-modal-num" id="ac-modal-num"></div>
+      <div class="ac-modal-cat" id="ac-modal-cat"></div>
       <div class="ac-modal-title" id="ac-modal-title"></div>
       <div class="ac-modal-rule"></div>
       <p class="ac-modal-desc" id="ac-modal-desc"></p>
+      <div class="ac-modal-meta-row">
+        <div>
+          <div class="ac-modal-meta-label">Studio</div>
+          <div class="ac-modal-meta-val" id="ac-modal-studio"></div>
+        </div>
+        <div>
+          <div class="ac-modal-meta-label">Critic</div>
+          <div class="ac-modal-meta-val" id="ac-modal-critic"></div>
+        </div>
+        <div>
+          <div class="ac-modal-meta-label">Tools</div>
+          <div class="ac-modal-meta-val" id="ac-modal-tools"></div>
+        </div>
+      </div>
       <div class="ac-modal-tags" id="ac-modal-tags"></div>
     </div>
   </div>
@@ -650,62 +882,159 @@
   /* ── PROJECT DATA ── */
   var PROJECTS = [
     {
-      type: 'Recreation · Core Studio III',
-      title: 'Pool House',
-      image: '../assets/images/projects/pool-house.jpg',
-      desc: 'An intimate recreational structure that investigates the boundary between inside and outside. The design explores materiality, natural light diffusion, and the choreography of movement through threshold conditions — questioning how a simple program can generate spatial richness.',
-      tags: ['Materiality', 'Natural Light', 'Threshold', 'Core III', 'Columbia GSAPP']
+      n: '01', title: 'Threshold <em>Conditions</em>', cat: 'Core Studio · Fall 2022',
+      studio: 'Core Studio I', critic: 'A. Lokko', course: 'ARCH A4105',
+      tag: 'Housing Typology',
+      desc: 'A study of liminal space in dense urban housing — vestibules, stairwells, and shared landings reframed as primary architecture rather than residual circulation. The proposal stitches three party walls into a single porous block, with light wells calibrated to the equinox sun path.',
+      tools: 'Rhino, Grasshopper, V-Ray',
+      imgs: ['../assets/images/projects/pool-house.jpg']
     },
     {
-      type: 'Environmental · Core Studio IV',
-      title: 'Mangrove HWB',
-      image: '../assets/images/projects/mangrove.jpg',
-      desc: 'A waterfront intervention at the intersection of ecological systems and architectural infrastructure. The project proposes a hybrid water buffer that integrates mangrove ecology with resilient building typologies, addressing coastal vulnerability through design research.',
-      tags: ['Ecology', 'Waterfront', 'Resilience', 'Infrastructure', 'Core IV', 'Columbia GSAPP']
+      n: '02', title: 'Sediment <em>Lines</em>', cat: 'Design Research · Spring 2023',
+      studio: 'Advanced Studio V', critic: 'D. Reiser', course: 'ARCH A4205',
+      tag: 'Coastal / Climate',
+      desc: 'A geomorphological reading of the Hudson estuary — mapping where land becomes water and water becomes infrastructure. The drawing set translates ten-year shoreline data into a vocabulary of seven coastal sections.',
+      tools: 'QGIS, Rhino, Illustrator',
+      imgs: ['../assets/images/projects/mangrove.jpg']
     },
     {
-      type: 'Cultural · Civic · Core Studio V',
-      title: 'Water Museum',
-      image: '../assets/images/projects/water-museum.jpg',
-      desc: 'A civic institution dedicated to water as cultural and political resource. The program and formal logic are derived directly from water\'s cycles of scarcity, abundance, and movement — creating a building that teaches through its own spatial sequence.',
-      tags: ['Civic', 'Cultural Institution', 'Water', 'Program', 'Core V', 'Columbia GSAPP']
+      n: '03', title: 'A Library for <em>Slow Reading</em>', cat: 'Public Building · Spring 2023',
+      studio: 'Core Studio II', critic: 'B. Bell', course: 'ARCH A4106',
+      tag: 'Civic Architecture',
+      desc: 'Twelve cloister-like rooms arranged around a central courtyard — each tuned to a different acoustic and light condition. A meditation on attention as a civic resource.',
+      tools: 'Rhino, V-Ray, InDesign',
+      imgs: []
     },
     {
-      type: 'Workspace · Core Studio VI',
-      title: 'Studio',
-      image: '../assets/images/projects/studio.jpg',
-      desc: 'A design studio that interrogates the conditions necessary for sustained creative work. The project studies how natural light, material weight, and spatial sequence can support — or suppress — the act of making. The result is a building organized around the rhythms of a working day.',
-      tags: ['Workspace', 'Natural Light', 'Creative Process', 'Core VI', 'Columbia GSAPP']
+      n: '04', title: 'After the <em>Grid</em>', cat: 'Urban Design · Fall 2023',
+      studio: 'Urban Design Studio', critic: 'K. Easterling', course: 'ARCH A4307',
+      tag: 'Manhattan / Speculation',
+      desc: "A speculative atlas of New York imagined without the 1811 Commissioners' Plan — eight alternative urbanisms drawn at the same scale. Tests the idea that the grid is not neutral but ideological.",
+      tools: 'QGIS, Illustrator, Photoshop',
+      imgs: []
     },
     {
-      type: 'Specialized · Technical Study',
-      title: 'Lighting Design',
-      image: '../assets/images/projects/lighting.jpg',
-      desc: 'A standalone technical study in luminous environments. The work addresses visual comfort, directional emphasis, and the emotional register of controlled artificial light — developing a design language for atmosphere that operates independently of form.',
-      tags: ['Luminance', 'Atmosphere', 'Technical', 'Specialized', 'Columbia GSAPP']
+      n: '05', title: 'Brick, <em>Reconsidered</em>', cat: 'Materials Research · Fall 2023',
+      studio: 'Material Practice', critic: 'M. Bell', course: 'ARCH A4583',
+      tag: 'Construction',
+      desc: 'A taxonomy of fired earth — twenty-eight bricks from twelve regions, each tested against compression, water absorption, and embodied carbon. The thesis: the most sustainable brick is the one already in the wall.',
+      tools: 'Excel, Rhino, InDesign',
+      imgs: []
+    },
+    {
+      n: '06', title: 'Quiet <em>Infrastructure</em>', cat: 'Thesis Prep · Spring 2024',
+      studio: 'Pre-Thesis', critic: 'L. Tsurumaki', course: 'ARCH A4001',
+      tag: 'Civic Systems',
+      desc: "Where does municipal water actually live? A cross-section of New York's water tunnel system rendered at the scale of the human body. Argues for the gentle visibility of essential systems.",
+      tools: 'Rhino, AutoCAD, V-Ray',
+      imgs: ['../assets/images/projects/water-museum.jpg']
+    },
+    {
+      n: '07', title: 'House for a <em>Translator</em>', cat: 'Studio · Spring 2024',
+      studio: 'Advanced Studio VI', critic: 'S. Whiting', course: 'ARCH A4206',
+      tag: 'Domestic Space',
+      desc: 'A small house organized around two desks — one facing morning light, one facing evening — connected by a long shelving wall holding two languages of books. The plan refuses the open plan.',
+      tools: 'Rhino, InDesign, V-Ray',
+      imgs: ['../assets/images/projects/studio.jpg']
+    },
+    {
+      n: '08', title: 'Field <em>Notation</em>', cat: 'Independent Study · Summer 2024',
+      studio: 'Visualization', critic: 'L. Allen', course: 'ARCH A4106',
+      tag: 'Drawing as Research',
+      desc: 'Eighteen drawings made on site over three weeks in northern Portugal — a study of how representation precedes design. The drawings are the project.',
+      tools: 'Graphite, Watercolor, Procreate',
+      imgs: ['../assets/images/projects/lighting.jpg']
+    },
+    {
+      n: '09', title: 'On <em>Repair</em>', cat: 'M.Arch Thesis · Fall 2024',
+      studio: 'M.Arch Thesis', critic: 'M. Wigley', course: 'ARCH A4002',
+      tag: 'Adaptive Reuse',
+      desc: 'A thesis on architectural repair as ethical practice — three abandoned masonry buildings reimagined through additive, subtractive, and substitutive operations. Repair is design at its most demanding.',
+      tools: 'Rhino, Grasshopper, V-Ray, InDesign',
+      imgs: []
     }
   ];
 
-  /* ── MODAL ── */
-  var overlay  = document.getElementById('ac-modal');
-  var closeBtn = document.getElementById('ac-modal-close');
-
-  function openModal(idx) {
-    var p = PROJECTS[idx];
-    if (!p) return;
-    document.getElementById('ac-modal-img').src   = p.image;
-    document.getElementById('ac-modal-img').alt   = p.title;
-    document.getElementById('ac-modal-type').textContent  = p.type;
-    document.getElementById('ac-modal-title').textContent = p.title;
-    document.getElementById('ac-modal-desc').textContent  = p.desc;
-    var tags = document.getElementById('ac-modal-tags');
-    tags.innerHTML = '';
-    p.tags.forEach(function (t) {
-      var s = document.createElement('span');
-      s.className = 'ac-modal-tag';
-      s.textContent = t;
-      tags.appendChild(s);
+  /* ── HERO CARD PARALLAX ── */
+  var phase0Cards = document.querySelectorAll('.ac-phase0-card');
+  var baseRots = [-1.8, 1.2, -0.6];
+  function updateParallax() {
+    var sy = window.scrollY;
+    var vh = window.innerHeight;
+    phase0Cards.forEach(function (card, i) {
+      var progress = Math.min(1, sy / (vh * 0.6));
+      var eased = progress < 0.5 ? 2*progress*progress : 1 - Math.pow(-2*progress+2,2)/2;
+      var dy = eased * (120 + i * 60);
+      var dx = eased * -(80 + i * 40);
+      var rot = baseRots[i] + eased * (i % 2 === 0 ? -3 : 3);
+      card.style.transform = 'translate(' + dx.toFixed(1) + 'px, ' + dy.toFixed(1) + 'px) rotate(' + rot.toFixed(2) + 'deg)';
     });
+  }
+  window.addEventListener('scroll', updateParallax, { passive: true });
+
+  /* ── MODAL ── */
+  var overlay   = document.getElementById('ac-modal');
+  var closeBtn  = document.getElementById('ac-modal-close');
+  var gallery   = document.getElementById('ac-modal-gallery');
+  var dotsEl    = document.getElementById('ac-gallery-dots');
+  var activeGalleryIdx = 0;
+  var currentImgs = [];
+
+  function setGallerySlide(idx) {
+    var imgs = gallery.querySelectorAll('.ac-gallery-img');
+    var dots = dotsEl.querySelectorAll('.ac-gallery-dot');
+    imgs.forEach(function (img, i) { img.classList.toggle('active', i === idx); });
+    dots.forEach(function (dot, i) { dot.classList.toggle('active', i === idx); });
+    activeGalleryIdx = idx;
+  }
+
+  function openModal(projectIdx) {
+    var p = PROJECTS[projectIdx];
+    if (!p) return;
+
+    document.getElementById('ac-modal-num').textContent  = 'N° ' + p.n;
+    document.getElementById('ac-modal-cat').textContent  = p.cat;
+    document.getElementById('ac-modal-title').innerHTML  = p.title;
+    document.getElementById('ac-modal-desc').textContent = p.desc;
+    document.getElementById('ac-modal-studio').textContent  = p.studio;
+    document.getElementById('ac-modal-critic').textContent  = p.critic;
+    document.getElementById('ac-modal-tools').textContent   = p.tools;
+
+    /* tags */
+    var tagsEl = document.getElementById('ac-modal-tags');
+    tagsEl.innerHTML = '';
+    [p.tag, p.course, 'Columbia GSAPP'].forEach(function (t) {
+      var s = document.createElement('span');
+      s.className = 'ac-modal-tag'; s.textContent = t;
+      tagsEl.appendChild(s);
+    });
+
+    /* gallery */
+    gallery.querySelectorAll('.ac-gallery-img, .ac-gallery-ph').forEach(function (el) { el.remove(); });
+    dotsEl.innerHTML = '';
+
+    if (p.imgs && p.imgs.length > 0) {
+      p.imgs.forEach(function (src, i) {
+        var img = document.createElement('img');
+        img.className = 'ac-gallery-img' + (i === 0 ? ' active' : '');
+        img.src = src; img.alt = p.n;
+        gallery.insertBefore(img, dotsEl);
+      });
+      if (p.imgs.length > 1) {
+        p.imgs.forEach(function (_, i) {
+          var dot = document.createElement('div');
+          dot.className = 'ac-gallery-dot' + (i === 0 ? ' active' : '');
+          dot.addEventListener('click', function () { setGallerySlide(i); });
+          dotsEl.appendChild(dot);
+        });
+      }
+    } else {
+      var ph = document.createElement('div');
+      ph.className = 'ac-gallery-ph';
+      ph.innerHTML = '<span class="ac-gallery-ph-text">' + p.n + '</span>';
+      gallery.insertBefore(ph, dotsEl);
+    }
+
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -719,30 +1048,31 @@
   overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
 
-  /* ── CARD CLICKS ── */
-  document.querySelectorAll('.ac-flip').forEach(function (card) {
+  /* click any card */
+  document.querySelectorAll('.ac-card').forEach(function (card) {
     card.addEventListener('click', function () {
       openModal(parseInt(card.dataset.project, 10));
     });
     card.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openModal(parseInt(card.dataset.project, 10));
-      }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(parseInt(card.dataset.project, 10)); }
     });
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
   });
 
-  /* ── SCROLL REVEAL ── */
-  var revealTargets = document.querySelectorAll('.ac-entry, .ac-quote-wrap');
+  /* ── SCROLL REVEAL for cascade slots ── */
+  var slots = document.querySelectorAll('.ac-cascade-slot');
+  var quoteEl = document.getElementById('ac-quote');
+  var revealEls = Array.prototype.slice.call(slots);
+  if (quoteEl) revealEls.push(quoteEl);
+
   var obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        obs.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
     });
   }, { threshold: 0.1 });
-  revealTargets.forEach(function (el) { obs.observe(el); });
+
+  revealEls.forEach(function (el) { obs.observe(el); });
 
 }());
 </script>
