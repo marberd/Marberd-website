@@ -497,6 +497,7 @@
   border: 0.5px solid #2a2a2a;
 }
 .pr-modal-imgs.single { grid-template-columns: 1fr; }
+.pr-modal-imgs.triple { grid-template-columns: repeat(3, 1fr); }
 .pr-modal-rule { height: 0.5px; background: #2a2a2a; margin-bottom: 20px; }
 .pr-modal-desc {
   font-family: var(--sans);
@@ -791,39 +792,12 @@
         <div class="pr-wexp-imgrow">
           <div class="pr-wexp-imgs">
             <div class="pr-wexp-imgcard" data-modal="dyo-maoya">
-              <img src="../assets/images/projects/maoya-1.png" alt="Maoya Hotel — night render" loading="lazy">
+              <img src="../assets/images/projects/maoya-1.png" alt="Maoya Hotel" loading="lazy">
             </div>
-            <div class="pr-wexp-imgcard" data-modal="dyo-maoya">
-              <img src="../assets/images/projects/maoya-2.png" alt="Maoya Hotel — aerial render" loading="lazy">
+            <div class="pr-wexp-imgcard" data-modal="dyo-humeniks">
+              <img src="../assets/images/projects/humeniks-before-after.png" alt="Humenik's Building" loading="lazy">
             </div>
           </div>
-          <button class="pr-wexp-cta" data-modal="dyo-maoya" aria-label="Expand Maoya Hotel">
-            <span class="pr-wexp-cta-vr"></span>
-            <span class="pr-wexp-cta-body">
-              <span class="pr-wexp-cta-arrow">↑</span>
-              <span class="pr-wexp-cta-text">expand project</span>
-            </span>
-          </button>
-        </div>
-        <div class="pr-wexp-imgrow" style="margin-top:10px;">
-          <div class="pr-wexp-imgs">
-            <div class="pr-wexp-imgcard" data-modal="dyo-humeniks">
-              <img src="../assets/images/projects/humeniks-before-after.png" alt="Humenik's Building — before/after" loading="lazy">
-            </div>
-            <div class="pr-wexp-imgcard" data-modal="dyo-humeniks">
-              <img src="../assets/images/projects/humeniks-kitchen.png" alt="Humenik's Building — kitchen" loading="lazy">
-            </div>
-            <div class="pr-wexp-imgcard" data-modal="dyo-humeniks">
-              <img src="../assets/images/projects/humeniks-exterior.png" alt="Humenik's Building — exterior" loading="lazy">
-            </div>
-          </div>
-          <button class="pr-wexp-cta" data-modal="dyo-humeniks" aria-label="Expand Humenik's Building">
-            <span class="pr-wexp-cta-vr"></span>
-            <span class="pr-wexp-cta-body">
-              <span class="pr-wexp-cta-arrow">↑</span>
-              <span class="pr-wexp-cta-text">expand project</span>
-            </span>
-          </button>
         </div>
         <div class="pr-wexp-brule"></div>
         <ul class="pr-wexp-bul">
@@ -971,8 +945,9 @@
     elDesc.textContent    = p.desc;
 
     elImgs.innerHTML = '';
+    elImgs.className = 'pr-modal-imgs';
     if (p.images.length === 1) elImgs.classList.add('single');
-    else elImgs.classList.remove('single');
+    else if (p.images.length === 3) elImgs.classList.add('triple');
     p.images.forEach(function (src) {
       var img = document.createElement('img');
       img.src = src; img.className = 'pr-modal-img'; img.alt = p.title;
