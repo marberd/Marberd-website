@@ -70,7 +70,7 @@
   position: relative; z-index: 5;
   display: flex; flex-direction: column;
   justify-content: flex-end;
-  padding-bottom: 180px;
+  padding-bottom: 250px;
 }
 .ac-h1 {
   font-family: var(--serif);
@@ -472,6 +472,10 @@
 }
 .ac-modal-source-link:hover { color: var(--gold-lt); }
 .ac-modal-source-link::after { content: '↗'; font-size: 10px; }
+.ac-modal-source-sep {
+  font-family: var(--mono); font-size: 9px;
+  color: rgba(255,255,255,0.12); flex-shrink: 0;
+}
 
 /* ── INSTAGRAM ────────────────────────── */
 .ac-ig-section {
@@ -1015,7 +1019,8 @@
         '../assets/images/academic/mangrove/mangrove-drawings.jpg',
         '../assets/images/academic/mangrove/mangrove-plans.jpg'
       ],
-      link: 'https://www.arch.columbia.edu/student-work/12006-the-mangrove'
+      link: 'https://www.arch.columbia.edu/student-work/12006-the-mangrove',
+      ig: 'https://www.instagram.com/p/Cuka-iMPrLA/'
     },
     {
       n: '03', title: 'A Library for <em>Slow Reading</em>', cat: 'Public Building · Spring 2023',
@@ -1168,19 +1173,34 @@
       nextBtn.classList.add('hidden');
     }
 
-    /* source link */
+    /* source links */
     var srcEl = document.getElementById('ac-modal-source');
     srcEl.innerHTML = '';
-    if (p.link) {
+    if (p.link || p.ig) {
       var label = document.createElement('span');
       label.className = 'ac-modal-source-label';
       label.textContent = 'Featured on';
-      var a = document.createElement('a');
-      a.className = 'ac-modal-source-link';
-      a.href = p.link; a.target = '_blank'; a.rel = 'noopener noreferrer';
-      a.textContent = 'Columbia GSAPP';
       srcEl.appendChild(label);
-      srcEl.appendChild(a);
+      if (p.link) {
+        var a1 = document.createElement('a');
+        a1.className = 'ac-modal-source-link';
+        a1.href = p.link; a1.target = '_blank'; a1.rel = 'noopener noreferrer';
+        a1.textContent = 'Columbia GSAPP';
+        srcEl.appendChild(a1);
+      }
+      if (p.ig) {
+        if (p.link) {
+          var sep = document.createElement('span');
+          sep.className = 'ac-modal-source-sep';
+          sep.textContent = '·';
+          srcEl.appendChild(sep);
+        }
+        var a2 = document.createElement('a');
+        a2.className = 'ac-modal-source-link ac-modal-source-ig';
+        a2.href = p.ig; a2.target = '_blank'; a2.rel = 'noopener noreferrer';
+        a2.textContent = 'Instagram';
+        srcEl.appendChild(a2);
+      }
     }
 
     overlay.classList.add('open');
