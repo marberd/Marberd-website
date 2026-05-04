@@ -441,6 +441,26 @@
   color: #505050; border: 0.5px solid #2a2a2a;
   border-radius: 2px; padding: 4px 9px;
 }
+.ac-modal-source {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 0.5px solid #222;
+  display: flex; align-items: center; gap: 14px;
+}
+.ac-modal-source-label {
+  font-family: var(--mono); font-size: 7.5px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.18); flex-shrink: 0;
+}
+.ac-modal-source-link {
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); text-decoration: none;
+  transition: color 0.2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.ac-modal-source-link:hover { color: var(--gold-lt); }
+.ac-modal-source-link::after { content: '↗'; font-size: 10px; }
 
 /* ── KEYFRAMES ────────────────────────── */
 @keyframes ac-rise { to { opacity: 1; transform: translateY(0); } }
@@ -569,24 +589,24 @@
       <div class="ac-card" data-project="1">
         <div class="ac-card-inner">
           <div class="ac-card-face ac-card-front">
-            <img src="../assets/images/projects/mangrove.jpg" alt="Sediment Lines">
+            <img src="../assets/images/academic/mangrove/mangrove-hero.jpg" alt="The Mangrove — night rendering">
             <span class="ac-card-front-corner">N° 02</span>
             <div class="ac-card-front-frame"></div>
             <div class="ac-card-front-label">
-              <span class="ac-card-front-title">Sediment <em>Lines</em></span>
-              <span class="ac-card-front-tag">Design Research</span>
+              <span class="ac-card-front-title">The <em>Mangrove</em></span>
+              <span class="ac-card-front-tag">Core Studio IV</span>
             </div>
           </div>
           <div class="ac-card-face ac-card-back">
             <div class="ac-back-top">
               <span class="ac-back-num">N° 02</span>
-              <span class="ac-back-tag">Coastal / Climate</span>
+              <span class="ac-back-tag">Environmental / Biomimetic</span>
             </div>
-            <div class="ac-back-title">Sediment <em>Lines</em></div>
-            <div class="ac-back-studio">Advanced Studio V · Spring 2023</div>
-            <p class="ac-back-desc">A geomorphological reading of the Hudson estuary — mapping where land becomes water and water becomes infrastructure.</p>
+            <div class="ac-back-title">The <em>Mangrove</em></div>
+            <div class="ac-back-studio">Architecture Studio IV · Spring 2023</div>
+            <p class="ac-back-desc">A waterfront civic structure whose branching Ipe wood network functions simultaneously as facade, structure, and foundation — drawing from mangrove ecosystems to mediate land, water, and light.</p>
             <div class="ac-back-cta">
-              <span class="ac-back-tools">QGIS · Rhino · Illustrator</span>
+              <span class="ac-back-tools">Rhino · V-Ray · AutoCAD</span>
               <span class="ac-back-expand">Expand ↗</span>
             </div>
           </div>
@@ -872,6 +892,7 @@
         </div>
       </div>
       <div class="ac-modal-tags" id="ac-modal-tags"></div>
+      <div class="ac-modal-source" id="ac-modal-source"></div>
     </div>
   </div>
 </div>
@@ -892,12 +913,19 @@
       imgs: ['../assets/images/projects/pool-house.jpg']
     },
     {
-      n: '02', title: 'Sediment <em>Lines</em>', cat: 'Design Research · Spring 2023',
-      studio: 'Advanced Studio V', critic: 'D. Reiser', course: 'ARCH A4205',
-      tag: 'Coastal / Climate',
-      desc: 'A geomorphological reading of the Hudson estuary — mapping where land becomes water and water becomes infrastructure. The drawing set translates ten-year shoreline data into a vocabulary of seven coastal sections.',
-      tools: 'QGIS, Rhino, Illustrator',
-      imgs: ['../assets/images/projects/mangrove.jpg']
+      n: '02', title: 'The <em>Mangrove</em>', cat: 'Architecture Studio IV · Spring 2023',
+      studio: 'Architecture Studio IV', critic: 'Robert Marino', course: 'ARCH A4204',
+      tag: 'Environmental / Biomimetic',
+      desc: 'A waterfront civic structure whose branching network of Ipe wood functions simultaneously as facade, structure, and foundation — drawing from mangrove ecosystems to mediate land, water, and light. Natural ventilation and daylighting are channeled through the interlocking structural canopy, creating an interior atmosphere described as a lush forest.',
+      tools: 'Rhino, V-Ray, AutoCAD',
+      imgs: [
+        '../assets/images/academic/mangrove/mangrove-hero.jpg',
+        '../assets/images/academic/mangrove/mangrove-aerial.jpg',
+        '../assets/images/academic/mangrove/mangrove-section.jpg',
+        '../assets/images/academic/mangrove/mangrove-drawings.jpg',
+        '../assets/images/academic/mangrove/mangrove-plans.jpg'
+      ],
+      link: 'https://www.arch.columbia.edu/student-work/12006-the-mangrove'
     },
     {
       n: '03', title: 'A Library for <em>Slow Reading</em>', cat: 'Public Building · Spring 2023',
@@ -1035,6 +1063,21 @@
       ph.className = 'ac-gallery-ph';
       ph.innerHTML = '<span class="ac-gallery-ph-text">' + p.n + '</span>';
       gallery.insertBefore(ph, dotsEl);
+    }
+
+    /* source link */
+    var srcEl = document.getElementById('ac-modal-source');
+    srcEl.innerHTML = '';
+    if (p.link) {
+      var label = document.createElement('span');
+      label.className = 'ac-modal-source-label';
+      label.textContent = 'Featured on';
+      var a = document.createElement('a');
+      a.className = 'ac-modal-source-link';
+      a.href = p.link; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      a.textContent = 'Columbia GSAPP';
+      srcEl.appendChild(label);
+      srcEl.appendChild(a);
     }
 
     overlay.classList.add('open');
