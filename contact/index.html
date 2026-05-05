@@ -372,7 +372,7 @@
             <div class="ci-val">marberdb@gmail.com</div>
           </div>
         </a>
-        <a class="ci-link" href="https://linkedin.com/in/marberd-bernard" target="_blank" rel="noopener">
+        <a class="ci-link" href="https://linkedin.com/in/marberd-bernard" target="_blank" rel="noopener noreferrer">
           <div class="ci-icon">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
           </div>
@@ -381,7 +381,7 @@
             <div class="ci-val">linkedin.com/in/marberd-bernard</div>
           </div>
         </a>
-        <a class="ci-link" href="https://archnimations.com" target="_blank" rel="noopener">
+        <a class="ci-link" href="https://archnimations.com" target="_blank" rel="noopener noreferrer">
           <div class="ci-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
           </div>
@@ -410,15 +410,58 @@
       <a class="foot-link" href="/about/">About</a>
       <a class="foot-link" href="/professional/">Work</a>
       <a class="foot-link" href="/contact/">Contact</a>
-      <a class="foot-link" href="https://linkedin.com/in/marberd-bernard" target="_blank">LinkedIn</a>
+      <a class="foot-link" href="https://linkedin.com/in/marberd-bernard" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
   </div>
 </footer>
 <script src="../assets/js/main.js"></script>
 <script>
-  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-  formspree('initForm', { formElement: '#contact-form', formId: 'mjglblvd' });
+  (function () {
+    const form = document.getElementById('contact-form');
+    const success = document.querySelector('[data-fs-success]');
+    const banner = document.querySelector('.form-error-banner');
+    const submitBtn = form ? form.querySelector('[data-fs-submit-btn]') : null;
+    const endpoint = 'https://formspree.io/f/mjglblvd';
+
+    if (!form || !submitBtn || !success || !banner) return;
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      banner.textContent = '';
+      success.textContent = '';
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      submitBtn.disabled = true;
+
+      try {
+        const payload = Object.fromEntries(new FormData(form).entries());
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          form.reset();
+          success.textContent = "Message received — I'll be in touch soon.";
+        } else {
+          const data = await response.json().catch(() => null);
+          banner.textContent = (data && data.error) ? data.error : 'Message could not be sent. Please try again.';
+        }
+      } catch (error) {
+        banner.textContent = 'Network error. Please try again.';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  })();
 </script>
-<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>

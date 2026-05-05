@@ -59,10 +59,10 @@ if (nav) {
 
 // ── ACTIVE NAV LINK ─────────────
 (function(){
-  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const path = window.location.pathname.replace(/\/+$/, '/') || '/';
   document.querySelectorAll('.nav-links a').forEach(a => {
-    const href = a.getAttribute('href');
-    if (href === path || (path==='' && href==='index.html')) a.classList.add('active');
+    const href = a.getAttribute('href').replace(/\/+$/, '/') || '/';
+    if (href === path) a.classList.add('active');
   });
 })();
 
@@ -76,26 +76,36 @@ if (nav) {
   burger.id = 'nav-burger';
   burger.setAttribute('aria-label', 'Open navigation');
   burger.setAttribute('aria-expanded', 'false');
-  burger.innerHTML = '<span></span><span></span><span></span>';
+  burger.appendChild(document.createElement('span'));
+  burger.appendChild(document.createElement('span'));
+  burger.appendChild(document.createElement('span'));
   nav.appendChild(burger);
 
   // Inject full-screen overlay into body
   const overlay = document.createElement('div');
   overlay.id = 'nav-overlay';
-  overlay.innerHTML =
-    '<nav class="overlay-nav">' +
-      '<a href="/about/">About</a>' +
-      '<a href="/academic/">Academic</a>' +
-      '<a href="/professional/">Professional</a>' +
-      '<a href="/bim-revit/">BIM / Revit</a>' +
-      '<a href="/contact/">Contact</a>' +
-    '</nav>';
+  const overlayNav = document.createElement('nav');
+  overlayNav.className = 'overlay-nav';
+  [
+    ['/about/', 'About'],
+    ['/academic/', 'Academic'],
+    ['/professional/', 'Professional'],
+    ['/bim-revit/', 'BIM / Revit'],
+    ['/contact/', 'Contact'],
+  ].forEach(([href, label]) => {
+    const link = document.createElement('a');
+    link.href = href;
+    link.textContent = label;
+    overlayNav.appendChild(link);
+  });
+  overlay.appendChild(overlayNav);
   document.body.appendChild(overlay);
 
   // Mark active link in overlay
-  const path = window.location.pathname;
+  const path = window.location.pathname.replace(/\/+$/, '/') || '/';
   overlay.querySelectorAll('a').forEach(a => {
-    if (a.getAttribute('href') === path) a.classList.add('active');
+    const href = a.getAttribute('href').replace(/\/+$/, '/') || '/';
+    if (href === path) a.classList.add('active');
   });
 
   function openMenu() {
