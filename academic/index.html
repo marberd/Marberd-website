@@ -572,6 +572,409 @@
   .ac-cascade-slot { transition: opacity 0.3s ease; }
 }
 
+/* ══════════════════════════════════════════
+   ACADEMIC PAGE — REDESIGNED EXPERIENCE
+══════════════════════════════════════════ */
+.ac-hero,
+.ac-cascade-section,
+.ac-quote-section,
+.ac-ig-section,
+.footer-minimal {
+  display: none;
+}
+
+.ac-experience {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(110, 123, 94, 0.18), transparent 28%),
+    radial-gradient(circle at 86% 8%, rgba(184, 148, 106, 0.16), transparent 30%),
+    linear-gradient(180deg, #111118 0%, #151512 42%, #f4f0e8 42%, #f4f0e8 100%);
+  min-height: 100vh;
+  overflow: hidden;
+}
+.acx-hero {
+  min-height: 92vh;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+  gap: 64px;
+  padding: 140px 60px 86px;
+  position: relative;
+}
+.acx-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 84px 84px;
+  pointer-events: none;
+}
+.acx-hero-copy {
+  position: relative;
+  z-index: 2;
+  align-self: end;
+  max-width: 640px;
+}
+.acx-kicker {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.36);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+.acx-kicker::before {
+  content: '';
+  width: 38px;
+  height: 1px;
+  background: var(--gold);
+}
+.acx-title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(58px, 8vw, 132px);
+  line-height: 0.88;
+  color: var(--white);
+  letter-spacing: -0.018em;
+}
+.acx-title em {
+  display: block;
+  color: var(--gold);
+  font-style: italic;
+  font-size: 0.78em;
+  margin-top: 8px;
+}
+.acx-intro {
+  max-width: 520px;
+  margin-top: 34px;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.58);
+}
+.acx-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 46px;
+  max-width: 560px;
+}
+.acx-stat {
+  border-top: 1px solid rgba(184,148,106,0.46);
+  padding-top: 14px;
+}
+.acx-stat strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 34px;
+  line-height: 1;
+  color: var(--white);
+  font-weight: 400;
+}
+.acx-stat span {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.32);
+}
+.acx-feature {
+  position: relative;
+  z-index: 2;
+  align-self: stretch;
+  min-height: 620px;
+}
+.acx-feature-card {
+  position: absolute;
+  width: min(42vw, 560px);
+  min-width: 360px;
+  background: #f8f4ec;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.38);
+  overflow: hidden;
+  transform-origin: center;
+}
+.acx-feature-card:nth-child(1) { right: 8%; top: 0; transform: rotate(-2.5deg); z-index: 3; }
+.acx-feature-card:nth-child(2) { left: 0; top: 170px; transform: rotate(2deg); z-index: 2; }
+.acx-feature-card:nth-child(3) { right: 0; bottom: 0; transform: rotate(-0.8deg); z-index: 1; }
+.acx-feature-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: #111;
+  display: block;
+  padding: 12px;
+}
+.acx-feature-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 20px 20px;
+}
+.acx-feature-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.05;
+  color: #151512;
+}
+.acx-feature-name em { color: var(--gold-dk); font-style: italic; }
+.acx-feature-tag {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #797062;
+  text-align: right;
+  max-width: 150px;
+}
+.acx-work {
+  position: relative;
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 56px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 84px 60px 110px;
+}
+.acx-index {
+  position: sticky;
+  top: 96px;
+  align-self: start;
+}
+.acx-index-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-bottom: 18px;
+}
+.acx-index-title {
+  font-family: var(--serif);
+  font-size: 42px;
+  line-height: 1;
+  font-weight: 400;
+  color: #151512;
+  margin-bottom: 24px;
+}
+.acx-index-title em { font-style: italic; color: var(--gold-dk); }
+.acx-index-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.acx-index-list a {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #756f65;
+  text-decoration: none;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(17,17,24,0.08);
+}
+.acx-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+}
+.acx-card {
+  grid-column: span 3;
+  min-height: 460px;
+  background: #fbfaf7;
+  border: 1px solid rgba(17,17,24,0.12);
+  color: #151512;
+  display: grid;
+  grid-template-rows: minmax(250px, 1fr) auto;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+  transition: transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s cubic-bezier(.16,1,.3,1), border-color .25s ease;
+}
+.acx-card:nth-child(4n + 1) { grid-column: span 4; }
+.acx-card:nth-child(4n + 2) { grid-column: span 2; }
+.acx-card:nth-child(4n + 3) { transform: translateY(42px); }
+.acx-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(138,106,66,0.55);
+  box-shadow: 0 28px 70px rgba(17,17,24,0.18);
+}
+.acx-card:nth-child(4n + 3):hover { transform: translateY(28px); }
+.acx-media {
+  background: #151512;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+.acx-media img {
+  width: 100%;
+  height: 100%;
+  min-height: 230px;
+  object-fit: contain;
+  display: block;
+}
+.acx-media-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 230px;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(135deg, rgba(184,148,106,0.16), transparent 42%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0 12px, rgba(255,255,255,0.02) 12px 24px),
+    #151512;
+}
+.acx-media-placeholder span {
+  font-family: var(--serif);
+  font-size: clamp(42px, 7vw, 92px);
+  font-style: italic;
+  color: rgba(255,255,255,0.16);
+}
+.acx-card-body {
+  padding: 24px 26px 28px;
+}
+.acx-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 26px;
+}
+.acx-number,
+.acx-card-tag,
+.acx-card-tools,
+.acx-open {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.acx-number { color: var(--gold-dk); }
+.acx-card-tag { color: #81786b; text-align: right; }
+.acx-card-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(28px, 3vw, 48px);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  color: #151512;
+}
+.acx-card-title em { color: var(--gold-dk); font-style: italic; }
+.acx-card-desc {
+  margin-top: 18px;
+  max-width: 560px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #625f58;
+}
+.acx-card-foot {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(17,17,24,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.acx-card-tools { color: #9b9286; letter-spacing: 0.08em; }
+.acx-open { color: var(--gold-dk); white-space: nowrap; }
+.acx-statement {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 60px 110px;
+}
+.acx-statement-inner {
+  border-top: 1px solid rgba(17,17,24,0.16);
+  border-bottom: 1px solid rgba(17,17,24,0.16);
+  padding: 54px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 48px;
+  align-items: end;
+}
+.acx-statement-text {
+  font-family: var(--serif);
+  font-size: clamp(30px, 4vw, 58px);
+  line-height: 1.05;
+  color: #151512;
+}
+.acx-statement-text em { color: var(--gold-dk); font-style: italic; }
+.acx-statement-meta {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #746b5f;
+}
+.acx-footer {
+  background: #111118;
+  color: rgba(255,255,255,0.35);
+  padding: 44px 60px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+@media (max-width: 980px) {
+  .acx-hero {
+    grid-template-columns: 1fr;
+    padding: 120px 24px 70px;
+    gap: 44px;
+  }
+  .acx-feature { min-height: 430px; }
+  .acx-feature-card { width: 70vw; min-width: 0; }
+  .acx-work {
+    grid-template-columns: 1fr;
+    padding: 64px 24px 90px;
+  }
+  .acx-index {
+    position: relative;
+    top: auto;
+  }
+  .acx-index-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+  }
+  .acx-card,
+  .acx-card:nth-child(4n + 1),
+  .acx-card:nth-child(4n + 2) {
+    grid-column: 1 / -1;
+  }
+  .acx-card:nth-child(4n + 3),
+  .acx-card:nth-child(4n + 3):hover {
+    transform: none;
+  }
+  .acx-statement {
+    padding: 0 24px 84px;
+  }
+  .acx-statement-inner {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .acx-hero { padding: 110px 20px 56px; }
+  .acx-title { font-size: clamp(48px, 16vw, 72px); }
+  .acx-stats { grid-template-columns: 1fr; }
+  .acx-feature { min-height: 380px; }
+  .acx-feature-card:nth-child(1) { right: 0; }
+  .acx-feature-card:nth-child(2) { left: 0; top: 126px; }
+  .acx-feature-card:nth-child(3) { display: none; }
+  .acx-index-list { grid-template-columns: 1fr; }
+  .acx-grid { display: flex; flex-direction: column; gap: 18px; }
+  .acx-card { min-height: 0; }
+  .acx-card-body { padding: 22px 20px 24px; }
+  .acx-card-foot { align-items: flex-start; flex-direction: column; }
+  .acx-footer { padding: 36px 20px; }
+}
+
 </style>
 </head>
 <body>
@@ -601,6 +1004,67 @@
     </a>
   </div>
 </nav>
+
+<main class="ac-experience">
+  <section class="acx-hero">
+    <div class="acx-hero-copy">
+      <div class="acx-kicker">Columbia GSAPP · M.Arch 2024</div>
+      <h1 class="acx-title">Research as <em>constructed atmosphere.</em></h1>
+      <p class="acx-intro">
+        Academic work as a live archive of experiments: material systems, ecological structures, civic interiors,
+        urban speculation, and the drawings that turn questions into spatial decisions.
+      </p>
+      <div class="acx-stats" aria-label="Academic overview">
+        <div class="acx-stat"><strong>09</strong><span>studies</span></div>
+        <div class="acx-stat"><strong>03</strong><span>research tracks</span></div>
+        <div class="acx-stat"><strong>GSAPP</strong><span>Columbia University</span></div>
+      </div>
+    </div>
+    <div class="acx-feature" aria-hidden="true">
+      <article class="acx-feature-card">
+        <img src="../assets/images/academic/mangrove/mangrove-hero.jpg" alt="">
+        <div class="acx-feature-caption">
+          <div class="acx-feature-name">The <em>Mangrove</em></div>
+          <div class="acx-feature-tag">Environmental structure</div>
+        </div>
+      </article>
+      <article class="acx-feature-card">
+        <img src="../assets/images/academic/loofah-adobe-brick/loofah-hero.png" alt="">
+        <div class="acx-feature-caption">
+          <div class="acx-feature-name">Loofah <em>Brick Studies</em></div>
+          <div class="acx-feature-tag">Material systems</div>
+        </div>
+      </article>
+      <article class="acx-feature-card">
+        <img src="../assets/images/projects/water-museum.jpg" alt="">
+        <div class="acx-feature-caption">
+          <div class="acx-feature-name">Quiet <em>Infrastructure</em></div>
+          <div class="acx-feature-tag">Civic systems</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="acx-work" aria-label="Academic projects">
+    <aside class="acx-index">
+      <div class="acx-index-label">Project Index</div>
+      <h2 class="acx-index-title">Nine ways of <em>testing form.</em></h2>
+      <nav class="acx-index-list" id="acx-index-list" aria-label="Academic project index"></nav>
+    </aside>
+    <div class="acx-grid" id="acx-project-grid"></div>
+  </section>
+
+  <section class="acx-statement">
+    <div class="acx-statement-inner">
+      <p class="acx-statement-text">
+        I research what exists, <em>design what is missing,</em> and build the systems that bring complex ideas into form.
+      </p>
+      <div class="acx-statement-meta">Marberd Bernard · Columbia GSAPP · M.Arch 2024</div>
+    </div>
+  </section>
+
+  <footer class="acx-footer">© 2026 Marberd Bernard · New York, NY</footer>
+</main>
 
 <!-- ══ HERO ══════════════════════════════════════════════ -->
 <section class="ac-hero">
@@ -1099,6 +1563,68 @@
     }
   ];
 
+  function projectPlainTitle(project) {
+    var div = document.createElement('div');
+    div.innerHTML = project.title;
+    return div.textContent || div.innerText || '';
+  }
+
+  function renderAcademicExperience() {
+    var grid = document.getElementById('acx-project-grid');
+    var index = document.getElementById('acx-index-list');
+    if (!grid || !index) return;
+
+    PROJECTS.forEach(function (project, i) {
+      var card = document.createElement('article');
+      card.className = 'acx-card reveal';
+      card.id = 'project-' + project.n;
+      card.dataset.project = i;
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'Open ' + projectPlainTitle(project));
+
+      var media = document.createElement('div');
+      media.className = 'acx-media';
+      if (project.imgs && project.imgs.length) {
+        var img = document.createElement('img');
+        img.src = project.imgs[0];
+        img.alt = projectPlainTitle(project);
+        img.loading = i > 2 ? 'lazy' : 'eager';
+        media.appendChild(img);
+      } else {
+        var ph = document.createElement('div');
+        ph.className = 'acx-media-placeholder';
+        ph.innerHTML = '<span>' + project.n + '</span>';
+        media.appendChild(ph);
+      }
+
+      var body = document.createElement('div');
+      body.className = 'acx-card-body';
+      body.innerHTML =
+        '<div class="acx-card-top">' +
+          '<span class="acx-number">N° ' + project.n + '</span>' +
+          '<span class="acx-card-tag">' + project.tag + '</span>' +
+        '</div>' +
+        '<h3 class="acx-card-title">' + project.title + '</h3>' +
+        '<p class="acx-card-desc">' + project.desc + '</p>' +
+        '<div class="acx-card-foot">' +
+          '<span class="acx-card-tools">' + project.tools + '</span>' +
+          '<span class="acx-open">Open study ↗</span>' +
+        '</div>';
+
+      card.appendChild(media);
+      card.appendChild(body);
+      grid.appendChild(card);
+
+      var link = document.createElement('a');
+      link.href = '#project-' + project.n;
+      link.textContent = project.n + ' · ' + projectPlainTitle(project);
+      index.appendChild(link);
+    });
+  }
+
+  renderAcademicExperience();
+
   /* ── HERO CARD PARALLAX ── */
   var phase0Cards = document.querySelectorAll('.ac-phase0-card');
   var baseRots = [-1.8, 1.2, -0.6];
@@ -1243,7 +1769,7 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
 
   /* click any card */
-  document.querySelectorAll('.ac-card').forEach(function (card) {
+  document.querySelectorAll('.ac-card, .acx-card').forEach(function (card) {
     card.addEventListener('click', function () {
       openModal(parseInt(card.dataset.project, 10));
     });
@@ -1255,7 +1781,7 @@
   });
 
   /* ── SCROLL REVEAL for cascade slots ── */
-  var slots = document.querySelectorAll('.ac-cascade-slot');
+  var slots = document.querySelectorAll('.ac-cascade-slot, .acx-card');
   var quoteEl = document.getElementById('ac-quote');
   var revealEls = Array.prototype.slice.call(slots);
   if (quoteEl) revealEls.push(quoteEl);
