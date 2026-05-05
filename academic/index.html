@@ -54,6 +54,28 @@
   background-size: 86px 86px;
   border-bottom: 1px solid rgba(184,148,106,0.42);
   overflow: hidden;
+  position: relative;
+  transform:
+    translateY(calc(var(--hero-exit, 0) * -72px))
+    scale(calc(1 - (var(--hero-exit, 0) * 0.035)));
+  opacity: calc(1 - (var(--hero-exit, 0) * 0.72));
+  filter: blur(calc(var(--hero-exit, 0) * 10px));
+  transition: opacity .12s linear, filter .12s linear, transform .12s linear;
+  transform-origin: top center;
+  will-change: opacity, filter, transform;
+}
+
+.academic-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(244,240,232,0) 54%, rgba(244,240,232,var(--hero-exit, 0)) 100%);
+}
+
+.academic-hero > * {
+  position: relative;
 }
 
 .hero-copy {
@@ -336,7 +358,9 @@ body.academic-card-hover #cur-dot {
 }
 
 .projects-section {
+  margin-top: calc(var(--hero-exit, 0) * -72px);
   padding: 76px clamp(20px, 5vw, 72px) 104px;
+  transition: margin-top .12s linear;
 }
 
 .projects-header {
@@ -999,8 +1023,10 @@ body.academic-card-hover #cur-dot {
   var next = document.getElementById('gallery-next');
   var close = document.getElementById('modal-close');
   var nav = document.getElementById('main-nav');
+  var root = document.documentElement;
   var currentImages = [];
   var currentSlide = 0;
+  var heroExitFrame = 0;
 
   function attachCardEffects(card) {
     card.addEventListener('pointerenter', function () {
@@ -1130,6 +1156,19 @@ body.academic-card-hover #cur-dot {
     document.body.style.overflow = '';
   }
 
+  function updateHeroExit() {
+    heroExitFrame = 0;
+    var vh = window.innerHeight || 1;
+    var progress = Math.max(0, Math.min(1, window.scrollY / (vh * 0.58)));
+    var eased = progress * progress * (3 - 2 * progress);
+    root.style.setProperty('--hero-exit', eased.toFixed(3));
+  }
+
+  function requestHeroExit() {
+    if (heroExitFrame) return;
+    heroExitFrame = window.requestAnimationFrame(updateHeroExit);
+  }
+
   projects.forEach(function (project, index) {
     if (index === 1) return;
     var card = buildCard(project, index);
@@ -1172,6 +1211,9 @@ body.academic-card-hover #cur-dot {
     if (event.key === 'ArrowLeft') setSlide(currentSlide - 1);
     if (event.key === 'ArrowRight') setSlide(currentSlide + 1);
   });
+  updateHeroExit();
+  window.addEventListener('scroll', requestHeroExit, { passive: true });
+  window.addEventListener('resize', requestHeroExit);
 }());
 </script>
 </body>
