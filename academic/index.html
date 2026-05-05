@@ -2390,6 +2390,364 @@ body.acx-hovering-card #cur-dot {
   }
 }
 
+/* ── EXPERT DESIGN PASS: CALM ACADEMIC PORTFOLIO ───────── */
+.ac-experience {
+  background: #f4f0e8;
+  color: #171716;
+  overflow: clip;
+}
+
+.ac-hero,
+.ac-cascade-section,
+.ac-quote-section,
+.ac-ig-section,
+.footer-minimal,
+.acx-work,
+.acw-archive {
+  display: none !important;
+}
+
+.acx-hero {
+  min-height: 92vh;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(360px, 0.78fr);
+  gap: clamp(32px, 6vw, 88px);
+  align-items: end;
+  padding: 132px clamp(28px, 5vw, 76px) 68px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    #111118;
+  background-size: 86px 86px;
+  position: relative;
+}
+
+.acx-hero::after {
+  content: '';
+  position: absolute;
+  left: clamp(28px, 5vw, 76px);
+  right: clamp(28px, 5vw, 76px);
+  bottom: 0;
+  height: 1px;
+  background: rgba(184,148,106,0.45);
+}
+
+.acx-hero-copy {
+  align-self: end;
+  max-width: 760px;
+  padding: 0;
+}
+
+.acx-kicker {
+  display: flex;
+  margin-bottom: 22px;
+}
+
+.acx-title {
+  max-width: 860px;
+  font-size: clamp(56px, 8.8vw, 124px);
+  line-height: 0.92;
+  letter-spacing: 0;
+}
+
+.acx-title em {
+  color: #d0ad82;
+  margin-top: 10px;
+}
+
+.acx-intro {
+  max-width: 610px;
+  margin-top: 30px;
+  font-size: clamp(15px, 1.35vw, 18px);
+  line-height: 1.75;
+  color: rgba(255,255,255,0.66);
+}
+
+.acx-stats {
+  max-width: 620px;
+  gap: 18px;
+  margin-top: 44px;
+}
+
+.acx-stat {
+  border-top-color: rgba(184,148,106,0.52);
+}
+
+.acx-stat strong {
+  font-size: clamp(28px, 3vw, 40px);
+}
+
+.acx-feature {
+  min-height: 0;
+  align-self: end;
+}
+
+.acx-hero-live-card,
+.acx-hero-live-card.reveal,
+.acx-hero-live-card.reveal.visible,
+.acx-hero-live-card:hover,
+.acx-hero-live-card.reveal:hover,
+.acx-hero-live-card.reveal.visible:hover {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  min-height: 0;
+  margin: 0 0 0 auto;
+  display: block;
+  background: transparent;
+  border: 0;
+  transform: none !important;
+  animation: none;
+  opacity: 1;
+  filter: none;
+}
+
+.acx-hero-live-card .acx-card-inner,
+.acx-hero-live-card:hover .acx-card-inner {
+  transform: none;
+  height: auto;
+}
+
+.acx-hero-live-card .acx-card-back {
+  display: none;
+}
+
+.acx-hero-live-card .acx-card-front {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto;
+  background: #f8f4ec;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 32px 90px rgba(0,0,0,0.36);
+}
+
+.acx-hero-live-card .acx-media {
+  min-height: 0;
+  padding: 14px;
+  background: #121212;
+}
+
+.acx-hero-live-card .acx-media img {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.acx-hero-live-card .acx-card-body {
+  padding: 22px 24px 24px;
+}
+
+.acx-hero-live-card .acx-card-title {
+  font-size: clamp(30px, 3.2vw, 44px);
+}
+
+.acx-hero-live-card .acx-card-desc {
+  display: block;
+  max-width: none;
+  color: rgba(17,17,24,0.68);
+}
+
+.acx-hero-live-card .acx-open {
+  color: var(--gold-dk);
+}
+
+.acq-archive {
+  display: block !important;
+  background: #f4f0e8;
+  color: #171716;
+  padding: 74px clamp(20px, 5vw, 76px) 96px;
+}
+
+.acq-archive::before {
+  display: none;
+}
+
+.acq-quote,
+.acq-quote[style] {
+  position: relative;
+  top: auto;
+  width: min(980px, 100%);
+  margin: 0 auto 72px;
+  padding: 0 0 34px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(17,17,24,0.16);
+  box-shadow: none;
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.acq-quote p {
+  max-width: 900px;
+  font-size: clamp(30px, 4.6vw, 64px);
+  line-height: 1.04;
+  color: #171716;
+}
+
+.acq-shell {
+  max-width: 1420px;
+  padding: 0;
+  grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 72px);
+}
+
+.acq-rail {
+  top: 96px;
+  border-top-color: rgba(17,17,24,0.16);
+}
+
+.acq-rail-right {
+  display: none;
+}
+
+.acq-rail-copy h3 {
+  font-size: clamp(32px, 3.8vw, 52px);
+  letter-spacing: 0;
+}
+
+.acq-meta-grid {
+  gap: 14px;
+}
+
+.acq-stage {
+  padding-top: 0;
+}
+
+.acq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.acq-card,
+.acq-card[style],
+.acq-card:nth-child(4n + 1),
+.acq-card:nth-child(4n + 2),
+.acq-card:nth-child(4n + 3),
+.acq-card:hover,
+.acq-card:focus-visible {
+  appearance: none;
+  padding: 0;
+  grid-column: auto;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: #fbfaf7;
+  border: 1px solid rgba(17,17,24,0.12);
+  border-radius: 0;
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  transition: border-color .2s ease, box-shadow .24s ease, transform .24s ease;
+}
+
+.acq-card:hover,
+.acq-card:focus-visible {
+  border-color: rgba(138,106,66,0.55);
+  box-shadow: 0 22px 52px rgba(17,17,24,0.12);
+  transform: translateY(-4px) !important;
+}
+
+.acq-media {
+  padding: 12px;
+  aspect-ratio: 16 / 10;
+}
+
+.acq-media img,
+.acq-media-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.acq-copy {
+  padding: 22px 24px 24px;
+}
+
+.acq-card-title {
+  font-size: clamp(26px, 3vw, 42px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.acq-card-desc {
+  margin-top: 16px;
+  line-height: 1.65;
+}
+
+.acq-card-foot {
+  margin-top: 22px;
+}
+
+.acq-card-cue {
+  white-space: nowrap;
+}
+
+.acx-footer {
+  display: block;
+  background: #111118;
+  padding: 42px 24px;
+}
+
+@media (max-width: 1040px) {
+  .acx-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .acx-feature {
+    width: min(100%, 560px);
+  }
+
+  .acx-hero-live-card {
+    margin-left: 0;
+  }
+
+  .acq-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .acq-rail {
+    position: relative;
+    top: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .acx-hero {
+    padding: 104px 20px 50px;
+    gap: 34px;
+  }
+
+  .acx-stats,
+  .acq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .acq-archive {
+    padding: 56px 20px 72px;
+  }
+
+  .acq-quote {
+    margin-bottom: 46px;
+  }
+
+  .acq-card-foot,
+  .acx-hero-live-card .acx-card-foot {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
 </style>
 </head>
 <body>
