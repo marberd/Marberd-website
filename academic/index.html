@@ -31,6 +31,9 @@
   backdrop-filter: blur(22px) saturate(1.15);
   -webkit-backdrop-filter: blur(22px) saturate(1.15);
 }
+#main-nav.hero-animation-pass {
+  z-index: 9000;
+}
 
 .academic-page {
   background: #f4f0e8;
@@ -55,6 +58,8 @@
 
 .hero-copy {
   max-width: 790px;
+  position: relative;
+  z-index: 12000;
 }
 
 .eyebrow {
@@ -156,7 +161,7 @@
   position: relative;
   overflow: hidden;
   transform-origin: center;
-  z-index: 4;
+  z-index: 11000;
   opacity: 0;
   transform: translateX(46vw) scale(0.42);
   animation: hero-card-sweep 2.7s .34s cubic-bezier(.18,.86,.18,1) forwards;
@@ -978,6 +983,7 @@ body.academic-card-hover #cur-dot {
   var prev = document.getElementById('gallery-prev');
   var next = document.getElementById('gallery-next');
   var close = document.getElementById('modal-close');
+  var nav = document.getElementById('main-nav');
   var currentImages = [];
   var currentSlide = 0;
 
@@ -1117,6 +1123,14 @@ body.academic-card-hover #cur-dot {
 
   var featuredCard = document.querySelector('.featured-card');
   attachCardEffects(featuredCard);
+  if (nav && featuredCard) {
+    nav.classList.add('hero-animation-pass');
+    featuredCard.addEventListener('animationend', function (event) {
+      if (event.animationName === 'hero-card-sweep' || event.animationName === 'hero-card-mobile') {
+        nav.classList.remove('hero-animation-pass');
+      }
+    }, { once: true });
+  }
   featuredCard.addEventListener('click', function () {
     openModal(1);
   });
