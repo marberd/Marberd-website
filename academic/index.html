@@ -1284,6 +1284,118 @@ body.acx-hovering-card #cur-dot {
   }
 }
 
+/* ── CLEANUP PASS ─────────────────────── */
+.acx-kicker,
+.acx-index-list,
+.acx-feature-card:nth-child(2),
+.acx-feature-card:nth-child(3) {
+  display: none;
+}
+.acx-hero {
+  min-height: 78vh;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.48fr);
+  padding-top: 104px;
+  padding-bottom: 46px;
+}
+.acx-hero-copy {
+  align-self: start;
+  padding-top: 54px;
+}
+.acx-title {
+  max-width: 860px;
+}
+.acx-intro {
+  margin-top: 28px;
+}
+.acx-feature {
+  min-height: 420px;
+  align-self: center;
+}
+.acx-feature-card:nth-child(1) {
+  right: 0;
+  top: 28px;
+  width: min(34vw, 420px);
+  min-width: 280px;
+  transform: rotate(1.8deg);
+  animation: acx-hero-card-drop 10s ease-in-out infinite;
+}
+.acx-work {
+  padding-top: 44px;
+}
+.acx-index {
+  display: block;
+  max-width: 1180px;
+  margin-bottom: 18px;
+}
+.acx-index-label {
+  display: none;
+}
+.acx-index-title {
+  max-width: 440px;
+  font-size: 34px;
+  opacity: 0.72;
+}
+.acx-orbit-stage {
+  min-height: 1520px;
+}
+.acx-orbit-quote {
+  top: 25vh;
+  z-index: 5;
+  margin-top: 10vh;
+  box-shadow: 0 34px 90px rgba(17,17,24,0.3);
+}
+.acx-card {
+  z-index: 2;
+}
+.acx-card:hover,
+.acx-card.reveal:hover,
+.acx-card.reveal.visible:hover {
+  z-index: 10;
+}
+.acx-card:nth-child(1) { left: 3%; top: 110px; --depth: 38px; }
+.acx-card:nth-child(2) { right: 4%; top: 80px; --depth: 42px; }
+.acx-card:nth-child(3) { left: 4%; top: 500px; --depth: 32px; }
+.acx-card:nth-child(4) { right: 3%; top: 535px; --depth: 48px; }
+.acx-card:nth-child(5) { left: 38%; top: 850px; --depth: 34px; }
+.acx-card:nth-child(6) { left: 6%; top: 1080px; --depth: 42px; }
+.acx-card:nth-child(7) { right: 8%; top: 1100px; --depth: 36px; }
+.acx-card:nth-child(8) { left: 34%; top: 1300px; --depth: 46px; }
+@keyframes acx-hero-card-drop {
+  0%, 100% {
+    margin-top: 0;
+    transform: translateY(0) rotate(1.8deg);
+  }
+  50% {
+    margin-top: 22px;
+    transform: translateY(18px) rotate(-0.6deg);
+  }
+}
+@media (max-width: 980px) {
+  .acx-hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding-top: 112px;
+  }
+  .acx-hero-copy {
+    padding-top: 0;
+  }
+  .acx-feature {
+    min-height: 330px;
+  }
+  .acx-feature-card:nth-child(1) {
+    width: min(76vw, 420px);
+    right: auto;
+    left: 0;
+    top: 0;
+  }
+  .acx-index-title {
+    max-width: none;
+  }
+  .acx-orbit-quote {
+    margin-top: 0;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1324,7 +1436,7 @@ body.acx-hovering-card #cur-dot {
         urban speculation, and the drawings that turn questions into spatial decisions.
       </p>
       <div class="acx-stats" aria-label="Academic overview">
-        <div class="acx-stat"><strong>09</strong><span>studies</span></div>
+        <div class="acx-stat"><strong>08</strong><span>studies</span></div>
         <div class="acx-stat"><strong>03</strong><span>research tracks</span></div>
         <div class="acx-stat"><strong>GSAPP</strong><span>Columbia University</span></div>
       </div>
@@ -1864,14 +1976,6 @@ body.acx-hovering-card #cur-dot {
       desc: 'Eighteen drawings made on site over three weeks in northern Portugal — a study of how representation precedes design. The drawings are the project.',
       tools: 'Graphite, Watercolor, Procreate',
       imgs: ['../assets/images/projects/lighting.jpg']
-    },
-    {
-      n: '09', title: 'On <em>Repair</em>', cat: 'M.Arch Thesis · Fall 2024',
-      studio: 'M.Arch Thesis', critic: 'M. Wigley', course: 'ARCH A4002',
-      tag: 'Adaptive Reuse',
-      desc: 'A thesis on architectural repair as ethical practice — three abandoned masonry buildings reimagined through additive, subtractive, and substitutive operations. Repair is design at its most demanding.',
-      tools: 'Rhino, Grasshopper, V-Ray, InDesign',
-      imgs: []
     }
   ];
 
@@ -1884,7 +1988,7 @@ body.acx-hovering-card #cur-dot {
   function renderAcademicExperience() {
     var grid = document.getElementById('acx-project-grid');
     var index = document.getElementById('acx-index-list');
-    if (!grid || !index) return;
+    if (!grid) return;
 
     PROJECTS.forEach(function (project, i) {
       var card = document.createElement('article');
@@ -1951,10 +2055,12 @@ body.acx-hovering-card #cur-dot {
       card.appendChild(inner);
       grid.appendChild(card);
 
-      var link = document.createElement('a');
-      link.href = '#project-' + project.n;
-      link.textContent = project.n + ' · ' + projectPlainTitle(project);
-      index.appendChild(link);
+      if (index) {
+        var link = document.createElement('a');
+        link.href = '#project-' + project.n;
+        link.textContent = project.n + ' · ' + projectPlainTitle(project);
+        index.appendChild(link);
+      }
     });
   }
 
@@ -1969,8 +2075,9 @@ body.acx-hovering-card #cur-dot {
     var progress = Math.max(0, Math.min(1, (vh * 0.78 - rect.top) / (rect.height + vh * 0.24)));
     motionCards.forEach(function (card, i) {
       var depth = parseFloat(getComputedStyle(card).getPropertyValue('--depth')) || 40;
-      var wave = Math.sin(progress * Math.PI * 2 + i * 0.82) * 18;
-      var y = (progress - 0.5) * depth + wave;
+      var downward = progress * Math.abs(depth) * 0.72;
+      var wave = Math.sin(progress * Math.PI * 2 + i * 0.82) * 8;
+      var y = downward + wave;
       card.style.setProperty('--scroll-y', y.toFixed(1) + 'px');
     });
   }
