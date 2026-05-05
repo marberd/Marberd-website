@@ -432,6 +432,9 @@ body.academic-card-hover #cur-dot {
   font-size: clamp(32px, 5vw, 76px);
   line-height: 1.02;
   color: #171716;
+  transform: translateY(calc(var(--mangrove-quote-push, 0) * 18px));
+  filter: blur(calc(var(--mangrove-quote-push, 0) * 1.4px));
+  transition: transform .12s linear, filter .12s linear;
 }
 
 .transition-quote em {
@@ -1082,6 +1085,7 @@ body.academic-modal-active #main-nav {
   var next = document.getElementById('gallery-next');
   var close = document.getElementById('modal-close');
   var nav = document.getElementById('main-nav');
+  var quoteEl = document.querySelector('.transition-quote');
   var root = document.documentElement;
   var currentImages = [];
   var currentSlide = 0;
@@ -1089,7 +1093,13 @@ body.academic-modal-active #main-nav {
   var mangroveTravelFrame = 0;
   var mangroveGridCard = null;
   var mangroveTravelCard = null;
-  var mangroveDocked = false;
+  var mangroveMode = 'scroll';
+  var mangroveAutoFrame = 0;
+  var mangroveAutoStart = 0;
+  var mangroveAutoFrom = null;
+  var mangroveAutoTargetAbs = null;
+  var mangroveHandoffScrollY = 0;
+  var mangroveLastScrollY = 0;
 
   function attachCardEffects(card) {
     card.addEventListener('pointerenter', function () {
@@ -1161,6 +1171,62 @@ body.academic-modal-active #main-nav {
 
   function lerp(a, b, t) {
     return a + (b - a) * t;
+  }
+
+  function rectFromStyles(el) {
+    return {
+      left: parseFloat(el.style.left) || 0,
+      top: parseFloat(el.style.top) || 0,
+      width: parseFloat(el.style.width) || 0,
+      height: parseFloat(el.style.height) || 0
+    };
+  }
+
+  function setTravelRect(rect, opacity, transform, filter) {
+    mangroveTravelCard.style.left = rect.left.toFixed(1) + 'px';
+    mangroveTravelCard.style.top = rect.top.toFixed(1) + 'px';
+    mangroveTravelCard.style.width = rect.width.toFixed(1) + 'px';
+    mangroveTravelCard.style.height = rect.height.toFixed(1) + 'px';
+    mangroveTravelCard.style.opacity = opacity.toFixed(3);
+    mangroveTravelCard.style.filter = filter || 'none';
+    mangroveTravelCard.style.transform = transform || 'none';
+  }
+
+  function quoteHandoffRect(startRect) {
+    var quoteRect = quoteEl.getBoundingClientRect();
+    var width = Math.min(startRect.width * 1.04, quoteRect.width * 0.46);
+    var height = startRect.height * (width / startRect.width);
+    return {
+      left: quoteRect.left + quoteRect.width * 0.58 - width / 2,
+      top: quoteRect.top + quoteRect.height * 0.5 - height / 2,
+      width: width,
+      height: height
+    };
+  }
+
+  function setMangroveDocked(pulse) {
+    mangroveMode = 'docked';
+    featuredCard.classList.add('is-traveling-source');
+    mangroveTravelCard.style.opacity = '0';
+    mangroveTravelCard.style.pointerEvents = 'none';
+    mangroveGridCard.classList.remove('is-awaiting-dock');
+    mangroveGridCard.classList.add('is-docked');
+    if (pulse) {
+      mangroveGridCard.classList.add('is-dock-pulse');
+      window.setTimeout(function () {
+        mangroveGridCard.classList.remove('is-dock-pulse');
+      }, 760);
+    }
+  }
+
+  function resetMangroveToScroll() {
+    mangroveMode = 'scroll';
+    if (mangroveAutoFrame) {
+      window.cancelAnimationFrame(mangroveAutoFrame);
+      mangroveAutoFrame = 0;
+    }
+    mangroveGridCard.classList.add('is-awaiting-dock');
+    mangroveGridCard.classList.remove('is-docked', 'is-dock-pulse');
   }
 
   function setSlide(index) {
@@ -1244,60 +1310,141 @@ body.academic-modal-active #main-nav {
 
   function updateMangroveTravel() {
     mangroveTravelFrame = 0;
-    if (!featuredCard || !mangroveGridCard || !mangroveTravelCard || window.matchMedia('(max-width: 760px)').matches) {
+    if (!featuredCard || !mangroveGridCard || !mangroveTravelCard || !quoteEl || window.matchMedia('(max-width: 760px)').matches) {
       if (featuredCard) featuredCard.classList.remove('is-traveling-source');
       if (mangroveTravelCard) mangroveTravelCard.style.opacity = '0';
       if (mangroveGridCard) {
         mangroveGridCard.classList.remove('is-awaiting-dock');
         mangroveGridCard.classList.add('is-docked');
       }
+      root.style.setProperty('--mangrove-quote-push', '0');
       return;
     }
 
     var vh = window.innerHeight || 1;
-    var targetRect = mangroveGridCard.getBoundingClientRect();
+    var scrollY = window.scrollY || 0;
+    var scrollingDown = scrollY >= mangroveLastScrollY;
+    mangroveLastScrollY = scrollY;
     var startRect = featuredCard.getBoundingClientRect();
-    var travelStart = vh * 0.16;
-    var travelEnd = Math.max(travelStart + 1, window.scrollY + targetRect.bottom - (vh * 0.82));
-    var raw = (window.scrollY - travelStart) / (travelEnd - travelStart);
+    var quoteRect = quoteEl.getBoundingClientRect();
+    var quoteTarget = quoteHandoffRect(startRect);
+    var raw = (vh * 0.58 - quoteRect.top) / (vh * 0.5);
     var progress = Math.max(0, Math.min(1, raw));
     var eased = easeInOut(progress);
-    var active = progress > 0.015 && progress < 0.995;
+    var quotePush = Math.max(0, 1 - Math.abs(progress - 0.86) / 0.22);
+    root.style.setProperty('--mangrove-quote-push', quotePush.toFixed(3));
 
-    featuredCard.classList.toggle('is-traveling-source', active || progress >= 0.995);
-    mangroveGridCard.classList.toggle('is-awaiting-dock', progress < 0.995);
-    mangroveGridCard.classList.toggle('is-docked', progress >= 0.995);
+    if ((mangroveMode === 'auto' || mangroveMode === 'docked') && scrollY < mangroveHandoffScrollY - 80) {
+      resetMangroveToScroll();
+    }
 
-    if (!active) {
+    if (mangroveMode === 'auto') return;
+
+    if (mangroveMode === 'docked') {
+      featuredCard.classList.add('is-traveling-source');
       mangroveTravelCard.style.opacity = '0';
-      mangroveTravelCard.style.pointerEvents = 'none';
-      if (progress >= 0.995 && !mangroveDocked) {
-        mangroveDocked = true;
-        mangroveGridCard.classList.add('is-dock-pulse');
-        window.setTimeout(function () {
-          mangroveGridCard.classList.remove('is-dock-pulse');
-        }, 760);
-      }
-      if (progress < 0.995) mangroveDocked = false;
+      root.style.setProperty('--mangrove-quote-push', '0');
       return;
     }
 
-    mangroveDocked = false;
+    featuredCard.classList.toggle('is-traveling-source', progress > 0.015);
+    mangroveGridCard.classList.add('is-awaiting-dock');
+    mangroveGridCard.classList.remove('is-docked');
+
+    if (progress >= 0.995) {
+      featuredCard.classList.add('is-traveling-source');
+      mangroveGridCard.classList.add('is-awaiting-dock');
+      mangroveGridCard.classList.remove('is-docked');
+      setTravelRect(
+        quoteTarget,
+        1,
+        'perspective(1200px) rotateY(900deg) rotateZ(0deg)',
+        'blur(0)'
+      );
+      if (scrollingDown) {
+        mangroveHandoffScrollY = scrollY;
+        startMangroveAutoDock(quoteTarget);
+      }
+      return;
+    }
+
+    if (progress <= 0.015) {
+      mangroveTravelCard.style.opacity = '0';
+      featuredCard.classList.remove('is-traveling-source');
+      return;
+    }
+
     var lift = Math.sin(eased * Math.PI) * -28;
     var flip = Math.round(progress * 5) * 180;
     var tilt = Math.sin(eased * Math.PI) * -2.5;
-    mangroveTravelCard.style.left = lerp(startRect.left, targetRect.left, eased).toFixed(1) + 'px';
-    mangroveTravelCard.style.top = (lerp(startRect.top, targetRect.top, eased) + lift).toFixed(1) + 'px';
-    mangroveTravelCard.style.width = lerp(startRect.width, targetRect.width, eased).toFixed(1) + 'px';
-    mangroveTravelCard.style.height = lerp(startRect.height, targetRect.height, eased).toFixed(1) + 'px';
-    mangroveTravelCard.style.opacity = (0.18 + eased * 0.82).toFixed(3);
-    mangroveTravelCard.style.filter = 'blur(' + (Math.sin(eased * Math.PI) * 1.3).toFixed(2) + 'px)';
-    mangroveTravelCard.style.transform = 'perspective(1200px) rotateY(' + flip + 'deg) rotateZ(' + tilt.toFixed(2) + 'deg)';
+    var currentRect = {
+      left: lerp(startRect.left, quoteTarget.left, eased),
+      top: lerp(startRect.top, quoteTarget.top, eased) + lift,
+      width: lerp(startRect.width, quoteTarget.width, eased),
+      height: lerp(startRect.height, quoteTarget.height, eased)
+    };
+    setTravelRect(
+      currentRect,
+      0.18 + eased * 0.82,
+      'perspective(1200px) rotateY(' + flip + 'deg) rotateZ(' + tilt.toFixed(2) + 'deg)',
+      'blur(' + (Math.sin(eased * Math.PI) * 1.3).toFixed(2) + 'px)'
+    );
   }
 
   function requestMangroveTravel() {
     if (mangroveTravelFrame) return;
     mangroveTravelFrame = window.requestAnimationFrame(updateMangroveTravel);
+  }
+
+  function startMangroveAutoDock(fromRect) {
+    if (mangroveMode === 'auto' || mangroveMode === 'docked') return;
+    mangroveMode = 'auto';
+    mangroveAutoStart = performance.now();
+    mangroveAutoFrom = fromRect || rectFromStyles(mangroveTravelCard);
+    var targetRect = mangroveGridCard.getBoundingClientRect();
+    mangroveAutoTargetAbs = {
+      left: targetRect.left + window.scrollX,
+      top: targetRect.top + window.scrollY,
+      width: targetRect.width,
+      height: targetRect.height
+    };
+    featuredCard.classList.add('is-traveling-source');
+    mangroveGridCard.classList.add('is-awaiting-dock');
+    mangroveGridCard.classList.remove('is-docked');
+    animateMangroveAutoDock();
+  }
+
+  function animateMangroveAutoDock(now) {
+    if (mangroveMode !== 'auto') return;
+    if (!now) now = performance.now();
+    var progress = Math.max(0, Math.min(1, (now - mangroveAutoStart) / 980));
+    var eased = easeInOut(progress);
+    var targetRect = {
+      left: mangroveAutoTargetAbs.left - window.scrollX,
+      top: mangroveAutoTargetAbs.top - window.scrollY,
+      width: mangroveAutoTargetAbs.width,
+      height: mangroveAutoTargetAbs.height
+    };
+    var lift = Math.sin(eased * Math.PI) * -38;
+    var rect = {
+      left: lerp(mangroveAutoFrom.left, targetRect.left, eased),
+      top: lerp(mangroveAutoFrom.top, targetRect.top, eased) + lift,
+      width: lerp(mangroveAutoFrom.width, targetRect.width, eased),
+      height: lerp(mangroveAutoFrom.height, targetRect.height, eased)
+    };
+    var settle = Math.sin(eased * Math.PI) * 2.2;
+    setTravelRect(
+      rect,
+      1,
+      'perspective(1200px) rotateY(' + (900 - eased * 900).toFixed(1) + 'deg) rotateZ(' + settle.toFixed(2) + 'deg)',
+      'blur(' + ((1 - eased) * 0.8).toFixed(2) + 'px)'
+    );
+    if (progress < 1) {
+      mangroveAutoFrame = window.requestAnimationFrame(animateMangroveAutoDock);
+    } else {
+      mangroveAutoFrame = 0;
+      setMangroveDocked(true);
+    }
   }
 
   projects.forEach(function (project, index) {
