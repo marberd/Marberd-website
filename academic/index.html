@@ -44,6 +44,7 @@
     #111118;
   background-size: 86px 86px;
   border-bottom: 1px solid rgba(184,148,106,0.42);
+  overflow: hidden;
 }
 
 .hero-copy {
@@ -60,6 +61,9 @@
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.42);
+  opacity: 0;
+  transform: translateY(24px);
+  animation: hero-rise .78s .12s cubic-bezier(.16,1,.3,1) forwards;
 }
 
 .eyebrow::before {
@@ -77,6 +81,9 @@
   line-height: 0.92;
   letter-spacing: 0;
   color: var(--white);
+  opacity: 0;
+  transform: translateY(34px);
+  animation: hero-rise .92s .24s cubic-bezier(.16,1,.3,1) forwards;
 }
 
 .hero-title em {
@@ -92,6 +99,9 @@
   font-size: clamp(15px, 1.3vw, 18px);
   line-height: 1.75;
   color: rgba(255,255,255,0.66);
+  opacity: 0;
+  transform: translateY(28px);
+  animation: hero-rise .82s .44s cubic-bezier(.16,1,.3,1) forwards;
 }
 
 .hero-meta {
@@ -100,6 +110,9 @@
   gap: 18px;
   max-width: 620px;
   margin-top: 44px;
+  opacity: 0;
+  transform: translateY(22px);
+  animation: hero-rise .72s .62s cubic-bezier(.16,1,.3,1) forwards;
 }
 
 .hero-meta div {
@@ -137,6 +150,10 @@
   position: relative;
   overflow: hidden;
   transform-origin: center;
+  z-index: 4;
+  opacity: 0;
+  transform: translateX(42vw) scale(0.98);
+  animation: hero-card-sweep 1.35s .34s cubic-bezier(.18,.86,.18,1) forwards;
   transition: transform .28s cubic-bezier(.16,1,.3,1), box-shadow .28s cubic-bezier(.16,1,.3,1), border-color .2s ease;
 }
 
@@ -208,6 +225,32 @@ body.academic-card-hover #cur-dot {
   0%, 100% { transform: translate(-50%, -50%) scale(1.4); opacity: 1; }
   45% { transform: translate(-50%, -50%) scale(2.35); opacity: 0.78; }
   68% { transform: translate(-50%, -50%) scale(1.7); opacity: 1; }
+}
+
+@keyframes hero-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-card-sweep {
+  0% {
+    opacity: 0;
+    transform: translateX(42vw) scale(0.98);
+  }
+  42% {
+    opacity: 1;
+    transform: translateX(-45vw) scale(1.035);
+  }
+  66% {
+    opacity: 1;
+    transform: translateX(-37vw) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
 
 .featured-card img {
@@ -616,6 +659,7 @@ body.academic-card-hover #cur-dot {
 
   .featured-card {
     margin-left: 0;
+    animation-name: hero-card-mobile;
   }
 
   .project-grid {
@@ -660,8 +704,31 @@ body.academic-card-hover #cur-dot {
 @media (prefers-reduced-motion: reduce) {
   .project-card,
   .academic-modal,
-  .modal-gallery img {
+  .modal-gallery img,
+  .eyebrow,
+  .hero-title,
+  .hero-intro,
+  .hero-meta,
+  .featured-card {
     transition: none;
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-card-mobile {
+  0% {
+    opacity: 0;
+    transform: translateX(24vw) scale(0.98);
+  }
+  54% {
+    opacity: 1;
+    transform: translateX(-8vw) scale(1.025);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
   }
 }
 </style>
