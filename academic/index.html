@@ -975,6 +975,315 @@
   .acx-footer { padding: 36px 20px; }
 }
 
+/* ── ORBITAL CARD EXPERIENCE ─────────── */
+.acx-feature-card {
+  animation: acx-drift 7s ease-in-out infinite;
+  will-change: transform;
+}
+.acx-feature-card:nth-child(2) { animation-delay: -2.2s; }
+.acx-feature-card:nth-child(3) { animation-delay: -4.1s; }
+.acx-work {
+  display: block;
+  max-width: none;
+  padding: 64px 36px 130px;
+  background:
+    linear-gradient(90deg, rgba(17,17,24,0.055) 1px, transparent 1px),
+    linear-gradient(rgba(17,17,24,0.045) 1px, transparent 1px),
+    var(--paper);
+  background-size: 74px 74px;
+}
+.acx-index {
+  position: relative;
+  top: auto;
+  max-width: 1180px;
+  margin: 0 auto 38px;
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 34px;
+  align-items: end;
+}
+.acx-index-title { margin-bottom: 0; }
+.acx-index-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.acx-index-list a {
+  border: 1px solid rgba(17,17,24,0.1);
+  padding: 8px 10px;
+  background: rgba(250,250,248,0.52);
+}
+.acx-orbit-stage {
+  position: relative;
+  min-height: 1700px;
+  max-width: 1320px;
+  margin: 0 auto;
+  perspective: 1400px;
+}
+.acx-orbit-quote {
+  position: sticky;
+  top: 30vh;
+  z-index: 1;
+  width: min(620px, calc(100vw - 48px));
+  min-height: 310px;
+  margin: 18vh auto 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 42px 44px;
+  background: rgba(17,17,24,0.94);
+  color: var(--white);
+  border: 1px solid rgba(184,148,106,0.34);
+  box-shadow: 0 34px 90px rgba(17,17,24,0.23);
+}
+.acx-orbit-quote::before,
+.acx-orbit-quote::after {
+  content: '';
+  position: absolute;
+  left: 44px;
+  right: 44px;
+  height: 1px;
+  background: rgba(184,148,106,0.46);
+}
+.acx-orbit-quote::before { top: 28px; }
+.acx-orbit-quote::after { bottom: 28px; }
+.acx-orbit-quote p {
+  font-family: var(--serif);
+  font-size: clamp(30px, 4vw, 58px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+.acx-orbit-quote em {
+  color: var(--gold);
+  font-style: italic;
+}
+.acx-orbit-quote span {
+  margin-top: 28px;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.32);
+}
+.acx-grid {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.acx-card,
+.acx-card.reveal,
+.acx-card.reveal.visible,
+.acx-card:nth-child(4n + 1),
+.acx-card:nth-child(4n + 2),
+.acx-card:nth-child(4n + 3) {
+  position: absolute;
+  grid-column: auto;
+  width: clamp(250px, 28vw, 385px);
+  min-height: 0;
+  height: 430px;
+  display: block;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  transform:
+    translate3d(var(--float-x, 0px), calc(var(--base-y, 0px) + var(--scroll-y, 0px)), 0)
+    rotate(var(--rot, 0deg));
+  transform-style: preserve-3d;
+  will-change: transform;
+  animation: acx-invite 5.8s ease-in-out infinite;
+  animation-delay: var(--shake-delay, 0s);
+  transition: transform .28s cubic-bezier(.16,1,.3,1), filter .24s ease;
+  z-index: 3;
+}
+.acx-card:nth-child(1) { left: 5%; top: 110px; --rot: -4deg; --float-x: -8px; --base-y: 0px; --depth: 80px; --shake-delay: -0.2s; }
+.acx-card:nth-child(2) { right: 7%; top: 64px; --rot: 3deg; --float-x: 10px; --base-y: 0px; --depth: -70px; --shake-delay: -2.8s; }
+.acx-card:nth-child(3) { left: 12%; top: 530px; --rot: 2.5deg; --float-x: 6px; --base-y: 0px; --depth: -45px; --shake-delay: -4.1s; }
+.acx-card:nth-child(4) { right: 2%; top: 500px; --rot: -3deg; --float-x: -6px; --base-y: 0px; --depth: 95px; --shake-delay: -1.4s; }
+.acx-card:nth-child(5) { left: 34%; top: 780px; --rot: 1.5deg; --float-x: 0px; --base-y: 0px; --depth: -55px; --shake-delay: -3.4s; }
+.acx-card:nth-child(6) { left: 4%; top: 1050px; --rot: -2deg; --float-x: 8px; --base-y: 0px; --depth: 60px; --shake-delay: -0.9s; }
+.acx-card:nth-child(7) { right: 8%; top: 1055px; --rot: 2.2deg; --float-x: -8px; --base-y: 0px; --depth: -80px; --shake-delay: -2.1s; }
+.acx-card:nth-child(8) { left: 20%; top: 1325px; --rot: 3.6deg; --float-x: 3px; --base-y: 0px; --depth: 70px; --shake-delay: -4.8s; }
+.acx-card:nth-child(9) { right: 22%; top: 1370px; --rot: -2.8deg; --float-x: -3px; --base-y: 0px; --depth: -35px; --shake-delay: -1.8s; }
+.acx-card:hover,
+.acx-card.reveal:hover,
+.acx-card.reveal.visible:hover,
+.acx-card:nth-child(4n + 3):hover {
+  filter: drop-shadow(0 30px 40px rgba(17,17,24,0.22));
+  transform:
+    translate3d(var(--float-x, 0px), calc(var(--base-y, 0px) + var(--scroll-y, 0px) - 14px), 0)
+    rotate(var(--rot, 0deg));
+  z-index: 9;
+  animation-play-state: paused;
+}
+.acx-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .7s cubic-bezier(.16,1,.3,1);
+}
+.acx-card:hover .acx-card-inner,
+.acx-card.is-flipped .acx-card-inner {
+  transform: rotateY(180deg);
+}
+.acx-card-face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: #fbfaf7;
+  border: 1px solid rgba(17,17,24,0.14);
+  box-shadow: 0 20px 48px rgba(17,17,24,0.16);
+}
+.acx-card-front {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+.acx-card-back {
+  transform: rotateY(180deg);
+  background: #111118;
+  color: var(--white);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-color: rgba(184,148,106,0.38);
+}
+.acx-media {
+  height: 100%;
+  min-height: 0;
+  border-bottom: 1px solid rgba(17,17,24,0.08);
+}
+.acx-media img,
+.acx-media-placeholder {
+  min-height: 0;
+}
+.acx-card-body {
+  padding: 20px 22px 23px;
+}
+.acx-card-title {
+  font-size: clamp(24px, 2.5vw, 34px);
+}
+.acx-card-desc {
+  display: none;
+}
+.acx-card-foot {
+  margin-top: 16px;
+}
+.acx-back-num,
+.acx-back-tag,
+.acx-back-tools,
+.acx-back-open {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.acx-back-num,
+.acx-back-open { color: var(--gold); }
+.acx-back-tag,
+.acx-back-tools { color: rgba(255,255,255,0.32); }
+.acx-back-title {
+  font-family: var(--serif);
+  font-size: 30px;
+  line-height: 1.02;
+  color: var(--white);
+  margin-top: 24px;
+}
+.acx-back-title em {
+  color: var(--gold);
+  font-style: italic;
+}
+.acx-back-desc {
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.62);
+}
+.acx-back-foot {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.acx-statement { display: none; }
+body.acx-hovering-card #cur {
+  transform: translate(-50%, -50%) scale(1.75) rotate(45deg);
+}
+body.acx-hovering-card #cur circle.cur-ring {
+  stroke: var(--gold);
+  stroke-width: 1.7;
+}
+body.acx-hovering-card #cur-dot {
+  transform: translate(-50%, -50%) scale(1.65);
+}
+@keyframes acx-invite {
+  0%, 84%, 100% { margin-left: 0; }
+  87% { margin-left: -2px; }
+  90% { margin-left: 2px; }
+  93% { margin-left: -1px; }
+  96% { margin-left: 1px; }
+}
+@keyframes acx-drift {
+  0%, 100% { margin-top: 0; }
+  50% { margin-top: -14px; }
+}
+@media (max-width: 980px) {
+  .acx-work {
+    padding: 58px 24px 90px;
+  }
+  .acx-index {
+    display: block;
+  }
+  .acx-index-list {
+    margin-top: 24px;
+    justify-content: flex-start;
+  }
+  .acx-orbit-stage {
+    min-height: 0;
+  }
+  .acx-orbit-quote {
+    position: relative;
+    top: auto;
+    margin: 0 auto 28px;
+  }
+  .acx-grid {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .acx-card,
+  .acx-card.reveal,
+  .acx-card.reveal.visible,
+  .acx-card:nth-child(n),
+  .acx-card:hover,
+  .acx-card:nth-child(4n + 3):hover {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    width: 100%;
+    height: 430px;
+    transform: none;
+    animation: none;
+  }
+}
+@media (max-width: 640px) {
+  .acx-orbit-quote {
+    padding: 38px 28px;
+    min-height: 260px;
+  }
+  .acx-orbit-quote::before,
+  .acx-orbit-quote::after {
+    left: 28px;
+    right: 28px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1051,15 +1360,14 @@
       <h2 class="acx-index-title">Nine ways of <em>testing form.</em></h2>
       <nav class="acx-index-list" id="acx-index-list" aria-label="Academic project index"></nav>
     </aside>
-    <div class="acx-grid" id="acx-project-grid"></div>
-  </section>
-
-  <section class="acx-statement">
-    <div class="acx-statement-inner">
-      <p class="acx-statement-text">
-        I research what exists, <em>design what is missing,</em> and build the systems that bring complex ideas into form.
-      </p>
-      <div class="acx-statement-meta">Marberd Bernard · Columbia GSAPP · M.Arch 2024</div>
+    <div class="acx-orbit-stage" id="acx-orbit-stage">
+      <div class="acx-orbit-quote">
+        <p>
+          I research what exists, <em>design what is missing,</em> and build the systems that bring complex ideas into form.
+        </p>
+        <span>Click any study · Scroll to rearrange the archive</span>
+      </div>
+      <div class="acx-grid" id="acx-project-grid"></div>
     </div>
   </section>
 
@@ -1616,8 +1924,31 @@
           '<span class="acx-open">Open study ↗</span>' +
         '</div>';
 
-      card.appendChild(media);
-      card.appendChild(body);
+      var back = document.createElement('div');
+      back.className = 'acx-card-face acx-card-back';
+      back.innerHTML =
+        '<div>' +
+          '<div class="acx-back-num">N° ' + project.n + '</div>' +
+          '<div class="acx-back-tag">' + project.cat + '</div>' +
+          '<h3 class="acx-back-title">' + project.title + '</h3>' +
+          '<p class="acx-back-desc">' + project.desc + '</p>' +
+        '</div>' +
+        '<div class="acx-back-foot">' +
+          '<span class="acx-back-tools">' + project.tools + '</span>' +
+          '<span class="acx-back-open">Open full study ↗</span>' +
+        '</div>';
+
+      var front = document.createElement('div');
+      front.className = 'acx-card-face acx-card-front';
+      front.appendChild(media);
+      front.appendChild(body);
+
+      var inner = document.createElement('div');
+      inner.className = 'acx-card-inner';
+      inner.appendChild(front);
+      inner.appendChild(back);
+
+      card.appendChild(inner);
       grid.appendChild(card);
 
       var link = document.createElement('a');
@@ -1628,6 +1959,24 @@
   }
 
   renderAcademicExperience();
+
+  var motionCards = Array.prototype.slice.call(document.querySelectorAll('.acx-card'));
+  function updateAcademicMotion() {
+    var stage = document.getElementById('acx-orbit-stage');
+    if (!stage || window.matchMedia('(max-width: 980px)').matches) return;
+    var rect = stage.getBoundingClientRect();
+    var vh = window.innerHeight || 1;
+    var progress = Math.max(0, Math.min(1, (vh * 0.78 - rect.top) / (rect.height + vh * 0.24)));
+    motionCards.forEach(function (card, i) {
+      var depth = parseFloat(getComputedStyle(card).getPropertyValue('--depth')) || 40;
+      var wave = Math.sin(progress * Math.PI * 2 + i * 0.82) * 18;
+      var y = (progress - 0.5) * depth + wave;
+      card.style.setProperty('--scroll-y', y.toFixed(1) + 'px');
+    });
+  }
+  updateAcademicMotion();
+  window.addEventListener('scroll', updateAcademicMotion, { passive: true });
+  window.addEventListener('resize', updateAcademicMotion);
 
   /* ── HERO CARD PARALLAX ── */
   var phase0Cards = document.querySelectorAll('.ac-phase0-card');
@@ -1774,11 +2123,26 @@
 
   /* click any card */
   document.querySelectorAll('.ac-card, .acx-card').forEach(function (card) {
+    card.setAttribute('data-hover', '');
+    card.addEventListener('mouseenter', function () {
+      document.body.classList.add('acx-hovering-card');
+    });
+    card.addEventListener('mouseleave', function () {
+      document.body.classList.remove('acx-hovering-card');
+      card.classList.remove('is-flipped');
+    });
     card.addEventListener('click', function () {
       openModal(parseInt(card.dataset.project, 10));
     });
     card.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(parseInt(card.dataset.project, 10)); }
+      if (e.key === ' ') {
+        e.preventDefault();
+        card.classList.toggle('is-flipped');
+      }
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        openModal(parseInt(card.dataset.project, 10));
+      }
     });
     card.setAttribute('tabindex', '0');
     card.setAttribute('role', 'button');
