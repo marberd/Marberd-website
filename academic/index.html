@@ -1568,21 +1568,102 @@ body.acx-hovering-card #cur-dot {
   align-self: center;
   position: relative;
 }
-.acx-feature .ac-phase0-card {
-  width: min(31vw, 330px);
-  height: 238px;
+.acx-hero-panel {
+  position: relative;
+  width: min(100%, 620px);
+  height: min(72vh, 720px);
+  margin-left: auto;
+  margin-top: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.42);
+  overflow: hidden;
+  background: #101010;
+  transform:
+    translate3d(var(--hero-shift-x, 0px), var(--hero-shift-y, 0px), 0)
+    rotate(var(--hero-tilt, 0deg));
+  will-change: transform;
 }
-.acx-feature .ac-phase0-card:nth-child(1) { right: 10%; top: 18px; }
-.acx-feature .ac-phase0-card:nth-child(2) { right: 26%; top: 150px; }
-.acx-feature .ac-phase0-card:nth-child(3) { right: 4%; top: 286px; }
-.acx-feature .ac-card {
-  box-shadow: 0 22px 56px rgba(0,0,0,0.28);
+.acx-hero-panel-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #0e0e0e;
 }
-.acx-feature .ac-card:hover .ac-card-inner {
-  transform: translateY(-4px);
+.acx-hero-panel-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform:
+    scale(var(--hero-scale, 1.02))
+    translate3d(var(--hero-pan-x, 0px), var(--hero-pan-y, 0px), 0);
+  transition: transform .08s linear;
+  filter: saturate(0.92) contrast(1.02) brightness(0.78);
+  will-change: transform;
 }
-.acx-feature .ac-card-hint {
-  bottom: -24px;
+.acx-hero-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(17,17,24,0.02), rgba(17,17,24,0.26)),
+    linear-gradient(90deg, rgba(0,0,0,0.14), transparent 18%, transparent 82%, rgba(0,0,0,0.16));
+  z-index: 1;
+  pointer-events: none;
+}
+.acx-hero-panel-frame {
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(255,255,255,0.1);
+  z-index: 2;
+  pointer-events: none;
+}
+.acx-hero-panel-copy {
+  position: absolute;
+  left: 26px;
+  bottom: 26px;
+  z-index: 3;
+  display: grid;
+  gap: 6px;
+  max-width: 60%;
+  color: var(--white);
+}
+.acx-hero-panel-kicker,
+.acx-hero-panel-meta,
+.acx-hero-panel-cue {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.36);
+}
+.acx-hero-panel-title {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--white);
+}
+.acx-hero-panel-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+.acx-hero-panel-cue {
+  position: absolute;
+  right: 24px;
+  top: 22px;
+  z-index: 3;
+  padding: 8px 0;
+  color: rgba(255,255,255,0.28);
+}
+.acx-hero-panel-cue::before {
+  content: '';
+  display: inline-block;
+  width: 22px;
+  height: 1px;
+  margin-right: 10px;
+  vertical-align: middle;
+  background: rgba(184,148,106,0.9);
 }
 
 .acq-archive {
@@ -1837,16 +1918,10 @@ body.acx-hovering-card #cur-dot {
     min-height: 0;
     display: block;
   }
-  .acx-feature .ac-phase0-card {
-    position: relative;
+  .acx-hero-panel {
     width: min(100%, 520px);
-    height: 240px;
-    margin: 0 auto 14px;
-  }
-  .acx-feature .ac-phase0-card:nth-child(1),
-  .acx-feature .ac-phase0-card:nth-child(2),
-  .acx-feature .ac-phase0-card:nth-child(3) {
-    left: auto; right: auto; top: auto;
+    height: 430px;
+    margin: 0 auto;
   }
   .acq-shell {
     grid-template-columns: 1fr;
@@ -1886,6 +1961,19 @@ body.acx-hovering-card #cur-dot {
   .acx-intro {
     font-size: 14px;
     line-height: 1.72;
+  }
+  .acx-feature {
+    min-height: 380px;
+  }
+  .acx-hero-panel {
+    width: 100%;
+    height: 380px;
+  }
+  .acx-hero-panel-copy {
+    left: 18px;
+    right: 18px;
+    max-width: none;
+    bottom: 18px;
   }
   .acq-quote p {
     font-size: clamp(26px, 9vw, 38px);
@@ -2398,100 +2486,19 @@ body.acx-hovering-card #cur-dot {
     <div class="ac-hero-footer">Columbia GSAPP · M.Arch · 2024</div>
   </div>
 
-  <!-- Phase 0: first 3 project cards stacked in right column -->
-  <div class="ac-hero-right" id="ac-hero-right" aria-hidden="true">
-    <!-- Card 1 -->
-    <div class="ac-phase0-card">
-      <div class="ac-card" data-project="0">
-        <div class="ac-card-inner">
-          <div class="ac-card-face ac-card-front">
-            <img src="../assets/images/projects/pool-house.jpg" alt="Threshold Conditions">
-            <span class="ac-card-front-corner">N° 01</span>
-            <div class="ac-card-front-frame"></div>
-            <div class="ac-card-front-label">
-              <span class="ac-card-front-title">Threshold <em>Conditions</em></span>
-              <span class="ac-card-front-tag">Core Studio</span>
-            </div>
-          </div>
-          <div class="ac-card-face ac-card-back">
-            <div class="ac-back-top">
-              <span class="ac-back-num">N° 01</span>
-              <span class="ac-back-tag">Housing Typology</span>
-            </div>
-            <div class="ac-back-title">Threshold <em>Conditions</em></div>
-            <div class="ac-back-studio">Core Studio I · Fall 2022</div>
-            <p class="ac-back-desc">A study of liminal space in dense urban housing — vestibules, stairwells, and shared landings reframed as primary architecture rather than residual circulation.</p>
-            <div class="ac-back-cta">
-              <span class="ac-back-tools">Rhino · Grasshopper · V-Ray</span>
-              <span class="ac-back-expand">Expand ↗</span>
-            </div>
-          </div>
-        </div>
-        <div class="ac-card-hint">View project</div>
+  <div class="ac-hero-right" id="ac-hero-right">
+    <figure class="acx-hero-panel" id="acx-hero-panel" aria-label="The Mangrove featured image">
+      <div class="acx-hero-panel-media">
+        <img src="../assets/images/academic/mangrove/mangrove-hero.jpg" alt="The Mangrove project hero image">
       </div>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="ac-phase0-card">
-      <div class="ac-card" data-project="1">
-        <div class="ac-card-inner">
-          <div class="ac-card-face ac-card-front">
-            <img src="../assets/images/academic/mangrove/mangrove-hero.jpg" alt="The Mangrove — night rendering">
-            <span class="ac-card-front-corner">N° 02</span>
-            <div class="ac-card-front-frame"></div>
-            <div class="ac-card-front-label">
-              <span class="ac-card-front-title">The <em>Mangrove</em></span>
-              <span class="ac-card-front-tag">Core Studio IV</span>
-            </div>
-          </div>
-          <div class="ac-card-face ac-card-back">
-            <div class="ac-back-top">
-              <span class="ac-back-num">N° 02</span>
-              <span class="ac-back-tag">Environmental / Biomimetic</span>
-            </div>
-            <div class="ac-back-title">The <em>Mangrove</em></div>
-            <div class="ac-back-studio">Architecture Studio IV · Spring 2023</div>
-            <p class="ac-back-desc">A waterfront civic structure whose branching Ipe wood network functions simultaneously as facade, structure, and foundation — drawing from mangrove ecosystems to mediate land, water, and light.</p>
-            <div class="ac-back-cta">
-              <span class="ac-back-tools">Revit · Lumion · Luban</span>
-              <span class="ac-back-expand">Expand ↗</span>
-            </div>
-          </div>
-        </div>
-        <div class="ac-card-hint">View project</div>
-      </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="ac-phase0-card">
-      <div class="ac-card" data-project="2">
-        <div class="ac-card-inner">
-          <div class="ac-card-face ac-card-front">
-            <div class="ac-card-ph"></div>
-            <span class="ac-card-front-corner">N° 03</span>
-            <div class="ac-card-front-frame"></div>
-            <div class="ac-card-front-label">
-              <span class="ac-card-front-title">A Library for <em>Slow Reading</em></span>
-              <span class="ac-card-front-tag">Civic</span>
-            </div>
-          </div>
-          <div class="ac-card-face ac-card-back">
-            <div class="ac-back-top">
-              <span class="ac-back-num">N° 03</span>
-              <span class="ac-back-tag">Civic Architecture</span>
-            </div>
-            <div class="ac-back-title">A Library for <em>Slow Reading</em></div>
-            <div class="ac-back-studio">Core Studio II · Spring 2023</div>
-            <p class="ac-back-desc">Twelve cloister-like rooms arranged around a central courtyard — each tuned to a different acoustic and light condition. A meditation on attention as a civic resource.</p>
-            <div class="ac-back-cta">
-              <span class="ac-back-tools">Rhino · V-Ray · InDesign</span>
-              <span class="ac-back-expand">Expand ↗</span>
-            </div>
-          </div>
-        </div>
-        <div class="ac-card-hint">View project</div>
-      </div>
-    </div>
+      <div class="acx-hero-panel-frame"></div>
+      <figcaption class="acx-hero-panel-copy">
+        <span class="acx-hero-panel-kicker">Featured project</span>
+        <strong class="acx-hero-panel-title">The Mangrove</strong>
+        <span class="acx-hero-panel-meta">Architecture Studio IV · Spring 2023</span>
+      </figcaption>
+      <div class="acx-hero-panel-cue">Drag to explore</div>
+    </figure>
   </div>
 </section>
 
@@ -3391,7 +3398,10 @@ body.acx-hovering-card #cur-dot {
   var refinedArchiveLeft = document.getElementById('acq-active-copy');
   var refinedArchiveRight = document.getElementById('acq-side-copy');
   var refinedArchiveShell = document.getElementById('acq-archive');
-  var refinedHeroCards = Array.prototype.slice.call(document.querySelectorAll('.acx-hero .ac-card'));
+  var refinedHeroPanel = document.getElementById('acx-hero-panel');
+  var refinedHeroPointerX = 0.5;
+  var refinedHeroPointerY = 0.44;
+  var refinedHeroPointerActive = false;
   var refinedArchiveCards = [];
   var refinedActiveIndex = 0;
   var refinedScrollFrame = 0;
@@ -3439,6 +3449,7 @@ body.acx-hovering-card #cur-dot {
     if (!refinedArchiveGrid || !refinedArchiveLeft || !refinedArchiveRight) return;
 
     refinedArchiveGrid.innerHTML = '';
+    refinedArchiveCards = [];
     refinedArchiveProjects.forEach(function (project, index) {
       var card = buildRefinedArchiveCard(project, index);
       refinedArchiveGrid.appendChild(card);
@@ -3464,6 +3475,22 @@ body.acx-hovering-card #cur-dot {
     });
 
     syncRefinedArchivePanels(0);
+  }
+
+  if (refinedHeroPanel) {
+    refinedHeroPanel.addEventListener('pointermove', function (event) {
+      var rect = refinedHeroPanel.getBoundingClientRect();
+      refinedHeroPointerX = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+      refinedHeroPointerY = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
+      refinedHeroPointerActive = true;
+      requestRefinedAcademicMotion();
+    });
+    refinedHeroPanel.addEventListener('pointerleave', function () {
+      refinedHeroPointerActive = false;
+      refinedHeroPointerX = 0.5;
+      refinedHeroPointerY = 0.44;
+      requestRefinedAcademicMotion();
+    });
   }
 
   function syncRefinedArchivePanels(index) {
@@ -3507,18 +3534,25 @@ body.acx-hovering-card #cur-dot {
     }
 
     var dropProgress = Math.max(0, Math.min(1, scrollY / (vh * 0.26)));
-    refinedHeroCards.forEach(function (card, i) {
-      var baseX = i === 1 ? 0 : (i === 0 ? 14 : -12);
-      var wave = Math.sin((scrollY / 140) + i * 1.2) * 4;
-      var dropY = dropProgress * (92 + i * 22);
-      var rot = i === 1 ? 1.1 : (i === 0 ? -1.5 : 0.8);
-      card.style.transform = 'translate3d(' + (baseX + wave).toFixed(1) + 'px, ' + dropY.toFixed(1) + 'px, 0) rotate(' + (rot + dropProgress * 0.8).toFixed(2) + 'deg)';
-    });
+    if (refinedHeroPanel) {
+      var heroPanX = ((refinedHeroPointerX - 0.5) * 34) + Math.sin(scrollY / 220) * 4;
+      var heroPanY = ((refinedHeroPointerY - 0.5) * 24) + dropProgress * 18;
+      var heroShiftY = dropProgress * 42;
+      var heroShiftX = Math.sin(scrollY / 380) * 3;
+      var heroTilt = ((refinedHeroPointerX - 0.5) * 1.6) + (refinedHeroPointerActive ? 0.1 : 0);
+      var heroScale = 1.06 + dropProgress * 0.03;
+      refinedHeroPanel.style.setProperty('--hero-pan-x', heroPanX.toFixed(1) + 'px');
+      refinedHeroPanel.style.setProperty('--hero-pan-y', heroPanY.toFixed(1) + 'px');
+      refinedHeroPanel.style.setProperty('--hero-shift-y', heroShiftY.toFixed(1) + 'px');
+      refinedHeroPanel.style.setProperty('--hero-shift-x', heroShiftX.toFixed(1) + 'px');
+      refinedHeroPanel.style.setProperty('--hero-tilt', heroTilt.toFixed(2) + 'deg');
+      refinedHeroPanel.style.setProperty('--hero-scale', heroScale.toFixed(3));
+    }
 
     if (refinedArchiveQuote) {
-      var quotePulse = Math.max(0, 1 - Math.abs(archiveProgress - 0.16) / 0.16);
+      var quotePulse = Math.max(0, 1 - Math.abs(archiveProgress - 0.14) / 0.12);
       refinedArchiveQuote.style.opacity = quotePulse.toFixed(3);
-      refinedArchiveQuote.style.transform = 'translateY(' + (12 - quotePulse * 12).toFixed(1) + 'px) scale(' + (0.98 + quotePulse * 0.025).toFixed(3) + ')';
+      refinedArchiveQuote.style.transform = 'translateY(' + (10 - quotePulse * 10).toFixed(1) + 'px) scale(' + (0.975 + quotePulse * 0.03).toFixed(3) + ')';
       refinedArchiveQuote.style.filter = 'blur(' + ((1 - quotePulse) * 0.1).toFixed(2) + 'px)';
     }
 
