@@ -1583,6 +1583,363 @@ body.acx-hovering-card #cur-dot {
     rotate(var(--rot, 0deg));
 }
 
+/* ── NEW ACADEMIC WHEEL ─────────────────────────────── */
+.acx-work,
+.acx-footer {
+  display: none;
+}
+.acw-archive {
+  background: #f7f4ee;
+  color: #151512;
+  padding: 92px 60px 72px;
+}
+.acw-shell {
+  max-width: 1480px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(240px, 0.82fr) minmax(0, 1.18fr) minmax(260px, 0.78fr);
+  gap: 44px;
+  align-items: start;
+}
+.acw-meta,
+.acw-side {
+  position: sticky;
+  top: 104px;
+  align-self: start;
+}
+.acw-label,
+.acw-kicker,
+.acw-side-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(17,17,24,0.48);
+}
+.acw-label { margin-bottom: 16px; }
+.acw-meta-panel,
+.acw-side-panel {
+  border-top: 1px solid rgba(17,17,24,0.12);
+  padding-top: 22px;
+}
+.acw-kicker {
+  color: var(--gold-dk);
+  margin-bottom: 18px;
+}
+.acw-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4vw, 58px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin: 0 0 26px;
+}
+.acw-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 18px;
+}
+.acw-meta-grid div {
+  padding-top: 12px;
+  border-top: 1px solid rgba(17,17,24,0.08);
+}
+.acw-meta-grid .acw-full { grid-column: 1 / -1; }
+.acw-meta-grid span,
+.acw-side-group span {
+  display: block;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(17,17,24,0.42);
+  margin-bottom: 8px;
+}
+.acw-meta-grid strong {
+  display: block;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black);
+}
+.acw-stage {
+  min-height: calc(100vh + 500vh);
+  position: relative;
+}
+.acw-sticky {
+  position: sticky;
+  top: 88px;
+  height: calc(100vh - 160px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.acw-wheel {
+  position: relative;
+  width: min(100%, 760px);
+  height: min(74vh, 720px);
+  overflow: visible;
+}
+.acw-wheel-axis {
+  position: absolute;
+  left: 50%;
+  top: 8%;
+  bottom: 8%;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(17,17,24,0.06), rgba(17,17,24,0.28), rgba(17,17,24,0.06));
+  transform: translateX(-50%);
+}
+.acw-wheel-axis::before,
+.acw-wheel-axis::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 10px;
+  height: 1px;
+  background: rgba(17,17,24,0.14);
+  transform: translateX(-50%);
+}
+.acw-wheel-axis::before { top: 0; }
+.acw-wheel-axis::after { bottom: 0; }
+.acw-frame {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(100%, 600px);
+  height: min(70vh, 620px);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.acw-frame::before,
+.acw-frame::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 180px;
+  height: 1px;
+  background: rgba(17,17,24,0.1);
+  transform: translateX(-50%);
+}
+.acw-frame::before { top: 0; }
+.acw-frame::after { bottom: 0; }
+.acw-frame i,
+.acw-frame b {
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  height: 74%;
+  background: rgba(17,17,24,0.1);
+  transform: translateY(-50%);
+}
+.acw-frame i { left: 0; }
+.acw-frame b { right: 0; }
+.acw-wheel-track {
+  position: absolute;
+  inset: 0;
+}
+.acw-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(100%, 560px);
+  transform:
+    translate(-50%, -50%)
+    translate3d(var(--x, 0px), var(--y, 0px), 0)
+    scale(var(--scale, 1))
+    rotate(var(--rot, 0deg));
+  opacity: var(--opacity, 1);
+  filter: blur(var(--blur, 0px));
+  transition: transform .28s cubic-bezier(.16,1,.3,1), opacity .28s ease, filter .28s ease;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: none;
+}
+.acw-card:hover {
+  filter: blur(0) drop-shadow(0 18px 34px rgba(17,17,24,0.14));
+}
+.acw-card.is-active .acw-card-inner {
+  border-color: rgba(17,17,24,0.22);
+  box-shadow: 0 26px 64px rgba(17,17,24,0.12);
+}
+.acw-card-inner {
+  background: #fff;
+  border: 1px solid rgba(17,17,24,0.12);
+  box-shadow: 0 18px 42px rgba(17,17,24,0.08);
+  overflow: hidden;
+}
+.acw-media {
+  background: #151512;
+  border-bottom: 1px solid rgba(17,17,24,0.08);
+}
+.acw-media img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  display: block;
+  padding: 12px;
+}
+.acw-placeholder {
+  min-height: 240px;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(135deg, rgba(184,148,106,0.08), transparent 48%),
+    #151512;
+}
+.acw-placeholder span {
+  font-family: var(--serif);
+  font-size: clamp(42px, 7vw, 92px);
+  font-style: italic;
+  color: rgba(255,255,255,0.16);
+}
+.acw-copy {
+  padding: 18px 22px 22px;
+}
+.acw-number,
+.acw-cue,
+.acw-themes-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.acw-number {
+  color: var(--gold-dk);
+  display: block;
+  margin-bottom: 12px;
+}
+.acw-card-title {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 400;
+  line-height: 1.02;
+  color: var(--black);
+}
+.acw-card-title em { color: var(--gold-dk); font-style: italic; }
+.acw-card-sub {
+  margin-top: 14px;
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(17,17,24,0.72);
+}
+.acw-hover {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(17,17,24,0.08);
+  color: var(--gold-dk);
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+.acw-card:hover .acw-hover { opacity: 1; }
+.acw-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  margin: 0 6px 6px 0;
+  border: 1px solid rgba(17,17,24,0.08);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(17,17,24,0.72);
+  background: rgba(255,255,255,0.64);
+}
+.acw-side-panel {
+  max-width: 340px;
+}
+.acw-side-desc {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.45;
+  color: var(--black);
+  margin: 0 0 22px;
+}
+.acw-side-group {
+  display: grid;
+  gap: 18px;
+}
+.acw-side-group p {
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(17,17,24,0.72);
+}
+.acw-cue {
+  margin-top: 22px;
+  color: var(--gold-dk);
+}
+.acw-footer {
+  max-width: 1480px;
+  margin: 72px auto 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(17,17,24,0.08);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(17,17,24,0.42);
+}
+@media (max-width: 1100px) {
+  .acw-shell {
+    grid-template-columns: 1fr;
+  }
+  .acw-meta,
+  .acw-side {
+    position: static;
+  }
+  .acw-stage {
+    min-height: 0;
+    padding: 36px 0 24px;
+  }
+  .acw-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
+  }
+  .acw-wheel {
+    height: auto;
+    min-height: 0;
+  }
+  .acw-wheel-axis {
+    display: none;
+  }
+  .acw-frame {
+    display: none;
+  }
+  .acw-card {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    margin-bottom: 18px;
+  }
+  .acw-hover { opacity: 1; }
+}
+@media (max-width: 640px) {
+  .acw-archive {
+    padding: 72px 20px 40px;
+  }
+  .acw-meta-grid {
+    grid-template-columns: 1fr;
+  }
+  .acw-side-panel {
+    max-width: none;
+  }
+  .acw-side-desc {
+    font-size: 18px;
+  }
+  .acw-card-title {
+    font-size: 24px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1631,21 +1988,52 @@ body.acx-hovering-card #cur-dot {
     <div class="acx-feature" id="acx-hero-card-slot"></div>
   </section>
 
-  <section class="acx-work" aria-label="Academic projects">
-    <aside class="acx-index">
-      <div class="acx-index-label">Project Index</div>
-      <h2 class="acx-index-title">Seven ways of <em>testing form.</em></h2>
-      <nav class="acx-index-list" id="acx-index-list" aria-label="Academic project index"></nav>
-    </aside>
-    <div class="acx-orbit-stage" id="acx-orbit-stage">
-      <div class="acx-orbit-quote">
-        <p>
-          I research what exists, <em>design what is missing,</em> and build the systems that bring complex ideas into form.
-        </p>
-        <span>Click any study · Scroll to rearrange the archive</span>
+  <section class="acw-archive" id="acw-archive" aria-label="Academic projects">
+    <div class="acw-shell">
+      <aside class="acw-meta">
+        <div class="acw-label">Academic archive</div>
+        <div class="acw-meta-panel">
+          <div class="acw-kicker">Project dossier</div>
+          <h2 class="acw-title" id="acw-title"></h2>
+          <div class="acw-meta-grid">
+            <div><span>Year</span><strong id="acw-year"></strong></div>
+            <div><span>School</span><strong id="acw-school"></strong></div>
+            <div><span>Studio</span><strong id="acw-studio"></strong></div>
+            <div><span>Professor</span><strong id="acw-professor"></strong></div>
+            <div class="acw-full"><span>Category</span><strong id="acw-category"></strong></div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="acw-stage" id="acw-stage">
+        <div class="acw-sticky">
+          <div class="acw-wheel" id="acw-wheel">
+            <div class="acw-wheel-axis"></div>
+            <div class="acw-frame" aria-hidden="true"><i></i><b></b></div>
+            <div class="acw-wheel-track" id="acw-wheel-track"></div>
+          </div>
+        </div>
       </div>
-      <div class="acx-grid" id="acx-project-grid"></div>
+
+      <aside class="acw-side">
+        <div class="acw-side-panel">
+          <div class="acw-side-label">Project notes</div>
+          <p class="acw-side-desc" id="acw-side-desc"></p>
+          <div class="acw-side-group">
+            <div>
+              <span>Themes</span>
+              <p id="acw-themes"></p>
+            </div>
+            <div>
+              <span>Tools</span>
+              <p id="acw-tools"></p>
+            </div>
+          </div>
+          <div class="acw-cue">Click to expand</div>
+        </div>
+      </aside>
     </div>
+    <footer class="acw-footer">© 2026 Marberd Bernard · New York, NY</footer>
   </section>
 
   <footer class="acx-footer">© 2026 Marberd Bernard · New York, NY</footer>
@@ -2145,10 +2533,120 @@ body.acx-hovering-card #cur-dot {
     }
   ];
 
+  var YEAR_BY_PROJECT = {
+    '01': '2022',
+    '02': '2023',
+    '03': '2023',
+    '04': '2023',
+    '05': '2024',
+    '06': '2024',
+    '07': '2024',
+    '08': '2024'
+  };
+
+  var THEMES_BY_PROJECT = {
+    '01': ['Housing typology', 'Thresholds', 'Light'],
+    '02': ['Biomimicry', 'Structure', 'Ecology'],
+    '03': ['Civic interior', 'Acoustics', 'Attention'],
+    '04': ['Urban systems', 'BIM', 'Zoning'],
+    '05': ['Material research', 'Carbon storage', 'Biodegradability'],
+    '06': ['Infrastructure', 'Water', 'Visibility'],
+    '07': ['Domestic space', 'Translation', 'Section'],
+    '08': ['Drawing', 'Field study', 'Representation']
+  };
+
+  var WHEEL_PROJECTS = PROJECTS.filter(function (project) {
+    return !project.heroOnly;
+  }).map(function (project, originalIndex) {
+    return {
+      originalIndex: originalIndex,
+      n: project.n,
+      title: project.title,
+      year: YEAR_BY_PROJECT[project.n] || '',
+      school: 'Columbia GSAPP',
+      studio: project.studio,
+      professor: project.critic,
+      category: project.cat,
+      shortDescription: project.desc.length > 150 ? project.desc.slice(0, 150).replace(/\s+\S*$/, '') + '…' : project.desc,
+      longDescription: project.desc,
+      themes: THEMES_BY_PROJECT[project.n] || [project.tag],
+      tools: project.tools,
+      images: project.imgs || [],
+      tag: project.tag
+    };
+  });
+
   function projectPlainTitle(project) {
     var div = document.createElement('div');
     div.innerHTML = project.title;
     return div.textContent || div.innerText || '';
+  }
+
+  function renderThemeChips(themes) {
+    return themes.map(function (theme) {
+      return '<span class="acw-chip">' + theme + '</span>';
+    }).join('');
+  }
+
+  function buildWheelCard(project, i) {
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'acw-card';
+    button.dataset.project = String(project.originalIndex);
+    button.setAttribute('aria-label', 'Open ' + projectPlainTitle(project));
+    button.innerHTML =
+      '<div class="acw-card-inner">' +
+        '<div class="acw-media">' +
+          (project.images && project.images.length
+            ? '<img src="' + project.images[0] + '" alt="' + projectPlainTitle(project) + '" loading="' + (i > 1 ? 'lazy' : 'eager') + '">'
+            : '<div class="acw-placeholder"><span>' + project.n + '</span></div>') +
+        '</div>' +
+        '<div class="acw-copy">' +
+          '<span class="acw-number">N° ' + project.n + '</span>' +
+          '<h3 class="acw-card-title">' + project.title + '</h3>' +
+          '<p class="acw-card-sub">' + project.shortDescription + '</p>' +
+          '<div class="acw-hover">Click to expand</div>' +
+        '</div>' +
+      '</div>';
+    return button;
+  }
+
+  function syncWheelPanels(index) {
+    var project = WHEEL_PROJECTS[index];
+    if (!project) return;
+
+    var titleEl = document.getElementById('acw-title');
+    var yearEl = document.getElementById('acw-year');
+    var schoolEl = document.getElementById('acw-school');
+    var studioEl = document.getElementById('acw-studio');
+    var professorEl = document.getElementById('acw-professor');
+    var categoryEl = document.getElementById('acw-category');
+    var descEl = document.getElementById('acw-side-desc');
+    var themesEl = document.getElementById('acw-themes');
+    var toolsEl = document.getElementById('acw-tools');
+
+    if (titleEl) titleEl.innerHTML = project.title;
+    if (yearEl) yearEl.textContent = project.year;
+    if (schoolEl) schoolEl.textContent = project.school;
+    if (studioEl) studioEl.textContent = project.studio;
+    if (professorEl) professorEl.textContent = project.professor;
+    if (categoryEl) categoryEl.textContent = project.category;
+    if (descEl) descEl.textContent = project.longDescription;
+    if (themesEl) themesEl.innerHTML = renderThemeChips(project.themes);
+    if (toolsEl) toolsEl.textContent = project.tools;
+  }
+
+  function renderAcademicWheel() {
+    var track = document.getElementById('acw-wheel-track');
+    var stage = document.getElementById('acw-stage');
+    if (!track || !stage) return;
+
+    track.innerHTML = '';
+    WHEEL_PROJECTS.forEach(function (project, i) {
+      track.appendChild(buildWheelCard(project, i));
+    });
+
+    syncWheelPanels(0);
   }
 
   function createProjectCard(project, i, extraClass) {
@@ -2252,6 +2750,86 @@ body.acx-hovering-card #cur-dot {
   }
 
   renderAcademicExperience();
+
+  var wheelCards = [];
+  var wheelActiveIndex = 0;
+  var wheelFrame = 0;
+
+  function updateAcademicWheel() {
+    var archive = document.getElementById('acw-archive');
+    if (!archive || !wheelCards.length) return;
+
+    var vh = window.innerHeight || 1;
+    if (window.matchMedia('(max-width: 1100px)').matches) {
+      wheelCards.forEach(function (card) {
+        card.style.setProperty('--x', '0px');
+        card.style.setProperty('--y', '0px');
+        card.style.setProperty('--scale', '1');
+        card.style.setProperty('--opacity', '1');
+        card.style.setProperty('--blur', '0px');
+        card.style.setProperty('--rot', '0deg');
+        card.style.zIndex = '1';
+      });
+      return;
+    }
+
+    var rect = archive.getBoundingClientRect();
+    var progress = Math.max(0, Math.min(1, (vh * 0.56 - rect.top) / (rect.height - vh * 0.56)));
+    var activeFloat = progress * (WHEEL_PROJECTS.length - 1);
+    var activeIndex = Math.round(activeFloat);
+    if (activeIndex !== wheelActiveIndex) {
+      wheelActiveIndex = activeIndex;
+      syncWheelPanels(activeIndex);
+    }
+
+    wheelCards.forEach(function (card, i) {
+      var delta = i - activeFloat;
+      var abs = Math.abs(delta);
+      var x = Math.sin(delta * 0.9) * 48;
+      var y = delta * 122;
+      var scale = Math.max(0.62, 1 - abs * 0.11);
+      var opacity = Math.max(0.18, 1 - abs * 0.34);
+      var blur = Math.min(abs * 1.6, 2.2);
+      var rot = delta * 1.8;
+      card.style.setProperty('--x', x.toFixed(1) + 'px');
+      card.style.setProperty('--y', y.toFixed(1) + 'px');
+      card.style.setProperty('--scale', scale.toFixed(3));
+      card.style.setProperty('--opacity', opacity.toFixed(3));
+      card.style.setProperty('--blur', blur.toFixed(2) + 'px');
+      card.style.setProperty('--rot', rot.toFixed(2) + 'deg');
+      card.style.zIndex = String(100 - Math.round(abs * 10));
+      card.classList.toggle('is-active', i === activeIndex);
+      card.setAttribute('aria-current', i === activeIndex ? 'true' : 'false');
+    });
+  }
+
+  function requestAcademicWheelUpdate() {
+    if (wheelFrame) return;
+    wheelFrame = window.requestAnimationFrame(function () {
+      wheelFrame = 0;
+      updateAcademicWheel();
+    });
+  }
+
+  renderAcademicWheel();
+  wheelCards = Array.prototype.slice.call(document.querySelectorAll('.acw-card'));
+  wheelCards.forEach(function (card, index) {
+    card.setAttribute('data-hover', '');
+    card.addEventListener('mouseenter', function () {
+      document.body.classList.add('acx-hovering-card');
+    });
+    card.addEventListener('mouseleave', function () {
+      document.body.classList.remove('acx-hovering-card');
+    });
+    card.addEventListener('click', function () {
+      wheelActiveIndex = index;
+      syncWheelPanels(index);
+      openModal(parseInt(card.dataset.project, 10));
+    });
+  });
+  updateAcademicWheel();
+  window.addEventListener('scroll', requestAcademicWheelUpdate, { passive: true });
+  window.addEventListener('resize', requestAcademicWheelUpdate);
 
   var motionCards = Array.prototype.slice.call(document.querySelectorAll('#acx-project-grid .acx-card'));
   function updateAcademicMotion() {
