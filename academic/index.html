@@ -1411,6 +1411,130 @@ body.acx-hovering-card #cur-dot {
     margin-top: 0;
   }
 }
+@media (max-width: 768px) {
+  .ac-experience {
+    background:
+      linear-gradient(180deg, #111118 0%, #111118 44%, #f4f0e8 44%, #f4f0e8 100%);
+  }
+  .acx-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 92px 20px 52px;
+  }
+  .acx-hero-copy {
+    padding-top: 0;
+  }
+  .acx-title {
+    font-size: clamp(42px, 15vw, 68px);
+    line-height: 0.94;
+    max-width: 100%;
+  }
+  .acx-title em {
+    margin-top: 4px;
+    white-space: normal;
+  }
+  .acx-intro {
+    margin-top: 24px;
+    max-width: 34rem;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+  .acx-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 30px;
+  }
+  .acx-stat strong {
+    font-size: 26px;
+  }
+  .acx-stat span {
+    font-size: 7px;
+    letter-spacing: 0.14em;
+  }
+  .acx-feature {
+    min-height: 0;
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 8px;
+  }
+  .acx-hero-live-card,
+  .acx-hero-live-card.reveal,
+  .acx-hero-live-card.reveal.visible,
+  .acx-hero-live-card:hover,
+  .acx-hero-live-card.reveal:hover,
+  .acx-hero-live-card.reveal.visible:hover {
+    width: min(82vw, 340px);
+    min-width: 0;
+    height: 340px;
+    margin: 0;
+    transform: rotate(1.5deg);
+    animation: none;
+  }
+  .acx-hero-live-card .acx-card-body {
+    padding: 16px 18px 18px;
+  }
+  .acx-hero-live-card .acx-card-title {
+    font-size: 25px;
+  }
+  .acx-work {
+    padding: 42px 20px 76px;
+    background-size: 54px 54px;
+  }
+  .acx-index {
+    margin-bottom: 22px;
+  }
+  .acx-index-title {
+    font-size: 30px;
+  }
+  .acx-orbit-stage {
+    min-height: 0;
+  }
+  .acx-orbit-quote {
+    width: 100%;
+    min-height: 0;
+    padding: 36px 24px;
+    margin-bottom: 24px;
+  }
+  .acx-orbit-quote p {
+    font-size: clamp(28px, 10vw, 42px);
+    line-height: 1.08;
+  }
+  .acx-orbit-quote span {
+    margin-top: 20px;
+    line-height: 1.5;
+  }
+  .acx-card,
+  .acx-card.reveal,
+  .acx-card.reveal.visible,
+  .acx-card:nth-child(n),
+  .acx-card:hover,
+  .acx-card.reveal:hover,
+  .acx-card.reveal.visible:hover {
+    height: 390px;
+  }
+}
+@media (max-width: 420px) {
+  .acx-hero {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .acx-stats {
+    grid-template-columns: 1fr;
+  }
+  .acx-stat {
+    padding-top: 10px;
+  }
+  .acx-feature {
+    justify-content: center;
+  }
+  .acx-hero-live-card,
+  .acx-hero-live-card.reveal,
+  .acx-hero-live-card.reveal.visible,
+  .acx-hero-live-card:hover {
+    width: 100%;
+  }
+}
 
 </style>
 </head>

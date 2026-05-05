@@ -84,16 +84,16 @@ if (nav) {
   overlay.id = 'nav-overlay';
   overlay.innerHTML =
     '<nav class="overlay-nav">' +
-      '<a href="about.html">About</a>' +
-      '<a href="academic.html">Academic</a>' +
-      '<a href="professional.html">Professional</a>' +
-      '<a href="bim-revit.html">BIM / Revit</a>' +
-      '<a href="contact.html">Contact</a>' +
+      '<a href="/about/">About</a>' +
+      '<a href="/academic/">Academic</a>' +
+      '<a href="/professional/">Professional</a>' +
+      '<a href="/bim-revit/">BIM / Revit</a>' +
+      '<a href="/contact/">Contact</a>' +
     '</nav>';
   document.body.appendChild(overlay);
 
   // Mark active link in overlay
-  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const path = window.location.pathname;
   overlay.querySelectorAll('a').forEach(a => {
     if (a.getAttribute('href') === path) a.classList.add('active');
   });
