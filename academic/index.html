@@ -1558,8 +1558,8 @@ body.acx-hovering-card #cur-dot {
 .acx-card:nth-child(4n + 1),
 .acx-card:nth-child(4n + 2),
 .acx-card:nth-child(4n + 3) {
-  opacity: calc(1 - (var(--acx-progress, 0) * 0.18));
-  filter: saturate(calc(1 - (var(--acx-progress, 0) * 0.55))) brightness(calc(1 - (var(--acx-progress, 0) * 0.06)));
+  opacity: calc(0.12 + (var(--acx-progress, 0) * 0.88));
+  filter: saturate(calc(0.45 + (var(--acx-progress, 0) * 0.55))) brightness(calc(0.9 + (var(--acx-progress, 0) * 0.1)));
 }
 .acx-card:hover,
 .acx-card.reveal:hover,
@@ -2276,15 +2276,14 @@ body.acx-hovering-card #cur-dot {
     motionCards.forEach(function (card, i) {
       var direction = i % 2 === 0 ? -1 : 1;
       var gap = Math.min(vh * 0.72, 720);
-      var lateral = progress * gap * direction;
-      var lift = progress * (i % 3 === 0 ? -12 : 8);
-      var fade = Math.max(0, 1 - progress * 1.25);
+      var arrival = 1 - progress;
+      var lateral = arrival * gap * direction;
+      var lift = arrival * (i % 3 === 0 ? -12 : 8);
       card.style.setProperty('--side-dir', direction);
       card.style.setProperty('--escape-x', gap.toFixed(1) + 'px');
       card.style.setProperty('--scroll-x', lateral.toFixed(1) + 'px');
       card.style.setProperty('--scroll-y', lift.toFixed(1) + 'px');
-      card.style.opacity = fade.toFixed(3);
-      card.style.filter = 'saturate(' + (1 - progress * 0.5).toFixed(3) + ') brightness(' + (1 - progress * 0.05).toFixed(3) + ')';
+      card.style.filter = 'saturate(' + (0.45 + progress * 0.55).toFixed(3) + ') brightness(' + (0.9 + progress * 0.1).toFixed(3) + ')';
     });
   }
   updateAcademicMotion();
