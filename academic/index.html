@@ -1294,12 +1294,12 @@ body.acx-hovering-card #cur-dot {
 .acx-hero {
   min-height: 78vh;
   grid-template-columns: minmax(0, 1fr) minmax(300px, 0.48fr);
-  padding-top: 104px;
+  padding-top: 82px;
   padding-bottom: 46px;
 }
 .acx-hero-copy {
   align-self: start;
-  padding-top: 54px;
+  padding-top: 28px;
 }
 .acx-title {
   max-width: 860px;
@@ -1311,13 +1311,31 @@ body.acx-hovering-card #cur-dot {
   min-height: 420px;
   align-self: center;
 }
-.acx-feature-card:nth-child(1) {
-  right: 0;
-  top: 28px;
+.acx-hero-live-card,
+.acx-hero-live-card.reveal,
+.acx-hero-live-card.reveal.visible,
+.acx-hero-live-card:hover {
+  position: relative;
+  left: auto;
+  right: auto;
+  top: auto;
   width: min(34vw, 420px);
   min-width: 280px;
-  transform: rotate(1.8deg);
+  height: 430px;
+  transform:
+    translate3d(0, var(--hero-scroll-y, 0px), 0)
+    rotate(1.8deg);
   animation: acx-hero-card-drop 10s ease-in-out infinite;
+  margin: 12px 0 0 auto;
+  z-index: 4;
+}
+.acx-hero-live-card:hover,
+.acx-hero-live-card.reveal:hover,
+.acx-hero-live-card.reveal.visible:hover {
+  transform:
+    translate3d(0, calc(var(--hero-scroll-y, 0px) - 12px), 0)
+    rotate(1.8deg);
+  z-index: 12;
 }
 .acx-work {
   padding-top: 44px;
@@ -1353,7 +1371,7 @@ body.acx-hovering-card #cur-dot {
   z-index: 10;
 }
 .acx-card:nth-child(1) { left: 3%; top: 110px; --depth: 38px; }
-.acx-card:nth-child(2) { right: 4%; top: 80px; --depth: 42px; }
+.acx-card:nth-child(2) { right: 4%; top: 80px; --depth: 54px; }
 .acx-card:nth-child(3) { left: 4%; top: 500px; --depth: 32px; }
 .acx-card:nth-child(4) { right: 3%; top: 535px; --depth: 48px; }
 .acx-card:nth-child(5) { left: 38%; top: 850px; --depth: 34px; }
@@ -1363,11 +1381,9 @@ body.acx-hovering-card #cur-dot {
 @keyframes acx-hero-card-drop {
   0%, 100% {
     margin-top: 0;
-    transform: translateY(0) rotate(1.8deg);
   }
   50% {
-    margin-top: 22px;
-    transform: translateY(18px) rotate(-0.6deg);
+    margin-top: 24px;
   }
 }
 @media (max-width: 980px) {
@@ -1441,29 +1457,7 @@ body.acx-hovering-card #cur-dot {
         <div class="acx-stat"><strong>GSAPP</strong><span>Columbia University</span></div>
       </div>
     </div>
-    <div class="acx-feature" aria-hidden="true">
-      <article class="acx-feature-card">
-        <img src="../assets/images/academic/mangrove/mangrove-hero.jpg" alt="">
-        <div class="acx-feature-caption">
-          <div class="acx-feature-name">The <em>Mangrove</em></div>
-          <div class="acx-feature-tag">Environmental structure</div>
-        </div>
-      </article>
-      <article class="acx-feature-card">
-        <img src="../assets/images/academic/loofah-adobe-brick/loofah-hero.png" alt="">
-        <div class="acx-feature-caption">
-          <div class="acx-feature-name">Loofah <em>Brick Studies</em></div>
-          <div class="acx-feature-tag">Material systems</div>
-        </div>
-      </article>
-      <article class="acx-feature-card">
-        <img src="../assets/images/projects/water-museum.jpg" alt="">
-        <div class="acx-feature-caption">
-          <div class="acx-feature-name">Quiet <em>Infrastructure</em></div>
-          <div class="acx-feature-tag">Civic systems</div>
-        </div>
-      </article>
-    </div>
+    <div class="acx-feature" id="acx-hero-card-slot"></div>
   </section>
 
   <section class="acx-work" aria-label="Academic projects">
@@ -1985,74 +1979,84 @@ body.acx-hovering-card #cur-dot {
     return div.textContent || div.innerText || '';
   }
 
+  function createProjectCard(project, i, extraClass) {
+    var card = document.createElement('article');
+    card.className = 'acx-card reveal' + (extraClass ? ' ' + extraClass : '');
+    card.id = extraClass === 'acx-hero-live-card' ? 'hero-project-' + project.n : 'project-' + project.n;
+    card.dataset.project = i;
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', 'Open ' + projectPlainTitle(project));
+
+    var media = document.createElement('div');
+    media.className = 'acx-media';
+    if (project.imgs && project.imgs.length) {
+      var img = document.createElement('img');
+      img.src = project.imgs[0];
+      img.alt = projectPlainTitle(project);
+      img.loading = i > 2 ? 'lazy' : 'eager';
+      media.appendChild(img);
+    } else {
+      var ph = document.createElement('div');
+      ph.className = 'acx-media-placeholder';
+      ph.innerHTML = '<span>' + project.n + '</span>';
+      media.appendChild(ph);
+    }
+
+    var body = document.createElement('div');
+    body.className = 'acx-card-body';
+    body.innerHTML =
+      '<div class="acx-card-top">' +
+        '<span class="acx-number">N° ' + project.n + '</span>' +
+        '<span class="acx-card-tag">' + project.tag + '</span>' +
+      '</div>' +
+      '<h3 class="acx-card-title">' + project.title + '</h3>' +
+      '<p class="acx-card-desc">' + project.desc + '</p>' +
+      '<div class="acx-card-foot">' +
+        '<span class="acx-card-tools">' + project.tools + '</span>' +
+        '<span class="acx-open">Open study ↗</span>' +
+      '</div>';
+
+    var back = document.createElement('div');
+    back.className = 'acx-card-face acx-card-back';
+    back.innerHTML =
+      '<div>' +
+        '<div class="acx-back-num">N° ' + project.n + '</div>' +
+        '<div class="acx-back-tag">' + project.cat + '</div>' +
+        '<h3 class="acx-back-title">' + project.title + '</h3>' +
+        '<p class="acx-back-desc">' + project.desc + '</p>' +
+      '</div>' +
+      '<div class="acx-back-foot">' +
+        '<span class="acx-back-tools">' + project.tools + '</span>' +
+        '<span class="acx-back-open">Open full study ↗</span>' +
+      '</div>';
+
+    var front = document.createElement('div');
+    front.className = 'acx-card-face acx-card-front';
+    front.appendChild(media);
+    front.appendChild(body);
+
+    var inner = document.createElement('div');
+    inner.className = 'acx-card-inner';
+    inner.appendChild(front);
+    inner.appendChild(back);
+
+    card.appendChild(inner);
+    return card;
+  }
+
   function renderAcademicExperience() {
     var grid = document.getElementById('acx-project-grid');
     var index = document.getElementById('acx-index-list');
+    var heroSlot = document.getElementById('acx-hero-card-slot');
     if (!grid) return;
 
+    if (heroSlot && PROJECTS[1]) {
+      heroSlot.appendChild(createProjectCard(PROJECTS[1], 1, 'acx-hero-live-card'));
+    }
+
     PROJECTS.forEach(function (project, i) {
-      var card = document.createElement('article');
-      card.className = 'acx-card reveal';
-      card.id = 'project-' + project.n;
-      card.dataset.project = i;
-      card.setAttribute('tabindex', '0');
-      card.setAttribute('role', 'button');
-      card.setAttribute('aria-label', 'Open ' + projectPlainTitle(project));
-
-      var media = document.createElement('div');
-      media.className = 'acx-media';
-      if (project.imgs && project.imgs.length) {
-        var img = document.createElement('img');
-        img.src = project.imgs[0];
-        img.alt = projectPlainTitle(project);
-        img.loading = i > 2 ? 'lazy' : 'eager';
-        media.appendChild(img);
-      } else {
-        var ph = document.createElement('div');
-        ph.className = 'acx-media-placeholder';
-        ph.innerHTML = '<span>' + project.n + '</span>';
-        media.appendChild(ph);
-      }
-
-      var body = document.createElement('div');
-      body.className = 'acx-card-body';
-      body.innerHTML =
-        '<div class="acx-card-top">' +
-          '<span class="acx-number">N° ' + project.n + '</span>' +
-          '<span class="acx-card-tag">' + project.tag + '</span>' +
-        '</div>' +
-        '<h3 class="acx-card-title">' + project.title + '</h3>' +
-        '<p class="acx-card-desc">' + project.desc + '</p>' +
-        '<div class="acx-card-foot">' +
-          '<span class="acx-card-tools">' + project.tools + '</span>' +
-          '<span class="acx-open">Open study ↗</span>' +
-        '</div>';
-
-      var back = document.createElement('div');
-      back.className = 'acx-card-face acx-card-back';
-      back.innerHTML =
-        '<div>' +
-          '<div class="acx-back-num">N° ' + project.n + '</div>' +
-          '<div class="acx-back-tag">' + project.cat + '</div>' +
-          '<h3 class="acx-back-title">' + project.title + '</h3>' +
-          '<p class="acx-back-desc">' + project.desc + '</p>' +
-        '</div>' +
-        '<div class="acx-back-foot">' +
-          '<span class="acx-back-tools">' + project.tools + '</span>' +
-          '<span class="acx-back-open">Open full study ↗</span>' +
-        '</div>';
-
-      var front = document.createElement('div');
-      front.className = 'acx-card-face acx-card-front';
-      front.appendChild(media);
-      front.appendChild(body);
-
-      var inner = document.createElement('div');
-      inner.className = 'acx-card-inner';
-      inner.appendChild(front);
-      inner.appendChild(back);
-
-      card.appendChild(inner);
+      var card = createProjectCard(project, i);
       grid.appendChild(card);
 
       if (index) {
@@ -2069,15 +2073,22 @@ body.acx-hovering-card #cur-dot {
   var motionCards = Array.prototype.slice.call(document.querySelectorAll('.acx-card'));
   function updateAcademicMotion() {
     var stage = document.getElementById('acx-orbit-stage');
+    var vh = window.innerHeight || 1;
+    var heroCard = document.querySelector('.acx-hero-live-card');
+    if (heroCard) {
+      var heroRect = heroCard.getBoundingClientRect();
+      var heroProgress = Math.max(0, Math.min(1, (vh * 0.68 - heroRect.top) / (vh * 0.95)));
+      heroCard.style.setProperty('--hero-scroll-y', (heroProgress * 72).toFixed(1) + 'px');
+    }
     if (!stage || window.matchMedia('(max-width: 980px)').matches) return;
     var rect = stage.getBoundingClientRect();
-    var vh = window.innerHeight || 1;
-    var progress = Math.max(0, Math.min(1, (vh * 0.78 - rect.top) / (rect.height + vh * 0.24)));
+    var progress = Math.max(0, Math.min(1, (vh * 0.84 - rect.top) / (rect.height + vh * 0.12)));
     motionCards.forEach(function (card, i) {
       var depth = parseFloat(getComputedStyle(card).getPropertyValue('--depth')) || 40;
-      var downward = progress * Math.abs(depth) * 0.72;
-      var wave = Math.sin(progress * Math.PI * 2 + i * 0.82) * 8;
-      var y = downward + wave;
+      var lane = i % 2 === 0 ? 1 : 0.72;
+      var downward = progress * (Math.abs(depth) + 92) * lane;
+      var wave = Math.sin(progress * Math.PI * 1.35 + i * 0.7) * 6;
+      var y = Math.max(0, downward + wave);
       card.style.setProperty('--scroll-y', y.toFixed(1) + 'px');
     });
   }
