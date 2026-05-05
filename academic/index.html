@@ -1537,8 +1537,16 @@ body.acx-hovering-card #cur-dot {
 }
 
 /* ── INVERSE SCROLL PASS ─────────────────────────────── */
+.ac-hero,
+.ac-cascade-section,
+.ac-quote-section,
+.ac-ig-section,
+.footer-minimal {
+  display: none;
+}
 .acx-orbit-stage {
   --acx-progress: 0;
+  overflow: hidden;
 }
 .acx-orbit-quote {
   transition: transform .2s linear, opacity .2s linear, filter .2s linear;
@@ -1559,6 +1567,20 @@ body.acx-hovering-card #cur-dot {
 .acx-card:nth-child(4n + 3):hover {
   opacity: 1;
   filter: drop-shadow(0 30px 40px rgba(17,17,24,0.22));
+}
+.acx-card,
+.acx-card.reveal,
+.acx-card.reveal.visible,
+.acx-card:nth-child(4n + 1),
+.acx-card:nth-child(4n + 2),
+.acx-card:nth-child(4n + 3) {
+  transform:
+    translate3d(
+      calc(var(--float-x, 0px) + var(--scroll-x, 0px)),
+      calc(var(--base-y, 0px) + var(--scroll-y, 0px)),
+      0
+    )
+    rotate(var(--rot, 0deg));
 }
 
 </style>
@@ -1612,7 +1634,7 @@ body.acx-hovering-card #cur-dot {
   <section class="acx-work" aria-label="Academic projects">
     <aside class="acx-index">
       <div class="acx-index-label">Project Index</div>
-      <h2 class="acx-index-title">Eight ways of <em>testing form.</em></h2>
+      <h2 class="acx-index-title">Seven ways of <em>testing form.</em></h2>
       <nav class="acx-index-list" id="acx-index-list" aria-label="Academic project index"></nav>
     </aside>
     <div class="acx-orbit-stage" id="acx-orbit-stage">
@@ -2051,7 +2073,8 @@ body.acx-hovering-card #cur-dot {
         '../assets/images/academic/mangrove/mangrove-plans.jpg'
       ],
       link: 'https://www.arch.columbia.edu/student-work/12006-the-mangrove',
-      ig: 'https://www.instagram.com/p/Cuka-iMPrLA/'
+      ig: 'https://www.instagram.com/p/Cuka-iMPrLA/',
+      heroOnly: true
     },
     {
       n: '03', title: 'A Library for <em>Slow Reading</em>', cat: 'Public Building · Spring 2023',
@@ -2200,11 +2223,22 @@ body.acx-hovering-card #cur-dot {
     var heroSlot = document.getElementById('acx-hero-card-slot');
     if (!grid) return;
 
-    if (heroSlot && PROJECTS[1]) {
-      heroSlot.appendChild(createProjectCard(PROJECTS[1], 1, 'acx-hero-live-card'));
+    var heroProject = null;
+    for (var h = 0; h < PROJECTS.length; h++) {
+      if (PROJECTS[h].heroOnly) {
+        heroProject = PROJECTS[h];
+        break;
+      }
+    }
+    if (!heroProject) heroProject = PROJECTS[1];
+
+    if (heroSlot && heroProject) {
+      var heroIndex = PROJECTS.indexOf(heroProject);
+      heroSlot.appendChild(createProjectCard(heroProject, heroIndex, 'acx-hero-live-card'));
     }
 
     PROJECTS.forEach(function (project, i) {
+      if (project.heroOnly) return;
       var card = createProjectCard(project, i);
       grid.appendChild(card);
 
@@ -2219,7 +2253,7 @@ body.acx-hovering-card #cur-dot {
 
   renderAcademicExperience();
 
-  var motionCards = Array.prototype.slice.call(document.querySelectorAll('.acx-card'));
+  var motionCards = Array.prototype.slice.call(document.querySelectorAll('#acx-project-grid .acx-card'));
   function updateAcademicMotion() {
     var stage = document.getElementById('acx-orbit-stage');
     var vh = window.innerHeight || 1;
@@ -2235,17 +2269,22 @@ body.acx-hovering-card #cur-dot {
     stage.style.setProperty('--acx-progress', progress.toFixed(3));
     var quote = stage.querySelector('.acx-orbit-quote');
     if (quote) {
-      quote.style.transform = 'translateY(' + (-progress * 18).toFixed(1) + 'px) scale(' + (1 + progress * 0.02).toFixed(3) + ')';
+      quote.style.transform = 'translateY(' + (-progress * 12).toFixed(1) + 'px) scale(' + (1 + progress * 0.018).toFixed(3) + ')';
       quote.style.opacity = (1 - progress * 0.1).toFixed(3);
       quote.style.filter = 'brightness(' + (1 + progress * 0.04).toFixed(3) + ')';
     }
     motionCards.forEach(function (card, i) {
-      var depth = parseFloat(getComputedStyle(card).getPropertyValue('--depth')) || 40;
-      var lane = i % 2 === 0 ? 1 : 0.72;
-      var retreat = progress * (Math.abs(depth) + 112) * lane;
-      var wave = Math.sin(progress * Math.PI * 1.2 + i * 0.7) * 5;
-      var y = -(retreat + wave);
-      card.style.setProperty('--scroll-y', y.toFixed(1) + 'px');
+      var direction = i % 2 === 0 ? -1 : 1;
+      var gap = Math.min(vh * 0.72, 720);
+      var lateral = progress * gap * direction;
+      var lift = progress * (i % 3 === 0 ? -12 : 8);
+      var fade = Math.max(0, 1 - progress * 1.25);
+      card.style.setProperty('--side-dir', direction);
+      card.style.setProperty('--escape-x', gap.toFixed(1) + 'px');
+      card.style.setProperty('--scroll-x', lateral.toFixed(1) + 'px');
+      card.style.setProperty('--scroll-y', lift.toFixed(1) + 'px');
+      card.style.opacity = fade.toFixed(3);
+      card.style.filter = 'saturate(' + (1 - progress * 0.5).toFixed(3) + ') brightness(' + (1 - progress * 0.05).toFixed(3) + ')';
     });
   }
   updateAcademicMotion();
