@@ -172,12 +172,15 @@
   background: #141414;
   border: 0.5px solid rgba(255,255,255,0.06);
   z-index: 2; opacity: 1; transform: scale(1);
+  padding: 12px;
 }
 .ac-card:hover .ac-card-front { opacity: 0; transform: scale(1.025); }
 
 .ac-card-front img {
   width: 100%; height: 100%;
-  object-fit: cover; display: block;
+  object-fit: contain; object-position: center;
+  display: block;
+  background: #0b0b0b;
   filter: grayscale(30%) brightness(0.55);
   transition: filter 0.4s ease;
 }
@@ -373,9 +376,10 @@
   background: #0a0a0a;
 }
 .ac-gallery-img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
+  position: absolute; inset: 14px;
+  width: calc(100% - 28px); height: calc(100% - 28px);
+  object-fit: contain; object-position: center;
+  display: block;
   opacity: 0; transition: opacity 0.4s ease;
 }
 .ac-gallery-img.active { opacity: 1; }
@@ -761,24 +765,24 @@
       <div class="ac-card" data-project="4">
         <div class="ac-card-inner">
           <div class="ac-card-face ac-card-front">
-            <img src="../assets/images/academic/loofah-adobe-brick/loofah-hero.png" alt="Loofah Adobe Brick">
+            <img src="../assets/images/academic/loofah-adobe-brick/loofah-hero.png" alt="Loofah brick material studies">
             <span class="ac-card-front-corner">N° 05</span>
             <div class="ac-card-front-frame"></div>
             <div class="ac-card-front-label">
-              <span class="ac-card-front-title">Loofah <em>Adobe Brick</em></span>
-              <span class="ac-card-front-tag">Material Research</span>
+              <span class="ac-card-front-title">Loofah <em>Brick Studies</em></span>
+              <span class="ac-card-front-tag">Material Systems</span>
             </div>
           </div>
           <div class="ac-card-face ac-card-back">
             <div class="ac-back-top">
               <span class="ac-back-num">N° 05</span>
-              <span class="ac-back-tag">Biodegradable Structure</span>
+              <span class="ac-back-tag">Carbon / Biodegradable Systems</span>
             </div>
-            <div class="ac-back-title">Loofah <em>Adobe Brick</em></div>
-            <div class="ac-back-studio">Material Kitchens · Spring 2024</div>
-            <p class="ac-back-desc">A structural column composed of adobe loofah bricks, testing a load-bearing and entirely biodegradable construction system.</p>
+            <div class="ac-back-title">Loofah <em>Brick Studies</em></div>
+            <div class="ac-back-studio">Material Kitchens + Studio VI · Spring 2024</div>
+            <p class="ac-back-desc">A two-part material investigation testing loofah as reinforcement, carbon storage, and biodegradable structure through adobe and clay brick prototypes.</p>
             <div class="ac-back-cta">
-              <span class="ac-back-tools">Adobe · Loofah · Material Testing</span>
+              <span class="ac-back-tools">Adobe · Clay · Loofah · Material Testing</span>
               <span class="ac-back-expand">Expand ↗</span>
             </div>
           </div>
@@ -1039,17 +1043,26 @@
       imgs: []
     },
     {
-      n: '05', title: 'Loofah <em>Adobe Brick</em>', cat: 'Material Kitchens · Spring 2024',
-      studio: 'Material Kitchens: Cultures, Formulas, and Mix-Designs', critic: 'Lola Ben-Alon', course: 'Spring 2024',
-      tag: 'Biodegradable Structure',
-      desc: 'A structural column composed of Adobe Loofah Bricks, designed to be load-bearing and entirely biodegradable. The project tests sustainable construction through carbon-capturing material logic, combining traditional adobe building with loofah fiber reinforcement and material experimentation.',
-      tools: 'Adobe, Loofah, Material Testing',
+      n: '05', title: 'Loofah <em>Brick Studies</em>', cat: 'Material Research · Spring 2024',
+      studio: 'Material Kitchens + Architecture Studio VI', critic: 'Lola Ben-Alon / David Benjamin', course: 'Spring 2024',
+      tag: 'Carbon / Biodegradable Systems',
+      desc: 'A hybrid material investigation developed across two GSAPP courses. In Material Kitchens, the study tested Adobe Loofah Bricks as a load-bearing and entirely biodegradable structural column. In Architecture Studio VI, the research pushed the system toward clay loofah bricks for load-bearing walls, using loofah fiber as carbon-storing reinforcement and proposing a lower-carbon substitute for concrete-heavy construction assemblies.',
+      tools: 'Adobe, Clay, Loofah, Material Testing',
       imgs: [
         '../assets/images/academic/loofah-adobe-brick/loofah-hero.png',
         '../assets/images/academic/loofah-adobe-brick/loofah-detail-1.gif',
-        '../assets/images/academic/loofah-adobe-brick/loofah-detail-2.png'
+        '../assets/images/academic/loofah-adobe-brick/loofah-detail-2.png',
+        '../assets/images/academic/loofah-adobe-brick/clay-loofah-hero.gif',
+        '../assets/images/academic/loofah-adobe-brick/clay-loofah-01.jpg',
+        '../assets/images/academic/loofah-adobe-brick/clay-loofah-02.jpg',
+        '../assets/images/academic/loofah-adobe-brick/clay-loofah-03.jpg',
+        '../assets/images/academic/loofah-adobe-brick/clay-loofah-04.jpg'
       ],
-      link: 'https://www.arch.columbia.edu/student-work/12413-loofah-adobe-brick'
+      link: 'https://www.arch.columbia.edu/student-work/12413-loofah-adobe-brick',
+      links: [
+        { label: 'Loofah Adobe Brick', href: 'https://www.arch.columbia.edu/student-work/12413-loofah-adobe-brick' },
+        { label: 'Clay Loofah Brick', href: 'https://www.arch.columbia.edu/student-work/12945-clay-loofah-brick' }
+      ]
     },
     {
       n: '06', title: 'Quiet <em>Infrastructure</em>', cat: 'Thesis Prep · Spring 2024',
@@ -1181,25 +1194,32 @@
     /* source links */
     var srcEl = document.getElementById('ac-modal-source');
     srcEl.innerHTML = '';
-    if (p.link || p.ig) {
+    if ((p.links && p.links.length) || p.link || p.ig) {
       var label = document.createElement('span');
       label.className = 'ac-modal-source-label';
       label.textContent = 'Featured on';
       srcEl.appendChild(label);
-      if (p.link) {
+      var sourceLinks = p.links || (p.link ? [{ label: 'Columbia GSAPP', href: p.link }] : []);
+      sourceLinks.forEach(function (source, i) {
+        if (i > 0) {
+          var sourceSep = document.createElement('span');
+          sourceSep.className = 'ac-modal-source-sep';
+          sourceSep.textContent = '·';
+          srcEl.appendChild(sourceSep);
+        }
         var a1 = document.createElement('a');
         a1.className = 'ac-modal-source-link';
-        a1.href = p.link; a1.target = '_blank'; a1.rel = 'noopener noreferrer';
-        a1.textContent = 'Columbia GSAPP';
+        a1.href = source.href; a1.target = '_blank'; a1.rel = 'noopener noreferrer';
+        a1.textContent = source.label;
         srcEl.appendChild(a1);
+      });
+      if (p.ig && sourceLinks.length) {
+        var sep = document.createElement('span');
+        sep.className = 'ac-modal-source-sep';
+        sep.textContent = '·';
+        srcEl.appendChild(sep);
       }
       if (p.ig) {
-        if (p.link) {
-          var sep = document.createElement('span');
-          sep.className = 'ac-modal-source-sep';
-          sep.textContent = '·';
-          srcEl.appendChild(sep);
-        }
         var a2 = document.createElement('a');
         a2.className = 'ac-modal-source-link ac-modal-source-ig';
         a2.href = p.ig; a2.target = '_blank'; a2.rel = 'noopener noreferrer';
