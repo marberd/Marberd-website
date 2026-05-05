@@ -1536,6 +1536,31 @@ body.acx-hovering-card #cur-dot {
   }
 }
 
+/* ── INVERSE SCROLL PASS ─────────────────────────────── */
+.acx-orbit-stage {
+  --acx-progress: 0;
+}
+.acx-orbit-quote {
+  transition: transform .2s linear, opacity .2s linear, filter .2s linear;
+  z-index: 6;
+}
+.acx-card,
+.acx-card.reveal,
+.acx-card.reveal.visible,
+.acx-card:nth-child(4n + 1),
+.acx-card:nth-child(4n + 2),
+.acx-card:nth-child(4n + 3) {
+  opacity: calc(1 - (var(--acx-progress, 0) * 0.18));
+  filter: saturate(calc(1 - (var(--acx-progress, 0) * 0.55))) brightness(calc(1 - (var(--acx-progress, 0) * 0.06)));
+}
+.acx-card:hover,
+.acx-card.reveal:hover,
+.acx-card.reveal.visible:hover,
+.acx-card:nth-child(4n + 3):hover {
+  opacity: 1;
+  filter: drop-shadow(0 30px 40px rgba(17,17,24,0.22));
+}
+
 </style>
 </head>
 <body>
@@ -1587,7 +1612,7 @@ body.acx-hovering-card #cur-dot {
   <section class="acx-work" aria-label="Academic projects">
     <aside class="acx-index">
       <div class="acx-index-label">Project Index</div>
-      <h2 class="acx-index-title">Nine ways of <em>testing form.</em></h2>
+      <h2 class="acx-index-title">Eight ways of <em>testing form.</em></h2>
       <nav class="acx-index-list" id="acx-index-list" aria-label="Academic project index"></nav>
     </aside>
     <div class="acx-orbit-stage" id="acx-orbit-stage">
@@ -1606,7 +1631,7 @@ body.acx-hovering-card #cur-dot {
 
 <!-- ══ HERO ══════════════════════════════════════════════ -->
 <section class="ac-hero">
-  <div class="ac-ghost" aria-hidden="true">9</div>
+  <div class="ac-ghost" aria-hidden="true">8</div>
 
   <div class="ac-hero-left">
     <h1 class="ac-h1">
@@ -2207,12 +2232,19 @@ body.acx-hovering-card #cur-dot {
     if (!stage || window.matchMedia('(max-width: 980px)').matches) return;
     var rect = stage.getBoundingClientRect();
     var progress = Math.max(0, Math.min(1, (vh * 0.84 - rect.top) / (rect.height + vh * 0.12)));
+    stage.style.setProperty('--acx-progress', progress.toFixed(3));
+    var quote = stage.querySelector('.acx-orbit-quote');
+    if (quote) {
+      quote.style.transform = 'translateY(' + (-progress * 18).toFixed(1) + 'px) scale(' + (1 + progress * 0.02).toFixed(3) + ')';
+      quote.style.opacity = (1 - progress * 0.1).toFixed(3);
+      quote.style.filter = 'brightness(' + (1 + progress * 0.04).toFixed(3) + ')';
+    }
     motionCards.forEach(function (card, i) {
       var depth = parseFloat(getComputedStyle(card).getPropertyValue('--depth')) || 40;
       var lane = i % 2 === 0 ? 1 : 0.72;
-      var downward = progress * (Math.abs(depth) + 92) * lane;
-      var wave = Math.sin(progress * Math.PI * 1.35 + i * 0.7) * 6;
-      var y = Math.max(0, downward + wave);
+      var retreat = progress * (Math.abs(depth) + 112) * lane;
+      var wave = Math.sin(progress * Math.PI * 1.2 + i * 0.7) * 5;
+      var y = -(retreat + wave);
       card.style.setProperty('--scroll-y', y.toFixed(1) + 'px');
     });
   }
