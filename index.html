@@ -81,6 +81,9 @@
   opacity: 0;
   animation: fadeUp .9s ease .3s forwards;
 }
+.hero__mobile-photo {
+  display: none;
+}
 .hero__eyebrow {
   font-family: var(--mono);
   font-size: 9px;
@@ -250,20 +253,26 @@
   .hero__bloom { display: none; }
   .hero__content {
     max-width: 100%;
-    padding: 0 20px 56px;
-    justify-content: flex-end;
+    padding: 0 20px 48px;
+    justify-content: flex-start;
     min-height: 100svh;
-    /* Fade from transparent (image shows above) to solid white (text sits on clean bg) */
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      transparent 36%,
-      rgba(250,250,248,0.65) 52%,
-      rgba(250,250,248,0.96) 66%,
-      #FAFAF8 78%
-    );
+    background: var(--white);
   }
-  .hero__subhead { font-size: 15px; max-width: 100%; }
+  .hero__headline { margin-bottom: 14px; }
+  .hero__mobile-photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    margin: 6px 0 18px;
+    background-image: url('assets/images/hero-studio.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    border: 1px solid var(--border);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  }
+  .hero__eyebrow { margin: 0 0 18px; }
+  .hero__subhead { font-size: 15px; max-width: 100%; margin-bottom: 22px; }
   .hero__stats   { flex-wrap: wrap; gap: 0; }
   .hstat         { flex: 1 1 28%; min-width: 80px; padding: 0 16px 0 0; border: none; }
   .hstat:not(:first-child) { padding-left: 16px; border-left: 1px solid var(--border); }
@@ -280,7 +289,9 @@
 /* ── SMALL PHONES (≤480px) ── */
 @media (max-width: 480px) {
   .hero__content { padding: 0 16px 48px; }
-  .hero__subhead { font-size: 14px; margin-bottom: 20px; }
+  .hero__headline { margin-bottom: 12px; }
+  .hero__mobile-photo { margin: 4px 0 16px; }
+  .hero__subhead { font-size: 14px; margin-bottom: 18px; }
   .hero__stats   { gap: 16px; margin-bottom: 24px; }
   .hstat-n       { font-size: 20px; }
 }
@@ -313,6 +324,7 @@
       <span class="hero__name">Marberd</span>
       <span class="hero__surname">Bernard.</span>
     </h1>
+    <div class="hero__mobile-photo" aria-hidden="true"></div>
     <p class="hero__eyebrow">Architectural Designer &amp; VDC Specialist</p>
     <p class="hero__subhead">
       With a Master of Architecture from Columbia University, Marberd bridges design instinct, BIM/VDC expertise, and visual storytelling to deliver complex projects with precision.
