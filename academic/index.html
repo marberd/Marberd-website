@@ -363,6 +363,32 @@ body.academic-card-hover #cur-dot {
   transition: margin-top .12s linear;
 }
 
+.transition-quote {
+  min-height: 34vh;
+  margin-top: calc(var(--hero-exit, 0) * -120px);
+  padding: 34px clamp(20px, 5vw, 72px) 24px;
+  display: flex;
+  align-items: center;
+  background: #f4f0e8;
+  opacity: var(--hero-exit, 0);
+  transform: translateY(calc((1 - var(--hero-exit, 0)) * 34px));
+  transition: opacity .12s linear, transform .12s linear, margin-top .12s linear;
+}
+
+.transition-quote p {
+  max-width: 1120px;
+  margin: 0 auto;
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 76px);
+  line-height: 1.02;
+  color: #171716;
+}
+
+.transition-quote em {
+  color: var(--gold-dk);
+  font-style: italic;
+}
+
 .projects-header {
   max-width: 1420px;
   margin: 0 auto 46px;
@@ -495,27 +521,6 @@ body.academic-card-hover #cur-dot {
   color: rgba(17,17,24,0.46);
 }
 
-.closing-statement {
-  max-width: 1420px;
-  margin: 76px auto 0;
-  padding-top: 38px;
-  border-top: 1px solid rgba(17,17,24,0.16);
-}
-
-.closing-statement p {
-  max-width: 980px;
-  margin: 0;
-  font-family: var(--serif);
-  font-size: clamp(30px, 4.4vw, 64px);
-  line-height: 1.06;
-  color: #171716;
-}
-
-.closing-statement em {
-  color: var(--gold-dk);
-  font-style: italic;
-}
-
 .academic-footer {
   background: #111118;
   padding: 44px 24px;
@@ -539,6 +544,12 @@ body.academic-card-hover #cur-dot {
   opacity: 0;
   visibility: hidden;
   transition: opacity .22s ease, visibility .22s ease;
+}
+
+body.academic-modal-active #main-nav {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
 }
 
 .academic-modal.open {
@@ -729,6 +740,11 @@ body.academic-card-hover #cur-dot {
     padding: 56px 20px 76px;
   }
 
+  .transition-quote {
+    min-height: 30vh;
+    padding: 26px 20px 12px;
+  }
+
   .project-copy {
     min-height: 0;
   }
@@ -849,16 +865,16 @@ body.academic-card-hover #cur-dot {
     </button>
   </section>
 
+  <section class="transition-quote" aria-label="Design statement">
+    <p>I research what exists, <em>design what is missing,</em> and build the systems that bring complex ideas into form.</p>
+  </section>
+
   <section class="projects-section" aria-label="Academic projects">
     <div class="projects-header">
       <div class="section-kicker">Academic archive</div>
     </div>
 
     <div class="project-grid" id="project-grid"></div>
-
-    <div class="closing-statement">
-      <p>I research what exists, <em>design what is missing,</em> and build the systems that bring complex ideas into form.</p>
-    </div>
   </section>
 </main>
 
@@ -1147,12 +1163,14 @@ body.academic-card-hover #cur-dot {
     });
 
     modal.classList.add('open');
+    document.body.classList.add('academic-modal-active');
     document.body.style.overflow = 'hidden';
   }
 
   function closeModal() {
     modal.classList.remove('open');
     document.body.classList.remove('academic-card-hover');
+    document.body.classList.remove('academic-modal-active');
     document.body.style.overflow = '';
   }
 
