@@ -52,9 +52,33 @@
 // ── NAV SCROLL ─────────────────
 const nav = document.getElementById('main-nav');
 if (nav) {
-  window.addEventListener('scroll',()=>{
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  });
+  let lastScrollY = window.scrollY || 0;
+  let navScrollFrame = 0;
+
+  function updateNavScroll() {
+    navScrollFrame = 0;
+    const currentY = Math.max(0, window.scrollY || 0);
+    const delta = currentY - lastScrollY;
+    const menuOpen = document.getElementById('nav-overlay')?.classList.contains('open');
+
+    nav.classList.toggle('scrolled', currentY > 40);
+
+    if (menuOpen || currentY < 80 || delta < -4) {
+      nav.classList.remove('nav-hidden');
+    } else if (delta > 6 && currentY > 120) {
+      nav.classList.add('nav-hidden');
+    }
+
+    lastScrollY = currentY;
+  }
+
+  function requestNavScroll() {
+    if (navScrollFrame) return;
+    navScrollFrame = window.requestAnimationFrame(updateNavScroll);
+  }
+
+  updateNavScroll();
+  window.addEventListener('scroll', requestNavScroll, { passive: true });
 }
 
 // ── ACTIVE NAV LINK ─────────────
@@ -109,6 +133,7 @@ if (nav) {
   });
 
   function openMenu() {
+    nav.classList.remove('nav-hidden');
     overlay.classList.add('open');
     burger.classList.add('open');
     burger.setAttribute('aria-expanded', 'true');

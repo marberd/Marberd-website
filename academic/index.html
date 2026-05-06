@@ -422,36 +422,29 @@ body.academic-card-hover #cur-dot {
 }
 
 .transition-quote {
-  min-height: 34vh;
-  margin-top: calc(var(--hero-exit, 0) * -120px);
-  padding: 34px clamp(20px, 5vw, 72px) 24px;
+  min-height: auto;
+  margin-top: 0;
+  padding: 42px clamp(20px, 5vw, 72px) 34px;
   display: flex;
   align-items: center;
   background: #f4f0e8;
-  opacity: var(--hero-exit, 0);
-  transform: translateY(calc((1 - var(--hero-exit, 0)) * 34px));
-  transition: opacity .12s linear, transform .12s linear, margin-top .12s linear;
+  opacity: 1;
+  transform: none;
+  border-bottom: 1px solid rgba(17,17,24,0.1);
   position: relative;
   z-index: 9000;
 }
 
 .transition-quote::before {
-  content: '';
-  position: absolute;
-  inset: -24px 0;
-  z-index: -1;
-  pointer-events: none;
-  background: rgba(244,240,232,0.68);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  content: none;
 }
 
 .transition-quote p {
-  max-width: 1120px;
+  max-width: 920px;
   margin: 0 auto;
   font-family: var(--serif);
-  font-size: clamp(32px, 5vw, 76px);
-  line-height: 1.02;
+  font-size: clamp(24px, 3.2vw, 44px);
+  line-height: 1.08;
   color: #171716;
   transform: translateY(calc(var(--mangrove-quote-push, 0) * 18px));
   filter: blur(calc(var(--mangrove-quote-push, 0) * 1.4px));
@@ -823,8 +816,8 @@ body.academic-modal-active #main-nav {
   }
 
   .transition-quote {
-    min-height: 30vh;
-    padding: 26px 20px 12px;
+    min-height: auto;
+    padding: 30px 20px 24px;
   }
 
   .project-copy {
