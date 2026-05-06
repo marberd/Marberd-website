@@ -39,9 +39,11 @@
 @media (prefers-reduced-motion: reduce) {
   .load-fade { opacity: 1; transform: none; }
   .load-line { transform: none; }
-  .contact-statement,
+  .contact-form-card,
   .contact-aside > *,
-  .contact-hero-panel {
+  .contact-hero-panel,
+  .contact-info-card,
+  .contact-availability {
     transform: none;
     opacity: 1;
     transition: none;
@@ -68,16 +70,16 @@
 .contact-page {
   background:
     radial-gradient(circle at 10% 12%, rgba(47,111,115,0.08), transparent 24vw),
-    linear-gradient(180deg, #FAFAF8 0%, #F4F0E8 58%, #FAFAF8 100%);
+    linear-gradient(180deg, #FAFAF8 0%, #F4F0E8 56%, #FAFAF8 100%);
 }
 .contact-page .page-hero {
   max-width: none;
   margin: 0;
-  min-height: 74vh;
-  padding: 92px 60px 0;
+  min-height: 72vh;
+  padding: 96px 60px 0;
   border-bottom: none;
   background:
-    linear-gradient(90deg, rgba(17,17,24,0.98) 0%, rgba(17,17,24,0.94) 52%, rgba(17,17,24,0.80) 100%),
+    linear-gradient(90deg, rgba(17,17,24,0.98) 0%, rgba(17,17,24,0.94) 55%, rgba(17,17,24,0.82) 100%),
     linear-gradient(180deg, rgba(17,17,24,0.96) 0%, rgba(17,17,24,0.90) 100%);
   position: relative;
   overflow: hidden;
@@ -98,7 +100,7 @@
   content: '';
   position: absolute;
   inset: auto 0 0;
-  height: 22%;
+  height: 20%;
   background: linear-gradient(180deg, transparent, rgba(17,17,24,0.96));
   pointer-events: none;
 }
@@ -107,15 +109,15 @@
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, .82fr);
-  gap: 36px;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+  gap: 34px;
   align-items: end;
 }
 .contact-hero-copyblock {
   position: relative;
   z-index: 1;
-  max-width: 560px;
-  padding: 20px 0 28px;
+  max-width: 580px;
+  padding: 18px 0 26px;
 }
 .contact-page .page-eyebrow {
   color: var(--gold-lt);
@@ -130,7 +132,7 @@
   font-size: 14px;
   line-height: 1.75;
   color: rgba(255,255,255,0.66);
-  max-width: 500px;
+  max-width: 48ch;
   margin-top: 18px;
 }
 .contact-hero-actions {
@@ -175,50 +177,48 @@
 .contact-hero-panel {
   position: relative;
   z-index: 1;
-  padding: 22px;
+  padding: 24px 26px 22px;
   border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.055);
+  background: rgba(255,255,255,0.06);
   backdrop-filter: blur(18px);
   box-shadow: 0 28px 64px rgba(0,0,0,0.18);
-  display: grid;
-  gap: 14px;
-  animation: panelFloat 8s ease-in-out infinite alternate;
+  animation: panelRise .85s cubic-bezier(.16,1,.3,1) .12s both;
 }
 .contact-hero-panel::before {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent 42%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), transparent 42%);
   pointer-events: none;
 }
-.contact-hero-tile {
+.contact-hero-row {
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
   padding: 14px 0;
   border-bottom: 1px solid rgba(255,255,255,0.10);
-  transform: translateY(10px);
   opacity: 0;
-  animation: tileRise .7s cubic-bezier(.16,1,.3,1) forwards;
+  transform: translateY(12px);
+  animation: rowRise .65s cubic-bezier(.16,1,.3,1) forwards;
 }
-.contact-hero-tile:nth-child(2) { animation-delay: 120ms; }
-.contact-hero-tile:nth-child(3) { animation-delay: 240ms; }
-.contact-hero-tile:last-of-type {
+.contact-hero-row:nth-child(1) { animation-delay: 90ms; }
+.contact-hero-row:nth-child(2) { animation-delay: 190ms; }
+.contact-hero-row:nth-child(3) { animation-delay: 290ms; }
+.contact-hero-row:last-of-type {
   border-bottom: none;
-  padding-bottom: 0;
+  padding-bottom: 12px;
 }
-.contact-hero-tile-label {
+.contact-hero-row-label {
   font-family: var(--mono);
   font-size: 8px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.38);
 }
-.contact-hero-tile-value {
+.contact-hero-row-value {
   font-family: var(--serif);
   font-size: 19px;
   line-height: 1.15;
@@ -228,26 +228,26 @@
 .contact-hero-note {
   position: relative;
   z-index: 1;
-  margin-top: 2px;
+  margin-top: 12px;
   font-size: 13px;
   color: rgba(255,255,255,0.58);
   line-height: 1.65;
 }
 
-@keyframes tileRise {
-  from { opacity: 0; transform: translateY(16px); }
+@keyframes panelRise {
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-@keyframes panelFloat {
-  from { transform: translateY(0); }
-  to { transform: translateY(-8px); }
+@keyframes rowRise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ── GRID ──────────────────────────────────────────────── */
 #contact-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.04fr) minmax(300px, .76fr);
-  gap: 24px;
+  grid-template-columns: minmax(0, 1.08fr) minmax(300px, .82fr);
+  gap: 28px;
   margin-top: 0;
   align-items: start;
 }
@@ -255,64 +255,69 @@
   position: relative;
   z-index: 2;
   margin-top: 0;
-  padding-top: 42px;
-  padding-bottom: 92px;
+  padding-top: 44px;
+  padding-bottom: 88px;
 }
 @media (max-width: 768px) {
   #contact-grid { grid-template-columns: 1fr; gap: 48px; }
 }
 
 /* ── STATEMENT ─────────────────────────────────────────── */
-.contact-statement h2 {
+.contact-form-card h2 {
   font-family: var(--serif);
-  font-size: clamp(28px, 3.4vw, 44px);
+  font-size: clamp(30px, 4vw, 52px);
   font-weight: 300;
   line-height: 1.15;
   color: var(--black);
   margin-bottom: 20px;
 }
-.contact-statement h2 em {
+.contact-form-card h2 em {
   font-style: italic;
   color: var(--gold-dk);
   font-weight: 300;
 }
-.contact-statement h2 .roles {
-  font-style: normal;
-  color: var(--black);
-  font-weight: 300;
-}
-.contact-statement p {
+.contact-form-copy {
   font-size: 1rem;
   color: var(--mid);
   line-height: 1.75;
   font-weight: 300;
   max-width: 560px;
 }
-.contact-statement {
-  padding: 36px 34px 34px;
+.contact-form-card {
+  position: relative;
+  overflow: hidden;
+  padding: 38px 36px 34px;
   border: 1px solid rgba(17,17,24,0.08);
-  background: rgba(250,250,248,0.97);
+  background: rgba(250,250,248,0.98);
   box-shadow: 0 24px 60px rgba(17,17,24,0.07);
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
-.contact-statement:hover {
+.contact-form-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent 76%);
+}
+.contact-form-card:hover {
   transform: translateY(-4px);
   border-color: rgba(184,148,106,0.24);
   box-shadow: 0 30px 70px rgba(17,17,24,0.10);
 }
-.contact-statement p:first-of-type {
+.contact-form-card p:first-of-type {
   max-width: 520px;
 }
-.contact-statement h2 {
+.contact-form-card h2 {
   max-width: 12ch;
 }
 /* ── FORM ──────────────────────────────────────────────── */
 .contact-form {
-  margin-top: 30px;
+  margin-top: 28px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px 18px;
-  padding: 28px 0 0;
+  gap: 20px 18px;
+  padding: 24px 0 0;
   border-top: 1px solid var(--border);
 }
 .form-field {
@@ -332,22 +337,22 @@
 }
 .form-input,
 .form-textarea {
-  background: rgba(255,255,255,0.66);
-  border: 1px solid rgba(17,17,24,0.10);
-  padding: 14px 16px 13px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(17,17,24,0.14);
+  padding: 10px 0 12px;
   font-family: var(--sans);
   font-size: 15px;
   color: var(--text);
   width: 100%;
   outline: none;
-  transition: border-color .2s, background .2s, box-shadow .2s;
+  transition: border-color .2s, transform .2s;
   resize: none;
 }
 .form-input:focus,
 .form-textarea:focus {
-  border-color: rgba(184,148,106,0.65);
-  background: rgba(255,255,255,0.92);
-  box-shadow: 0 0 0 3px rgba(184,148,106,0.10);
+  border-color: var(--gold);
+  transform: translateX(2px);
 }
 .form-input::placeholder,
 .form-textarea::placeholder {
@@ -357,20 +362,25 @@
 .form-btn {
   grid-column: 1 / -1;
   justify-self: start;
-  margin-top: 6px;
-  padding: 14px 36px;
-  background: var(--gold-dk);
+  margin-top: 4px;
+  padding: 14px 28px;
+  background: var(--black);
   color: #fff;
   font-family: var(--mono);
   font-size: 9px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  border: none;
+  border: 1px solid var(--gold);
   border-radius: 3px;
   cursor: none;
-  transition: background .22s, transform .22s;
+  transition: background .22s, transform .22s, border-color .22s, color .22s;
 }
-.form-btn:hover { background: var(--black); transform: translateY(-2px); }
+.form-btn:hover {
+  background: var(--gold);
+  color: var(--black);
+  transform: translateY(-2px);
+  border-color: var(--gold);
+}
 @media (max-width: 768px) {
   .form-btn { align-self: stretch; text-align: center; }
   .form-input, .form-textarea { font-size: 16px; }
@@ -379,20 +389,22 @@
   .contact-hero-copy { max-width: 100%; }
   .contact-hero-actions { margin-top: 22px; }
   .contact-hero-panel { padding: 18px; }
-  .contact-hero-tile-value { font-size: 18px; }
+  .contact-hero-row-value { font-size: 18px; }
   .contact-form { grid-template-columns: 1fr; }
   .form-field:nth-of-type(3) { grid-column: auto; }
-  .contact-statement { padding: 26px 20px 24px; }
+  .contact-form-card { padding: 28px 20px 24px; }
+  .contact-info-link { padding: 18px 20px; }
+  .contact-info-head { padding: 16px 20px 10px; }
+  .contact-availability { padding: 20px 20px; }
   .contact-page .content-wrap { padding-top: 28px; padding-bottom: 56px; }
 }
 
 /* ── CONTACT CARDS ─────────────────────────────────────── */
 .contact-aside {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 16px;
 }
-.contact-info {
+.contact-info-card {
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -401,12 +413,20 @@
   box-shadow: 0 22px 54px rgba(17,17,24,0.14);
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
-.contact-info:hover {
+.contact-info-card:hover {
   transform: translateY(-4px);
   border-color: rgba(184,148,106,0.28);
   box-shadow: 0 28px 66px rgba(17,17,24,0.18);
 }
-.ci-link {
+.contact-info-head {
+  padding: 20px 24px 12px;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+}
+.contact-info-link {
   display: flex;
   gap: 20px;
   align-items: center;
@@ -416,11 +436,11 @@
   text-decoration: none;
   transition: background .2s, transform .2s;
 }
-.ci-link:last-child { border-bottom: none; }
-.ci-link:hover { background: rgba(255,255,255,0.04); transform: translateY(-1px); }
-.ci-link:hover .ci-label { color: var(--gold-lt); }
-.ci-link:hover .ci-icon { border-color: var(--gold); }
-.ci-icon {
+.contact-info-link:last-child { border-bottom: none; }
+.contact-info-link:hover { background: rgba(255,255,255,0.04); transform: translateX(4px); }
+.contact-info-link:hover .contact-info-label { color: var(--gold-lt); }
+.contact-info-link:hover .contact-info-icon { border-color: var(--gold); }
+.contact-info-icon {
   width: 36px; height: 36px;
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 50%;
@@ -429,8 +449,8 @@
   color: var(--gold-lt);
   transition: border-color .2s, color .2s;
 }
-.ci-icon svg { width: 14px; height: 14px; }
-.ci-label {
+.contact-info-icon svg { width: 14px; height: 14px; }
+.contact-info-label {
   font-family: var(--mono);
   font-size: 8px;
   letter-spacing: 1.5px;
@@ -439,13 +459,13 @@
   margin-bottom: 3px;
   transition: color .2s;
 }
-.ci-val {
+.contact-info-value {
   font-size: 14px;
   color: rgba(255,255,255,0.82);
 }
 
 /* ── AVAILABILITY ──────────────────────────────────────── */
-.avail-box {
+.contact-availability {
   padding: 24px 28px;
   border: 1px solid rgba(17,17,24,0.10);
   background: rgba(17,17,24,0.96);
@@ -453,12 +473,12 @@
   margin-top: 2px;
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
-.avail-box:hover {
+.contact-availability:hover {
   transform: translateY(-4px);
   border-color: rgba(184,106,184,0.22);
   box-shadow: 0 28px 66px rgba(17,17,24,0.18);
 }
-.avail-label {
+.contact-availability-label {
   font-family: var(--mono);
   font-size: 8px;
   letter-spacing: 2px;
@@ -466,7 +486,7 @@
   color: var(--gold-lt);
   margin-bottom: 8px;
 }
-.avail-text {
+.contact-availability-text {
   font-size: 13px;
   color: rgba(255,255,255,0.64);
   line-height: 1.7;
@@ -544,36 +564,35 @@
   <div class="contact-hero">
     <div class="contact-hero-copyblock">
       <div class="page-eyebrow">Contact</div>
-      <h1 class="page-title">Let's build something<br><em>together.</em></h1>
-      <p class="contact-hero-copy">Direct contact for project inquiries, senior roles, and focused collaborations.</p>
+      <h1 class="page-title">Direct conversations<br><em>with clarity.</em></h1>
+      <p class="contact-hero-copy">Project inquiries, senior roles, and focused collaborations are handled personally. For BIM, Revit, VDC, and delivery questions, send a clear brief and I’ll reply directly.</p>
       <div class="contact-hero-actions">
         <a class="contact-hero-btn contact-hero-btn--accent" href="#contact-form">Send a message</a>
         <a class="contact-hero-btn" href="mailto:marberdb@gmail.com">Email directly</a>
       </div>
     </div>
     <div class="contact-hero-panel" aria-label="Contact overview">
-      <div class="contact-hero-tile">
+      <div class="contact-hero-row">
         <div>
-          <div class="contact-hero-tile-label">Focus</div>
-          <div class="contact-hero-tile-value">BIM, Revit, VDC</div>
+          <div class="contact-hero-row-label">Focus</div>
+          <div class="contact-hero-row-value">BIM, Revit, VDC</div>
         </div>
       </div>
-      <div class="contact-hero-tile">
+      <div class="contact-hero-row">
         <div>
-          <div class="contact-hero-tile-label">Work mode</div>
-          <div class="contact-hero-tile-value">Hybrid and on-site</div>
+          <div class="contact-hero-row-label">Work mode</div>
+          <div class="contact-hero-row-value">Hybrid and on-site</div>
         </div>
       </div>
-      <div class="contact-hero-tile">
+      <div class="contact-hero-row">
         <div>
-          <div class="contact-hero-tile-label">Response</div>
-          <div class="contact-hero-tile-value">Direct contact</div>
+          <div class="contact-hero-row-label">Response</div>
+          <div class="contact-hero-row-value">Direct contact</div>
         </div>
       </div>
       <div class="contact-hero-note">Refined collaboration for complex project delivery and leadership-level support.</div>
     </div>
   </div>
-</div>
 </div>
 
 <!-- MAIN CONTENT -->
@@ -581,11 +600,11 @@
   <div id="contact-grid">
 
     <!-- LEFT: statement + form -->
-    <div class="contact-statement">
-      <div class="sec-label">Inquiry</div>
-      <h2>Open to BIM, Revit, and VDC delivery roles.</h2>
-      <p style="margin-top:18px;">
-        Columbia-trained architectural designer with 8+ years delivering BIM and Revit workflows across the US and international projects. Experienced in scaling complex fit-outs and building systems from the ground up, ready to contribute from day one. Open to hybrid and on-site senior roles.
+    <section class="contact-form-card">
+      <div class="sec-label">Send a note</div>
+      <h2>Tell me what needs to move.</h2>
+      <p class="contact-form-copy" style="margin-top:18px;">
+        Share the scope, timing, and what needs to be solved. I handle project inquiries, senior roles, and focused collaborations directly.
       </p>
 
       <!-- FORM (Formspree) -->
@@ -614,43 +633,49 @@
 
         <button class="form-btn" type="submit" data-fs-submit-btn>Send Message</button>
       </form>
-    </div>
+    </section>
 
     <!-- RIGHT: cards + availability -->
     <div class="load-fade d500 contact-aside">
-      <div class="contact-info">
-        <a class="ci-link" href="mailto:marberdb@gmail.com">
-          <div class="ci-icon">
+      <div class="contact-info-card">
+        <div class="contact-info-head">Reach</div>
+        <a class="contact-info-link" href="mailto:marberdb@gmail.com">
+          <div class="contact-info-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
           <div>
-            <div class="ci-label">Email</div>
-            <div class="ci-val">marberdb@gmail.com</div>
+            <div class="contact-info-label">Email</div>
+            <div class="contact-info-value">marberdb@gmail.com</div>
           </div>
         </a>
-        <a class="ci-link" href="https://linkedin.com/in/marberd-bernard" target="_blank" rel="noopener noreferrer">
-          <div class="ci-icon">
+        <a class="contact-info-link" href="https://linkedin.com/in/marberd-bernard" target="_blank" rel="noopener noreferrer">
+          <div class="contact-info-icon">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
           </div>
           <div>
-            <div class="ci-label">LinkedIn</div>
-            <div class="ci-val">linkedin.com/in/marberd-bernard</div>
+            <div class="contact-info-label">LinkedIn</div>
+            <div class="contact-info-value">linkedin.com/in/marberd-bernard</div>
           </div>
         </a>
-        <a class="ci-link" href="https://archnimations.com" target="_blank" rel="noopener noreferrer">
-          <div class="ci-icon">
+        <a class="contact-info-link" href="https://archnimations.com" target="_blank" rel="noopener noreferrer">
+          <div class="contact-info-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
           </div>
           <div>
-            <div class="ci-label">Freelance</div>
-            <div class="ci-val">archnimations.com</div>
+            <div class="contact-info-label">Freelance</div>
+            <div class="contact-info-value">archnimations.com</div>
           </div>
         </a>
       </div>
 
-      <div class="avail-box">
-        <div class="avail-label">Availability</div>
-        <div class="avail-text">Open to new opportunities · On-site &amp; hybrid · English · Spanish · Italian · Greek</div>
+      <div class="contact-availability">
+        <div class="contact-availability-label">Availability</div>
+        <div class="contact-availability-text">Open to new opportunities, on-site and hybrid. English, Spanish, Italian, Greek.</div>
+      </div>
+
+      <div class="contact-availability" style="background: rgba(250,250,248,0.98);">
+        <div class="contact-availability-label" style="color: var(--gold-dk);">Best fit</div>
+        <div class="contact-availability-text" style="color: var(--mid);">Project inquiries, leadership roles, BIM delivery support, and focused collaborations.</div>
       </div>
     </div>
 
