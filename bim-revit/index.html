@@ -349,6 +349,10 @@
   gap: 28px;
   align-items: start;
 }
+.bim-training-copy,
+.bim-training-media {
+  align-self: start;
+}
 .bim-training-copy p {
   font-size: 13.5px;
   color: var(--mid);
@@ -375,6 +379,7 @@
   background: var(--black);
   border: 1px solid rgba(17,17,24,0.16);
   box-shadow: 0 28px 60px rgba(17,17,24,0.12);
+  margin-top: 0;
 }
 .bim-video {
   width: 100%; display: block;
@@ -778,7 +783,7 @@
           <span>Advanced troubleshooting for live project constraints</span>
         </div>
       </div>
-      <div class="reveal">
+      <div class="bim-training-media reveal">
         <div class="bim-video-frame">
           <video class="bim-video" controls preload="metadata">
             <source src="../assets/videos/revit-training.mp4" type="video/mp4">
