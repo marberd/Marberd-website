@@ -433,44 +433,104 @@
 }
 .bim-yt-desc { font-size: 12px; color: var(--mid); line-height: 1.6; }
 
-/* Expertise sidebar */
-.bim-exp-sticky {
+/* Scroll wheel */
+.bim-exp-wheel {
+  --bim-wheel-rotation: 0deg;
   position: sticky;
-  top: 92px;
-  background: rgba(250,250,248,0.70);
-  border: 1px solid var(--bim-line);
-  padding: 18px;
-  backdrop-filter: blur(12px);
-}
-.bim-exp-head {
-  font-family: var(--serif);
-  font-size: clamp(23px, 2.5vw, 30px);
-  font-weight: 400; line-height: 1.05;
-  color: var(--black); margin-bottom: 16px;
-}
-.bim-exp-head em { font-style: italic; color: var(--gold-dk); }
-.bim-exp-list { display: flex; flex-direction: column; }
-.bim-exp-item {
+  top: 96px;
+  min-height: 340px;
   display: grid;
-  grid-template-columns: 28px 1fr;
-  gap: 14px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--bim-line);
-  align-items: start;
+  place-items: center;
 }
-.bim-exp-item:first-child { border-top: 1px solid var(--bim-line); }
-.bim-exp-num {
-  font-family: var(--mono); font-size: 8.5px;
-  letter-spacing: 1px; color: var(--gold);
-  padding-top: 3px;
+.bim-exp-wheel-frame {
+  position: relative;
+  width: min(100%, 340px);
+  aspect-ratio: 1;
 }
-.bim-exp-area {
-  font-size: 13px; font-weight: 500;
-  color: var(--black); margin-bottom: 5px;
+.bim-exp-wheel-rotor {
+  position: absolute;
+  inset: 24px;
+  border: 1px solid rgba(17,17,24,0.14);
+  border-radius: 50%;
+  transform: rotate(var(--bim-wheel-rotation));
+  transition: transform .08s linear;
 }
-.bim-exp-detail {
-  font-family: var(--mono); font-size: 8px;
-  letter-spacing: .06em; color: var(--muted); line-height: 1.6;
+.bim-exp-wheel-rotor::before,
+.bim-exp-wheel-rotor::after {
+  content: '';
+  position: absolute;
+  inset: 48px;
+  border: 1px solid rgba(184,148,106,0.32);
+  border-radius: 50%;
+}
+.bim-exp-wheel-rotor::after {
+  inset: 104px;
+  background: rgba(255,255,255,0.42);
+}
+.bim-exp-hub {
+  position: absolute;
+  inset: 50%;
+  width: 96px;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(184,148,106,0.45);
+  border-radius: 50%;
+  background: rgba(250,250,248,0.84);
+  text-align: center;
+  z-index: 3;
+}
+.bim-exp-hub span {
+  display: block;
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  line-height: 1.5;
+}
+.bim-exp-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 118px;
+  min-height: 34px;
+  margin: -17px 0 0 -59px;
+  display: grid;
+  place-items: center;
+  transform: rotate(var(--angle)) translate(110px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation)));
+  z-index: 4;
+}
+.bim-exp-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(17,17,24,0.12);
+  border-radius: 999px;
+  background: rgba(250,250,248,0.92);
+  box-shadow: 0 10px 30px rgba(17,17,24,0.08);
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 1px;
+  line-height: 1.35;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--black);
+  white-space: normal;
+}
+.bim-exp-wheel-note {
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  transform: translateX(-50%);
+  width: min(260px, 72%);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--mid);
 }
 
 /* ══ SOFTWARE STACK — RULED TABLE ══ */
@@ -627,7 +687,9 @@
   .bim-section-intro { grid-template-columns: 1fr; gap: 24px; }
   .bim-stats-inner { grid-template-columns: 1fr 1fr; gap: 0; }
   .bim-ai-grid { grid-template-columns: repeat(2, 1fr); }
-  .bim-exp-sticky { position: static; }
+  .bim-exp-wheel { position: relative; top: auto; min-height: 310px; }
+  .bim-exp-wheel-frame { width: min(100%, 300px); }
+  .bim-exp-orbit { transform: rotate(var(--angle)) translate(94px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation))); }
   .bim-hero { min-height: auto; }
   .bim-hero-panel { max-width: 560px; }
   .bim-yt-stack { grid-template-columns: 1fr; }
@@ -825,40 +887,19 @@
         </div>
       </div>
 
-      <!-- Expertise -->
-      <div class="reveal">
-        <div class="bim-exp-sticky">
-          <h3 class="bim-exp-head">Deep expertise.<br><em>Proven in practice.</em></h3>
-          <div class="bim-exp-list">
-            <div class="bim-exp-item">
-              <span class="bim-exp-num">01</span>
-              <div><div class="bim-exp-area">Parametric Family Engineering</div><div class="bim-exp-detail">Complex nested families, formula-driven geometry, adaptive components</div></div>
-            </div>
-            <div class="bim-exp-item">
-              <span class="bim-exp-num">02</span>
-              <div><div class="bim-exp-area">BIM 360 / ACC Administration</div><div class="bim-exp-detail">300+ projects — setup, permissions, model coordination, issue tracking</div></div>
-            </div>
-            <div class="bim-exp-item">
-              <span class="bim-exp-num">03</span>
-              <div><div class="bim-exp-area">Multi-discipline Coordination</div><div class="bim-exp-detail">Architecture, structure, and MEP federated models across complex commercial projects</div></div>
-            </div>
-            <div class="bim-exp-item">
-              <span class="bim-exp-num">04</span>
-              <div><div class="bim-exp-area">Construction Documentation</div><div class="bim-exp-detail">Full CD sets, phased drawings, millwork details, casework elevations</div></div>
-            </div>
-            <div class="bim-exp-item">
-              <span class="bim-exp-num">05</span>
-              <div><div class="bim-exp-area">Dynamo Automation</div><div class="bim-exp-detail">Parametric workflows, data extraction, repetitive task scripting</div></div>
-            </div>
-            <div class="bim-exp-item">
-              <span class="bim-exp-num">06</span>
-              <div><div class="bim-exp-area">Clash Detection</div><div class="bim-exp-detail">Navisworks-based MEP coordination across 100+ projects at AMA and TPG</div></div>
-            </div>
-            <div class="bim-exp-item">
-              <span class="bim-exp-num">07</span>
-              <div><div class="bim-exp-area">Firmwide Training</div><div class="bim-exp-detail">Annual Revit Essentials program — raising proficiency across all studio groups</div></div>
-            </div>
+      <!-- Capability wheel -->
+      <div class="bim-exp-wheel reveal" data-bim-wheel>
+        <div class="bim-exp-wheel-frame" aria-label="BIM capability wheel">
+          <div class="bim-exp-wheel-rotor">
+            <div class="bim-exp-hub"><span>BIM<br>Practice</span></div>
+            <div class="bim-exp-orbit" style="--angle: 0deg;"><span class="bim-exp-chip">Family Systems</span></div>
+            <div class="bim-exp-orbit" style="--angle: 60deg;"><span class="bim-exp-chip">ACC Admin</span></div>
+            <div class="bim-exp-orbit" style="--angle: 120deg;"><span class="bim-exp-chip">Coordination</span></div>
+            <div class="bim-exp-orbit" style="--angle: 180deg;"><span class="bim-exp-chip">Documentation</span></div>
+            <div class="bim-exp-orbit" style="--angle: 240deg;"><span class="bim-exp-chip">Dynamo</span></div>
+            <div class="bim-exp-orbit" style="--angle: 300deg;"><span class="bim-exp-chip">Clash Review</span></div>
           </div>
+          <p class="bim-exp-wheel-note">Core Revit and VDC strengths orbit around one delivery practice.</p>
         </div>
       </div>
 
@@ -1003,5 +1044,31 @@
   <p>© 2026 Marberd Bernard · New York, NY</p>
 </footer>
 <script src="../assets/js/main.js"></script>
+<script>
+(function () {
+  var wheel = document.querySelector('[data-bim-wheel]');
+  if (!wheel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var ticking = false;
+  function updateWheel() {
+    ticking = false;
+    var rect = wheel.getBoundingClientRect();
+    var vh = window.innerHeight || 1;
+    var progress = (vh - rect.top) / (vh + rect.height);
+    var rotation = Math.max(-80, Math.min(520, progress * 520 - 80));
+    wheel.style.setProperty('--bim-wheel-rotation', rotation.toFixed(2) + 'deg');
+  }
+
+  function requestWheel() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(updateWheel);
+  }
+
+  updateWheel();
+  window.addEventListener('scroll', requestWheel, { passive: true });
+  window.addEventListener('resize', requestWheel);
+}());
+</script>
 </body>
 </html>
