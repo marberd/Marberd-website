@@ -119,15 +119,6 @@
 .bim-hero-content {
   padding-top: 10px;
 }
-.bim-hero-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--gold-lt);
-  margin-bottom: 14px;
-  opacity: 0; animation: bimRise .7s ease .08s forwards;
-}
-.bim-hero-eyebrow::before { content:''; width:24px; height:1px; background:var(--gold); }
 .bim-hero-h1 {
   font-family: var(--serif);
   font-size: clamp(44px, 5.8vw, 76px);
@@ -182,45 +173,6 @@
 @keyframes bimRise {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ══ PROOF BAND ══ */
-.bim-stats-band {
-  position: relative;
-  z-index: 1;
-  margin-top: -1px;
-  background: var(--black);
-  color: var(--white);
-}
-.bim-stats-inner {
-  max-width: 1200px; margin: 0 auto;
-  padding: 0 60px 28px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: rgba(255,255,255,0.10);
-}
-.bim-stat {
-  min-height: 112px;
-  padding: 18px 20px 16px;
-  background: #17171f;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: background .2s ease, transform .2s ease;
-}
-.bim-stat:hover { background: #1d1d27; transform: translateY(-2px); }
-.bim-stat-n {
-  font-family: var(--serif);
-  font-size: clamp(34px, 4vw, 50px);
-  font-weight: 300; color: var(--white);
-  line-height: .95; margin-bottom: 10px;
-}
-.bim-stat-n em { font-style: italic; color: var(--gold-lt); }
-.bim-stat-l {
-  font-family: var(--mono); font-size: 8px;
-  letter-spacing: 2px; text-transform: uppercase;
-  color: rgba(255,255,255,0.46); line-height: 1.7;
 }
 
 /* ══ MAIN CONTENT WRAPPER ══ */
@@ -285,20 +237,6 @@
   font-weight: 300;
   max-width: 460px;
   margin: 14px 0;
-}
-.bim-training-list {
-  display: grid;
-  gap: 0;
-}
-.bim-training-list span {
-  display: block;
-  padding: 8px 0;
-  border-top: 1px solid var(--bim-line);
-  font-family: var(--mono);
-  color: var(--black);
-  font-size: 8.5px;
-  letter-spacing: 1.25px;
-  text-transform: uppercase;
 }
 .bim-video-frame {
   position: relative;
@@ -513,18 +451,18 @@ body.bim-video-cursor #cur-dot {
   --bim-wheel-rotation: 0deg;
   position: sticky;
   top: 88px;
-  min-height: 472px;
+  min-height: 512px;
   display: grid;
   place-items: center;
 }
 .bim-exp-wheel-frame {
   position: relative;
-  width: min(100%, 472px);
+  width: min(100%, 512px);
   aspect-ratio: 1;
 }
 .bim-exp-wheel-rotor {
   position: absolute;
-  inset: 24px;
+  inset: 22px;
   border: 1px solid rgba(17,17,24,0.14);
   border-radius: 50%;
   transform: rotate(var(--bim-wheel-rotation));
@@ -534,19 +472,19 @@ body.bim-video-cursor #cur-dot {
 .bim-exp-wheel-rotor::after {
   content: '';
   position: absolute;
-  inset: 52px;
+  inset: 54px;
   border: 1px solid rgba(184,148,106,0.32);
   border-radius: 50%;
 }
 .bim-exp-wheel-rotor::after {
-  inset: 122px;
+  inset: 130px;
   background: rgba(255,255,255,0.42);
 }
 .bim-exp-hub {
   position: absolute;
   inset: 50%;
-  width: 144px;
-  height: 144px;
+  width: 156px;
+  height: 156px;
   display: grid;
   place-items: center;
   transform: translate(-50%, -50%);
@@ -560,22 +498,23 @@ body.bim-video-cursor #cur-dot {
 .bim-exp-hub span {
   display: block;
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 10px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--gold-dk);
-  line-height: 1.38;
+  line-height: 1.25;
+  transform: translateY(1px);
 }
 .bim-exp-orbit {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 146px;
-  min-height: 38px;
-  margin: -19px 0 0 -73px;
+  width: 154px;
+  min-height: 40px;
+  margin: -20px 0 0 -77px;
   display: grid;
   place-items: center;
-  transform: rotate(var(--angle)) translate(152px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation)));
+  transform: rotate(var(--angle)) translate(162px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation)));
   z-index: 4;
 }
 .bim-exp-chip {
@@ -600,7 +539,7 @@ body.bim-video-cursor #cur-dot {
 .bim-exp-wheel-note {
   position: absolute;
   left: 50%;
-  bottom: -4px;
+  bottom: -2px;
   transform: translateX(-50%);
   width: min(280px, 72%);
   font-size: 12px;
@@ -611,14 +550,14 @@ body.bim-video-cursor #cur-dot {
 .bim-hero-wheel {
   position: relative;
   top: auto;
-  min-height: 474px;
+  min-height: 514px;
   z-index: 4;
   transform: translateY(30px);
   opacity: 0;
   animation: bimRise .85s ease .42s forwards;
 }
 .bim-hero-wheel .bim-exp-wheel-frame {
-  width: min(100%, 472px);
+  width: min(100%, 512px);
 }
 .bim-hero-wheel .bim-exp-wheel-rotor {
   border-color: rgba(255,255,255,0.22);
@@ -852,7 +791,6 @@ body.bim-video-cursor #cur-dot {
   .bim-problem-layout,
   .sw-dynamic,
   .bim-section-intro { grid-template-columns: 1fr; gap: 24px; }
-  .bim-stats-inner { grid-template-columns: 1fr 1fr; gap: 0; }
   .bim-ai-grid { grid-template-columns: repeat(2, 1fr); }
   .sw-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bim-hero { min-height: auto; }
@@ -860,8 +798,6 @@ body.bim-video-cursor #cur-dot {
 }
 @media (max-width: 768px) {
   .bim-hero { padding: 84px 20px 26px; }
-  .bim-stats-inner { padding: 0 20px 28px; }
-  .bim-stat { min-height: 108px; padding: 16px 16px; }
   .bim-wrap { padding: 26px 20px 34px; }
   .bim-section { padding: 28px 0; }
   .bim-ai-inner { padding: 36px 20px 42px; }
@@ -870,7 +806,6 @@ body.bim-video-cursor #cur-dot {
   .bim-sec-label { margin-bottom: 16px; }
 }
 @media (max-width: 600px) {
-  .bim-stats-inner,
   .bim-ai-grid { grid-template-columns: 1fr 1fr; }
   .bim-hero-h1 { font-size: clamp(50px, 16vw, 70px); }
   .bim-hero-sub { font-size: 15px; }
@@ -882,12 +817,9 @@ body.bim-video-cursor #cur-dot {
   .sw-detail-panel { min-height: 260px; }
 }
 @media (max-width: 420px) {
-  .bim-stats-inner,
   .bim-ai-grid { grid-template-columns: 1fr; }
-  .bim-stat { min-height: 148px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .bim-hero-eyebrow,
   .bim-hero-h1,
   .bim-hero-sub,
   .bim-hero-actions,
@@ -927,7 +859,6 @@ body.bim-video-cursor #cur-dot {
 <section class="bim-hero">
   <div class="bim-hero-inner">
     <div class="bim-hero-content">
-      <div class="bim-hero-eyebrow bim-kicker">BIM / VDC</div>
       <h1 class="bim-hero-h1">Digital delivery<br><em>with architectural rigor.</em></h1>
       <p class="bim-hero-sub">Revit leadership, BIM 360 / ACC administration, VDC coordination, and emerging AI workflows for complex commercial interiors and multidisciplinary project delivery.</p>
       <div class="bim-hero-actions">
@@ -952,28 +883,6 @@ body.bim-video-cursor #cur-dot {
   </div>
 </section>
 
-<!-- ── STATS BAND ── -->
-<div class="bim-stats-band">
-  <div class="bim-stats-inner">
-    <div class="bim-stat reveal">
-      <div class="bim-stat-n">300<em>+</em></div>
-      <div class="bim-stat-l">BIM 360 / ACC<br>Projects Administered</div>
-    </div>
-    <div class="bim-stat reveal">
-      <div class="bim-stat-n">25<em>+</em></div>
-      <div class="bim-stat-l">JPMorgan Chase<br>Locations Led</div>
-    </div>
-    <div class="bim-stat reveal">
-      <div class="bim-stat-n">119<em>K</em></div>
-      <div class="bim-stat-l">SF — CLEAR HQ<br>at 4 World Trade Center</div>
-    </div>
-    <div class="bim-stat reveal">
-      <div class="bim-stat-n">8<em>+</em></div>
-      <div class="bim-stat-l">Years Active<br>BIM Practice</div>
-    </div>
-  </div>
-</div>
-
 <!-- ── MAIN CONTENT ── -->
 <div class="bim-wrap">
 
@@ -985,12 +894,6 @@ body.bim-video-cursor #cur-dot {
         <h2 class="bim-section-title reveal">Firmwide Revit standards,<br><em>taught through real project practice.</em></h2>
         <p class="bim-section-note">Training is built around the realities of active project delivery: clean setup, consistent documentation, fewer coordination surprises, and faster team confidence inside Revit.</p>
         <p>Office-wide training session led annually for all studio teams at TPG Architecture. From model setup and BIM standards to advanced coordination workflows — building shared precision across every project.</p>
-        <div class="bim-training-list">
-          <span>Model setup and clean project starts</span>
-          <span>Firm standards, templates, and drawing consistency</span>
-          <span>Coordination workflows for production teams</span>
-          <span>Advanced troubleshooting for live project constraints</span>
-        </div>
       </div>
       <div class="bim-training-media reveal">
         <button class="bim-video-frame bim-video-launch" type="button" data-video-type="local" data-video-src="../assets/videos/revit-training.mp4" data-video-title="Revit Essentials · Annual Office-Wide Training" aria-label="Open Revit training video">
