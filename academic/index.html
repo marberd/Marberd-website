@@ -394,6 +394,27 @@ body.academic-card-hover #cur-dot {
   color: rgba(17,17,24,0.68);
 }
 
+.featured-summary,
+.project-summary,
+.modal-summary {
+  margin: 10px 0 0;
+  font-size: 0.95em;
+  line-height: 1.45;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.featured-summary,
+.project-summary {
+  max-width: 38ch;
+  color: rgba(17,17,24,0.66);
+}
+
+.modal-summary {
+  max-width: 760px;
+  color: rgba(255,255,255,0.64);
+}
+
 .projects-section {
   margin-top: calc(var(--hero-exit, 0) * -72px);
   padding: 76px clamp(20px, 5vw, 72px) 104px;
@@ -935,6 +956,7 @@ body.academic-modal-active #main-nav {
       <div class="card-number" id="modal-number"></div>
       <div class="modal-category card-tag" id="modal-category"></div>
       <h2 class="modal-title" id="modal-title"></h2>
+      <p class="modal-summary" id="modal-summary"></p>
       <p class="modal-desc" id="modal-desc"></p>
       <div class="modal-meta">
         <div><span class="meta-label">Studio</span><strong id="modal-studio"></strong></div>
@@ -959,6 +981,7 @@ body.academic-modal-active #main-nav {
       studio: 'Architecture Studio III',
       critic: 'Erica Goetz',
       tag: 'Housing / Water Systems',
+      summary: 'Riverfront housing lacked shared water systems → reciprocal frames organize apartments, gardens, and circulation → residents gain light and environmental awareness.',
       desc: 'A riverfront housing project developed with Marika Falco. Inspired by Venice and the portego typology, the design uses stepping reciprocal frames to organize apartments, welcome gardens, circulation, and extended living spaces facing the river. The building also treats water as an environmental system, drawing river water through structural pipe chases for heating, cooling, and radiant floors while centering water awareness and swim education for residents and neighbors.',
       tools: 'Housing Design · Environmental Systems · Reciprocal Frames',
       images: [
@@ -978,6 +1001,7 @@ body.academic-modal-active #main-nav {
       studio: 'Architecture Studio IV',
       critic: 'Robert Marino',
       tag: 'Environmental / Biomimetic',
+      summary: 'Coastal instability and access were unresolved → a mangrove-derived Ipe frame organizes structure and facade → the building filters land, water, and light.',
       desc: 'A waterfront civic structure whose branching network of Ipe wood functions simultaneously as facade, structure, and foundation, drawing from mangrove ecosystems to mediate land, water, and light.',
       tools: 'Revit · Lumion · Luban',
       images: [
@@ -1001,6 +1025,7 @@ body.academic-modal-active #main-nav {
       studio: 'Re-Thinking BIM',
       critic: 'Joseph Brennan',
       tag: 'BIM / Urban Systems',
+      summary: 'Hudson Yards massing was driven by abstract zoning → BIM coordinates envelopes, sun, and public realm → the proposal resolves as a buildable mixed-use system.',
       desc: 'A BIM and urban systems study for Hudson Yards translating special district zoning, lot envelopes, solar exposure, public space requirements, and tower massing into a coordinated mixed-use proposal.',
       tools: 'BIM · Zoning Analysis · Massing',
       images: [
@@ -1022,6 +1047,7 @@ body.academic-modal-active #main-nav {
       studio: 'Material Kitchens + Architecture Studio VI',
       critic: 'Lola Ben-Alon / David Benjamin',
       tag: 'Carbon / Biodegradable Systems',
+      summary: 'Loofah’s structural role was unclear → adobe and clay prototypes test reinforcement and biodegradability → the material reads as a low-carbon brick system.',
       desc: 'A hybrid material investigation testing loofah as reinforcement, carbon storage, and biodegradable structure through adobe and clay brick prototypes.',
       tools: 'Adobe · Clay · Loofah · Material Testing',
       images: [
@@ -1047,6 +1073,7 @@ body.academic-modal-active #main-nav {
       studio: 'ARCH4105-17',
       critic: 'Jorge Otero-Pailos / Mark Rakatansky',
       tag: 'Civic Infrastructure',
+      summary: 'Hidden water infrastructure lacked civic presence → the museum turns section, atmosphere, and display into sequence → water reads as public memory.',
       desc: 'A Core V proposal for a water museum in Venice, shaped by the discovery of an overlooked pool building and its triangular woven structure. The project turns freshwater history into a sequence of exhibition islands, moving visitors through architecture, infrastructure, and civic memory.',
       tools: 'Rhino · AutoCAD · V-Ray · InDesign',
       images: [
@@ -1073,6 +1100,7 @@ body.academic-modal-active #main-nav {
       studio: 'A4115-1',
       critic: 'Lola Ben-Alon',
       tag: 'Life Cycle Systems',
+      summary: 'Lifecycle impact was disconnected from construction decisions → case-study analysis links materials, sequencing, and management → the project culminates in a full-scale detail mock-up.',
       desc: 'A technical studio project that studies a single case study building through material geographies, environmental and social life cycles, construction sequencing, and project management. The final work combines analysis with a full-scale mock-up of a selected detail.',
       tools: 'Rhino · AutoCAD · InDesign · Model Making',
       images: [
@@ -1158,7 +1186,7 @@ body.academic-modal-active #main-nav {
       ? '<img src="' + project.images[0] + '" alt="' + plainTitle(project) + '" loading="' + (index > 2 ? 'lazy' : 'eager') + '">'
       : '<div class="project-placeholder"><span>' + project.n + '</span></div>';
 
-    button.innerHTML =
+  button.innerHTML =
       '<div class="project-media">' + media + '</div>' +
       '<div class="project-copy">' +
         '<div class="project-top">' +
@@ -1166,6 +1194,7 @@ body.academic-modal-active #main-nav {
           '<span class="card-tag">' + project.tag + '</span>' +
         '</div>' +
         '<h3 class="project-title">' + project.title + '</h3>' +
+        '<p class="project-summary">' + project.summary + '</p>' +
         '<p class="project-desc">' + shortText(project.desc) + '</p>' +
         '<div class="project-foot">' +
           '<span class="project-tools">' + project.tools + '</span>' +
@@ -1257,6 +1286,7 @@ body.academic-modal-active #main-nav {
     document.getElementById('modal-number').textContent = 'N° ' + project.n;
     document.getElementById('modal-category').textContent = project.category;
     document.getElementById('modal-title').innerHTML = project.title;
+    document.getElementById('modal-summary').textContent = project.summary;
     document.getElementById('modal-desc').textContent = project.desc;
     document.getElementById('modal-studio').textContent = project.studio;
     document.getElementById('modal-critic').textContent = project.critic;
@@ -1470,6 +1500,7 @@ body.academic-modal-active #main-nav {
   });
 
   var featuredCard = document.querySelector('.featured-card');
+  document.getElementById('featured-summary').textContent = projects[1].summary;
   attachCardEffects(featuredCard);
   mangroveTravelCard = featuredCard.cloneNode(true);
   mangroveTravelCard.classList.add('mangrove-travel-card');
