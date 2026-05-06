@@ -493,49 +493,104 @@
   color: rgba(255,255,255,0.58);
 }
 
-/* ══ SOFTWARE STACK — RULED TABLE ══ */
-.sw-card {
-  border: 1px solid var(--bim-line);
-  background: rgba(255,255,255,0.56);
-  padding: 12px 18px;
-  box-shadow: 0 18px 48px rgba(17,17,24,0.05);
+/* ══ SOFTWARE STACK — DYNAMIC CARDS ══ */
+.sw-dynamic {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, .44fr);
+  gap: 12px;
+  align-items: stretch;
 }
-.sw-table {
-  width: 100%;
-  border-collapse: collapse;
+.sw-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
 }
-.sw-table thead tr {
-  border-bottom: 1px solid var(--border);
+.sw-tool-card {
+  min-height: 132px;
+  appearance: none;
+  border: 1px solid rgba(17,17,24,0.10);
+  background: rgba(255,255,255,0.52);
+  padding: 16px;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  cursor: none;
+  transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
 }
-.sw-table thead th {
-  font-family: var(--mono); font-size: 8px;
-  letter-spacing: 2px; text-transform: uppercase;
-  color: var(--muted); font-weight: 400;
-  padding: 0 0 10px; text-align: left;
+.sw-tool-card:hover,
+.sw-tool-card:focus-visible,
+.sw-tool-card.is-active {
+  background: rgba(255,255,255,0.82);
+  border-color: rgba(184,148,106,0.42);
+  box-shadow: 0 18px 46px rgba(17,17,24,0.07);
+  transform: translateY(-3px);
+  outline: none;
 }
-.sw-table thead th + th { padding-left: 28px; }
-.sw-table tbody tr {
-  border-bottom: 1px solid rgba(226,222,214,0.55);
-  transition: background .18s;
+.sw-tool-cat {
+  display: block;
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-bottom: 12px;
 }
-.sw-table tbody tr:hover { background: var(--paper); }
-.sw-table tbody td {
-  padding: 10px 0;
-  vertical-align: top;
+.sw-tool-name {
+  display: block;
+  font-size: 15px;
+  line-height: 1.15;
+  font-weight: 500;
+  color: var(--black);
 }
-.sw-table tbody td + td { padding-left: 28px; }
-.sw-td-cat {
-  font-family: var(--mono); font-size: 8px;
-  letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--gold-dk); white-space: nowrap;
-  width: 170px;
+.sw-tool-hint {
+  display: block;
+  margin-top: 16px;
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: var(--muted);
 }
-.sw-td-name {
-  font-size: 14px; font-weight: 500; color: var(--black);
-  white-space: nowrap; width: 220px;
+.sw-detail-panel {
+  min-height: 100%;
+  border: 1px solid rgba(17,17,24,0.10);
+  background: var(--black);
+  color: var(--white);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 22px 54px rgba(17,17,24,0.14);
 }
-.sw-td-detail {
-  font-size: 12px; color: var(--mid); line-height: 1.55;
+.sw-detail-kicker {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.sw-detail-title {
+  margin-top: 14px;
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: .96;
+  font-weight: 400;
+}
+.sw-detail-text {
+  margin-top: 18px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.58);
+}
+.sw-detail-meta {
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
 }
 
 /* ══ AI BAND — DARK ══ */
@@ -644,9 +699,11 @@
   .bim-hero-inner,
   .bim-training-grid,
   .bim-problem-layout,
+  .sw-dynamic,
   .bim-section-intro { grid-template-columns: 1fr; gap: 24px; }
   .bim-stats-inner { grid-template-columns: 1fr 1fr; gap: 0; }
   .bim-ai-grid { grid-template-columns: repeat(2, 1fr); }
+  .sw-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bim-exp-wheel { position: relative; top: auto; min-height: 380px; }
   .bim-exp-wheel-frame { width: min(100%, 360px); }
   .bim-exp-orbit { transform: rotate(var(--angle)) translate(120px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation))); }
@@ -663,8 +720,6 @@
   .bim-ai-inner { padding: 36px 20px 42px; }
   .bim-ai-head-row { flex-direction: column; align-items: flex-start; }
   .bim-ai-sub { text-align: left; max-width: 100%; }
-  .sw-td-cat,
-  .sw-td-name { white-space: normal; width: auto; }
   .bim-sec-label { margin-bottom: 16px; }
 }
 @media (max-width: 600px) {
@@ -680,9 +735,8 @@
   .bim-exp-orbit { transform: rotate(var(--angle)) translate(96px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation))); }
   .bim-exp-chip { font-size: 7px; min-height: 32px; padding: 0 9px; }
   .ai-card-featured { grid-column: span 2; }
-  .sw-table thead th:nth-child(3),
-  .sw-table tbody td:nth-child(3) { display: none; }
-  .sw-card { padding: 14px; overflow-x: auto; }
+  .sw-card-grid { grid-template-columns: 1fr; }
+  .sw-detail-panel { min-height: 260px; }
 }
 @media (max-width: 420px) {
   .bim-stats-inner,
@@ -846,58 +900,57 @@
       </div>
       <p class="bim-section-note reveal">The toolset supports the full chain of digital delivery: authoring, coordination, automation, visualization, documentation, and team review.</p>
     </div>
-    <div class="sw-card reveal">
-      <table class="sw-table">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Tool</th>
-            <th>Application</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="sw-td-cat">BIM / Modeling</td>
-            <td class="sw-td-name">Autodesk Revit</td>
-            <td class="sw-td-detail">Primary BIM authoring — advanced formulas, parametric families, firmwide standards</td>
-          </tr>
-          <tr>
-            <td class="sw-td-cat">Cloud Coordination</td>
-            <td class="sw-td-name">BIM 360 / ACC</td>
-            <td class="sw-td-detail">300+ projects administered — user access, model management, issue tracking</td>
-          </tr>
-          <tr>
-            <td class="sw-td-cat">Clash Detection</td>
-            <td class="sw-td-name">Navisworks</td>
-            <td class="sw-td-detail">Multi-discipline coordination across MEP, structural, and architectural models</td>
-          </tr>
-          <tr>
-            <td class="sw-td-cat">Drafting</td>
-            <td class="sw-td-name">AutoCAD</td>
-            <td class="sw-td-detail">2D documentation, site plans, detail drawings</td>
-          </tr>
-          <tr>
-            <td class="sw-td-cat">Computational</td>
-            <td class="sw-td-name">Dynamo for Revit</td>
-            <td class="sw-td-detail">Parametric workflows, data extraction, automation scripts</td>
-          </tr>
-          <tr>
-            <td class="sw-td-cat">Parametric Design</td>
-            <td class="sw-td-name">Rhino + Grasshopper</td>
-            <td class="sw-td-detail">Complex geometry, generative form studies</td>
-          </tr>
-          <tr>
-            <td class="sw-td-cat">Visualization</td>
-            <td class="sw-td-name">Lumion + Enscape</td>
-            <td class="sw-td-detail">Architectural rendering, real-time Revit visualization, client presentations, and animations</td>
-          </tr>
-          <tr>
-            <td class="sw-td-cat">Documentation</td>
-            <td class="sw-td-name">Bluebeam Revu</td>
-            <td class="sw-td-detail">PDF markup, drawing review, field coordination</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="sw-dynamic reveal" data-software-stack>
+      <div class="sw-card-grid" role="list" aria-label="Software tools">
+        <button class="sw-tool-card is-active" type="button" data-tool="Autodesk Revit" data-category="BIM / Modeling" data-detail="Primary BIM authoring with advanced formulas, parametric families, firmwide standards, and documentation workflows.">
+          <span class="sw-tool-cat">BIM / Modeling</span>
+          <span class="sw-tool-name">Autodesk Revit</span>
+          <span class="sw-tool-hint">Primary authoring</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="BIM 360 / ACC" data-category="Cloud Coordination" data-detail="300+ projects administered across user access, model management, issue tracking, coordination, and team permissions.">
+          <span class="sw-tool-cat">Cloud Coordination</span>
+          <span class="sw-tool-name">BIM 360 / ACC</span>
+          <span class="sw-tool-hint">Project control</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="Navisworks" data-category="Clash Detection" data-detail="Multi-discipline coordination across MEP, structural, and architectural models for constructability review.">
+          <span class="sw-tool-cat">Clash Detection</span>
+          <span class="sw-tool-name">Navisworks</span>
+          <span class="sw-tool-hint">Model review</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="AutoCAD" data-category="Drafting" data-detail="2D documentation, site plans, detail drawings, legacy drawing coordination, and production support.">
+          <span class="sw-tool-cat">Drafting</span>
+          <span class="sw-tool-name">AutoCAD</span>
+          <span class="sw-tool-hint">2D support</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="Dynamo for Revit" data-category="Computational" data-detail="Parametric workflows, data extraction, automation scripts, repetitive task control, and project cleanup.">
+          <span class="sw-tool-cat">Computational</span>
+          <span class="sw-tool-name">Dynamo for Revit</span>
+          <span class="sw-tool-hint">Automation</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="Rhino + Grasshopper" data-category="Parametric Design" data-detail="Complex geometry, generative form studies, surface logic, and early design systems before BIM translation.">
+          <span class="sw-tool-cat">Parametric Design</span>
+          <span class="sw-tool-name">Rhino + Grasshopper</span>
+          <span class="sw-tool-hint">Geometry systems</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="Lumion + Enscape" data-category="Visualization" data-detail="Architectural rendering, real-time Revit visualization, client presentations, visual studies, and animations.">
+          <span class="sw-tool-cat">Visualization</span>
+          <span class="sw-tool-name">Lumion + Enscape</span>
+          <span class="sw-tool-hint">Real-time output</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="Bluebeam Revu" data-category="Documentation" data-detail="PDF markup, drawing review, field coordination, drawing issue tracking, and team review sessions.">
+          <span class="sw-tool-cat">Documentation</span>
+          <span class="sw-tool-name">Bluebeam Revu</span>
+          <span class="sw-tool-hint">Review workflow</span>
+        </button>
+      </div>
+      <aside class="sw-detail-panel" aria-live="polite">
+        <div>
+          <div class="sw-detail-kicker" id="sw-detail-category">BIM / Modeling</div>
+          <div class="sw-detail-title" id="sw-detail-title">Autodesk Revit</div>
+          <p class="sw-detail-text" id="sw-detail-text">Primary BIM authoring with advanced formulas, parametric families, firmwide standards, and documentation workflows.</p>
+        </div>
+        <div class="sw-detail-meta">Hover or select a tool</div>
+      </aside>
     </div>
   </div>
 
@@ -1004,6 +1057,35 @@
   updateWheel();
   window.addEventListener('scroll', requestWheel, { passive: true });
   window.addEventListener('resize', requestWheel);
+}());
+
+(function () {
+  var stack = document.querySelector('[data-software-stack]');
+  if (!stack) return;
+
+  var cards = Array.prototype.slice.call(stack.querySelectorAll('.sw-tool-card'));
+  var category = document.getElementById('sw-detail-category');
+  var title = document.getElementById('sw-detail-title');
+  var text = document.getElementById('sw-detail-text');
+
+  function activate(card) {
+    cards.forEach(function (item) {
+      var isActive = item === card;
+      item.classList.toggle('is-active', isActive);
+      item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    if (category) category.textContent = card.getAttribute('data-category') || '';
+    if (title) title.textContent = card.getAttribute('data-tool') || '';
+    if (text) text.textContent = card.getAttribute('data-detail') || '';
+  }
+
+  cards.forEach(function (card) {
+    card.setAttribute('aria-pressed', card.classList.contains('is-active') ? 'true' : 'false');
+    card.addEventListener('pointerenter', function () { activate(card); });
+    card.addEventListener('focus', function () { activate(card); });
+    card.addEventListener('click', function () { activate(card); });
+  });
 }());
 </script>
 </body>
