@@ -508,114 +508,139 @@ body.bim-video-cursor #cur-dot {
 }
 .bim-yt-desc { font-size: 12px; color: var(--mid); line-height: 1.6; }
 
-/* ══ HERO INFO PANEL ══ */
-.bim-hero-panel {
-  position: relative;
-  padding: 22px 22px 18px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background:
-    linear-gradient(180deg, rgba(18,18,26,0.84) 0%, rgba(18,18,26,0.72) 100%),
-    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: auto, 34px 34px, 34px 34px;
-  box-shadow: 0 24px 68px rgba(0,0,0,0.28);
-  overflow: hidden;
+/* Scroll wheel */
+.bim-exp-wheel {
+  --bim-wheel-rotation: 0deg;
+  position: sticky;
+  top: 88px;
+  min-height: 472px;
+  display: grid;
+  place-items: center;
 }
-.bim-hero-panel::before {
+.bim-exp-wheel-frame {
+  position: relative;
+  width: min(100%, 472px);
+  aspect-ratio: 1;
+}
+.bim-exp-wheel-rotor {
+  position: absolute;
+  inset: 24px;
+  border: 1px solid rgba(17,17,24,0.14);
+  border-radius: 50%;
+  transform: rotate(var(--bim-wheel-rotation));
+  transition: transform .08s linear;
+}
+.bim-exp-wheel-rotor::before,
+.bim-exp-wheel-rotor::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(184,148,106,0.12), transparent 40%);
-  pointer-events: none;
+  inset: 52px;
+  border: 1px solid rgba(184,148,106,0.32);
+  border-radius: 50%;
 }
-.bim-hero-panel-head {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.10);
+.bim-exp-wheel-rotor::after {
+  inset: 122px;
+  background: rgba(255,255,255,0.42);
 }
-.bim-hero-panel-label {
-  font-family: var(--mono);
-  font-size: 8px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(212,184,150,0.82);
-  margin-bottom: 8px;
-}
-.bim-hero-panel-title {
-  font-family: var(--serif);
-  font-size: clamp(26px, 2.6vw, 38px);
-  line-height: .96;
-  font-weight: 400;
-  color: var(--white);
-  max-width: 10ch;
-}
-.bim-hero-panel-summary {
-  max-width: 240px;
-  font-size: 12px;
-  line-height: 1.6;
-  color: rgba(255,255,255,0.54);
-}
-.bim-hero-map {
-  position: relative;
+.bim-exp-hub {
+  position: absolute;
+  inset: 50%;
+  width: 144px;
+  height: 144px;
   display: grid;
-  gap: 0;
-  margin-top: 6px;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(184,148,106,0.48);
+  border-radius: 50%;
+  background: rgba(250,250,248,0.90);
+  text-align: center;
+  z-index: 3;
+  box-shadow: 0 14px 38px rgba(17,17,24,0.12);
 }
-.bim-hero-map-item {
-  display: grid;
-  grid-template-columns: 102px minmax(0, 1fr);
-  gap: 14px;
-  align-items: start;
-  padding: 14px 0;
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-.bim-hero-map-kicker {
-  font-family: var(--mono);
-  font-size: 7.5px;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: rgba(212,184,150,0.78);
-}
-.bim-hero-map-copy {
-  font-size: 12px;
-  line-height: 1.55;
-  color: rgba(255,255,255,0.72);
-}
-.bim-hero-map-copy em {
+.bim-exp-hub span {
   display: block;
-  margin-top: 4px;
   font-family: var(--mono);
-  font-size: 7.5px;
-  letter-spacing: 1.25px;
+  font-size: 9.5px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.44);
-  font-style: normal;
+  color: var(--gold-dk);
+  line-height: 1.38;
 }
-.bim-hero-panel-foot {
-  position: relative;
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255,255,255,0.10);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
+.bim-exp-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 146px;
+  min-height: 38px;
+  margin: -19px 0 0 -73px;
+  display: grid;
+  place-items: center;
+  transform: rotate(var(--angle)) translate(152px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation)));
+  z-index: 4;
 }
-.bim-hero-panel-foot span {
-  min-height: 28px;
+.bim-exp-chip {
   display: inline-flex;
   align-items: center;
-  padding: 0 10px;
-  border: 1px solid rgba(184,148,106,0.18);
-  background: rgba(255,255,255,0.04);
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid rgba(17,17,24,0.12);
+  border-radius: 999px;
+  background: rgba(250,250,248,0.94);
+  box-shadow: 0 10px 30px rgba(17,17,24,0.08);
   font-family: var(--mono);
   font-size: 7.5px;
   letter-spacing: 1px;
+  line-height: 1.35;
+  text-align: center;
   text-transform: uppercase;
+  color: var(--black);
+  white-space: normal;
+}
+.bim-exp-wheel-note {
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  transform: translateX(-50%);
+  width: min(280px, 72%);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--mid);
+}
+.bim-hero-wheel {
+  position: relative;
+  top: auto;
+  min-height: 474px;
+  z-index: 4;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: bimRise .85s ease .42s forwards;
+}
+.bim-hero-wheel .bim-exp-wheel-frame {
+  width: min(100%, 472px);
+}
+.bim-hero-wheel .bim-exp-wheel-rotor {
+  border-color: rgba(255,255,255,0.22);
+}
+.bim-hero-wheel .bim-exp-wheel-rotor::before {
+  border-color: rgba(212,184,150,0.38);
+}
+.bim-hero-wheel .bim-exp-wheel-rotor::after {
+  background: rgba(17,17,24,0.50);
+  border-color: rgba(255,255,255,0.13);
+}
+.bim-hero-wheel .bim-exp-hub {
+  background: rgba(17,17,24,0.76);
+  border-color: rgba(212,184,150,0.58);
+}
+.bim-hero-wheel .bim-exp-hub span {
+  color: var(--gold-lt);
+}
+.bim-hero-wheel .bim-exp-chip {
+  background: rgba(250,250,248,0.96);
+}
+.bim-hero-wheel .bim-exp-wheel-note {
   color: rgba(255,255,255,0.62);
 }
 
@@ -843,10 +868,6 @@ body.bim-video-cursor #cur-dot {
   .bim-ai-head-row { flex-direction: column; align-items: flex-start; }
   .bim-ai-sub { text-align: left; max-width: 100%; }
   .bim-sec-label { margin-bottom: 16px; }
-  .bim-hero-panel-head { flex-direction: column; align-items: flex-start; }
-  .bim-hero-panel-summary { max-width: 100%; }
-  .bim-hero-map-item { grid-template-columns: 1fr; gap: 8px; }
-  .bim-hero-panel-foot span { width: 100%; justify-content: center; }
 }
 @media (max-width: 600px) {
   .bim-stats-inner,
@@ -870,7 +891,7 @@ body.bim-video-cursor #cur-dot {
   .bim-hero-h1,
   .bim-hero-sub,
   .bim-hero-actions,
-  .bim-hero-panel,
+  .bim-hero-wheel,
   .bim-video-launch {
     animation: none;
     opacity: 1;
@@ -914,32 +935,18 @@ body.bim-video-cursor #cur-dot {
         <a class="bim-cta bim-cta-secondary" href="#revit-training">View training work</a>
       </div>
     </div>
-    <aside class="bim-hero-panel reveal" aria-label="BIM practice map">
-      <div class="bim-hero-panel-head">
-        <div>
-          <div class="bim-hero-panel-label">Practice map</div>
-          <div class="bim-hero-panel-title">What the BIM stack actually covers</div>
+    <aside class="bim-exp-wheel bim-hero-wheel" data-bim-wheel aria-label="BIM capability wheel">
+      <div class="bim-exp-wheel-frame">
+        <div class="bim-exp-wheel-rotor">
+          <div class="bim-exp-hub"><span>BIM<br>Practice</span></div>
+          <div class="bim-exp-orbit" style="--angle: 0deg;"><span class="bim-exp-chip">Family Systems</span></div>
+          <div class="bim-exp-orbit" style="--angle: 60deg;"><span class="bim-exp-chip">ACC Admin</span></div>
+          <div class="bim-exp-orbit" style="--angle: 120deg;"><span class="bim-exp-chip">Coordination</span></div>
+          <div class="bim-exp-orbit" style="--angle: 180deg;"><span class="bim-exp-chip">Documentation</span></div>
+          <div class="bim-exp-orbit" style="--angle: 240deg;"><span class="bim-exp-chip">AI Leverage</span></div>
+          <div class="bim-exp-orbit" style="--angle: 300deg;"><span class="bim-exp-chip">Clash Review</span></div>
         </div>
-        <div class="bim-hero-panel-summary">A concise map of the delivery responsibilities that sit behind the page, not a decorative summary.</div>
-      </div>
-      <div class="bim-hero-map">
-        <div class="bim-hero-map-item">
-          <div class="bim-hero-map-kicker">Authoring</div>
-          <div class="bim-hero-map-copy">Revit families, model standards, sheet control, and production-ready documentation.<em>Built for consistent output.</em></div>
-        </div>
-        <div class="bim-hero-map-item">
-          <div class="bim-hero-map-kicker">Coordination</div>
-          <div class="bim-hero-map-copy">ACC administration, model review, clash response, and issue tracking across disciplines.<em>Supports active projects.</em></div>
-        </div>
-        <div class="bim-hero-map-item">
-          <div class="bim-hero-map-kicker">Automation</div>
-          <div class="bim-hero-map-copy">Dynamo workflows, design options, and targeted AI support when the process needs leverage.<em>Speeds repeatable work.</em></div>
-        </div>
-      </div>
-      <div class="bim-hero-panel-foot" aria-label="Primary delivery outcomes">
-        <span>300+ projects administered</span>
-        <span>25+ locations led</span>
-        <span>8+ years active practice</span>
+        <p class="bim-exp-wheel-note">Core Revit and VDC strengths orbit around one delivery practice.</p>
       </div>
     </aside>
   </div>
@@ -1182,6 +1189,31 @@ body.bim-video-cursor #cur-dot {
 </footer>
 <script src="../assets/js/main.js"></script>
 <script>
+(function () {
+  var wheel = document.querySelector('[data-bim-wheel]');
+  if (!wheel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var ticking = false;
+  function updateWheel() {
+    ticking = false;
+    var rect = wheel.getBoundingClientRect();
+    var vh = window.innerHeight || 1;
+    var progress = (vh - rect.top) / (vh + rect.height);
+    var rotation = Math.max(-80, Math.min(520, progress * 520 - 80));
+    wheel.style.setProperty('--bim-wheel-rotation', rotation.toFixed(2) + 'deg');
+  }
+
+  function requestWheel() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(updateWheel);
+  }
+
+  updateWheel();
+  window.addEventListener('scroll', requestWheel, { passive: true });
+  window.addEventListener('resize', requestWheel);
+}());
+
 (function () {
   var stack = document.querySelector('[data-software-stack]');
   if (!stack) return;
