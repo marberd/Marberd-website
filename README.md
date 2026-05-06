@@ -15,7 +15,7 @@ Personal portfolio website for **Marberd Bernard**, Architect & VDC Specialist.
 ├── about.html            ← Bio, education, experience timeline
 ├── academic.html         ← Academic projects (Columbia studio work)
 ├── professional.html     ← Professional work (TPG, clients, international)
-├── bim-revit.html        ← BIM/VDC capabilities & AI tools
+├── bim-revit.html        ← BIM/AI capabilities & tools
 ├── contact.html          ← Contact information
 ├── assets/
 │   ├── css/style.css     ← All shared styles (design system)
