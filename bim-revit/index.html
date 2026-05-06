@@ -139,6 +139,7 @@
   align-items: center;
   gap: 14px;
   flex-wrap: wrap;
+  margin-top: 34px;
   opacity: 0; animation: bimRise .85s ease .62s forwards;
 }
 .bim-cta {
@@ -574,7 +575,13 @@ body.bim-video-cursor #cur-dot {
   border-color: rgba(212,184,150,0.58);
 }
 .bim-hero-wheel .bim-exp-hub span {
+  font-size: 9px;
+  letter-spacing: 1.25px;
   color: var(--gold-lt);
+  line-height: 1.1;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: translateY(1px);
 }
 .bim-hero-wheel .bim-exp-chip {
   background: rgba(250,250,248,0.96);
@@ -804,6 +811,7 @@ body.bim-video-cursor #cur-dot {
   .bim-ai-head-row { flex-direction: column; align-items: flex-start; }
   .bim-ai-sub { text-align: left; max-width: 100%; }
   .bim-sec-label { margin-bottom: 16px; }
+  .bim-hero-actions { margin-top: 24px; }
 }
 @media (max-width: 600px) {
   .bim-ai-grid { grid-template-columns: 1fr 1fr; }
