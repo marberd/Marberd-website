@@ -76,13 +76,13 @@
 /* ══ HERO ══ */
 .bim-hero {
   position: relative;
-  min-height: 92vh;
+  min-height: 74vh;
   display: grid;
   align-items: end;
   background:
     linear-gradient(90deg, rgba(17,17,24,0.96) 0%, rgba(17,17,24,0.88) 45%, rgba(17,17,24,0.48) 100%),
     url('../assets/images/projects/tpg-interior.jpg') center / cover;
-  padding: 132px 60px 54px;
+  padding: 112px 60px 46px;
   overflow: hidden;
 }
 .bim-hero::before {
@@ -111,8 +111,8 @@
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 0.7fr);
-  gap: 72px;
+  grid-template-columns: minmax(0, 1fr) minmax(330px, 0.52fr);
+  gap: 48px;
   align-items: end;
 }
 .bim-hero-eyebrow {
@@ -120,23 +120,23 @@
   align-items: center;
   gap: 12px;
   color: var(--gold-lt);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   opacity: 0; animation: bimRise .7s ease .08s forwards;
 }
 .bim-hero-eyebrow::before { content:''; width:24px; height:1px; background:var(--gold); }
 .bim-hero-h1 {
   font-family: var(--serif);
-  font-size: clamp(58px, 8vw, 116px);
-  font-weight: 400; line-height: .88; color: var(--white);
-  letter-spacing: -2px; margin-bottom: 30px;
+  font-size: clamp(48px, 6.7vw, 88px);
+  font-weight: 400; line-height: .92; color: var(--white);
+  letter-spacing: -1.2px; margin-bottom: 22px;
   opacity: 0; animation: bimRise .85s ease .28s forwards;
 }
 .bim-hero-h1 em { font-style: italic; color: var(--gold-lt); }
 .bim-hero-sub {
-  font-size: 16px; font-weight: 300;
+  font-size: 15px; font-weight: 300;
   color: rgba(255,255,255,0.64);
-  line-height: 1.85; max-width: 610px;
-  margin-bottom: 30px;
+  line-height: 1.7; max-width: 600px;
+  margin-bottom: 24px;
   opacity: 0; animation: bimRise .85s ease .48s forwards;
 }
 .bim-hero-actions {
@@ -147,7 +147,7 @@
   opacity: 0; animation: bimRise .85s ease .62s forwards;
 }
 .bim-cta {
-  min-height: 46px;
+  min-height: 42px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -180,7 +180,7 @@
   border: 1px solid rgba(255,255,255,0.14);
   background: rgba(17,17,24,0.58);
   backdrop-filter: blur(18px);
-  padding: 22px;
+  padding: 18px;
   box-shadow: 0 28px 80px rgba(0,0,0,0.32);
   opacity: 0; animation: bimRise .85s ease .42s forwards;
 }
@@ -195,7 +195,7 @@
 .bim-panel-title {
   font-family: var(--serif);
   color: var(--white);
-  font-size: 25px;
+  font-size: 22px;
   line-height: 1.05;
 }
 .bim-panel-tag {
@@ -207,8 +207,8 @@
   white-space: nowrap;
 }
 .bim-panel-visual {
-  margin: 20px 0;
-  min-height: 220px;
+  margin: 16px 0;
+  min-height: 150px;
   border: 1px solid rgba(255,255,255,0.10);
   background:
     linear-gradient(135deg, rgba(47,111,115,0.42), rgba(184,148,106,0.24)),
@@ -235,13 +235,13 @@
 }
 .bim-panel-metric {
   background: rgba(17,17,24,0.78);
-  padding: 16px;
+  padding: 14px;
 }
 .bim-panel-metric strong {
   display: block;
   font-family: var(--serif);
   color: var(--white);
-  font-size: 36px;
+  font-size: 30px;
   line-height: 1;
   font-weight: 400;
 }
@@ -269,15 +269,15 @@
 }
 .bim-stats-inner {
   max-width: 1200px; margin: 0 auto;
-  padding: 0 60px 74px;
+  padding: 0 60px 48px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background: rgba(255,255,255,0.10);
 }
 .bim-stat {
-  min-height: 194px;
-  padding: 30px 26px 26px;
+  min-height: 136px;
+  padding: 22px 22px 20px;
   background: #17171f;
   display: flex;
   flex-direction: column;
@@ -287,9 +287,9 @@
 .bim-stat:hover { background: #1d1d27; transform: translateY(-2px); }
 .bim-stat-n {
   font-family: var(--serif);
-  font-size: clamp(46px, 5.3vw, 72px);
+  font-size: clamp(38px, 4.6vw, 58px);
   font-weight: 300; color: var(--white);
-  line-height: .95; margin-bottom: 24px;
+  line-height: .95; margin-bottom: 14px;
 }
 .bim-stat-n em { font-style: italic; color: var(--gold-lt); }
 .bim-stat-l {
@@ -301,17 +301,17 @@
 /* ══ MAIN CONTENT WRAPPER ══ */
 .bim-wrap {
   max-width: 1200px; margin: 0 auto;
-  padding: 92px 60px 104px;
+  padding: 58px 60px 70px;
 }
 .bim-section {
-  padding: 86px 0;
+  padding: 58px 0;
   border-top: 1px solid var(--bim-line);
 }
 .bim-section:first-child { border-top: none; padding-top: 0; }
 .bim-sec-label {
   font-family: var(--mono); font-size: 9px; letter-spacing: 3px;
   text-transform: uppercase; color: var(--gold-dk);
-  margin-bottom: 34px; display: flex; align-items: center; gap: 12px;
+  margin-bottom: 18px; display: flex; align-items: center; gap: 12px;
 }
 .bim-sec-label::after {
   content: ''; height: 1px;
@@ -321,13 +321,13 @@
 .bim-section-intro {
   display: grid;
   grid-template-columns: minmax(0, .82fr) minmax(260px, .45fr);
-  gap: 48px;
+  gap: 32px;
   align-items: end;
-  margin-bottom: 46px;
+  margin-bottom: 28px;
 }
 .bim-section-title {
   font-family: var(--serif);
-  font-size: clamp(34px, 4.6vw, 60px);
+  font-size: clamp(30px, 3.6vw, 48px);
   font-weight: 400;
   line-height: 1;
   color: var(--black);
@@ -335,9 +335,9 @@
 }
 .bim-section-title em { font-style: italic; color: var(--gold-dk); }
 .bim-section-note {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--mid);
-  line-height: 1.75;
+  line-height: 1.65;
   font-weight: 300;
 }
 
@@ -345,24 +345,24 @@
 .bim-training-grid {
   display: grid;
   grid-template-columns: minmax(280px, .44fr) minmax(0, .56fr);
-  gap: 44px;
+  gap: 34px;
   align-items: start;
 }
 .bim-training-copy p {
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--mid);
-  line-height: 1.85;
+  line-height: 1.7;
   font-weight: 300;
   max-width: 440px;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 .bim-training-list {
   display: grid;
-  gap: 12px;
+  gap: 0;
 }
 .bim-training-list span {
   display: block;
-  padding: 13px 0;
+  padding: 10px 0;
   border-top: 1px solid var(--bim-line);
   font-family: var(--mono);
   color: var(--black);
@@ -391,14 +391,14 @@
 .bim-solve-grid {
   display: grid;
   grid-template-columns: minmax(0, .57fr) minmax(300px, .43fr);
-  gap: 58px;
+  gap: 34px;
   align-items: start;
 }
-.bim-yt-stack { display: flex; flex-direction: column; gap: 30px; }
+.bim-yt-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .bim-yt-item {
   background: rgba(255,255,255,0.62);
   border: 1px solid var(--bim-line);
-  padding: 18px;
+  padding: 14px;
   box-shadow: 0 18px 48px rgba(17,17,24,0.06);
 }
 .bim-yt-embed {
@@ -406,7 +406,7 @@
   aspect-ratio: 16/9;
   background: var(--black);
   overflow: hidden;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 .bim-yt-embed iframe {
   position: absolute; inset: 0;
@@ -421,11 +421,11 @@
 }
 .bim-yt-label::before { content:''; width:14px; height:1px; background:var(--gold); flex-shrink:0; }
 .bim-yt-title {
-  font-family: var(--serif); font-size: 20px;
+  font-family: var(--serif); font-size: 18px;
   font-weight: 400; color: var(--black); line-height: 1.2;
   margin-bottom: 8px;
 }
-.bim-yt-desc { font-size: 12.5px; color: var(--mid); line-height: 1.7; }
+.bim-yt-desc { font-size: 12px; color: var(--mid); line-height: 1.6; }
 
 /* Expertise sidebar */
 .bim-exp-sticky {
@@ -433,22 +433,22 @@
   top: 92px;
   background: rgba(250,250,248,0.70);
   border: 1px solid var(--bim-line);
-  padding: 28px;
+  padding: 22px;
   backdrop-filter: blur(12px);
 }
 .bim-exp-head {
   font-family: var(--serif);
-  font-size: clamp(28px, 3.2vw, 42px);
+  font-size: clamp(25px, 2.8vw, 34px);
   font-weight: 400; line-height: 1.05;
-  color: var(--black); margin-bottom: 40px;
+  color: var(--black); margin-bottom: 22px;
 }
 .bim-exp-head em { font-style: italic; color: var(--gold-dk); }
 .bim-exp-list { display: flex; flex-direction: column; }
 .bim-exp-item {
   display: grid;
   grid-template-columns: 28px 1fr;
-  gap: 16px;
-  padding: 18px 0;
+  gap: 14px;
+  padding: 12px 0;
   border-bottom: 1px solid var(--bim-line);
   align-items: start;
 }
@@ -471,7 +471,7 @@
 .sw-card {
   border: 1px solid var(--bim-line);
   background: rgba(255,255,255,0.56);
-  padding: 24px;
+  padding: 16px 22px;
   box-shadow: 0 18px 48px rgba(17,17,24,0.05);
 }
 .sw-table {
@@ -485,7 +485,7 @@
   font-family: var(--mono); font-size: 8px;
   letter-spacing: 2px; text-transform: uppercase;
   color: var(--muted); font-weight: 400;
-  padding: 0 0 16px; text-align: left;
+  padding: 0 0 12px; text-align: left;
 }
 .sw-table thead th + th { padding-left: 28px; }
 .sw-table tbody tr {
@@ -494,7 +494,7 @@
 }
 .sw-table tbody tr:hover { background: var(--paper); }
 .sw-table tbody td {
-  padding: 20px 0;
+  padding: 13px 0;
   vertical-align: top;
 }
 .sw-table tbody td + td { padding-left: 28px; }
@@ -533,25 +533,25 @@
 .bim-ai-inner {
   position: relative;
   max-width: 1200px; margin: 0 auto;
-  padding: 88px 60px 96px;
+  padding: 62px 60px 72px;
 }
 .bim-ai-head-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 60px;
-  flex-wrap: wrap; gap: 28px;
+  margin-bottom: 32px;
+  flex-wrap: wrap; gap: 24px;
 }
 .bim-ai-left {}
 .bim-ai-label {
   font-family: var(--mono); font-size: 9px; letter-spacing: 3px;
   text-transform: uppercase; color: var(--gold);
-  margin-bottom: 18px; display: flex; align-items: center; gap: 12px;
+  margin-bottom: 12px; display: flex; align-items: center; gap: 12px;
 }
 .bim-ai-label::after { content:''; width:32px; height:1px; background:rgba(184,148,106,0.35); }
 .bim-ai-h2 {
   font-family: var(--serif);
-  font-size: clamp(32px, 4.5vw, 58px);
+  font-size: clamp(30px, 3.8vw, 48px);
   font-weight: 400; line-height: 1;
   color: var(--white); letter-spacing: -.8px;
 }
@@ -563,13 +563,13 @@
 .bim-ai-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  gap: 10px;
 }
 .ai-card {
-  min-height: 172px;
+  min-height: 138px;
   border: 1px solid rgba(255,255,255,0.09);
   background: rgba(255,255,255,0.035);
-  padding: 32px 26px;
+  padding: 22px 20px;
   transition: background .2s, transform .2s, border-color .2s;
 }
 .ai-card:hover {
@@ -578,7 +578,7 @@
   transform: translateY(-3px);
 }
 .ai-name {
-  font-size: 14px; font-weight: 500;
+  font-size: 15px; font-weight: 500;
   color: var(--white); margin-bottom: 7px;
 }
 .ai-maker {
@@ -588,7 +588,29 @@
 }
 .ai-use {
   font-size: 12px; color: rgba(255,255,255,0.48);
-  line-height: 1.7;
+  line-height: 1.6;
+}
+.ai-card-featured {
+  grid-column: span 2;
+}
+.ai-tool-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 0;
+}
+.ai-tool-list span {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(212,184,150,0.18);
+  background: rgba(255,255,255,0.045);
+  padding: 0 10px;
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.64);
 }
 
 /* ══ MOBILE ══ */
@@ -596,27 +618,28 @@
   .bim-hero-inner,
   .bim-training-grid,
   .bim-solve-grid,
-  .bim-section-intro { grid-template-columns: 1fr; gap: 42px; }
+  .bim-section-intro { grid-template-columns: 1fr; gap: 24px; }
   .bim-stats-inner { grid-template-columns: 1fr 1fr; gap: 0; }
   .bim-ai-grid { grid-template-columns: repeat(2, 1fr); }
   .bim-exp-sticky { position: static; }
   .bim-hero { min-height: auto; }
   .bim-hero-panel { max-width: 560px; }
+  .bim-yt-stack { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
-  .bim-hero { padding: 104px 20px 40px; }
+  .bim-hero { padding: 96px 20px 34px; }
   .bim-hero-panel { padding: 16px; }
   .bim-panel-visual { min-height: 180px; }
-  .bim-stats-inner { padding: 0 20px 54px; }
-  .bim-stat { min-height: 170px; padding: 24px 18px; }
-  .bim-wrap { padding: 52px 20px 72px; }
-  .bim-section { padding: 60px 0; }
-  .bim-ai-inner { padding: 64px 20px 72px; }
+  .bim-stats-inner { padding: 0 20px 38px; }
+  .bim-stat { min-height: 124px; padding: 20px 18px; }
+  .bim-wrap { padding: 42px 20px 56px; }
+  .bim-section { padding: 46px 0; }
+  .bim-ai-inner { padding: 52px 20px 58px; }
   .bim-ai-head-row { flex-direction: column; align-items: flex-start; }
   .bim-ai-sub { text-align: left; max-width: 100%; }
   .sw-td-cat,
   .sw-td-name { white-space: normal; width: auto; }
-  .bim-sec-label { margin-bottom: 36px; }
+  .bim-sec-label { margin-bottom: 16px; }
 }
 @media (max-width: 600px) {
   .bim-stats-inner,
@@ -627,6 +650,7 @@
   .bim-cta { width: 100%; }
   .bim-panel-grid { grid-template-columns: 1fr; }
   .bim-pill { width: 100%; justify-content: center; }
+  .ai-card-featured { grid-column: span 2; }
   .sw-table thead th:nth-child(3),
   .sw-table tbody td:nth-child(3) { display: none; }
   .sw-card { padding: 14px; overflow-x: auto; }
@@ -917,15 +941,25 @@
       <p class="bim-ai-sub">Research, visualization, design automation, and project delivery — not experimental, operational.</p>
     </div>
     <div class="bim-ai-grid">
-      <div class="ai-card reveal">
-        <div class="ai-name">Claude (Anthropic)</div>
+      <div class="ai-card ai-card-featured reveal">
+        <div class="ai-name">Anthropic</div>
         <div class="ai-maker">Daily Use</div>
-        <div class="ai-use">Research, documentation, CLI automation, project proposals</div>
+        <div class="ai-use">Research, documentation, design iteration, CLI automation, and project proposals.</div>
+        <div class="ai-tool-list" aria-label="Anthropic tools">
+          <span>Claude AI</span>
+          <span>Claude Design</span>
+          <span>Claude Code</span>
+        </div>
       </div>
-      <div class="ai-card reveal">
-        <div class="ai-name">ChatGPT</div>
+      <div class="ai-card ai-card-featured reveal">
+        <div class="ai-name">OpenAI</div>
         <div class="ai-maker">Daily Use</div>
-        <div class="ai-use">Spec writing, code compliance, client communications</div>
+        <div class="ai-use">Spec writing, image generation, code support, compliance checks, and client communications.</div>
+        <div class="ai-tool-list" aria-label="OpenAI tools">
+          <span>ChatGPT</span>
+          <span>DALL-E</span>
+          <span>Codex</span>
+        </div>
       </div>
       <div class="ai-card reveal">
         <div class="ai-name">Autodesk Forma</div>

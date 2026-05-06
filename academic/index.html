@@ -522,15 +522,23 @@ body.academic-card-hover #cur-dot {
 
 .project-media {
   aspect-ratio: 16 / 10;
-  padding: 12px;
   background: #151512;
+  overflow: hidden;
 }
 
 .project-media img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  transform: scale(1.01);
+  transition: transform .35s cubic-bezier(.16,1,.3,1), filter .35s cubic-bezier(.16,1,.3,1);
+}
+
+.project-card:hover .project-media img,
+.project-card:focus-visible .project-media img {
+  transform: scale(1.06);
+  filter: saturate(1.04) contrast(1.02);
 }
 
 .project-placeholder {
@@ -910,7 +918,7 @@ body.academic-modal-active #main-nav {
         civic interiors, BIM research, and architectural representation.
       </p>
       <div class="hero-meta" aria-label="Academic overview">
-        <div><strong>08</strong><span>selected studies</span></div>
+        <div><strong>06</strong><span>selected studies</span></div>
         <div><strong>03</strong><span>research tracks</span></div>
         <div><strong>GSAPP</strong><span>Columbia University</span></div>
       </div>
@@ -921,7 +929,7 @@ body.academic-modal-active #main-nav {
       <div class="featured-copy">
         <span class="card-number">N&deg; 02</span>
         <h2 class="featured-title">The <em>Mangrove</em></h2>
-        <p class="featured-desc">A waterfront civic structure whose branching Ipe wood network functions as facade, structure, and foundation.</p>
+        <p class="featured-desc" id="featured-summary">A waterfront civic structure whose branching Ipe wood network functions as facade, structure, and foundation.</p>
         <div class="project-foot">
           <span class="project-tools">Revit · Lumion · Luban</span>
           <span class="open-cue">Open study</span>
@@ -937,6 +945,7 @@ body.academic-modal-active #main-nav {
   <section class="projects-section" aria-label="Academic projects">
     <div class="projects-header">
       <div class="section-kicker">Academic archive</div>
+      <h2 class="section-title">Selected projects across <em>studio, material research,</em> and BIM systems.</h2>
     </div>
 
     <div class="project-grid" id="project-grid"></div>
@@ -1500,7 +1509,8 @@ body.academic-modal-active #main-nav {
   });
 
   var featuredCard = document.querySelector('.featured-card');
-  document.getElementById('featured-summary').textContent = projects[1].summary;
+  var featuredSummary = document.getElementById('featured-summary');
+  if (featuredSummary) featuredSummary.textContent = projects[1].summary;
   attachCardEffects(featuredCard);
   mangroveTravelCard = featuredCard.cloneNode(true);
   mangroveTravelCard.classList.add('mangrove-travel-card');
