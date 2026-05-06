@@ -39,23 +39,13 @@
 @media (prefers-reduced-motion: reduce) {
   .load-fade { opacity: 1; transform: none; }
   .load-line { transform: none; }
+  .contact-statement,
+  .contact-aside > * {
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
 }
-
-/* ── NAV OVER DARK HERO ───────────────────────────────── */
-#main-nav .nav-links a { color: rgba(255,255,255,0.58); }
-#main-nav .nav-links a:hover { color: var(--white); }
-#main-nav .nav-links a.active { color: var(--gold-lt); }
-#main-nav .nav-links a.active::after { background: var(--gold-lt); }
-#main-nav .nav-icon { color: rgba(255,255,255,0.45); border-color: rgba(255,255,255,0.15); }
-#main-nav .nav-icon:hover { border-color: var(--gold); color: var(--gold-lt); }
-#nav-burger span { background: rgba(255,255,255,0.72); }
-#main-nav.scrolled .nav-links a { color: var(--mid); }
-#main-nav.scrolled .nav-links a:hover { color: var(--black); }
-#main-nav.scrolled .nav-links a.active { color: var(--gold-dk); }
-#main-nav.scrolled .nav-links a.active::after { background: var(--gold-dk); }
-#main-nav.scrolled .nav-icon { color: var(--muted); border-color: var(--border); }
-#main-nav.scrolled .nav-icon:hover { border-color: var(--gold); color: var(--gold-dk); }
-#main-nav.scrolled #nav-burger span { background: var(--black); }
 
 /* ── CONTACT THEME ────────────────────────────────────── */
 .contact-page {
@@ -66,12 +56,10 @@
 .contact-page .page-hero {
   max-width: none;
   margin: 0;
-  padding: 118px 60px 54px;
+  min-height: 82vh;
+  padding: 118px 60px 0;
   border-bottom: none;
-  background:
-    linear-gradient(90deg, rgba(17,17,24,0.98) 0%, rgba(17,17,24,0.90) 58%, rgba(17,17,24,0.50) 100%),
-    url('../assets/images/projects/tpg-interior.jpg') center / cover;
-  color: var(--white);
+  background: linear-gradient(180deg, rgba(250,250,248,0.96) 0%, rgba(244,240,232,0.92) 100%);
   position: relative;
   overflow: hidden;
 }
@@ -80,36 +68,78 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(17,17,24,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17,17,24,0.04) 1px, transparent 1px);
   background-size: 64px 64px;
   -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 78%);
   mask-image: linear-gradient(90deg, #000 0%, transparent 78%);
   pointer-events: none;
+}
+.contact-hero-stage {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 66vh;
+}
+.contact-hero-media {
+  position: absolute;
+  inset: -4% -3% -1% auto;
+  width: min(72vw, 960px);
+  height: calc(100% + 4%);
+  pointer-events: none;
+  opacity: 0.16;
+  transform: translateY(20px) scale(1);
+  filter: saturate(0.5) contrast(0.96);
+  transition:
+    opacity .95s cubic-bezier(.16,1,.3,1),
+    transform .95s cubic-bezier(.16,1,.3,1),
+    filter .95s cubic-bezier(.16,1,.3,1);
+  will-change: transform, opacity, filter;
+}
+.contact-hero-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(250,250,248,0.18) 0%, rgba(250,250,248,0.62) 88%);
+}
+.contact-hero-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center center;
+  box-shadow: 0 34px 90px rgba(17,17,24,0.10);
+}
+.contact-page.hero-settled .contact-hero-media {
+  opacity: 0;
+  transform: translateY(-34px) scale(1.1);
+  filter: blur(12px) saturate(0.38);
 }
 .contact-hero-grid {
   position: relative;
   z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
+  padding-top: 16px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, .42fr);
   gap: 40px;
   align-items: end;
+  transition: transform .95s cubic-bezier(.16,1,.3,1);
 }
 .contact-page .page-eyebrow {
-  color: var(--gold-lt);
+  color: var(--gold-dk);
 }
 .contact-page .page-eyebrow::before { background: var(--gold); }
 .contact-page .page-title {
-  color: var(--white);
+  color: var(--black);
   max-width: 10ch;
 }
-.contact-page .page-title em { color: var(--gold-lt); }
+.contact-page .page-title em { color: var(--gold-dk); }
 .contact-hero-copy {
   font-size: 14px;
   line-height: 1.7;
-  color: rgba(255,255,255,0.64);
+  color: var(--mid);
   max-width: 320px;
   justify-self: end;
   padding-bottom: 8px;
@@ -124,7 +154,19 @@
   align-items: start;
 }
 .contact-page .content-wrap {
-  padding-top: 44px;
+  position: relative;
+  z-index: 2;
+  margin-top: -92px;
+  padding-top: 0;
+  padding-bottom: 82px;
+  transition: margin-top .95s cubic-bezier(.16,1,.3,1), transform .95s cubic-bezier(.16,1,.3,1);
+}
+.contact-page.hero-settled .contact-hero-grid {
+  transform: translateY(-10px);
+}
+.contact-page.hero-settled .content-wrap {
+  margin-top: -28px;
+  transform: translateY(-6px);
 }
 @media (max-width: 768px) {
   #contact-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -159,11 +201,18 @@
 .contact-statement {
   padding: 34px 32px 32px;
   border: 1px solid rgba(17,17,24,0.08);
-  background: rgba(250,250,248,0.82);
+  background: rgba(250,250,248,0.90);
   box-shadow: 0 24px 60px rgba(17,17,24,0.08);
+  transform: translateY(18px) scale(0.985);
+  opacity: 0.98;
+  transition: transform .95s cubic-bezier(.16,1,.3,1), opacity .95s cubic-bezier(.16,1,.3,1);
 }
 .contact-statement p:first-of-type {
   max-width: 520px;
+}
+.contact-page.hero-settled .contact-statement {
+  transform: none;
+  opacity: 1;
 }
 
 /* ── FORM ──────────────────────────────────────────────── */
@@ -234,12 +283,15 @@
 @media (max-width: 768px) {
   .form-btn { align-self: stretch; text-align: center; }
   .form-input, .form-textarea { font-size: 16px; }
-  .contact-page .page-hero { padding: 100px 20px 46px; }
+  .contact-page .page-hero { min-height: auto; padding: 96px 20px 0; }
+  .contact-hero-stage { min-height: auto; }
+  .contact-hero-media { position: relative; inset: auto; width: 100%; height: 300px; margin-top: 26px; opacity: 0.22; }
   .contact-hero-grid { grid-template-columns: 1fr; gap: 18px; }
   .contact-hero-copy { max-width: 100%; justify-self: start; }
   .contact-form { grid-template-columns: 1fr; }
   .form-field:nth-of-type(3) { grid-column: auto; }
   .contact-statement { padding: 26px 20px 24px; }
+  .contact-page .content-wrap { margin-top: -36px; padding-bottom: 56px; }
 }
 
 /* ── CONTACT CARDS ─────────────────────────────────────── */
@@ -247,6 +299,15 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+.contact-aside > * {
+  transform: translateY(18px) scale(0.985);
+  opacity: 0.98;
+  transition: transform .95s cubic-bezier(.16,1,.3,1), opacity .95s cubic-bezier(.16,1,.3,1);
+}
+.contact-page.hero-settled .contact-aside > * {
+  transform: none;
+  opacity: 1;
 }
 .contact-info {
   display: flex;
@@ -385,12 +446,17 @@
 
 <!-- HERO -->
 <div class="page-hero load-fade">
-  <div class="contact-hero-grid">
-    <div>
-      <div class="page-eyebrow">Contact</div>
-      <h1 class="page-title">Let's build something<br><em>together.</em></h1>
+  <div class="contact-hero-stage">
+    <div class="contact-hero-media" aria-hidden="true">
+      <img src="../assets/images/contact/presentation-mb.png" alt="" loading="eager" decoding="async">
     </div>
-    <p class="contact-hero-copy">Project inquiries, senior roles, and focused collaborations, handled directly and with care.</p>
+    <div class="contact-hero-grid">
+      <div>
+        <div class="page-eyebrow">Contact</div>
+        <h1 class="page-title">Let's build something<br><em>together.</em></h1>
+      </div>
+      <p class="contact-hero-copy">Project inquiries, senior roles, and focused collaborations, handled directly and with care.</p>
+    </div>
   </div>
 </div>
 
@@ -494,6 +560,49 @@
 </footer>
 <script src="../assets/js/main.js"></script>
 <script>
+  (function () {
+    if (!document.body.classList.contains('contact-page')) return;
+
+    const storageKey = 'marberd-contact-hero-seen';
+    const root = document.body;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    try {
+      if (sessionStorage.getItem(storageKey) === '1') {
+        root.classList.add('hero-settled');
+        return;
+      }
+    } catch (error) {
+      /* sessionStorage may be blocked */
+    }
+
+    const settleHero = () => {
+      if (root.classList.contains('hero-settled')) return;
+      if (window.scrollY < 28) return;
+
+      root.classList.add('hero-settled');
+      try {
+        sessionStorage.setItem(storageKey, '1');
+      } catch (error) {
+        /* no-op */
+      }
+      window.removeEventListener('scroll', settleHero);
+    };
+
+    if (reducedMotion) {
+      root.classList.add('hero-settled');
+      try {
+        sessionStorage.setItem(storageKey, '1');
+      } catch (error) {
+        /* no-op */
+      }
+      return;
+    }
+
+    window.addEventListener('scroll', settleHero, { passive: true });
+    settleHero();
+  })();
+
   (function () {
     const form = document.getElementById('contact-form');
     const success = document.querySelector('[data-fs-success]');
