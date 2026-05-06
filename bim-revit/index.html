@@ -292,6 +292,7 @@
 .bim-video {
   width: 100%; display: block;
   aspect-ratio: 16/9; object-fit: cover;
+  filter: saturate(0.5);
 }
 .bim-video-cap {
   display: block;
@@ -745,15 +746,28 @@ body.bim-video-cursor #cur-dot {
 }
 .ai-card {
   min-height: 126px;
-  border: 1px solid rgba(255,255,255,0.09);
-  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.13);
+  background: rgba(255,255,255,0.055);
   padding: 18px 18px;
-  transition: background .2s, transform .2s, border-color .2s;
+  backdrop-filter: blur(18px) saturate(155%);
+  -webkit-backdrop-filter: blur(18px) saturate(155%);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+  transition: background .2s, transform .2s, border-color .2s, box-shadow .2s;
+  overflow: hidden;
+  position: relative;
 }
 .ai-card:hover {
-  background: rgba(184,148,106,0.09);
-  border-color: rgba(184,148,106,0.34);
+  background: rgba(184,148,106,0.11);
+  border-color: rgba(212,184,150,0.32);
   transform: translateY(-3px);
+  box-shadow: 0 20px 52px rgba(0,0,0,0.14);
+}
+.ai-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06), transparent 42%);
+  pointer-events: none;
 }
 .ai-name {
   font-size: 15px; font-weight: 500;
@@ -770,6 +784,10 @@ body.bim-video-cursor #cur-dot {
 }
 .ai-card-featured {
   grid-column: span 2;
+}
+.ai-card-copilot {
+  grid-column: 1 / -1;
+  min-height: 118px;
 }
 .ai-tool-list {
   display: flex;
@@ -1075,7 +1093,7 @@ body.bim-video-cursor #cur-dot {
         <div class="ai-maker">Proficient</div>
         <div class="ai-use">AI-assisted layout generation, space planning optimization</div>
       </div>
-      <div class="ai-card reveal">
+      <div class="ai-card ai-card-copilot reveal">
         <div class="ai-name">GitHub Copilot</div>
         <div class="ai-maker">Familiar</div>
         <div class="ai-use">Dynamo scripting, Revit API automation</div>
