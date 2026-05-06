@@ -301,16 +301,61 @@
   text-transform: uppercase;
 }
 .bim-video-frame {
+  position: relative;
+  width: 100%;
+  display: block;
   background: var(--black);
   border: 1px solid rgba(17,17,24,0.16);
-  box-shadow: 0 28px 60px rgba(17,17,24,0.12);
+  box-shadow: 0 26px 54px rgba(17,17,24,0.16), 22px 34px 52px rgba(17,17,24,0.18);
   margin-top: 0;
+  color: inherit;
+  text-align: left;
+  overflow: visible;
+  transform-origin: center;
+  transition: transform .26s cubic-bezier(.16,1,.3,1), box-shadow .26s, filter .26s;
+}
+.bim-video-frame::after,
+.bim-yt-embed::after {
+  content: '';
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: -18px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(17,17,24,0.24);
+  filter: blur(18px);
+  z-index: -1;
+  transition: transform .26s, opacity .26s;
+}
+.bim-video-launch {
+  appearance: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: none;
+}
+.bim-video-launch:hover,
+.bim-video-launch:focus-visible {
+  transform: translateY(-5px) scale(1.025);
+  box-shadow: 0 32px 70px rgba(17,17,24,0.20), 30px 42px 64px rgba(17,17,24,0.22);
+  animation: bimVideoPulse 1.45s ease-in-out infinite;
+  outline: none;
+}
+.bim-video-launch:hover::after,
+.bim-video-launch:focus-visible::after {
+  opacity: .88;
+  transform: translateY(7px) scaleX(1.12);
+}
+.bim-video-launch:active {
+  transform: translateY(2px) scale(.965);
+  filter: brightness(.86);
 }
 .bim-video {
   width: 100%; display: block;
   aspect-ratio: 16/9; object-fit: cover;
 }
 .bim-video-cap {
+  display: block;
   padding: 14px 20px;
   font-family: var(--mono); font-size: 7.5px;
   letter-spacing: 1.5px; text-transform: uppercase;
@@ -338,11 +383,116 @@
   background: var(--black);
   overflow: hidden;
   margin-bottom: 12px;
+  border: 0;
+  box-shadow: 0 22px 46px rgba(17,17,24,0.14), 18px 30px 44px rgba(17,17,24,0.16);
+  transition: transform .26s cubic-bezier(.16,1,.3,1), box-shadow .26s, filter .26s;
 }
+.bim-yt-embed img,
 .bim-yt-embed iframe {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   border: none; display: block;
+}
+.bim-yt-embed img {
+  object-fit: cover;
+  opacity: .88;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .25s;
+}
+.bim-yt-embed:hover img,
+.bim-yt-embed:focus-visible img {
+  transform: scale(1.045);
+  opacity: .98;
+}
+.bim-video-cue {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 2;
+  padding: 8px 10px;
+  background: rgba(17,17,24,0.74);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+}
+body.bim-video-cursor #cur::after {
+  content: 'PLAY';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: var(--gold);
+}
+body.bim-video-cursor #cur-dot {
+  transform: translate(-50%, -50%) scale(0);
+}
+.bim-video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .24s ease;
+}
+.bim-video-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.bim-video-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(17,17,24,0.76);
+  backdrop-filter: blur(10px);
+}
+.bim-video-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, 92vw);
+  background: var(--black);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 44px 120px rgba(0,0,0,0.48);
+  transform: translateY(18px) scale(.96);
+  transition: transform .28s cubic-bezier(.16,1,.3,1);
+}
+.bim-video-modal.is-open .bim-video-dialog {
+  transform: translateY(0) scale(1);
+}
+.bim-video-player {
+  position: relative;
+  aspect-ratio: 16/9;
+}
+.bim-video-player iframe,
+.bim-video-player video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: var(--black);
+}
+.bim-video-close {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(17,17,24,0.76);
+  color: var(--white);
+  font-size: 16px;
+  z-index: 2;
+}
+@keyframes bimVideoPulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.08); }
 }
 .bim-yt-label {
   font-family: var(--mono); font-size: 8px;
@@ -748,7 +898,8 @@
   .bim-hero-h1,
   .bim-hero-sub,
   .bim-hero-actions,
-  .bim-hero-wheel {
+  .bim-hero-wheel,
+  .bim-video-launch {
     animation: none;
     opacity: 1;
     transform: none;
@@ -849,12 +1000,13 @@
         </div>
       </div>
       <div class="bim-training-media reveal">
-        <div class="bim-video-frame">
-          <video class="bim-video" controls preload="metadata">
+        <button class="bim-video-frame bim-video-launch" type="button" data-video-type="local" data-video-src="../assets/videos/revit-training.mp4" data-video-title="Revit Essentials · Annual Office-Wide Training" aria-label="Open Revit training video">
+          <video class="bim-video" muted playsinline preload="metadata">
             <source src="../assets/videos/revit-training.mp4" type="video/mp4">
           </video>
-          <p class="bim-video-cap">Revit Essentials · Annual Office-Wide Training</p>
-        </div>
+          <span class="bim-video-cue">Click to watch</span>
+          <span class="bim-video-cap">Revit Essentials · Annual Office-Wide Training</span>
+        </button>
       </div>
     </div>
   </div>
@@ -871,17 +1023,19 @@
       <!-- Videos -->
       <div class="bim-yt-stack reveal">
         <div class="bim-yt-item">
-          <div class="bim-yt-embed">
-            <iframe src="https://www.youtube.com/embed/A4yAIlgU5RE?start=32" title="Revit Advanced Workflow" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-          </div>
+          <button class="bim-yt-embed bim-video-launch" type="button" data-video-type="youtube" data-video-src="https://www.youtube.com/embed/A4yAIlgU5RE?start=32&autoplay=1" data-video-title="Revit Advanced Workflow" aria-label="Open Revit advanced workflow video">
+            <img src="https://img.youtube.com/vi/A4yAIlgU5RE/hqdefault.jpg" alt="" loading="lazy">
+            <span class="bim-video-cue">Click to watch</span>
+          </button>
           <div class="bim-yt-label">Revit · Advanced Workflow</div>
           <div class="bim-yt-title">Undocumented Revit Solution</div>
           <p class="bim-yt-desc">A fix with no publicly available documentation — the kind of problem-solving that only comes from deep platform experience.</p>
         </div>
         <div class="bim-yt-item">
-          <div class="bim-yt-embed">
-            <iframe src="https://www.youtube.com/embed/z1Y50ZdU_UA" title="Revit Problem Solving" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-          </div>
+          <button class="bim-yt-embed bim-video-launch" type="button" data-video-type="youtube" data-video-src="https://www.youtube.com/embed/z1Y50ZdU_UA?autoplay=1" data-video-title="Revit Problem Solving" aria-label="Open Revit problem solving video">
+            <img src="https://img.youtube.com/vi/z1Y50ZdU_UA/hqdefault.jpg" alt="" loading="lazy">
+            <span class="bim-video-cue">Click to watch</span>
+          </button>
           <div class="bim-yt-label">Revit · Problem Solving</div>
           <div class="bim-yt-title">Undocumented Revit Solution</div>
           <p class="bim-yt-desc">Another deep-dive into a non-trivial challenge — documented and shared to demonstrate what mastery of the tool actually looks like.</p>
@@ -1028,6 +1182,14 @@
 
 </main>
 
+<div class="bim-video-modal" data-video-modal aria-hidden="true">
+  <div class="bim-video-backdrop" data-video-close></div>
+  <div class="bim-video-dialog" role="dialog" aria-modal="true" aria-label="Video player">
+    <button class="bim-video-close" type="button" data-video-close aria-label="Close video">X</button>
+    <div class="bim-video-player" data-video-player></div>
+  </div>
+</div>
+
 <footer class="footer-minimal">
   <div class="footer-rule"></div>
   <p>© 2026 Marberd Bernard · New York, NY</p>
@@ -1085,6 +1247,85 @@
     card.addEventListener('pointerenter', function () { activate(card); });
     card.addEventListener('focus', function () { activate(card); });
     card.addEventListener('click', function () { activate(card); });
+  });
+}());
+
+(function () {
+  var modal = document.querySelector('[data-video-modal]');
+  var player = document.querySelector('[data-video-player]');
+  var triggers = Array.prototype.slice.call(document.querySelectorAll('.bim-video-launch'));
+  if (!modal || !player || !triggers.length) return;
+
+  var lastTrigger = null;
+
+  function clearPlayer() {
+    player.innerHTML = '';
+  }
+
+  function openVideo(trigger) {
+    var type = trigger.getAttribute('data-video-type');
+    var src = trigger.getAttribute('data-video-src');
+    var title = trigger.getAttribute('data-video-title') || 'Video';
+    if (!src) return;
+
+    lastTrigger = trigger;
+    clearPlayer();
+
+    if (type === 'youtube') {
+      var iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.title = title;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      player.appendChild(iframe);
+    } else {
+      var video = document.createElement('video');
+      video.controls = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      var source = document.createElement('source');
+      source.src = src;
+      source.type = 'video/mp4';
+      video.appendChild(source);
+      player.appendChild(video);
+    }
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    var closeButton = modal.querySelector('.bim-video-close');
+    if (closeButton) closeButton.focus();
+  }
+
+  function closeVideo() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearPlayer();
+    if (lastTrigger) lastTrigger.focus();
+  }
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('mouseenter', function () {
+      document.body.classList.add('bim-video-cursor');
+    });
+    trigger.addEventListener('mouseleave', function () {
+      document.body.classList.remove('bim-video-cursor');
+    });
+    trigger.addEventListener('click', function () {
+      document.body.classList.remove('bim-video-cursor');
+      openVideo(trigger);
+    });
+  });
+
+  modal.querySelectorAll('[data-video-close]').forEach(function (closer) {
+    closer.addEventListener('click', closeVideo);
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeVideo();
+    }
   });
 }());
 </script>
