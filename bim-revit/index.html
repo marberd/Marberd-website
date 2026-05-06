@@ -78,11 +78,11 @@
   position: relative;
   min-height: 66vh;
   display: grid;
-  align-items: end;
+  align-items: center;
   background:
     linear-gradient(90deg, rgba(17,17,24,0.96) 0%, rgba(17,17,24,0.88) 45%, rgba(17,17,24,0.48) 100%),
     url('../assets/images/projects/tpg-interior.jpg') center / cover;
-  padding: 104px 60px 36px;
+  padding: 92px 60px 44px;
   overflow: hidden;
 }
 .bim-hero::before {
@@ -111,9 +111,9 @@
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.44fr);
-  gap: 34px;
-  align-items: end;
+  grid-template-columns: minmax(0, 0.96fr) minmax(340px, 0.52fr);
+  gap: 44px;
+  align-items: center;
 }
 .bim-hero-eyebrow {
   display: flex;
@@ -183,6 +183,7 @@
   padding: 16px;
   box-shadow: 0 28px 80px rgba(0,0,0,0.32);
   opacity: 0; animation: bimRise .85s ease .42s forwards;
+  align-self: center;
 }
 .bim-hero-panel-top {
   display: flex;
@@ -208,7 +209,7 @@
 }
 .bim-panel-visual {
   margin: 14px 0;
-  min-height: 118px;
+  min-height: 138px;
   border: 1px solid rgba(255,255,255,0.10);
   background:
     linear-gradient(135deg, rgba(47,111,115,0.42), rgba(184,148,106,0.24)),
@@ -301,10 +302,10 @@
 /* ══ MAIN CONTENT WRAPPER ══ */
 .bim-wrap {
   max-width: 1200px; margin: 0 auto;
-  padding: 42px 60px 56px;
+  padding: 46px 60px 56px;
 }
 .bim-section {
-  padding: 42px 0;
+  padding: 44px 0;
   border-top: 1px solid var(--bim-line);
 }
 .bim-section:first-child { border-top: none; padding-top: 0; }
@@ -320,8 +321,8 @@
 }
 .bim-section-intro {
   display: grid;
-  grid-template-columns: minmax(0, 760px);
-  gap: 12px;
+  grid-template-columns: minmax(0, 720px);
+  gap: 10px;
   align-items: start;
   margin-bottom: 24px;
 }
@@ -345,8 +346,8 @@
 /* ══ TRAINING SECTION ══ */
 .bim-training-grid {
   display: grid;
-  grid-template-columns: minmax(280px, .42fr) minmax(0, .58fr);
-  gap: 28px;
+  grid-template-columns: minmax(280px, .4fr) minmax(0, .6fr);
+  gap: 32px;
   align-items: start;
 }
 .bim-training-copy,
@@ -396,9 +397,9 @@
 /* ══ PROBLEM SOLVING ══ */
 .bim-solve-grid {
   display: grid;
-  grid-template-columns: minmax(0, .56fr) minmax(300px, .44fr);
-  gap: 28px;
-  align-items: start;
+  grid-template-columns: minmax(0, .52fr) minmax(360px, .48fr);
+  gap: 36px;
+  align-items: center;
 }
 .bim-yt-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .bim-yt-item {
@@ -437,19 +438,19 @@
 .bim-exp-wheel {
   --bim-wheel-rotation: 0deg;
   position: sticky;
-  top: 96px;
-  min-height: 340px;
+  top: 88px;
+  min-height: 430px;
   display: grid;
   place-items: center;
 }
 .bim-exp-wheel-frame {
   position: relative;
-  width: min(100%, 340px);
+  width: min(100%, 420px);
   aspect-ratio: 1;
 }
 .bim-exp-wheel-rotor {
   position: absolute;
-  inset: 24px;
+  inset: 30px;
   border: 1px solid rgba(17,17,24,0.14);
   border-radius: 50%;
   transform: rotate(var(--bim-wheel-rotation));
@@ -459,19 +460,19 @@
 .bim-exp-wheel-rotor::after {
   content: '';
   position: absolute;
-  inset: 48px;
+  inset: 58px;
   border: 1px solid rgba(184,148,106,0.32);
   border-radius: 50%;
 }
 .bim-exp-wheel-rotor::after {
-  inset: 104px;
+  inset: 126px;
   background: rgba(255,255,255,0.42);
 }
 .bim-exp-hub {
   position: absolute;
   inset: 50%;
-  width: 96px;
-  height: 96px;
+  width: 116px;
+  height: 116px;
   display: grid;
   place-items: center;
   transform: translate(-50%, -50%);
@@ -494,19 +495,19 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 118px;
-  min-height: 34px;
-  margin: -17px 0 0 -59px;
+  width: 136px;
+  min-height: 36px;
+  margin: -18px 0 0 -68px;
   display: grid;
   place-items: center;
-  transform: rotate(var(--angle)) translate(110px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation)));
+  transform: rotate(var(--angle)) translate(142px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation)));
   z-index: 4;
 }
 .bim-exp-chip {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 34px;
+  min-height: 36px;
   padding: 0 12px;
   border: 1px solid rgba(17,17,24,0.12);
   border-radius: 999px;
@@ -524,7 +525,7 @@
 .bim-exp-wheel-note {
   position: absolute;
   left: 50%;
-  bottom: 4px;
+  bottom: 0;
   transform: translateX(-50%);
   width: min(260px, 72%);
   font-size: 12px;
@@ -628,7 +629,7 @@
 }
 .bim-ai-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 10px;
 }
 .ai-card {
@@ -687,15 +688,15 @@
   .bim-section-intro { grid-template-columns: 1fr; gap: 24px; }
   .bim-stats-inner { grid-template-columns: 1fr 1fr; gap: 0; }
   .bim-ai-grid { grid-template-columns: repeat(2, 1fr); }
-  .bim-exp-wheel { position: relative; top: auto; min-height: 310px; }
-  .bim-exp-wheel-frame { width: min(100%, 300px); }
-  .bim-exp-orbit { transform: rotate(var(--angle)) translate(94px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation))); }
+  .bim-exp-wheel { position: relative; top: auto; min-height: 380px; }
+  .bim-exp-wheel-frame { width: min(100%, 360px); }
+  .bim-exp-orbit { transform: rotate(var(--angle)) translate(120px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation))); }
   .bim-hero { min-height: auto; }
   .bim-hero-panel { max-width: 560px; }
   .bim-yt-stack { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
-  .bim-hero { padding: 90px 20px 30px; }
+  .bim-hero { padding: 84px 20px 32px; }
   .bim-hero-panel { padding: 16px; }
   .bim-panel-visual { min-height: 180px; }
   .bim-stats-inner { padding: 0 20px 28px; }
@@ -718,6 +719,10 @@
   .bim-cta { width: 100%; }
   .bim-panel-grid { grid-template-columns: 1fr; }
   .bim-pill { width: 100%; justify-content: center; }
+  .bim-exp-wheel { min-height: 320px; }
+  .bim-exp-wheel-frame { width: min(100%, 300px); }
+  .bim-exp-orbit { transform: rotate(var(--angle)) translate(96px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation))); }
+  .bim-exp-chip { font-size: 7px; min-height: 32px; padding: 0 9px; }
   .ai-card-featured { grid-column: span 2; }
   .sw-table thead th:nth-child(3),
   .sw-table tbody td:nth-child(3) { display: none; }
@@ -1017,6 +1022,11 @@
         <div class="ai-name">Midjourney</div>
         <div class="ai-maker">Proficient</div>
         <div class="ai-use">Concept mood boards, material palette ideation</div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">Nano Banana</div>
+        <div class="ai-maker">Active</div>
+        <div class="ai-use">Fast visual edits, concept image refinement, and presentation graphics</div>
       </div>
       <div class="ai-card reveal">
         <div class="ai-name">Hypar (Trimble)</div>
