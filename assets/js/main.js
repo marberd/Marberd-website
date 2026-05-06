@@ -114,7 +114,7 @@ if (nav) {
     ['/about/', 'About'],
     ['/academic/', 'Academic'],
     ['/professional/', 'Professional'],
-    ['/bim-revit/', 'BIM / AI'],
+    ['/bim-ai/', 'BIM / AI'],
     ['/contact/', 'Contact'],
   ].forEach(([href, label]) => {
     const link = document.createElement('a');

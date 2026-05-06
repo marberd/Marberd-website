@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Marberd Bernard, Architectural Designer & VDC Specialist. Columbia-trained. New York City.">
+<title>BIM / AI · MARBERD</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="../assets/css/style.css">
+<style>
+
+/* ══ NAV: white base for dark hero, scrolled restores dark ══ */
+#main-nav .nav-links a { color: rgba(255,255,255,0.55); }
+#main-nav .nav-links a:hover { color: var(--white); }
+#main-nav .nav-links a.active { color: var(--gold-lt); }
+#main-nav .nav-links a.active::after { background: var(--gold-lt); }
+#main-nav .nav-icon { color: rgba(255,255,255,0.45); border-color: rgba(255,255,255,0.15); }
+#main-nav .nav-icon:hover { border-color: var(--gold); color: var(--gold-lt); }
+#main-nav.scrolled .nav-links a { color: var(--mid); }
+#main-nav.scrolled .nav-links a:hover { color: var(--black); }
+#main-nav.scrolled .nav-links a.active { color: var(--gold-dk); }
+#main-nav.scrolled .nav-links a.active::after { background: var(--gold-dk); }
+#main-nav.scrolled .nav-icon { color: var(--muted); border-color: var(--border); }
+#main-nav.scrolled .nav-icon:hover { border-color: var(--gold); color: var(--gold-dk); }
+#nav-burger span { background: rgba(255,255,255,0.7); }
+#main-nav.scrolled #nav-burger span { background: var(--black); }
+
+/* ══ PAGE-SPECIFIC DESIGN TOKENS ══ */
+:root {
+  --bim-ink: #111118;
+  --bim-soft: #F7F3EC;
+  --bim-line: rgba(17,17,24,0.11);
+  --bim-teal: #2F6F73;
+  --bim-teal-soft: #D8E8E5;
+  --bim-copper: #B86D4B;
+}
+
+.bim-page {
+  background:
+    radial-gradient(circle at 8% 10%, rgba(47,111,115,0.10), transparent 24vw),
+    linear-gradient(180deg, #FAFAF8 0%, #F4F0E8 58%, #FAFAF8 100%);
+  overflow: hidden;
+}
+
+.bim-kicker {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2.7px;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+}
+
+.bim-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bim-pill {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(184,148,106,0.38);
+  border-radius: 999px;
+  padding: 0 14px;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.74);
+  background: rgba(255,255,255,0.055);
+}
+
+/* ══ HERO ══ */
+.bim-hero {
+  position: relative;
+  z-index: 2;
+  min-height: 58vh;
+  display: grid;
+  align-items: start;
+  background:
+    linear-gradient(90deg, rgba(17,17,24,0.96) 0%, rgba(17,17,24,0.88) 45%, rgba(17,17,24,0.48) 100%),
+    url('../assets/images/projects/tpg-interior.jpg') center / cover;
+  padding: 90px 60px 22px;
+  overflow: visible;
+}
+.bim-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 78%);
+  mask-image: linear-gradient(90deg, #000 0%, transparent 78%);
+  pointer-events: none;
+}
+.bim-hero::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 34%;
+  background: linear-gradient(180deg, transparent, rgba(17,17,24,0.96));
+  pointer-events: none;
+}
+.bim-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(420px, 0.62fr);
+  gap: 36px;
+  align-items: start;
+}
+.bim-hero-content {
+  padding-top: 10px;
+}
+.bim-hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(44px, 5.8vw, 76px);
+  font-weight: 400; line-height: .92; color: var(--white);
+  letter-spacing: -0.8px; margin-bottom: 16px;
+  opacity: 0; animation: bimRise .85s ease .28s forwards;
+}
+.bim-hero-h1 em { font-style: italic; color: var(--gold-lt); }
+.bim-hero-sub {
+  font-size: 15px; font-weight: 300;
+  color: rgba(255,255,255,0.64);
+  line-height: 1.58; max-width: 540px;
+  margin-bottom: 18px;
+  opacity: 0; animation: bimRise .85s ease .48s forwards;
+}
+.bim-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 34px;
+  opacity: 0; animation: bimRise .85s ease .62s forwards;
+}
+.bim-cta {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 18px;
+  border: 1px solid var(--gold);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+.bim-cta-primary {
+  background: var(--gold);
+  color: var(--black);
+}
+.bim-cta-secondary {
+  color: rgba(255,255,255,0.76);
+  background: rgba(255,255,255,0.04);
+}
+.bim-cta:hover {
+  transform: translateY(-2px);
+  background: var(--gold-lt);
+  border-color: var(--gold-lt);
+  color: var(--black);
+}
+@keyframes bimRise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══ MAIN CONTENT WRAPPER ══ */
+.bim-wrap {
+  max-width: 1200px; margin: 0 auto;
+  padding: 30px 60px 38px;
+}
+.bim-section {
+  padding: 30px 0;
+  border-top: 1px solid var(--bim-line);
+}
+.bim-section:first-child { border-top: none; padding-top: 0; }
+.bim-sec-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold-dk);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 12px;
+}
+.bim-sec-label::after {
+  content: ''; height: 1px;
+  background: rgba(184,148,106,0.25);
+  flex: 1; max-width: 64px;
+}
+.bim-section-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 720px);
+  gap: 10px;
+  align-items: start;
+  margin-bottom: 18px;
+}
+.bim-section-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--black);
+  letter-spacing: -0.2px;
+}
+.bim-section-title em { font-style: italic; color: var(--gold-dk); }
+.bim-section-note {
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.55;
+  font-weight: 300;
+  max-width: 650px;
+}
+
+/* ══ TRAINING SECTION ══ */
+.bim-training-grid {
+  display: grid;
+  grid-template-columns: minmax(310px, .42fr) minmax(0, .58fr);
+  gap: 34px;
+  align-items: start;
+}
+.bim-training-copy,
+.bim-training-media {
+  align-self: start;
+}
+.bim-training-copy p {
+  font-size: 13.5px;
+  color: var(--mid);
+  line-height: 1.6;
+  font-weight: 300;
+  max-width: 460px;
+  margin: 14px 0;
+}
+.bim-video-frame {
+  position: relative;
+  width: 100%;
+  display: block;
+  background: var(--black);
+  border: 1px solid rgba(17,17,24,0.16);
+  box-shadow: 0 26px 54px rgba(17,17,24,0.16), 22px 34px 52px rgba(17,17,24,0.18);
+  margin-top: 0;
+  color: inherit;
+  text-align: left;
+  overflow: visible;
+  transform-origin: center;
+  transition: transform .26s cubic-bezier(.16,1,.3,1), box-shadow .26s, filter .26s;
+}
+.bim-video-frame::after,
+.bim-yt-embed::after {
+  content: '';
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: -18px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(17,17,24,0.24);
+  filter: blur(18px);
+  z-index: -1;
+  transition: transform .26s, opacity .26s;
+}
+.bim-video-launch {
+  appearance: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: none;
+}
+.bim-video-launch:hover,
+.bim-video-launch:focus-visible {
+  transform: translateY(-5px) scale(1.025);
+  box-shadow: 0 32px 70px rgba(17,17,24,0.20), 30px 42px 64px rgba(17,17,24,0.22);
+  animation: bimVideoPulse 1.45s ease-in-out infinite;
+  outline: none;
+}
+.bim-video-launch:hover::after,
+.bim-video-launch:focus-visible::after {
+  opacity: .88;
+  transform: translateY(7px) scaleX(1.12);
+}
+.bim-video-launch:active {
+  transform: translateY(2px) scale(.965);
+  filter: brightness(.86);
+}
+.bim-video {
+  width: 100%; display: block;
+  aspect-ratio: 16/9; object-fit: cover;
+  filter: saturate(0.5);
+}
+.bim-video-cap {
+  display: block;
+  padding: 14px 20px;
+  font-family: var(--mono); font-size: 7.5px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ══ PROBLEM SOLVING ══ */
+.bim-problem-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, .38fr) minmax(0, .62fr);
+  gap: 34px;
+  align-items: start;
+}
+.bim-yt-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.bim-yt-item {
+  background: rgba(255,255,255,0.62);
+  border: 1px solid var(--bim-line);
+  padding: 12px;
+  box-shadow: 0 18px 48px rgba(17,17,24,0.06);
+}
+.bim-yt-embed {
+  position: relative; width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--black);
+  overflow: hidden;
+  margin-bottom: 12px;
+  border: 0;
+  box-shadow: 0 22px 46px rgba(17,17,24,0.14), 18px 30px 44px rgba(17,17,24,0.16);
+  transition: transform .26s cubic-bezier(.16,1,.3,1), box-shadow .26s, filter .26s;
+}
+.bim-yt-embed img,
+.bim-yt-embed iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: none; display: block;
+}
+.bim-yt-embed img {
+  object-fit: cover;
+  opacity: .88;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .25s;
+}
+.bim-yt-embed:hover img,
+.bim-yt-embed:focus-visible img {
+  transform: scale(1.045);
+  opacity: .98;
+}
+.bim-video-cue {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 2;
+  padding: 8px 10px;
+  background: rgba(17,17,24,0.74);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+}
+body.bim-video-cursor #cur::after {
+  content: 'PLAY';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: var(--gold);
+}
+body.bim-video-cursor #cur-dot {
+  transform: translate(-50%, -50%) scale(0);
+}
+.bim-video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .24s ease;
+}
+.bim-video-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.bim-video-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(17,17,24,0.76);
+  backdrop-filter: blur(10px);
+}
+.bim-video-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, 92vw);
+  background: var(--black);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 44px 120px rgba(0,0,0,0.48);
+  transform: translateY(18px) scale(.96);
+  transition: transform .28s cubic-bezier(.16,1,.3,1);
+}
+.bim-video-modal.is-open .bim-video-dialog {
+  transform: translateY(0) scale(1);
+}
+.bim-video-player {
+  position: relative;
+  aspect-ratio: 16/9;
+}
+.bim-video-player iframe,
+.bim-video-player video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: var(--black);
+}
+.bim-video-close {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(17,17,24,0.76);
+  color: var(--white);
+  font-size: 16px;
+  z-index: 2;
+}
+@keyframes bimVideoPulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.08); }
+}
+.bim-yt-label {
+  font-family: var(--mono); font-size: 8px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold-dk); margin-bottom: 7px;
+  display: flex; align-items: center; gap: 8px;
+}
+.bim-yt-label::before { content:''; width:14px; height:1px; background:var(--gold); flex-shrink:0; }
+.bim-yt-title {
+  font-family: var(--serif); font-size: 17px;
+  font-weight: 400; color: var(--black); line-height: 1.2;
+  margin-bottom: 8px;
+}
+.bim-yt-desc { font-size: 12px; color: var(--mid); line-height: 1.6; }
+
+/* Scroll wheel */
+.bim-exp-wheel {
+  --bim-wheel-rotation: 0deg;
+  position: sticky;
+  top: 88px;
+  min-height: 512px;
+  display: grid;
+  place-items: center;
+}
+.bim-exp-wheel-frame {
+  position: relative;
+  width: min(100%, 512px);
+  aspect-ratio: 1;
+}
+.bim-exp-wheel-rotor {
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(17,17,24,0.14);
+  border-radius: 50%;
+  transform: rotate(var(--bim-wheel-rotation));
+  transition: transform .08s linear;
+}
+.bim-exp-wheel-rotor::before,
+.bim-exp-wheel-rotor::after {
+  content: '';
+  position: absolute;
+  inset: 54px;
+  border: 1px solid rgba(184,148,106,0.32);
+  border-radius: 50%;
+}
+.bim-exp-wheel-rotor::after {
+  inset: 130px;
+  background: rgba(255,255,255,0.42);
+}
+.bim-exp-hub {
+  position: absolute;
+  inset: 50%;
+  width: 156px;
+  height: 156px;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(184,148,106,0.48);
+  border-radius: 50%;
+  background: rgba(250,250,248,0.90);
+  text-align: center;
+  z-index: 3;
+  box-shadow: 0 14px 38px rgba(17,17,24,0.12);
+}
+.bim-exp-hub span {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  line-height: 1.25;
+  transform: translateY(1px);
+}
+.bim-exp-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 154px;
+  min-height: 40px;
+  margin: -20px 0 0 -77px;
+  display: grid;
+  place-items: center;
+  transform: rotate(var(--angle)) translate(162px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation)));
+  z-index: 4;
+}
+.bim-exp-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid rgba(17,17,24,0.12);
+  border-radius: 999px;
+  background: rgba(250,250,248,0.94);
+  box-shadow: 0 10px 30px rgba(17,17,24,0.08);
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 1px;
+  line-height: 1.35;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--black);
+  white-space: normal;
+}
+.bim-exp-wheel-note {
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  transform: translateX(-50%);
+  width: min(280px, 72%);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--mid);
+}
+.bim-hero-wheel {
+  position: relative;
+  top: auto;
+  min-height: 514px;
+  z-index: 4;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: bimRise .85s ease .42s forwards;
+}
+.bim-hero-wheel .bim-exp-wheel-frame {
+  width: min(100%, 512px);
+}
+.bim-hero-wheel .bim-exp-wheel-rotor {
+  border-color: rgba(255,255,255,0.22);
+}
+.bim-hero-wheel .bim-exp-wheel-rotor::before {
+  border-color: rgba(212,184,150,0.38);
+}
+.bim-hero-wheel .bim-exp-wheel-rotor::after {
+  background: rgba(17,17,24,0.50);
+  border-color: rgba(255,255,255,0.13);
+}
+.bim-hero-wheel .bim-exp-hub {
+  background: rgba(17,17,24,0.76);
+  border-color: rgba(212,184,150,0.58);
+}
+.bim-hero-wheel .bim-exp-hub span {
+  font-size: 9px;
+  letter-spacing: 1.25px;
+  color: var(--gold-lt);
+  line-height: 1.1;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: translateY(1px);
+}
+.bim-hero-wheel .bim-exp-chip {
+  background: rgba(250,250,248,0.96);
+}
+.bim-hero-wheel .bim-exp-wheel-note {
+  color: rgba(255,255,255,0.62);
+}
+
+/* ══ SOFTWARE STACK - DYNAMIC CARDS ══ */
+.sw-dynamic {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, .44fr);
+  gap: 12px;
+  align-items: stretch;
+}
+.sw-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.sw-tool-card {
+  min-height: 132px;
+  appearance: none;
+  border: 1px solid rgba(17,17,24,0.10);
+  background: rgba(255,255,255,0.52);
+  padding: 16px;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  cursor: none;
+  transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
+}
+.sw-tool-card:hover,
+.sw-tool-card:focus-visible,
+.sw-tool-card.is-active {
+  background: rgba(255,255,255,0.82);
+  border-color: rgba(184,148,106,0.42);
+  box-shadow: 0 18px 46px rgba(17,17,24,0.07);
+  transform: translateY(-3px);
+  outline: none;
+}
+.sw-tool-cat {
+  display: block;
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+  margin-bottom: 12px;
+}
+.sw-tool-name {
+  display: block;
+  font-size: 15px;
+  line-height: 1.15;
+  font-weight: 500;
+  color: var(--black);
+}
+.sw-tool-hint {
+  display: block;
+  margin-top: 16px;
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sw-detail-panel {
+  min-height: 100%;
+  border: 1px solid rgba(17,17,24,0.10);
+  background: var(--black);
+  color: var(--white);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 22px 54px rgba(17,17,24,0.14);
+}
+.sw-detail-kicker {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.sw-detail-title {
+  margin-top: 14px;
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: .96;
+  font-weight: 400;
+}
+.sw-detail-text {
+  margin-top: 18px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.58);
+}
+.sw-detail-meta {
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+}
+
+/* ══ AI BAND - DARK ══ */
+.bim-ai-band {
+  background:
+    linear-gradient(135deg, rgba(47,111,115,0.26), transparent 36%),
+    var(--black);
+  position: relative;
+  overflow: hidden;
+}
+.bim-ai-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+}
+.bim-ai-inner {
+  position: relative;
+  max-width: 1200px; margin: 0 auto;
+  padding: 42px 60px 48px;
+}
+.bim-ai-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+  flex-wrap: wrap; gap: 24px;
+}
+.bim-ai-left {}
+.bim-ai-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 12px;
+}
+.bim-ai-label::after { content:''; width:32px; height:1px; background:rgba(184,148,106,0.35); }
+.bim-ai-h2 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.2vw, 42px);
+  font-weight: 400; line-height: 1;
+  color: var(--white); letter-spacing: -.8px;
+}
+.bim-ai-h2 em { font-style: italic; color: var(--gold-lt); }
+.bim-ai-sub {
+  font-size: 14px; color: rgba(255,255,255,0.50);
+  max-width: 330px; line-height: 1.75; text-align: right;
+}
+.bim-ai-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+.ai-card {
+  min-height: 126px;
+  border: 1px solid rgba(255,255,255,0.13);
+  background: rgba(255,255,255,0.055);
+  padding: 18px 18px;
+  backdrop-filter: blur(18px) saturate(155%);
+  -webkit-backdrop-filter: blur(18px) saturate(155%);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+  transition: background .2s, transform .2s, border-color .2s, box-shadow .2s;
+  overflow: hidden;
+  position: relative;
+}
+.ai-card:hover {
+  background: rgba(184,148,106,0.11);
+  border-color: rgba(212,184,150,0.32);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 52px rgba(0,0,0,0.14);
+}
+.ai-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06), transparent 42%);
+  pointer-events: none;
+}
+.ai-name {
+  font-size: 15px; font-weight: 500;
+  color: var(--white); margin-bottom: 7px;
+}
+.ai-maker {
+  font-family: var(--mono); font-size: 7.5px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px;
+}
+.ai-use {
+  font-size: 12px; color: rgba(255,255,255,0.48);
+  line-height: 1.6;
+}
+.ai-card-featured {
+  grid-column: span 2;
+}
+.ai-card-copilot {
+  grid-column: 1 / -1;
+  min-height: 118px;
+}
+.ai-tool-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 0;
+}
+.ai-tool-list span {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(212,184,150,0.18);
+  background: rgba(255,255,255,0.045);
+  padding: 0 10px;
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.64);
+}
+
+/* ══ MOBILE ══ */
+@media (max-width: 900px) {
+  .bim-hero-inner,
+  .bim-training-grid,
+  .bim-problem-layout,
+  .sw-dynamic,
+  .bim-section-intro { grid-template-columns: 1fr; gap: 24px; }
+  .bim-ai-grid { grid-template-columns: repeat(2, 1fr); }
+  .sw-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bim-hero { min-height: auto; }
+  .bim-yt-stack { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .bim-hero { padding: 84px 20px 26px; }
+  .bim-wrap { padding: 26px 20px 34px; }
+  .bim-section { padding: 28px 0; }
+  .bim-ai-inner { padding: 36px 20px 42px; }
+  .bim-ai-head-row { flex-direction: column; align-items: flex-start; }
+  .bim-ai-sub { text-align: left; max-width: 100%; }
+  .bim-sec-label { margin-bottom: 16px; }
+  .bim-hero-actions { margin-top: 24px; }
+}
+@media (max-width: 600px) {
+  .bim-ai-grid { grid-template-columns: 1fr 1fr; }
+  .bim-hero-h1 { font-size: clamp(50px, 16vw, 70px); }
+  .bim-hero-sub { font-size: 15px; }
+  .bim-hero-actions { align-items: stretch; }
+  .bim-cta { width: 100%; }
+  .bim-pill { width: 100%; justify-content: center; }
+  .ai-card-featured { grid-column: span 2; }
+  .sw-card-grid { grid-template-columns: 1fr; }
+  .sw-detail-panel { min-height: 260px; }
+}
+@media (max-width: 420px) {
+  .bim-ai-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bim-hero-h1,
+  .bim-hero-sub,
+  .bim-hero-actions,
+  .bim-hero-wheel,
+  .bim-video-launch {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
+</head>
+<body><svg id="cur" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="cur-ring" cx="22" cy="22" r="16" stroke="#111118" stroke-width="1"/><line x1="22" y1="3" x2="22" y2="9" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="35" x2="22" y2="41" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="22" x2="9" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="22" x2="41" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/></svg><div id="cur-dot"></div>
+
+<nav id="main-nav">
+  <a id="nav-logo" href="/" title="MARBERD"><span class="logo-wrap"><img src="../assets/images/logo-gold.png" class="site-logo site-logo--gold" alt="MARBERD"><img src="../assets/images/logo.png" class="site-logo site-logo--color" aria-hidden="true"></span></a>
+  <ul class="nav-links">
+    <li><a href="/about/">About</a></li>
+    <li><a href="/academic/">Academic</a></li>
+    <li><a href="/professional/">Professional</a></li>
+    <li><a href="/bim-ai/" class="active">BIM / AI</a></li>
+    <li><a href="/contact/">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="nav-icon" href="https://linkedin.com/in/marberd-bernard" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a class="nav-icon" href="mailto:marberdb@gmail.com" title="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+</nav>
+
+<main class="bim-page">
+
+<!-- ── HERO ── -->
+<section class="bim-hero">
+  <div class="bim-hero-inner">
+    <div class="bim-hero-content">
+      <h1 class="bim-hero-h1">Digital delivery<br><em>with architectural rigor.</em></h1>
+      <p class="bim-hero-sub">Revit leadership, BIM 360 / ACC administration, VDC coordination, and emerging AI workflows for complex commercial interiors and multidisciplinary project delivery.</p>
+      <div class="bim-hero-actions">
+        <a class="bim-cta bim-cta-primary" href="/contact/">Discuss a project</a>
+        <a class="bim-cta bim-cta-secondary" href="#revit-training">View training work</a>
+      </div>
+    </div>
+    <aside class="bim-exp-wheel bim-hero-wheel" data-bim-wheel aria-label="BIM capability wheel">
+      <div class="bim-exp-wheel-frame">
+        <div class="bim-exp-wheel-rotor">
+          <div class="bim-exp-hub"><span>BIM<br>Practice</span></div>
+          <div class="bim-exp-orbit" style="--angle: 0deg;"><span class="bim-exp-chip">Family Systems</span></div>
+          <div class="bim-exp-orbit" style="--angle: 60deg;"><span class="bim-exp-chip">ACC Admin</span></div>
+          <div class="bim-exp-orbit" style="--angle: 120deg;"><span class="bim-exp-chip">Coordination</span></div>
+          <div class="bim-exp-orbit" style="--angle: 180deg;"><span class="bim-exp-chip">Documentation</span></div>
+          <div class="bim-exp-orbit" style="--angle: 240deg;"><span class="bim-exp-chip">AI Leverage</span></div>
+          <div class="bim-exp-orbit" style="--angle: 300deg;"><span class="bim-exp-chip">Clash Review</span></div>
+        </div>
+        <p class="bim-exp-wheel-note">Core Revit and VDC strengths orbit around one delivery practice.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="bim-wrap">
+
+  <!-- Training & Leadership -->
+  <div class="bim-section" id="revit-training">
+    <div class="bim-training-grid">
+      <div class="bim-training-copy reveal">
+        <div class="bim-sec-label reveal">Training &amp; Leadership</div>
+        <h2 class="bim-section-title reveal">Firmwide Revit standards,<br><em>taught through real project practice.</em></h2>
+        <p class="bim-section-note">Training is built around the realities of active project delivery: clean setup, consistent documentation, fewer coordination surprises, and faster team confidence inside Revit.</p>
+        <p>Office-wide training session led annually for all studio teams at TPG Architecture. From model setup and BIM standards to advanced coordination workflows, building shared precision across every project.</p>
+      </div>
+      <div class="bim-training-media reveal">
+        <button class="bim-video-frame bim-video-launch" type="button" data-video-type="local" data-video-src="../assets/videos/revit-training.mp4" data-video-title="Revit Essentials · Annual Office-Wide Training" aria-label="Open Revit training video">
+          <video class="bim-video" muted playsinline preload="metadata">
+            <source src="../assets/videos/revit-training.mp4" type="video/mp4">
+          </video>
+          <span class="bim-video-cue">Click to watch</span>
+          <span class="bim-video-cap">Revit Essentials · Annual Office-Wide Training</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Advanced Problem Solving -->
+  <div class="bim-section">
+    <div class="bim-problem-layout">
+      <div class="bim-section-intro reveal">
+        <div class="bim-sec-label reveal">Advanced Problem Solving</div>
+        <h2 class="bim-section-title reveal">When Revit breaks the usual path,<br><em>the solution still has to ship.</em></h2>
+        <p class="bim-section-note">Complex model issues often appear late, with limited documentation and real deadlines. The focus is practical resolution: diagnose the model, isolate the constraint, and keep production moving.</p>
+      </div>
+
+      <!-- Videos -->
+      <div class="bim-yt-stack reveal">
+        <div class="bim-yt-item">
+          <button class="bim-yt-embed bim-video-launch" type="button" data-video-type="youtube" data-video-src="https://www.youtube.com/embed/A4yAIlgU5RE?start=32&autoplay=1" data-video-title="Sheet Number Workaround" aria-label="Open sheet number workaround video">
+            <img src="https://img.youtube.com/vi/A4yAIlgU5RE/hqdefault.jpg" alt="" loading="lazy">
+            <span class="bim-video-cue">Click to watch</span>
+          </button>
+          <div class="bim-yt-label">Revit · Workflow Strategy</div>
+          <div class="bim-yt-title">Sheet Number Workaround</div>
+          <p class="bim-yt-desc">A practical method for handling multiple sheets that require the same sheet number, shared publicly after Autodesk forum guidance had no native solution.</p>
+        </div>
+        <div class="bim-yt-item">
+          <button class="bim-yt-embed bim-video-launch" type="button" data-video-type="youtube" data-video-src="https://www.youtube.com/embed/z1Y50ZdU_UA?autoplay=1" data-video-title="Design Option Troubleshooting" aria-label="Open design option troubleshooting video">
+            <img src="https://img.youtube.com/vi/z1Y50ZdU_UA/hqdefault.jpg" alt="" loading="lazy">
+            <span class="bim-video-cue">Click to watch</span>
+          </button>
+          <div class="bim-yt-label">Revit · Beginner Support</div>
+          <div class="bim-yt-title">Design Option Troubleshooting</div>
+          <p class="bim-yt-desc">A foundational check for new users who cannot select an element in Revit: verify the design option before assuming the model is broken.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Software Stack -->
+  <div class="bim-section">
+    <div class="bim-section-intro">
+      <div>
+        <div class="bim-sec-label reveal">Software Stack</div>
+        <h2 class="bim-section-title reveal">Tools organized around<br><em>delivery responsibilities.</em></h2>
+      </div>
+      <p class="bim-section-note reveal">The toolset supports the full chain of digital delivery: authoring, coordination, automation, visualization, documentation, and team review.</p>
+    </div>
+    <div class="sw-dynamic reveal" data-software-stack>
+      <div class="sw-card-grid" role="list" aria-label="Software tools">
+        <button class="sw-tool-card is-active" type="button" data-tool="Autodesk Revit" data-category="BIM / Modeling" data-detail="Primary BIM authoring with advanced formulas, parametric families, firmwide standards, and documentation workflows.">
+          <span class="sw-tool-cat">BIM / Modeling</span>
+          <span class="sw-tool-name">Autodesk Revit</span>
+          <span class="sw-tool-hint">Primary authoring</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="BIM 360 / ACC" data-category="Cloud Coordination" data-detail="300+ projects administered across user access, model management, issue tracking, coordination, and team permissions.">
+          <span class="sw-tool-cat">Cloud Coordination</span>
+          <span class="sw-tool-name">BIM 360 / ACC</span>
+          <span class="sw-tool-hint">Project control</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="Navisworks" data-category="Clash Detection" data-detail="Multi-discipline coordination across MEP, structural, and architectural models for constructability review.">
+          <span class="sw-tool-cat">Clash Detection</span>
+          <span class="sw-tool-name">Navisworks</span>
+          <span class="sw-tool-hint">Model review</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="AutoCAD" data-category="Drafting" data-detail="2D documentation, site plans, detail drawings, legacy drawing coordination, and production support.">
+          <span class="sw-tool-cat">Drafting</span>
+          <span class="sw-tool-name">AutoCAD</span>
+          <span class="sw-tool-hint">2D support</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="Dynamo for Revit" data-category="Computational" data-detail="Parametric workflows, data extraction, automation scripts, repetitive task control, and project cleanup.">
+          <span class="sw-tool-cat">Computational</span>
+          <span class="sw-tool-name">Dynamo for Revit</span>
+          <span class="sw-tool-hint">Automation</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="Rhino + Grasshopper" data-category="Parametric Design" data-detail="Complex geometry, generative form studies, surface logic, and early design systems before BIM translation.">
+          <span class="sw-tool-cat">Parametric Design</span>
+          <span class="sw-tool-name">Rhino + Grasshopper</span>
+          <span class="sw-tool-hint">Geometry systems</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="Lumion + Enscape" data-category="Visualization" data-detail="Architectural rendering, real-time Revit visualization, client presentations, visual studies, and animations.">
+          <span class="sw-tool-cat">Visualization</span>
+          <span class="sw-tool-name">Lumion + Enscape</span>
+          <span class="sw-tool-hint">Real-time output</span>
+        </button>
+        <button class="sw-tool-card" type="button" data-tool="Bluebeam Revu" data-category="Documentation" data-detail="PDF markup, drawing review, field coordination, drawing issue tracking, and team review sessions.">
+          <span class="sw-tool-cat">Documentation</span>
+          <span class="sw-tool-name">Bluebeam Revu</span>
+          <span class="sw-tool-hint">Review workflow</span>
+        </button>
+      </div>
+      <aside class="sw-detail-panel" aria-live="polite">
+        <div>
+          <div class="sw-detail-kicker" id="sw-detail-category">BIM / Modeling</div>
+          <div class="sw-detail-title" id="sw-detail-title">Autodesk Revit</div>
+          <p class="sw-detail-text" id="sw-detail-text">Primary BIM authoring with advanced formulas, parametric families, firmwide standards, and documentation workflows.</p>
+        </div>
+        <div class="sw-detail-meta">Hover or select a tool</div>
+      </aside>
+    </div>
+  </div>
+
+</div><!-- /bim-wrap -->
+
+<!-- ── AI BAND - DARK ── -->
+<div class="bim-ai-band">
+  <div class="bim-ai-inner">
+    <div class="bim-ai-head-row reveal">
+      <div class="bim-ai-left">
+        <div class="bim-ai-label">AI &amp; Emerging Technology</div>
+        <h2 class="bim-ai-h2">Actively integrated<br><em>across every phase.</em></h2>
+      </div>
+      <p class="bim-ai-sub">Research, visualization, design automation, and project delivery, not experimental, operational.</p>
+    </div>
+    <div class="bim-ai-grid">
+      <div class="ai-card ai-card-featured reveal">
+        <div class="ai-name">Anthropic</div>
+        <div class="ai-maker">Daily Use</div>
+        <div class="ai-use">Research, documentation, design iteration, CLI automation, and project proposals.</div>
+        <div class="ai-tool-list" aria-label="Anthropic tools">
+          <span>Claude AI</span>
+          <span>Claude Design</span>
+          <span>Claude Code</span>
+        </div>
+      </div>
+      <div class="ai-card ai-card-featured reveal">
+        <div class="ai-name">OpenAI</div>
+        <div class="ai-maker">Daily Use</div>
+        <div class="ai-use">Spec writing, image generation, code support, compliance checks, and client communications.</div>
+        <div class="ai-tool-list" aria-label="OpenAI tools">
+          <span>ChatGPT</span>
+          <span>DALL-E</span>
+          <span>Codex</span>
+        </div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">Autodesk Forma</div>
+        <div class="ai-maker">Active</div>
+        <div class="ai-use">AI massing studies, environmental simulation, BIM-integrated</div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">Veras (EvolveLA)</div>
+        <div class="ai-maker">Active</div>
+        <div class="ai-use">AI rendering from Revit models for rapid client presentations</div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">Midjourney</div>
+        <div class="ai-maker">Proficient</div>
+        <div class="ai-use">Concept mood boards, material palette ideation</div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">Nano Banana</div>
+        <div class="ai-maker">Active</div>
+        <div class="ai-use">Fast visual edits, concept image refinement, and presentation graphics</div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">Hypar (Trimble)</div>
+        <div class="ai-maker">Proficient</div>
+        <div class="ai-use">Parametric &amp; computational design, BIM-integrated systems</div>
+      </div>
+      <div class="ai-card reveal">
+        <div class="ai-name">Arko.ai</div>
+        <div class="ai-maker">Proficient</div>
+        <div class="ai-use">AI-assisted layout generation, space planning optimization</div>
+      </div>
+      <div class="ai-card ai-card-copilot reveal">
+        <div class="ai-name">GitHub Copilot</div>
+        <div class="ai-maker">Familiar</div>
+        <div class="ai-use">Dynamo scripting, Revit API automation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<div class="bim-video-modal" data-video-modal aria-hidden="true">
+  <div class="bim-video-backdrop" data-video-close></div>
+  <div class="bim-video-dialog" role="dialog" aria-modal="true" aria-label="Video player">
+    <button class="bim-video-close" type="button" data-video-close aria-label="Close video">X</button>
+    <div class="bim-video-player" data-video-player></div>
+  </div>
+</div>
+
+<footer class="footer-minimal">
+  <div class="footer-rule"></div>
+  <p>© 2026 Marberd Bernard · New York, NY</p>
+</footer>
+<script src="../assets/js/main.js"></script>
+<script>
+(function () {
+  var wheel = document.querySelector('[data-bim-wheel]');
+  if (!wheel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var ticking = false;
+  function updateWheel() {
+    ticking = false;
+    var rect = wheel.getBoundingClientRect();
+    var vh = window.innerHeight || 1;
+    var progress = (vh - rect.top) / (vh + rect.height);
+    var rotation = Math.max(-80, Math.min(520, progress * 520 - 80));
+    wheel.style.setProperty('--bim-wheel-rotation', rotation.toFixed(2) + 'deg');
+  }
+
+  function requestWheel() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(updateWheel);
+  }
+
+  updateWheel();
+  window.addEventListener('scroll', requestWheel, { passive: true });
+  window.addEventListener('resize', requestWheel);
+}());
+
+(function () {
+  var stack = document.querySelector('[data-software-stack]');
+  if (!stack) return;
+
+  var cards = Array.prototype.slice.call(stack.querySelectorAll('.sw-tool-card'));
+  var category = document.getElementById('sw-detail-category');
+  var title = document.getElementById('sw-detail-title');
+  var text = document.getElementById('sw-detail-text');
+
+  function activate(card) {
+    cards.forEach(function (item) {
+      var isActive = item === card;
+      item.classList.toggle('is-active', isActive);
+      item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    if (category) category.textContent = card.getAttribute('data-category') || '';
+    if (title) title.textContent = card.getAttribute('data-tool') || '';
+    if (text) text.textContent = card.getAttribute('data-detail') || '';
+  }
+
+  cards.forEach(function (card) {
+    card.setAttribute('aria-pressed', card.classList.contains('is-active') ? 'true' : 'false');
+    card.addEventListener('pointerenter', function () { activate(card); });
+    card.addEventListener('focus', function () { activate(card); });
+    card.addEventListener('click', function () { activate(card); });
+  });
+}());
+
+(function () {
+  var modal = document.querySelector('[data-video-modal]');
+  var player = document.querySelector('[data-video-player]');
+  var triggers = Array.prototype.slice.call(document.querySelectorAll('.bim-video-launch'));
+  if (!modal || !player || !triggers.length) return;
+
+  var lastTrigger = null;
+
+  function clearPlayer() {
+    player.innerHTML = '';
+  }
+
+  function openVideo(trigger) {
+    var type = trigger.getAttribute('data-video-type');
+    var src = trigger.getAttribute('data-video-src');
+    var title = trigger.getAttribute('data-video-title') || 'Video';
+    if (!src) return;
+
+    lastTrigger = trigger;
+    clearPlayer();
+
+    if (type === 'youtube') {
+      var iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.title = title;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      player.appendChild(iframe);
+    } else {
+      var video = document.createElement('video');
+      video.controls = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      var source = document.createElement('source');
+      source.src = src;
+      source.type = 'video/mp4';
+      video.appendChild(source);
+      player.appendChild(video);
+    }
+
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    var closeButton = modal.querySelector('.bim-video-close');
+    if (closeButton) closeButton.focus();
+  }
+
+  function closeVideo() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearPlayer();
+    if (lastTrigger) lastTrigger.focus();
+  }
+
+  triggers.forEach(function (trigger) {
+    trigger.addEventListener('mouseenter', function () {
+      document.body.classList.add('bim-video-cursor');
+    });
+    trigger.addEventListener('mouseleave', function () {
+      document.body.classList.remove('bim-video-cursor');
+    });
+    trigger.addEventListener('click', function () {
+      document.body.classList.remove('bim-video-cursor');
+      openVideo(trigger);
+    });
+  });
+
+  modal.querySelectorAll('[data-video-close]').forEach(function (closer) {
+    closer.addEventListener('click', closeVideo);
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeVideo();
+    }
+  });
+}());
+</script>
+</body>
+</html>
