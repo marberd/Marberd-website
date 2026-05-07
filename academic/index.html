@@ -1027,7 +1027,9 @@ body.academic-modal-active #main-nav {
   var currentImages = [];
   var currentSlide = 0;
   var mangroveCard = null;
-  var coinAnimationDone = false;
+  var coinClone = null;
+  var coinFrame = 0;
+  var coinMetrics = null;
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function plainTitle(project) {
@@ -1174,77 +1176,109 @@ body.academic-modal-active #main-nav {
     mangroveCard.classList.add('is-coin-target-landed');
   }
 
-  function runMangroveCoinAnimation() {
-    if (coinAnimationDone || !featuredCard || !mangroveCard || reduceMotion.matches) {
-      revealMangroveSlot();
-      return;
-    }
+  function hideMangroveSlot() {
+    if (!mangroveCard) return;
+    mangroveCard.classList.add('is-coin-target-pending');
+    mangroveCard.classList.remove('is-coin-target-landed');
+  }
 
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function easeInOut(value) {
+    return value * value * (3 - (2 * value));
+  }
+
+  function createCoinClone() {
+    if (coinClone || !featuredCard) return;
+    coinClone = featuredCard.cloneNode(true);
+    cleanCloneIds(coinClone);
+    coinClone.classList.remove('featured-card', 'is-coin-source-hidden');
+    coinClone.classList.add('featured-card', 'coin-flight-card');
+    coinClone.style.margin = '0';
+    coinClone.style.opacity = '0';
+    coinClone.style.animation = 'none';
+    document.body.appendChild(coinClone);
+  }
+
+  function measureCoinPath() {
+    if (!featuredCard || !mangroveCard || reduceMotion.matches) return null;
     var startRect = featuredCard.getBoundingClientRect();
     var endRect = mangroveCard.getBoundingClientRect();
-    if (!startRect.width || !endRect.width) {
-      revealMangroveSlot();
-      return;
-    }
+    if (!startRect.width || !endRect.width) return null;
 
-    coinAnimationDone = true;
-    featuredCard.classList.add('is-coin-source-hidden');
-    mangroveCard.classList.add('is-coin-target-pending');
-
-    var clone = featuredCard.cloneNode(true);
-    cleanCloneIds(clone);
-    clone.classList.remove('featured-card', 'is-coin-source-hidden');
-    clone.classList.add('featured-card', 'coin-flight-card');
-    clone.style.width = startRect.width + 'px';
-    clone.style.margin = '0';
-    clone.style.opacity = '1';
-    clone.style.animation = 'none';
-    document.body.appendChild(clone);
-
-    var scale = endRect.width / startRect.width;
-    var midX = startRect.left + ((endRect.left - startRect.left) * 0.52);
-    var midY = Math.min(startRect.top, endRect.top) - Math.max(80, window.innerHeight * 0.12);
-
-    var animation = clone.animate([
-      {
-        transform: 'translate3d(' + startRect.left + 'px, ' + startRect.top + 'px, 0) scale(1) rotateY(0deg)',
-        opacity: 1,
-        filter: 'blur(0) saturate(1)'
-      },
-      {
-        transform: 'translate3d(' + midX + 'px, ' + midY + 'px, 0) scale(' + Math.max(scale, 0.82).toFixed(3) + ') rotateY(540deg)',
-        opacity: 1,
-        filter: 'blur(0.8px) saturate(1.08)',
-        offset: 0.58
-      },
-      {
-        transform: 'translate3d(' + endRect.left + 'px, ' + endRect.top + 'px, 0) scale(' + scale.toFixed(3) + ') rotateY(1080deg)',
-        opacity: 1,
-        filter: 'blur(0) saturate(1)'
-      }
-    ], {
-      duration: 1280,
-      easing: 'cubic-bezier(.18,.9,.24,1)',
-      fill: 'forwards'
-    });
-
-    animation.onfinish = function () {
-      clone.remove();
-      revealMangroveSlot();
-    };
-    animation.oncancel = function () {
-      clone.remove();
-      revealMangroveSlot();
+    var startDocY = startRect.top + window.scrollY;
+    var endDocY = endRect.top + window.scrollY;
+    return {
+      startX: startRect.left + window.scrollX,
+      startY: startDocY,
+      endX: endRect.left + window.scrollX,
+      endY: endDocY,
+      startWidth: startRect.width,
+      endScale: endRect.width / startRect.width,
+      scrollStart: Math.max(0, startDocY - (window.innerHeight * 0.24)),
+      scrollEnd: Math.max(startDocY + 1, endDocY - (window.innerHeight * 0.42)),
+      arc: Math.max(90, Math.min(220, window.innerHeight * 0.18))
     };
   }
 
+  function updateCoinPosition() {
+    coinFrame = 0;
+    if (!coinMetrics) coinMetrics = measureCoinPath();
+    if (!coinClone || !coinMetrics) return;
+
+    var raw = (window.scrollY - coinMetrics.scrollStart) / (coinMetrics.scrollEnd - coinMetrics.scrollStart);
+    var progress = clamp(raw, 0, 1);
+    var eased = easeInOut(progress);
+    var x = coinMetrics.startX + ((coinMetrics.endX - coinMetrics.startX) * eased);
+    var y = coinMetrics.startY + ((coinMetrics.endY - coinMetrics.startY) * eased) - (Math.sin(Math.PI * progress) * coinMetrics.arc);
+    var scale = 1 + ((coinMetrics.endScale - 1) * eased);
+    var rotate = 1080 * progress;
+    var viewportY = y - window.scrollY;
+
+    if (progress <= 0.01) {
+      featuredCard.classList.remove('is-coin-source-hidden');
+      hideMangroveSlot();
+      coinClone.style.opacity = '0';
+    } else if (progress >= 0.99) {
+      featuredCard.classList.add('is-coin-source-hidden');
+      revealMangroveSlot();
+      coinClone.style.opacity = '0';
+    } else {
+      featuredCard.classList.add('is-coin-source-hidden');
+      hideMangroveSlot();
+      coinClone.style.opacity = '1';
+    }
+
+    coinClone.style.width = coinMetrics.startWidth + 'px';
+    coinClone.style.transform =
+      'translate3d(' + x.toFixed(1) + 'px, ' + viewportY.toFixed(1) + 'px, 0) ' +
+      'scale(' + scale.toFixed(3) + ') rotateY(' + rotate.toFixed(1) + 'deg)';
+    coinClone.style.filter = 'blur(' + (Math.sin(Math.PI * progress) * 0.8).toFixed(2) + 'px) saturate(' + (1 + (Math.sin(Math.PI * progress) * 0.08)).toFixed(2) + ')';
+  }
+
+  function requestCoinUpdate() {
+    if (coinFrame) return;
+    coinFrame = window.requestAnimationFrame(updateCoinPosition);
+  }
+
+  function resetCoinMetrics() {
+    coinMetrics = null;
+    requestCoinUpdate();
+  }
+
   if (mangroveCard && featuredCard && !reduceMotion.matches) {
-    var coinObserver = new IntersectionObserver(function (entries) {
-      if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
-      coinObserver.disconnect();
-      window.requestAnimationFrame(runMangroveCoinAnimation);
-    }, { threshold: 0.24, rootMargin: '0px 0px -16% 0px' });
-    coinObserver.observe(grid);
+    createCoinClone();
+    hideMangroveSlot();
+    window.addEventListener('scroll', requestCoinUpdate, { passive: true });
+    window.addEventListener('resize', resetCoinMetrics);
+    if (featuredCard.getAnimations) {
+      Promise.all(featuredCard.getAnimations().map(function (animation) {
+        return animation.finished.catch(function () {});
+      })).then(resetCoinMetrics);
+    }
+    resetCoinMetrics();
   } else {
     revealMangroveSlot();
   }
