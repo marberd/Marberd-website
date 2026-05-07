@@ -3,9 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Marberd Bernard — Architectural Designer & VDC Specialist. Eight years of precision practice in New York City.">
+<meta name="description" content="Marberd Bernard — BIM Manager and Architectural Designer with 8+ years in New York City. Revit, BIM 360 / ACC, VDC coordination, Columbia M.Arch 2024. Open to senior BIM and VDC leadership roles.">
 <link rel="canonical" href="https://marberd.com/professional/">
-<title>Professional · MARBERD</title>
+<title>Marberd Bernard — BIM Manager & Architectural Designer | New York</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta property="og:title" content="Marberd Bernard — BIM Manager & Architectural Designer">
+<meta property="og:description" content="Eight years of precision practice in New York City. Revit, BIM 360 / ACC, VDC, Columbia M.Arch 2024.">
+<meta property="og:url" content="https://marberd.com/professional/">
+<meta property="og:type" content="website">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -108,7 +114,7 @@
   font-size: 8px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.42);
 }
 .pr-meta-value {
   font-family: var(--sans);
@@ -288,7 +294,7 @@
   font-family: var(--sans);
   font-size: 10px;
   font-weight: 300;
-  color: #505050;
+  color: #686878;
   line-height: 1.5;
   margin-bottom: 16px;
 }
@@ -299,8 +305,8 @@
   font-variant-caps: small-caps;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #505050;
-  border: 0.5px solid #2a2a2a;
+  color: #787888;
+  border: 0.5px solid #333340;
   border-radius: 2px;
   padding: 3px 7px;
   white-space: nowrap;
@@ -346,10 +352,10 @@
 .pr-wexp-imgcard img {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
-  filter: grayscale(100%) blur(1.5px);
+  filter: grayscale(100%);
   transition: filter 0.4s ease;
 }
-.pr-wexp-imgcard:hover img { filter: grayscale(0%) blur(0px); }
+.pr-wexp-imgcard:hover img { filter: grayscale(0%); }
 
 /* Expand CTA */
 .pr-wexp-cta {
@@ -382,6 +388,8 @@
   color: #b8963e;
   font-size: 12px;
   line-height: 1;
+  transform: rotate(45deg);
+  display: inline-block;
 }
 .pr-wexp-cta-text {
   writing-mode: vertical-rl;
@@ -403,16 +411,16 @@
   display: flex;
   gap: 10px;
   font-family: var(--sans);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 300;
-  color: #888;
+  color: #AAAAAA;
   line-height: 1.65;
 }
 .pr-wexp-bul li::before {
   content: '—';
   color: #b8963e;
   flex-shrink: 0;
-  font-size: 11px;
+  font-size: 13px;
   margin-top: 0.1em;
 }
 
@@ -557,7 +565,7 @@
 /* ── MOBILE ───────────────────────────── */
 @media (max-width: 900px) {
   .pr-hero { flex-direction: column; align-items: flex-start; }
-  .pr-hero-left { flex: none; width: 100%; padding: 90px 24px 52px;
+  .pr-hero-left { flex: none; width: 100%; padding: 90px 24px 40px;
                   display: flex; flex-direction: column; justify-content: flex-start; }
   .pr-hero-reel { display: none; }
   .pr-meta-item { padding-right: 28px; margin-right: 28px; }
@@ -566,15 +574,258 @@
   .pr-wexp-vd    { display: none; }
   .pr-wexp-l     { padding-right: 0; }
   .pr-wexp-r     { padding-left: 0; }
-  .pr-wexp-imgcard { width: 120px; height: 80px; }
+  .pr-wexp-imgcard { width: 130px; height: 88px; }
   .pr-wexp-cta   { display: none; }
 }
 @media (max-width: 600px) {
-  .pr-hero-left { padding: 90px 20px 52px; }
+  .pr-hero-left { padding: 84px 20px 36px; }
   .pr-h1 { font-size: clamp(50px, 16vw, 70px); }
   .pr-meta-item:last-child { display: none; }
   .pr-wexp-inner { padding: 40px 20px 56px; }
-  .pr-wexp-imgcard { width: 100px; height: 68px; }
+  .pr-wexp-imgcard { width: 130px; height: 88px; }
+}
+
+/* ══ HERO SUB-HEADLINE ══════════════════ */
+.pr-hero-sub {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.50);
+  line-height: 1.68;
+  max-width: 520px;
+  margin-top: 20px;
+  opacity: 0;
+  transform: translateY(22px);
+  animation: pr-rise .82s .38s cubic-bezier(.16,1,.3,1) forwards;
+}
+@media (max-width: 600px) {
+  .pr-hero-sub { font-size: 13.5px; }
+}
+
+/* ══ MOBILE PROJECT STRIP ═══════════════ */
+.pr-mobile-strip {
+  display: none;
+  background: var(--black);
+  border-bottom: 0.5px solid #1e1e1e;
+  overflow: hidden;
+}
+.pr-mobile-strip-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 10px;
+}
+.pr-mobile-strip-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+}
+.pr-mobile-strip-hint {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(184,148,106,0.55);
+}
+.pr-mobile-strip-track {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 20px 18px;
+}
+.pr-mobile-strip-track::-webkit-scrollbar { display: none; }
+.pr-mobile-card {
+  flex-shrink: 0;
+  width: 200px;
+  height: 134px;
+  position: relative;
+  overflow: hidden;
+  scroll-snap-align: start;
+  cursor: pointer;
+  border: 0.5px solid rgba(255,255,255,0.06);
+}
+.pr-mobile-card img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  filter: grayscale(80%);
+  transition: filter 0.35s ease;
+}
+.pr-mobile-card:active img { filter: grayscale(0%); }
+.pr-mobile-card-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 28px 10px 8px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.72));
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.pr-mobile-card-name {
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.4;
+}
+.pr-mobile-card-year {
+  font-family: var(--mono);
+  font-size: 7.5px;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-left: 6px;
+}
+@media (max-width: 900px) {
+  .pr-mobile-strip { display: block; }
+}
+
+/* ══ TAP AFFORDANCE ═════════════════════ */
+.pr-tap-hint {
+  display: none;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(184,148,106,0.55);
+  padding: 8px 0 2px;
+  text-align: right;
+}
+@media (max-width: 900px) {
+  .pr-tap-hint { display: block; }
+}
+
+/* ══ FORMATIVE EXPERIENCE GROUP ═════════ */
+.pr-wexp-group--formative { margin-top: 48px; }
+
+/* ══ EDUCATION & CERTIFICATIONS ═════════ */
+.pr-edu {
+  background: var(--black);
+  border-top: 1px solid #1a1a22;
+}
+.pr-edu-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 52px 60px 60px;
+}
+.pr-edu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 4px;
+}
+.pr-edu-item {
+  padding: 20px 28px 20px 0;
+  border-right: 0.5px solid #222;
+}
+.pr-edu-item:last-child { border-right: none; }
+.pr-edu-item .pr-wexp-co { font-size: 9px; }
+@media (max-width: 900px) {
+  .pr-edu-inner { padding: 44px 24px 52px; }
+  .pr-edu-grid { grid-template-columns: 1fr; }
+  .pr-edu-item {
+    border-right: none;
+    border-bottom: 0.5px solid #222;
+    padding: 18px 0;
+  }
+  .pr-edu-item:last-child { border-bottom: none; }
+}
+@media (max-width: 600px) {
+  .pr-edu-inner { padding: 36px 20px 44px; }
+}
+
+/* ══ CTA BAND ═══════════════════════════ */
+.pr-cta-band {
+  background: var(--black);
+  border-top: 1px solid #222;
+}
+.pr-cta-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 60px 72px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+.pr-cta-eyebrow {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pr-cta-eyebrow::after { content: ''; width: 28px; height: 1px; background: rgba(184,148,106,0.35); }
+.pr-cta-h2 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.4vw, 46px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+.pr-cta-h2 em { font-style: italic; color: var(--gold-lt); }
+.pr-cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+  min-width: 200px;
+}
+.pr-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 24px;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background .2s, border-color .2s, color .2s;
+  border-radius: 0;
+}
+.pr-cta-btn--primary {
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  color: var(--black);
+  font-weight: 500;
+}
+.pr-cta-btn--primary:hover {
+  background: var(--gold-lt);
+  border-color: var(--gold-lt);
+}
+.pr-cta-btn--secondary {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.62);
+}
+.pr-cta-btn--secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold-lt);
+}
+@media (max-width: 900px) {
+  .pr-cta-inner {
+    grid-template-columns: 1fr;
+    padding: 48px 24px 56px;
+    gap: 28px;
+  }
+  .pr-cta-actions { flex-direction: row; }
+  .pr-cta-btn { flex: 1; }
+}
+@media (max-width: 600px) {
+  .pr-cta-inner { padding: 44px 20px 52px; }
+  .pr-cta-actions { flex-direction: column; }
+  .pr-cta-btn { width: 100%; }
 }
 
 </style>
@@ -614,6 +865,7 @@
         <span class="pr-h1-line"><span class="pr-h1-inner">Eight years.</span></span>
         <span class="pr-h1-line"><span class="pr-h1-inner">Precision at scale.</span></span>
       </h1>
+      <p class="pr-hero-sub">Architectural Designer and BIM Manager with eight years of precision practice in New York City — leading digital delivery for JPMorgan Chase, CLEAR HQ at 4 WTC, and BMW's flagship Manhattan showroom. Currently at TPG Architecture; open to senior BIM and VDC leadership roles.</p>
       <div class="pr-hero-meta">
         <div class="pr-meta-item">
           <span class="pr-meta-label">Current Role</span>
@@ -638,12 +890,57 @@
   </div>
 </section>
 
+<!-- ══ MOBILE PROJECT STRIP ════════════════════════════════ -->
+<div class="pr-mobile-strip" aria-label="Selected projects">
+  <div class="pr-mobile-strip-head">
+    <span class="pr-mobile-strip-label">Selected Projects</span>
+    <span class="pr-mobile-strip-hint">Tap to expand ↗</span>
+  </div>
+  <div class="pr-mobile-strip-track">
+    <div class="pr-mobile-card" data-modal="tpg-1290">
+      <img src="../assets/images/projects/tpg-interior.jpg" alt="1290 Avenue of the Americas" loading="lazy">
+      <div class="pr-mobile-card-overlay">
+        <span class="pr-mobile-card-name">1290 Ave of the Americas</span>
+        <span class="pr-mobile-card-year">2023</span>
+      </div>
+    </div>
+    <div class="pr-mobile-card" data-modal="tpg-bmw-showroom">
+      <img src="../assets/images/projects/bmw-showroom-main.webp" alt="BMW Showroom" loading="lazy">
+      <div class="pr-mobile-card-overlay">
+        <span class="pr-mobile-card-name">BMW Showroom</span>
+        <span class="pr-mobile-card-year">2023</span>
+      </div>
+    </div>
+    <div class="pr-mobile-card" data-modal="archnim-burton">
+      <img src="../assets/images/projects/burton-in99-main.webp" alt="BURTON IN99 Flagship" loading="lazy">
+      <div class="pr-mobile-card-overlay">
+        <span class="pr-mobile-card-name">BURTON IN99 Flagship</span>
+        <span class="pr-mobile-card-year">2020</span>
+      </div>
+    </div>
+    <div class="pr-mobile-card" data-modal="archnim-alpena">
+      <img src="../assets/images/projects/alpena-prof.jpg" alt="Alpena Mixed-Use" loading="lazy">
+      <div class="pr-mobile-card-overlay">
+        <span class="pr-mobile-card-name">130K SF Mixed-Use</span>
+        <span class="pr-mobile-card-year">2021</span>
+      </div>
+    </div>
+    <div class="pr-mobile-card" data-modal="dyo-maoya">
+      <img src="../assets/images/projects/maoya-1.png" alt="Maoya Hotel" loading="lazy">
+      <div class="pr-mobile-card-overlay">
+        <span class="pr-mobile-card-name">Maoya Hotel</span>
+        <span class="pr-mobile-card-year">2022</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ══ WORK EXPERIENCE ══════════════════════════════════════ -->
 <section class="pr-wexp">
   <div class="pr-wexp-inner">
 
     <div class="pr-wexp-head">
-      <span class="pr-wexp-title">Work Experience</span>
+      <h2 class="pr-wexp-title">Work Experience</h2>
       <div class="pr-wexp-hrule"></div>
     </div>
 
@@ -651,8 +948,8 @@
 
     <div class="pr-wexp-role pr-wexp-role--last" id="wexp-tpg">
       <div class="pr-wexp-l">
-        <div class="pr-wexp-co">TPG Architecture</div>
-        <div class="pr-wexp-rt">BIM Manager · Project Lead</div>
+        <h3 class="pr-wexp-co">TPG Architecture</h3>
+        <h4 class="pr-wexp-rt">BIM Manager · Project Lead</h4>
         <div class="pr-wexp-pd">Apr 2019 – Present · New York, NY</div>
         <div class="pr-wexp-tags">
           <span class="pr-wtag">Revit</span>
@@ -686,6 +983,7 @@
             </span>
           </button>
         </div>
+        <p class="pr-tap-hint">Tap any image to expand ↗</p>
         <div class="pr-wexp-brule"></div>
         <ul class="pr-wexp-bul">
           <li>Led BIM strategy coordinating architecture, structure, and MEP across multiple simultaneous commercial projects.</li>
@@ -706,9 +1004,9 @@
 
     <div class="pr-wexp-role" id="wexp-archnim">
       <div class="pr-wexp-l">
-        <div class="pr-wexp-co">Archnimations</div>
-        <div class="pr-wexp-rt">Independent Architectural Designer</div>
-        <div class="pr-wexp-pd">2018 – 2024 · New York, NY</div>
+        <h3 class="pr-wexp-co">Archnimations</h3>
+        <h4 class="pr-wexp-rt">Independent Architectural Designer</h4>
+        <div class="pr-wexp-pd">2018 – 2024 · Independent Practice, concurrent with TPG · New York, NY</div>
         <div class="pr-wexp-tags">
           <span class="pr-wtag">Revit</span>
           <span class="pr-wtag">Rhino</span>
@@ -743,6 +1041,7 @@
             </span>
           </button>
         </div>
+        <p class="pr-tap-hint">Tap any image to expand ↗</p>
         <div class="pr-wexp-brule"></div>
         <ul class="pr-wexp-bul">
           <li>Ran an independent design and visualization practice over six years, delivering architectural services across residential, commercial, and mixed-use typologies in the US, China, and the Dominican Republic.</li>
@@ -755,10 +1054,12 @@
       </div>
     </div>
 
+    <div class="pr-wexp-group pr-wexp-group--formative">Formative Experience</div>
+
     <div class="pr-wexp-role" id="wexp-ama">
       <div class="pr-wexp-l">
-        <div class="pr-wexp-co">AMA Consulting Engineers</div>
-        <div class="pr-wexp-rt">BIM / CAD Operator</div>
+        <h3 class="pr-wexp-co">AMA Consulting Engineers</h3>
+        <h4 class="pr-wexp-rt">BIM / CAD Operator</h4>
         <div class="pr-wexp-pd">May 2018 – 2019 · New York, NY</div>
         <div class="pr-wexp-tags">
           <span class="pr-wtag">Navisworks</span>
@@ -779,8 +1080,8 @@
 
     <div class="pr-wexp-role pr-wexp-role--last" id="wexp-dyo">
       <div class="pr-wexp-l">
-        <div class="pr-wexp-co">D-YO Studio</div>
-        <div class="pr-wexp-rt">Assistant Designer</div>
+        <h3 class="pr-wexp-co">D-YO Studio</h3>
+        <h4 class="pr-wexp-rt">Assistant Designer</h4>
         <div class="pr-wexp-pd">Jan 2016 – 2018 · New York, NY</div>
         <div class="pr-wexp-tags">
           <span class="pr-wtag">Revit</span>
@@ -801,6 +1102,7 @@
             </div>
           </div>
         </div>
+        <p class="pr-tap-hint">Tap any image to expand ↗</p>
         <div class="pr-wexp-brule"></div>
         <ul class="pr-wexp-bul">
           <li>Initiated and executed firm-wide platform migration from AutoCAD to Revit; introduced material takeoffs to support cost estimation and project budgeting.</li>
@@ -811,6 +1113,47 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ══ EDUCATION & CERTIFICATIONS ══════════════════════ -->
+<section class="pr-edu reveal">
+  <div class="pr-edu-inner">
+    <div class="pr-wexp-head">
+      <h2 class="pr-wexp-title">Education &amp; Certifications</h2>
+      <div class="pr-wexp-hrule"></div>
+    </div>
+    <div class="pr-edu-grid">
+      <div class="pr-edu-item">
+        <h3 class="pr-wexp-co">Columbia University</h3>
+        <h4 class="pr-wexp-rt">Master of Architecture</h4>
+        <div class="pr-wexp-pd">2024 · Graduate School of Architecture · New York, NY</div>
+      </div>
+      <div class="pr-edu-item">
+        <h3 class="pr-wexp-co">U.S. Green Building Council</h3>
+        <h4 class="pr-wexp-rt">LEED Green Associate</h4>
+        <div class="pr-wexp-pd">November 2024 · Credential ID on file</div>
+      </div>
+      <div class="pr-edu-item">
+        <h3 class="pr-wexp-co">Autodesk</h3>
+        <h4 class="pr-wexp-rt">Certified Professional — Revit</h4>
+        <div class="pr-wexp-pd">Certified 2019 &amp; 2024 · Architecture Specialty</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA BAND ══════════════════════════════════════════ -->
+<section class="pr-cta-band reveal">
+  <div class="pr-cta-inner">
+    <div class="pr-cta-text">
+      <p class="pr-cta-eyebrow">Currently open to</p>
+      <h2 class="pr-cta-h2">Senior BIM and VDC<br><em>leadership roles in New York.</em></h2>
+    </div>
+    <div class="pr-cta-actions">
+      <a class="pr-cta-btn pr-cta-btn--primary" href="/contact/">Get in touch</a>
+      <a class="pr-cta-btn pr-cta-btn--secondary" href="https://linkedin.com/in/marberd-bernard" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
   </div>
 </section>
 
