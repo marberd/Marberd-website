@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://marberd.com/sitemap.xml

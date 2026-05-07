@@ -31,10 +31,9 @@ body {
   font-size: 15px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  cursor: none !important;
+  cursor: auto;
 }
-*, *::before, *::after { cursor: none !important; }
-a, button { touch-action: manipulation; }
+a, button { cursor: pointer; touch-action: manipulation; }
 
 /* ── CURSOR ─────────────────────────────── */
 #cur {
@@ -84,6 +83,23 @@ a, button { touch-action: manipulation; }
   background: var(--gold-dk);
 }
 
+#cur,
+#cur-dot {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.has-custom-cursor,
+  body.has-custom-cursor * {
+    cursor: none !important;
+  }
+
+  body.has-custom-cursor #cur,
+  body.has-custom-cursor #cur-dot {
+    display: block;
+  }
+}
+
 /* ── NAVIGATION ─────────────────────────── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 10001;
@@ -101,7 +117,7 @@ nav.nav-hidden {
 }
 #nav-logo {
   display: flex; align-items: center; text-decoration: none;
-  cursor: none; flex-shrink: 0;
+  cursor: pointer; flex-shrink: 0;
 }
 #nav-logo svg { width: 48px; height: 48px; }
 .logo-wrap {
@@ -133,7 +149,7 @@ nav.nav-hidden {
 .nav-links a {
   font-family: var(--mono); font-size: 9.5px;
   letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--mid); text-decoration: none; cursor: none;
+  color: var(--mid); text-decoration: none; cursor: pointer;
   position: relative; padding-bottom: 2px;
   transition: color .2s;
 }
@@ -150,7 +166,7 @@ nav.nav-hidden {
 .nav-icon {
   width: 32px; height: 32px; border: 1px solid var(--border);
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  cursor: none; transition: all .2s; color: var(--muted);
+  cursor: pointer; transition: all .2s; color: var(--muted);
 }
 .nav-icon:hover { border-color: var(--gold); color: var(--gold-dk); }
 .nav-icon svg { width: 13px; height: 13px; }
@@ -177,7 +193,7 @@ footer {
 .foot-link {
   font-family: var(--mono); font-size: 9px; letter-spacing: 1.5px;
   text-transform: uppercase; color: rgba(255,255,255,0.28);
-  text-decoration: none; cursor: none; transition: color .2s;
+  text-decoration: none; cursor: pointer; transition: color .2s;
 }
 .foot-link:hover { color: var(--gold); }
 
@@ -242,7 +258,7 @@ footer {
   gap: 5px;
   width: 44px; height: 44px;
   background: none; border: none;
-  cursor: none; padding: 0; flex-shrink: 0;
+  cursor: pointer; padding: 0; flex-shrink: 0;
 }
 #nav-burger span {
   display: block;

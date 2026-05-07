@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Marberd Bernard — Architectural Designer & VDC Specialist. Eight years of precision practice in New York City.">
+<link rel="canonical" href="https://marberd.com/professional/">
 <title>Professional · MARBERD</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -335,7 +336,7 @@
   border-radius: 2px;
   overflow: hidden;
   flex-shrink: 0;
-  cursor: none;
+  cursor: pointer;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .pr-wexp-imgcard:hover {
@@ -358,7 +359,7 @@
   background: none;
   border: none;
   flex-shrink: 0;
-  cursor: none;
+  cursor: pointer;
   transition: opacity 0.2s;
 }
 .pr-wexp-cta:hover { opacity: 0.65; }
@@ -474,7 +475,7 @@
   border: none;
   color: #505050;
   font-size: 16px;
-  cursor: none;
+  cursor: pointer;
   padding: 2px;
   line-height: 1;
   flex-shrink: 0;
@@ -675,6 +676,9 @@
             <div class="pr-wexp-imgcard" data-modal="tpg-1290">
               <img src="../assets/images/projects/tpg-terrace.jpg" alt="1290 Avenue — Terrace" loading="lazy">
             </div>
+            <div class="pr-wexp-imgcard" data-modal="tpg-bmw-showroom">
+              <img src="../assets/images/projects/bmw-showroom-main.webp" alt="BMW Showroom — Manhattan flagship interior" loading="lazy">
+            </div>
           </div>
           <button class="pr-wexp-cta" data-modal="tpg-1290" aria-label="Expand project details">
             <span class="pr-wexp-cta-vr"></span>
@@ -857,6 +861,18 @@
       desc: 'Full-floor interior buildout, 130,000 SF mixed-use program. BIM lead coordinating architectural, structural, and MEP systems. Produced construction documentation, millwork details, and coordinated ceiling geometry under tight tolerances.',
       tags: ['Commercial Interior', 'BIM Lead', 'Revit', 'MEP Coordination', '130,000 SF']
     },
+    'tpg-bmw-showroom': {
+      company: 'TPG Architecture',
+      title:   'BMW Showroom',
+      images:  [
+        '../assets/images/projects/bmw-showroom-main.webp',
+        '../assets/images/projects/bmw-showroom-restroom.webp',
+        '../assets/images/projects/bmw-showroom-furniture.webp',
+        '../assets/images/projects/bmw-showroom-spread.webp'
+      ],
+      desc: 'Luxury BMW showroom at 555 W. 57th St. in New York, NY, designed to express the brand through refined architectural language and elevated materiality. Contributed to visualization and documentation by leading Revit modeling for intricate custom furniture pieces and specialty lighting elements, while supporting FF&E coordination for specifications, finishes, and procurement documentation under an accelerated schedule.',
+      tags: ['Automotive Retail', 'BMW Showroom', 'Revit', 'Parametric Families', 'FF&E', 'Specialty Lighting', 'New York, NY']
+    },
     'dyo-maoya': {
       company: 'D-YO Studio',
       title:   'Maoya Hotel',
@@ -920,6 +936,7 @@
   var REEL_PROJECTS = [
     { name: '1290 Avenue of the Americas', year: '2023', img: '../assets/images/projects/tpg-interior.jpg',         modal: 'tpg-1290'  },
     { name: '1290 Avenue — Terrace',       year: '2023', img: '../assets/images/projects/tpg-terrace.jpg',          modal: 'tpg-1290'  },
+    { name: 'BMW Showroom',                year: '2023', img: '../assets/images/projects/bmw-showroom-main.webp',   modal: 'tpg-bmw-showroom' },
     { name: 'Maoya Hotel',                 year: '2022', img: '../assets/images/projects/maoya-1.png',             modal: 'dyo-maoya' },
     { name: '130K SF Mixed-Use',           year: '2021', img: '../assets/images/projects/alpena-prof.jpg',          modal: 'archnim-alpena'     },
     { name: 'BURTON IN99 Flagship',        year: '2020', img: '../assets/images/projects/burton-china.jpg',         modal: 'archnim-burton'     },

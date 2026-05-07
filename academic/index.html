@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Marberd Bernard academic work, studio projects, and design research from Columbia GSAPP.">
+<link rel="canonical" href="https://marberd.com/academic/">
 <title>Academic · MARBERD</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -31,10 +32,6 @@
   backdrop-filter: blur(22px) saturate(1.15);
   -webkit-backdrop-filter: blur(22px) saturate(1.15);
 }
-#main-nav.hero-animation-pass {
-  z-index: 9000;
-}
-
 .academic-page {
   background: #f4f0e8;
   color: #171716;
@@ -73,7 +70,7 @@
 .hero-copy {
   max-width: 790px;
   position: relative;
-  z-index: 12000;
+  z-index: 1;
   padding-top: 8px;
   transform: translateY(-172px);
 }
@@ -145,10 +142,6 @@
 }
 
 .featured-card {
-  --travel-x: 0px;
-  --travel-y: 0px;
-  --travel-scale: 1;
-  --travel-opacity: 1;
   align-self: center;
   width: 100%;
   max-width: 520px;
@@ -159,18 +152,11 @@
   position: relative;
   overflow: hidden;
   transform-origin: center;
-  z-index: 11000;
+  z-index: 1;
   opacity: 0;
   transform: translate3d(72px, 18px, 0) scale(0.92);
   animation: hero-card-arrive 1.28s .34s cubic-bezier(.16,1,.3,1) forwards;
   transition: box-shadow .28s cubic-bezier(.16,1,.3,1), border-color .2s ease;
-}
-
-.featured-card.travel-ready {
-  animation: none;
-  opacity: var(--travel-opacity);
-  transform: translate3d(var(--travel-x), var(--travel-y), 0) scale(var(--travel-scale));
-  will-change: transform, opacity;
 }
 
 .featured-card::before,
@@ -354,7 +340,6 @@
 }
 
 .project-card {
-  --slot-opacity: 1;
   appearance: none;
   width: 100%;
   min-width: 0;
@@ -369,13 +354,10 @@
   text-align: left;
   overflow: hidden;
   position: relative;
-  opacity: var(--slot-opacity);
   transform-origin: center;
   transition: transform .28s cubic-bezier(.16,1,.3,1), border-color .22s ease, box-shadow .28s cubic-bezier(.16,1,.3,1);
-}
-
-.project-card.is-mangrove {
-  transition: opacity .12s linear, transform .28s cubic-bezier(.16,1,.3,1), border-color .22s ease, box-shadow .28s cubic-bezier(.16,1,.3,1);
+  content-visibility: auto;
+  contain-intrinsic-size: 640px;
 }
 
 .project-card:hover,
@@ -513,7 +495,6 @@ body.academic-modal-active #main-nav {
   border: 1px solid rgba(255,255,255,0.12);
   color: var(--white);
   position: relative;
-  cursor: none;
 }
 
 .modal-close {
@@ -527,7 +508,7 @@ body.academic-modal-active #main-nav {
   background: rgba(17,17,24,0.68);
   color: rgba(255,255,255,0.78);
   font-size: 20px;
-  cursor: none;
+  cursor: pointer;
 }
 
 .modal-close:hover {
@@ -576,7 +557,7 @@ body.academic-modal-active #main-nav {
   background: rgba(0,0,0,0.56);
   color: rgba(255,255,255,0.82);
   font-size: 24px;
-  cursor: none;
+  cursor: pointer;
 }
 
 .gallery-nav:hover {
@@ -800,7 +781,7 @@ body.academic-modal-active #main-nav {
     </div>
 
     <button class="featured-card" type="button" data-project="1" data-hover>
-      <img src="../assets/images/academic/mangrove/mangrove-hero.jpg" alt="The Mangrove project rendering">
+      <img src="../assets/images/academic/_thumbs/mangrove-hero.webp" alt="The Mangrove project rendering" decoding="async">
       <div class="featured-copy">
         <span class="card-number">N&deg; 02</span>
         <h2 class="featured-title">The <em>Mangrove</em></h2>
@@ -866,11 +847,12 @@ body.academic-modal-active #main-nav {
       desc: 'A riverfront housing project developed with Marika Falco. Inspired by Venice and the portego typology, the design uses stepping reciprocal frames to organize apartments, welcome gardens, circulation, and extended living spaces facing the river. The building also treats water as an environmental system, drawing river water through structural pipe chases for heating, cooling, and radiant floors while centering water awareness and swim education for residents and neighbors.',
       tools: 'Housing Design · Environmental Systems · Reciprocal Frames',
       images: [
-        '../assets/images/academic/little-mott-haven/day-exterior.jpg',
-        '../assets/images/academic/little-mott-haven/october-night.jpg',
-        '../assets/images/academic/little-mott-haven/portego-garden.jpg',
-        '../assets/images/academic/little-mott-haven/site.jpg'
+        '../assets/images/academic/_optimized/little-mott-haven/day-exterior.webp',
+        '../assets/images/academic/_optimized/little-mott-haven/october-night.webp',
+        '../assets/images/academic/_optimized/little-mott-haven/portego-garden.webp',
+        '../assets/images/academic/_optimized/little-mott-haven/site.webp'
       ],
+      thumb: '../assets/images/academic/_thumbs/day-exterior.webp',
       links: [
         { label: 'Columbia GSAPP', href: 'https://www.arch.columbia.edu/student-work/11368-little-mott-haven' }
       ]
@@ -885,14 +867,15 @@ body.academic-modal-active #main-nav {
       desc: 'A waterfront civic structure whose branching network of Ipe wood functions simultaneously as facade, structure, and foundation, drawing from mangrove ecosystems to mediate land, water, and light.',
       tools: 'Revit · Lumion · Luban',
       images: [
-        '../assets/images/academic/mangrove/mangrove-hero.jpg',
-        '../assets/images/academic/mangrove/mangrove-aerial.jpg',
-        '../assets/images/academic/mangrove/mangrove-section.jpg',
-        '../assets/images/academic/mangrove/mangrove-drawings.jpg',
-        '../assets/images/academic/mangrove/mangrove-plans.jpg',
-        '../assets/images/academic/mangrove/mangrove-logic.png',
-        '../assets/images/academic/mangrove/mangrove-process.gif'
+        '../assets/images/academic/_optimized/mangrove/mangrove-hero.webp',
+        '../assets/images/academic/_optimized/mangrove/mangrove-aerial.webp',
+        '../assets/images/academic/_optimized/mangrove/mangrove-section.webp',
+        '../assets/images/academic/_optimized/mangrove/mangrove-drawings.webp',
+        '../assets/images/academic/_optimized/mangrove/mangrove-plans.webp',
+        '../assets/images/academic/_optimized/mangrove/mangrove-logic.webp',
+        '../assets/images/academic/_optimized/mangrove/mangrove-process.webp'
       ],
+      thumb: '../assets/images/academic/_thumbs/mangrove-hero.webp',
       links: [
         { label: 'Columbia GSAPP', href: 'https://www.arch.columbia.edu/student-work/12006-the-mangrove' },
         { label: 'GSAPP Instagram', href: 'https://www.instagram.com/p/Cuka-iMPrLA/' }
@@ -908,11 +891,12 @@ body.academic-modal-active #main-nav {
       desc: 'A BIM and urban systems study for Hudson Yards translating special district zoning, lot envelopes, solar exposure, public space requirements, and tower massing into a coordinated mixed-use proposal.',
       tools: 'BIM · Zoning Analysis · Massing',
       images: [
-        '../assets/images/academic/mas-hudson-yards/final-layout-01.jpg',
-        '../assets/images/academic/mas-hudson-yards/final-render-board-01.jpg',
-        '../assets/images/academic/rethinking-bim/board-01.jpg',
-        '../assets/images/academic/rethinking-bim/board-02.jpg'
+        '../assets/images/academic/_optimized/mas-hudson-yards/final-layout-01.webp',
+        '../assets/images/academic/_optimized/mas-hudson-yards/final-render-board-01.webp',
+        '../assets/images/academic/_optimized/rethinking-bim/board-01.webp',
+        '../assets/images/academic/_optimized/rethinking-bim/board-02.webp'
       ],
+      thumb: '../assets/images/academic/_thumbs/final-layout-01.webp',
       links: [
         { label: 'Columbia GSAPP', href: 'https://www.arch.columbia.edu/student-work/11962' },
         { label: 'Final Layout PDF', href: '../assets/pdfs/academic/mas-hudson-yards/final-layout.pdf' },
@@ -929,15 +913,16 @@ body.academic-modal-active #main-nav {
       desc: 'A hybrid material investigation testing loofah as reinforcement, carbon storage, and biodegradable structure through adobe and clay brick prototypes.',
       tools: 'Adobe · Clay · Loofah · Material Testing',
       images: [
-        '../assets/images/academic/loofah-adobe-brick/loofah-hero.png',
-        '../assets/images/academic/loofah-adobe-brick/loofah-detail-1.gif',
-        '../assets/images/academic/loofah-adobe-brick/loofah-detail-2.png',
-        '../assets/images/academic/loofah-adobe-brick/clay-loofah-hero.gif',
-        '../assets/images/academic/loofah-adobe-brick/clay-loofah-01.jpg',
-        '../assets/images/academic/loofah-adobe-brick/clay-loofah-02.jpg',
-        '../assets/images/academic/loofah-adobe-brick/clay-loofah-03.jpg',
-        '../assets/images/academic/loofah-adobe-brick/clay-loofah-04.jpg'
+        '../assets/images/academic/_optimized/loofah-adobe-brick/loofah-hero.webp',
+        '../assets/images/academic/_optimized/loofah-adobe-brick/loofah-detail-1.webp',
+        '../assets/images/academic/_optimized/loofah-adobe-brick/loofah-detail-2.webp',
+        '../assets/images/academic/_optimized/loofah-adobe-brick/clay-loofah-hero.webp',
+        '../assets/images/academic/_optimized/loofah-adobe-brick/clay-loofah-01.webp',
+        '../assets/images/academic/_optimized/loofah-adobe-brick/clay-loofah-02.webp',
+        '../assets/images/academic/_optimized/loofah-adobe-brick/clay-loofah-03.webp',
+        '../assets/images/academic/_optimized/loofah-adobe-brick/clay-loofah-04.webp'
       ],
+      thumb: '../assets/images/academic/_thumbs/loofah-hero.webp',
       links: [
         { label: 'Loofah Adobe Brick', href: 'https://www.arch.columbia.edu/student-work/12413-loofah-adobe-brick' },
         { label: 'Clay Loofah Brick', href: 'https://www.arch.columbia.edu/student-work/12945-clay-loofah-brick' },
@@ -954,18 +939,19 @@ body.academic-modal-active #main-nav {
       desc: 'A Core V proposal for a water museum in Venice, shaped by the discovery of an overlooked pool building and its triangular woven structure. The project turns freshwater history into a sequence of exhibition islands, moving visitors through architecture, infrastructure, and civic memory.',
       tools: 'Rhino · AutoCAD · V-Ray · InDesign',
       images: [
-        '../assets/images/academic/museum-of-water/cover.jpg',
-        '../assets/images/academic/museum-of-water/site-night.jpg',
-        '../assets/images/academic/museum-of-water/presentation-page-01.jpg',
-        '../assets/images/academic/museum-of-water/presentation-page-02.jpg',
-        '../assets/images/academic/museum-of-water/presentation-page-04.jpg',
-        '../assets/images/academic/museum-of-water/presentation-page-05.jpg',
-        '../assets/images/academic/museum-of-water/presentation-page-06.jpg',
-        '../assets/images/academic/museum-of-water/booklet-page-36.jpg',
-        '../assets/images/academic/museum-of-water/booklet-page-37.jpg',
-        '../assets/images/academic/museum-of-water/booklet-spread-38-39.jpg',
-        '../assets/images/academic/museum-of-water/booklet-page-41.jpg'
+        '../assets/images/academic/_optimized/museum-of-water/cover.webp',
+        '../assets/images/academic/_optimized/museum-of-water/site-night.webp',
+        '../assets/images/academic/_optimized/museum-of-water/presentation-page-01.webp',
+        '../assets/images/academic/_optimized/museum-of-water/presentation-page-02.webp',
+        '../assets/images/academic/_optimized/museum-of-water/presentation-page-04.webp',
+        '../assets/images/academic/_optimized/museum-of-water/presentation-page-05.webp',
+        '../assets/images/academic/_optimized/museum-of-water/presentation-page-06.webp',
+        '../assets/images/academic/_optimized/museum-of-water/booklet-page-36.webp',
+        '../assets/images/academic/_optimized/museum-of-water/booklet-page-37.webp',
+        '../assets/images/academic/_optimized/museum-of-water/booklet-spread-38-39.webp',
+        '../assets/images/academic/_optimized/museum-of-water/booklet-page-41.webp'
       ],
+      thumb: '../assets/images/academic/_thumbs/cover.webp',
       links: [
         { label: 'Architecture Studio V', href: 'https://www.arch.columbia.edu/courses/10042-4386' }
       ]
@@ -980,14 +966,15 @@ body.academic-modal-active #main-nav {
       desc: 'A technical studio project that studies a single case study building through material geographies, environmental and social life cycles, construction sequencing, and project management. The final work combines analysis with a full-scale mock-up of a selected detail.',
       tools: 'Rhino · AutoCAD · InDesign · Model Making',
       images: [
-        '../assets/images/academic/at-v/slide-01.jpg',
-        '../assets/images/academic/at-v/slide-02.jpg',
-        '../assets/images/academic/at-v/slide-03.jpg',
-        '../assets/images/academic/at-v/slide-04.jpg',
-        '../assets/images/academic/at-v/slide-05.jpg',
-        '../assets/images/academic/at-v/slide-06.jpg',
-        '../assets/images/academic/at-v/slide-07.jpg'
+        '../assets/images/academic/_optimized/at-v/slide-01.webp',
+        '../assets/images/academic/_optimized/at-v/slide-02.webp',
+        '../assets/images/academic/_optimized/at-v/slide-03.webp',
+        '../assets/images/academic/_optimized/at-v/slide-04.webp',
+        '../assets/images/academic/_optimized/at-v/slide-05.webp',
+        '../assets/images/academic/_optimized/at-v/slide-06.webp',
+        '../assets/images/academic/_optimized/at-v/slide-07.webp'
       ],
+      thumb: '../assets/images/academic/_thumbs/slide-01.webp',
       links: [
         { label: 'TECH V Course Page', href: 'https://www.arch.columbia.edu/courses/11442-4191-tech-v-construction-and-life-cycle-systems' }
       ]
@@ -1000,13 +987,8 @@ body.academic-modal-active #main-nav {
   var prev = document.getElementById('gallery-prev');
   var next = document.getElementById('gallery-next');
   var close = document.getElementById('modal-close');
-  var nav = document.getElementById('main-nav');
   var currentImages = [];
   var currentSlide = 0;
-  var travelFrame = 0;
-  var mangroveCard = null;
-  var travelMetrics = null;
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function plainTitle(project) {
     var div = document.createElement('div');
@@ -1026,10 +1008,9 @@ body.academic-modal-active #main-nav {
     button.dataset.project = index;
     button.setAttribute('aria-label', 'Open ' + plainTitle(project));
     button.setAttribute('data-hover', '');
-    if (project.n === '02') button.classList.add('is-mangrove');
-
-    var media = project.images.length
-      ? '<img src="' + project.images[0] + '" alt="' + plainTitle(project) + '" loading="lazy" decoding="async">'
+    var preview = project.thumb || project.images[0];
+    var media = preview
+      ? '<img src="' + preview + '" alt="' + plainTitle(project) + '" loading="lazy" decoding="async">'
       : '<div class="project-placeholder"><span>' + project.n + '</span></div>';
 
     button.innerHTML =
@@ -1052,12 +1033,37 @@ body.academic-modal-active #main-nav {
   }
 
   function setSlide(index) {
-    var slides = gallery.querySelectorAll('img');
-    if (!slides.length) return;
-    currentSlide = (index + slides.length) % slides.length;
-    slides.forEach(function (img, i) {
-      if (i === currentSlide && !img.src) img.src = img.dataset.src;
-      img.classList.toggle('active', i === currentSlide);
+    if (!currentImages.length) return;
+    currentSlide = (index + currentImages.length) % currentImages.length;
+    renderSlide();
+    preloadAdjacentSlides();
+  }
+
+  function renderSlide() {
+    gallery.querySelectorAll('img, .modal-placeholder').forEach(function (node) { node.remove(); });
+
+    if (!currentImages.length) {
+      var placeholder = document.createElement('div');
+      placeholder.className = 'modal-placeholder';
+      placeholder.textContent = document.getElementById('modal-number').textContent.replace('N° ', '');
+      gallery.insertBefore(placeholder, prev);
+      return;
+    }
+
+    var img = document.createElement('img');
+    img.src = currentImages[currentSlide];
+    img.alt = document.getElementById('modal-title').textContent || 'Academic project image';
+    img.loading = 'eager';
+    img.decoding = 'async';
+    img.className = 'active';
+    gallery.insertBefore(img, prev);
+  }
+
+  function preloadAdjacentSlides() {
+    if (currentImages.length < 2) return;
+    [currentSlide + 1, currentSlide - 1].forEach(function (index) {
+      var preload = new Image();
+      preload.src = currentImages[(index + currentImages.length) % currentImages.length];
     });
   }
 
@@ -1073,29 +1079,10 @@ body.academic-modal-active #main-nav {
     document.getElementById('modal-critic').textContent = project.critic;
     document.getElementById('modal-tools').textContent = project.tools;
 
-    gallery.querySelectorAll('img, .modal-placeholder').forEach(function (node) { node.remove(); });
     currentImages = project.images || [];
     currentSlide = 0;
-
-    if (currentImages.length) {
-      currentImages.forEach(function (src, i) {
-        var img = document.createElement('img');
-        img.dataset.src = src;
-        img.alt = plainTitle(project);
-        img.loading = i === 0 ? 'eager' : 'lazy';
-        img.decoding = 'async';
-        if (i === 0) {
-          img.src = src;
-          img.className = 'active';
-        }
-        gallery.insertBefore(img, prev);
-      });
-    } else {
-      var placeholder = document.createElement('div');
-      placeholder.className = 'modal-placeholder';
-      placeholder.textContent = project.n;
-      gallery.insertBefore(placeholder, prev);
-    }
+    renderSlide();
+    preloadAdjacentSlides();
 
     prev.classList.toggle('hidden', currentImages.length < 2);
     next.classList.toggle('hidden', currentImages.length < 2);
@@ -1122,78 +1109,15 @@ body.academic-modal-active #main-nav {
     document.body.style.overflow = '';
   }
 
-  function clamp(value, min, max) {
-    return Math.max(min, Math.min(max, value));
-  }
-
-  function measureMangroveTravel() {
-    if (!featuredCard || !mangroveCard || reduceMotion.matches) return;
-
-    featuredCard.style.setProperty('--travel-x', '0px');
-    featuredCard.style.setProperty('--travel-y', '0px');
-    featuredCard.style.setProperty('--travel-scale', '1');
-
-    var featuredRect = featuredCard.getBoundingClientRect();
-    var targetRect = mangroveCard.getBoundingClientRect();
-    var featuredCenterX = featuredRect.left + window.scrollX + featuredRect.width / 2;
-    var featuredCenterY = featuredRect.top + window.scrollY + featuredRect.height / 2;
-    var targetCenterX = targetRect.left + window.scrollX + targetRect.width / 2;
-    var targetCenterY = targetRect.top + window.scrollY + targetRect.height / 2;
-
-    travelMetrics = {
-      x: targetCenterX - featuredCenterX,
-      y: targetCenterY - featuredCenterY,
-      scale: clamp(targetRect.width / featuredRect.width, 0.76, 1)
-    };
-  }
-
-  function updateMangroveTravel() {
-    travelFrame = 0;
-    if (!featuredCard || !mangroveCard || reduceMotion.matches) return;
-    if (!travelMetrics) measureMangroveTravel();
-    if (!travelMetrics) return;
-
-    var vh = window.innerHeight || 1;
-    var progress = clamp(window.scrollY / (vh * 0.62), 0, 1);
-    var eased = progress * progress * (3 - 2 * progress);
-    var scale = 1 + ((travelMetrics.scale - 1) * eased);
-
-    featuredCard.style.setProperty('--travel-x', (travelMetrics.x * eased).toFixed(1) + 'px');
-    featuredCard.style.setProperty('--travel-y', (travelMetrics.y * eased).toFixed(1) + 'px');
-    featuredCard.style.setProperty('--travel-scale', scale.toFixed(3));
-    featuredCard.style.setProperty('--travel-opacity', (1 - eased).toFixed(3));
-    featuredCard.style.pointerEvents = eased > 0.98 ? 'none' : '';
-    mangroveCard.style.setProperty('--slot-opacity', clamp((eased - 0.68) / 0.32, 0, 1).toFixed(3));
-  }
-
-  function requestMangroveTravel() {
-    if (travelFrame) return;
-    travelFrame = window.requestAnimationFrame(updateMangroveTravel);
-  }
-
   projects.forEach(function (project, index) {
     var card = buildCard(project, index);
     grid.appendChild(card);
-    if (project.n === '02') mangroveCard = card;
   });
 
   var featuredCard = document.querySelector('.featured-card');
   var featuredDesc = document.getElementById('featured-desc');
   if (featuredDesc) featuredDesc.textContent = projects[1].desc;
-  if (nav && featuredCard) {
-    nav.classList.add('hero-animation-pass');
-    featuredCard.addEventListener('animationend', function (event) {
-      if (event.animationName === 'hero-card-arrive' || event.animationName === 'hero-card-mobile') {
-        nav.classList.remove('hero-animation-pass');
-        featuredCard.classList.add('travel-ready');
-        measureMangroveTravel();
-        requestMangroveTravel();
-      }
-    }, { once: true });
-  }
-  featuredCard.addEventListener('click', function () {
-    openModal(1);
-  });
+  if (featuredCard) featuredCard.addEventListener('click', function () { openModal(1); });
 
   prev.addEventListener('click', function () { setSlide(currentSlide - 1); });
   next.addEventListener('click', function () { setSlide(currentSlide + 1); });
@@ -1209,18 +1133,6 @@ body.academic-modal-active #main-nav {
     if (event.key === 'Escape') closeModal();
     if (event.key === 'ArrowLeft') setSlide(currentSlide - 1);
     if (event.key === 'ArrowRight') setSlide(currentSlide + 1);
-  });
-  if (reduceMotion.matches) {
-    if (featuredCard) featuredCard.classList.add('travel-ready');
-    if (mangroveCard) mangroveCard.style.setProperty('--slot-opacity', '1');
-  } else if (featuredCard) {
-    window.addEventListener('load', requestMangroveTravel);
-  }
-  window.addEventListener('scroll', requestMangroveTravel, { passive: true });
-  window.addEventListener('resize', function () {
-    travelMetrics = null;
-    measureMangroveTravel();
-    requestMangroveTravel();
   });
 }());
 </script>

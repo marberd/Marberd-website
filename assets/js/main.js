@@ -8,6 +8,11 @@
   const curDot = document.getElementById('cur-dot');
   if (!cur || !curDot) return;
 
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  if (!finePointer.matches) return;
+
+  document.body.classList.add('has-custom-cursor');
+
   // Start offscreen so it doesn't flash at 0,0
   let mx = -200, my = -200, cx = -200, cy = -200;
   let cursorFrame = 0;
@@ -40,10 +45,16 @@
     requestCursorTick();
   });
 
-  // Hover state — scale + rotate via CSS class
-  document.querySelectorAll('a, button, [data-hover]').forEach(el => {
-    el.addEventListener('mouseenter', () => cur.classList.add('hovering'));
-    el.addEventListener('mouseleave', () => cur.classList.remove('hovering'));
+  // Delegated hover state also covers elements injected after load.
+  document.addEventListener('pointerover', e => {
+    if (e.target.closest('a, button, [data-hover]')) cur.classList.add('hovering');
+  });
+  document.addEventListener('pointerout', e => {
+    const fromInteractive = e.target.closest('a, button, [data-hover]');
+    const toInteractive = e.relatedTarget && e.relatedTarget.closest
+      ? e.relatedTarget.closest('a, button, [data-hover]')
+      : null;
+    if (fromInteractive && fromInteractive !== toInteractive) cur.classList.remove('hovering');
   });
 
   // Press state
