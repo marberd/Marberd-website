@@ -38,12 +38,12 @@
 }
 
 .academic-hero {
-  min-height: 92vh;
+  min-height: 58vh;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.74fr);
-  gap: clamp(36px, 6vw, 92px);
-  align-items: end;
-  padding: 132px clamp(24px, 5vw, 72px) 72px;
+  grid-template-columns: minmax(0, 0.88fr) minmax(420px, 0.62fr);
+  gap: 36px;
+  align-items: start;
+  padding: 90px 60px 22px;
   background:
     linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
     linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
@@ -71,12 +71,12 @@
   max-width: 790px;
   position: relative;
   z-index: 1;
-  padding-top: 8px;
-  transform: translateY(-172px);
+  padding-top: 10px;
+  transform: none;
 }
 
 .hero-title {
-  margin: 0;
+  margin: 0 0 16px;
   font-family: var(--serif);
   font-size: clamp(44px, 5.8vw, 76px);
   font-weight: 400;
@@ -96,11 +96,12 @@
 }
 
 .hero-intro {
-  max-width: 610px;
-  margin-top: 32px;
-  font-size: clamp(15px, 1.3vw, 18px);
-  line-height: 1.75;
-  color: rgba(255,255,255,0.66);
+  max-width: 540px;
+  margin: 0 0 18px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.58;
+  color: rgba(255,255,255,0.64);
   opacity: 0;
   transform: translateY(28px);
   animation: hero-rise .82s .44s cubic-bezier(.16,1,.3,1) forwards;
@@ -110,8 +111,8 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
-  max-width: 620px;
-  margin-top: 44px;
+  max-width: 540px;
+  margin-top: 34px;
   opacity: 0;
   transform: translateY(22px);
   animation: hero-rise .72s .62s cubic-bezier(.16,1,.3,1) forwards;
@@ -125,7 +126,7 @@
 .hero-meta strong {
   display: block;
   font-family: var(--serif);
-  font-size: clamp(28px, 3vw, 40px);
+  font-size: clamp(24px, 2.6vw, 34px);
   line-height: 1;
   font-weight: 400;
   color: var(--white);
@@ -142,10 +143,10 @@
 }
 
 .featured-card {
-  align-self: center;
+  align-self: start;
   width: 100%;
   max-width: 520px;
-  margin: 0 0 42px auto;
+  margin: 8px 0 0 auto;
   background: #f8f4ec;
   border: 1px solid rgba(255,255,255,0.14);
   box-shadow: 0 32px 90px rgba(0,0,0,0.36);
@@ -768,11 +769,11 @@ body.academic-modal-active #main-nav {
   }
 
   .hero-copy {
-    transform: translateY(-86px);
+    transform: none;
   }
 
   .featured-card {
-    margin-left: 0;
+    margin: 0;
     animation-name: hero-card-mobile;
   }
 
@@ -784,7 +785,7 @@ body.academic-modal-active #main-nav {
 @media (max-width: 760px) {
   .academic-hero {
     min-height: auto;
-    padding: 104px 20px 52px;
+    padding: 90px 20px 52px;
   }
 
   .hero-copy {
@@ -793,6 +794,10 @@ body.academic-modal-active #main-nav {
 
   .hero-title {
     font-size: clamp(50px, 16vw, 70px);
+  }
+
+  .hero-intro {
+    font-size: 15px;
   }
 
   .hero-meta,
