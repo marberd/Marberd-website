@@ -869,8 +869,6 @@ body.academic-modal-active #main-nav {
 </style>
 </head>
 <body>
-<svg id="cur" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="cur-ring" cx="22" cy="22" r="16" stroke="#111118" stroke-width="1"/><line x1="22" y1="3" x2="22" y2="9" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="35" x2="22" y2="41" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="22" x2="9" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="22" x2="41" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/></svg>
-<div id="cur-dot"></div>
 
 <nav id="main-nav">
   <a id="nav-logo" href="/" title="MARBERD">
@@ -911,12 +909,12 @@ body.academic-modal-active #main-nav {
       </div>
     </div>
 
-    <button class="featured-card" type="button" data-project="1" data-hover>
+    <button class="featured-card" type="button" data-project="1">
       <img src="../assets/images/academic/thumbs/mangrove-hero.webp" alt="The Mangrove project rendering" decoding="async">
       <div class="featured-copy">
         <span class="card-number">N&deg; 02</span>
         <h2 class="featured-title">The <em>Mangrove</em></h2>
-        <p class="featured-desc" id="featured-desc">A waterfront civic structure whose branching Ipe wood network functions as facade, structure, and foundation.</p>
+        <p class="featured-desc">A waterfront civic structure whose branching Ipe wood network functions as facade, structure, and foundation.</p>
         <div class="project-foot">
           <span class="project-tools">Revit · Lumion · Luban</span>
           <span class="open-cue">Open study</span>
@@ -1146,8 +1144,7 @@ body.academic-modal-active #main-nav {
     button.className = 'project-card';
     button.dataset.project = index;
     button.setAttribute('aria-label', 'Open ' + plainTitle(project));
-    button.setAttribute('data-hover', '');
-    if (project.n === '02') button.classList.add('is-mangrove-slot', 'is-coin-target-pending');
+    if (project.n === '02') button.classList.add('is-coin-target-pending');
     var preview = project.thumb || project.images[0];
     var media = preview
       ? '<img src="' + preview + '" alt="' + plainTitle(project) + '" loading="lazy" decoding="async">'
@@ -1257,8 +1254,6 @@ body.academic-modal-active #main-nav {
   });
 
   var featuredCard = document.querySelector('.featured-card');
-  var featuredDesc = document.getElementById('featured-desc');
-  if (featuredDesc) featuredDesc.textContent = projects[1].desc;
   if (featuredCard) featuredCard.addEventListener('click', function () { openModal(1); });
 
   function cleanCloneIds(node) {
@@ -1411,9 +1406,6 @@ body.academic-modal-active #main-nav {
   prev.addEventListener('click', function () { setSlide(currentSlide - 1); });
   next.addEventListener('click', function () { setSlide(currentSlide + 1); });
   close.addEventListener('click', closeModal);
-  [prev, next, close].forEach(function (control) {
-    control.setAttribute('data-hover', '');
-  });
   modal.addEventListener('click', function (event) {
     if (event.target === modal) closeModal();
   });
