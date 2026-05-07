@@ -55,14 +55,6 @@
   border-bottom: 1px solid rgba(184,148,106,0.42);
   overflow: hidden;
   position: relative;
-  transform:
-    translateY(calc(var(--hero-exit, 0) * -72px))
-    scale(calc(1 - (var(--hero-exit, 0) * 0.035)));
-  opacity: calc(1 - (var(--hero-exit, 0) * 0.72));
-  filter: blur(calc(var(--hero-exit, 0) * 10px));
-  transition: opacity .12s linear, filter .12s linear, transform .12s linear;
-  transform-origin: top center;
-  will-change: opacity, filter, transform;
 }
 
 .academic-hero::before {
@@ -71,7 +63,7 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(244,240,232,0) 54%, rgba(244,240,232,var(--hero-exit, 0)) 100%);
+  background: linear-gradient(180deg, rgba(244,240,232,0) 54%, rgba(244,240,232,0.18) 100%);
 }
 
 .academic-hero > * {
@@ -83,15 +75,16 @@
   position: relative;
   z-index: 12000;
   padding-top: 8px;
+  transform: translateY(-172px);
 }
 
 .hero-title {
   margin: 0;
   font-family: var(--serif);
-  font-weight: 300;
   font-size: clamp(44px, 5.8vw, 76px);
+  font-weight: 400;
   line-height: 0.92;
-  letter-spacing: 0;
+  letter-spacing: -0.8px;
   color: var(--white);
   opacity: 0;
   transform: translateY(34px);
@@ -100,9 +93,9 @@
 
 .hero-title em {
   display: block;
-  margin-top: 8px;
+  margin-top: 0;
   font-style: italic;
-  color: #d0ad82;
+  color: var(--gold-lt);
 }
 
 .hero-intro {
@@ -152,6 +145,10 @@
 }
 
 .featured-card {
+  --travel-x: 0px;
+  --travel-y: 0px;
+  --travel-scale: 1;
+  --travel-opacity: 1;
   align-self: center;
   width: 100%;
   max-width: 520px;
@@ -166,7 +163,14 @@
   opacity: 0;
   transform: translate3d(72px, 18px, 0) scale(0.92);
   animation: hero-card-arrive 1.28s .34s cubic-bezier(.16,1,.3,1) forwards;
-  transition: transform .28s cubic-bezier(.16,1,.3,1), box-shadow .28s cubic-bezier(.16,1,.3,1), border-color .2s ease;
+  transition: box-shadow .28s cubic-bezier(.16,1,.3,1), border-color .2s ease;
+}
+
+.featured-card.travel-ready {
+  animation: none;
+  opacity: var(--travel-opacity);
+  transform: translate3d(var(--travel-x), var(--travel-y), 0) scale(var(--travel-scale));
+  will-change: transform, opacity;
 }
 
 .featured-card::before,
@@ -176,14 +180,10 @@
   inset: 0;
   z-index: 3;
   pointer-events: none;
-  background:
-    radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 18%), rgba(255,255,255,0.52), rgba(255,255,255,0.16) 18%, transparent 42%),
-    linear-gradient(var(--shine-angle, 115deg), rgba(255,255,255,0) 0%, rgba(255,255,255,0.26) 34%, rgba(255,255,255,0.08) 46%, rgba(255,255,255,0) 58%),
-    linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.02) 42%, rgba(0,0,0,0.04));
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.03) 42%, rgba(0,0,0,0.04));
   mix-blend-mode: screen;
   opacity: 0.34;
-  transform: translateX(var(--shine-shift, -26%));
-  transition: opacity .22s ease, transform .18s linear, background .18s linear;
+  transition: opacity .22s ease;
 }
 
 .featured-card::after,
@@ -199,7 +199,6 @@
 
 .featured-card:hover,
 .featured-card:focus-visible {
-  transform: scale(1.035);
   border-color: rgba(184,148,106,0.5);
   box-shadow: 0 42px 110px rgba(0,0,0,0.46);
   outline: none;
@@ -210,33 +209,6 @@
 .project-card:hover::before,
 .project-card:focus-visible::before {
   opacity: 0.72;
-  transform: translateX(var(--shine-shift, 16%));
-}
-
-body.academic-card-hover #cur {
-  animation: cursor-palpitate 1.05s ease-in-out infinite;
-}
-
-body.academic-card-hover #cur circle.cur-ring {
-  stroke: var(--gold);
-  stroke-width: 1.8;
-}
-
-body.academic-card-hover #cur-dot {
-  animation: cursor-dot-palpitate 1.05s ease-in-out infinite;
-  background: var(--gold);
-}
-
-@keyframes cursor-palpitate {
-  0%, 100% { transform: translate(-50%, -50%) scale(1.42) rotate(45deg); }
-  45% { transform: translate(-50%, -50%) scale(1.82) rotate(45deg); }
-  68% { transform: translate(-50%, -50%) scale(1.56) rotate(45deg); }
-}
-
-@keyframes cursor-dot-palpitate {
-  0%, 100% { transform: translate(-50%, -50%) scale(1.4); opacity: 1; }
-  45% { transform: translate(-50%, -50%) scale(2.35); opacity: 0.78; }
-  68% { transform: translate(-50%, -50%) scale(1.7); opacity: 1; }
 }
 
 @keyframes hero-rise {
@@ -299,8 +271,7 @@ body.academic-card-hover #cur-dot {
 }
 
 .featured-title,
-.project-title,
-.section-title {
+.project-title {
   font-family: var(--serif);
   font-weight: 400;
   line-height: 1;
@@ -314,8 +285,7 @@ body.academic-card-hover #cur-dot {
 }
 
 .featured-title em,
-.project-title em,
-.section-title em {
+.project-title em {
   color: var(--gold-dk);
   font-style: italic;
 }
@@ -327,31 +297,8 @@ body.academic-card-hover #cur-dot {
   color: rgba(17,17,24,0.68);
 }
 
-.featured-summary,
-.project-summary,
-.modal-summary {
-  margin: 10px 0 0;
-  font-size: 0.95em;
-  line-height: 1.45;
-  font-weight: 500;
-  letter-spacing: 0;
-}
-
-.featured-summary,
-.project-summary {
-  max-width: 38ch;
-  color: rgba(17,17,24,0.66);
-}
-
-.modal-summary {
-  max-width: 760px;
-  color: rgba(255,255,255,0.64);
-}
-
 .projects-section {
-  margin-top: calc(var(--hero-exit, 0) * -72px);
   padding: 76px clamp(20px, 5vw, 72px) 104px;
-  transition: margin-top .12s linear;
 }
 
 .transition-quote {
@@ -388,23 +335,13 @@ body.academic-card-hover #cur-dot {
 
 .projects-header {
   max-width: 1420px;
-  margin: 0 auto 46px;
-  display: grid;
-  grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr);
-  gap: clamp(28px, 5vw, 72px);
-  align-items: end;
+  margin: 0 auto 24px;
 }
 
 .section-kicker {
   color: rgba(17,17,24,0.48);
   border-top: 1px solid rgba(17,17,24,0.16);
   padding-top: 18px;
-}
-
-.section-title {
-  max-width: 900px;
-  margin: 0;
-  font-size: clamp(34px, 4.8vw, 68px);
 }
 
 .project-grid {
@@ -417,6 +354,7 @@ body.academic-card-hover #cur-dot {
 }
 
 .project-card {
+  --slot-opacity: 1;
   appearance: none;
   width: 100%;
   min-width: 0;
@@ -431,8 +369,13 @@ body.academic-card-hover #cur-dot {
   text-align: left;
   overflow: hidden;
   position: relative;
+  opacity: var(--slot-opacity);
   transform-origin: center;
   transition: transform .28s cubic-bezier(.16,1,.3,1), border-color .22s ease, box-shadow .28s cubic-bezier(.16,1,.3,1);
+}
+
+.project-card.is-mangrove {
+  transition: opacity .12s linear, transform .28s cubic-bezier(.16,1,.3,1), border-color .22s ease, box-shadow .28s cubic-bezier(.16,1,.3,1);
 }
 
 .project-card:hover,
@@ -714,9 +657,12 @@ body.academic-modal-active #main-nav {
 }
 
 @media (max-width: 1120px) {
-  .academic-hero,
-  .projects-header {
+  .academic-hero {
     grid-template-columns: 1fr;
+  }
+
+  .hero-copy {
+    transform: translateY(-86px);
   }
 
   .featured-card {
@@ -733,6 +679,14 @@ body.academic-modal-active #main-nav {
   .academic-hero {
     min-height: auto;
     padding: 104px 20px 52px;
+  }
+
+  .hero-copy {
+    transform: none;
+  }
+
+  .hero-title {
+    font-size: clamp(50px, 16vw, 70px);
   }
 
   .hero-meta,
@@ -803,9 +757,6 @@ body.academic-modal-active #main-nav {
 </style>
 </head>
 <body>
-<svg id="cur" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="cur-ring" cx="22" cy="22" r="16" stroke="#111118" stroke-width="1"/><line x1="22" y1="3" x2="22" y2="9" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="35" x2="22" y2="41" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="22" x2="9" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="22" x2="41" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/></svg>
-<div id="cur-dot"></div>
-
 <nav id="main-nav">
   <a id="nav-logo" href="/" title="MARBERD">
     <span class="logo-wrap">
@@ -850,7 +801,7 @@ body.academic-modal-active #main-nav {
       <div class="featured-copy">
         <span class="card-number">N&deg; 02</span>
         <h2 class="featured-title">The <em>Mangrove</em></h2>
-        <p class="featured-desc" id="featured-summary">A waterfront civic structure whose branching Ipe wood network functions as facade, structure, and foundation.</p>
+        <p class="featured-desc" id="featured-desc">A waterfront civic structure whose branching Ipe wood network functions as facade, structure, and foundation.</p>
         <div class="project-foot">
           <span class="project-tools">Revit · Lumion · Luban</span>
           <span class="open-cue">Open study</span>
@@ -866,7 +817,6 @@ body.academic-modal-active #main-nav {
   <section class="projects-section" aria-label="Academic projects">
     <div class="projects-header">
       <div class="section-kicker">Academic archive</div>
-      <h2 class="section-title">Selected projects across <em>studio, material research,</em> and BIM systems.</h2>
     </div>
 
     <div class="project-grid" id="project-grid"></div>
@@ -886,7 +836,6 @@ body.academic-modal-active #main-nav {
       <div class="card-number" id="modal-number"></div>
       <div class="modal-category card-tag" id="modal-category"></div>
       <h2 class="modal-title" id="modal-title"></h2>
-      <p class="modal-summary" id="modal-summary"></p>
       <p class="modal-desc" id="modal-desc"></p>
       <div class="modal-meta">
         <div><span class="meta-label">Studio</span><strong id="modal-studio"></strong></div>
@@ -911,7 +860,6 @@ body.academic-modal-active #main-nav {
       studio: 'Architecture Studio III',
       critic: 'Erica Goetz',
       tag: 'Housing / Water Systems',
-      summary: 'Riverfront housing lacked shared water systems → reciprocal frames organize apartments, gardens, and circulation → residents gain light and environmental awareness.',
       desc: 'A riverfront housing project developed with Marika Falco. Inspired by Venice and the portego typology, the design uses stepping reciprocal frames to organize apartments, welcome gardens, circulation, and extended living spaces facing the river. The building also treats water as an environmental system, drawing river water through structural pipe chases for heating, cooling, and radiant floors while centering water awareness and swim education for residents and neighbors.',
       tools: 'Housing Design · Environmental Systems · Reciprocal Frames',
       images: [
@@ -931,7 +879,6 @@ body.academic-modal-active #main-nav {
       studio: 'Architecture Studio IV',
       critic: 'Robert Marino',
       tag: 'Environmental / Biomimetic',
-      summary: 'Coastal instability and access were unresolved → a mangrove-derived Ipe frame organizes structure and facade → the building filters land, water, and light.',
       desc: 'A waterfront civic structure whose branching network of Ipe wood functions simultaneously as facade, structure, and foundation, drawing from mangrove ecosystems to mediate land, water, and light.',
       tools: 'Revit · Lumion · Luban',
       images: [
@@ -955,7 +902,6 @@ body.academic-modal-active #main-nav {
       studio: 'Re-Thinking BIM',
       critic: 'Joseph Brennan',
       tag: 'BIM / Urban Systems',
-      summary: 'Hudson Yards massing was driven by abstract zoning → BIM coordinates envelopes, sun, and public realm → the proposal resolves as a buildable mixed-use system.',
       desc: 'A BIM and urban systems study for Hudson Yards translating special district zoning, lot envelopes, solar exposure, public space requirements, and tower massing into a coordinated mixed-use proposal.',
       tools: 'BIM · Zoning Analysis · Massing',
       images: [
@@ -977,7 +923,6 @@ body.academic-modal-active #main-nav {
       studio: 'Material Kitchens + Architecture Studio VI',
       critic: 'Lola Ben-Alon / David Benjamin',
       tag: 'Carbon / Biodegradable Systems',
-      summary: 'Loofah’s structural role was unclear → adobe and clay prototypes test reinforcement and biodegradability → the material reads as a low-carbon brick system.',
       desc: 'A hybrid material investigation testing loofah as reinforcement, carbon storage, and biodegradable structure through adobe and clay brick prototypes.',
       tools: 'Adobe · Clay · Loofah · Material Testing',
       images: [
@@ -1003,7 +948,6 @@ body.academic-modal-active #main-nav {
       studio: 'ARCH4105-17',
       critic: 'Jorge Otero-Pailos / Mark Rakatansky',
       tag: 'Civic Infrastructure',
-      summary: 'Hidden water infrastructure lacked civic presence → the museum turns section, atmosphere, and display into sequence → water reads as public memory.',
       desc: 'A Core V proposal for a water museum in Venice, shaped by the discovery of an overlooked pool building and its triangular woven structure. The project turns freshwater history into a sequence of exhibition islands, moving visitors through architecture, infrastructure, and civic memory.',
       tools: 'Rhino · AutoCAD · V-Ray · InDesign',
       images: [
@@ -1030,7 +974,6 @@ body.academic-modal-active #main-nav {
       studio: 'A4115-1',
       critic: 'Lola Ben-Alon',
       tag: 'Life Cycle Systems',
-      summary: 'Lifecycle impact was disconnected from construction decisions → case-study analysis links materials, sequencing, and management → the project culminates in a full-scale detail mock-up.',
       desc: 'A technical studio project that studies a single case study building through material geographies, environmental and social life cycles, construction sequencing, and project management. The final work combines analysis with a full-scale mock-up of a selected detail.',
       tools: 'Rhino · AutoCAD · InDesign · Model Making',
       images: [
@@ -1055,32 +998,12 @@ body.academic-modal-active #main-nav {
   var next = document.getElementById('gallery-next');
   var close = document.getElementById('modal-close');
   var nav = document.getElementById('main-nav');
-  var root = document.documentElement;
   var currentImages = [];
   var currentSlide = 0;
-  var heroExitFrame = 0;
-
-  function attachCardEffects(card) {
-    card.addEventListener('pointerenter', function () {
-      document.body.classList.add('academic-card-hover');
-    });
-    card.addEventListener('pointerleave', function () {
-      document.body.classList.remove('academic-card-hover');
-      card.style.removeProperty('--shine-x');
-      card.style.removeProperty('--shine-y');
-      card.style.removeProperty('--shine-angle');
-      card.style.removeProperty('--shine-shift');
-    });
-    card.addEventListener('pointermove', function (event) {
-      var rect = card.getBoundingClientRect();
-      var x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
-      var y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
-      card.style.setProperty('--shine-x', (x * 100).toFixed(1) + '%');
-      card.style.setProperty('--shine-y', (y * 100).toFixed(1) + '%');
-      card.style.setProperty('--shine-angle', (102 + x * 32).toFixed(1) + 'deg');
-      card.style.setProperty('--shine-shift', ((x - 0.5) * 28).toFixed(1) + '%');
-    });
-  }
+  var travelFrame = 0;
+  var mangroveCard = null;
+  var travelMetrics = null;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function plainTitle(project) {
     var div = document.createElement('div');
@@ -1100,12 +1023,13 @@ body.academic-modal-active #main-nav {
     button.dataset.project = index;
     button.setAttribute('aria-label', 'Open ' + plainTitle(project));
     button.setAttribute('data-hover', '');
+    if (project.n === '02') button.classList.add('is-mangrove');
 
     var media = project.images.length
       ? '<img src="' + project.images[0] + '" alt="' + plainTitle(project) + '" loading="' + (index > 2 ? 'lazy' : 'eager') + '">'
       : '<div class="project-placeholder"><span>' + project.n + '</span></div>';
 
-  button.innerHTML =
+    button.innerHTML =
       '<div class="project-media">' + media + '</div>' +
       '<div class="project-copy">' +
         '<div class="project-top">' +
@@ -1113,7 +1037,6 @@ body.academic-modal-active #main-nav {
           '<span class="card-tag">' + project.tag + '</span>' +
         '</div>' +
         '<h3 class="project-title">' + project.title + '</h3>' +
-        '<p class="project-summary">' + project.summary + '</p>' +
         '<p class="project-desc">' + shortText(project.desc) + '</p>' +
         '<div class="project-foot">' +
           '<span class="project-tools">' + project.tools + '</span>' +
@@ -1141,7 +1064,6 @@ body.academic-modal-active #main-nav {
     document.getElementById('modal-number').textContent = 'N° ' + project.n;
     document.getElementById('modal-category').textContent = project.category;
     document.getElementById('modal-title').innerHTML = project.title;
-    document.getElementById('modal-summary').textContent = project.summary;
     document.getElementById('modal-desc').textContent = project.desc;
     document.getElementById('modal-studio').textContent = project.studio;
     document.getElementById('modal-critic').textContent = project.critic;
@@ -1187,39 +1109,76 @@ body.academic-modal-active #main-nav {
 
   function closeModal() {
     modal.classList.remove('open');
-    document.body.classList.remove('academic-card-hover');
     document.body.classList.remove('academic-modal-active');
     document.body.style.overflow = '';
   }
 
-  function updateHeroExit() {
-    heroExitFrame = 0;
-    var vh = window.innerHeight || 1;
-    var progress = Math.max(0, Math.min(1, window.scrollY / (vh * 0.58)));
-    var eased = progress * progress * (3 - 2 * progress);
-    root.style.setProperty('--hero-exit', eased.toFixed(3));
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
   }
 
-  function requestHeroExit() {
-    if (heroExitFrame) return;
-    heroExitFrame = window.requestAnimationFrame(updateHeroExit);
+  function measureMangroveTravel() {
+    if (!featuredCard || !mangroveCard || reduceMotion.matches) return;
+
+    featuredCard.style.setProperty('--travel-x', '0px');
+    featuredCard.style.setProperty('--travel-y', '0px');
+    featuredCard.style.setProperty('--travel-scale', '1');
+
+    var featuredRect = featuredCard.getBoundingClientRect();
+    var targetRect = mangroveCard.getBoundingClientRect();
+    var featuredCenterX = featuredRect.left + window.scrollX + featuredRect.width / 2;
+    var featuredCenterY = featuredRect.top + window.scrollY + featuredRect.height / 2;
+    var targetCenterX = targetRect.left + window.scrollX + targetRect.width / 2;
+    var targetCenterY = targetRect.top + window.scrollY + targetRect.height / 2;
+
+    travelMetrics = {
+      x: targetCenterX - featuredCenterX,
+      y: targetCenterY - featuredCenterY,
+      scale: clamp(targetRect.width / featuredRect.width, 0.76, 1)
+    };
+  }
+
+  function updateMangroveTravel() {
+    travelFrame = 0;
+    if (!featuredCard || !mangroveCard || reduceMotion.matches) return;
+    if (!travelMetrics) measureMangroveTravel();
+    if (!travelMetrics) return;
+
+    var vh = window.innerHeight || 1;
+    var progress = clamp(window.scrollY / (vh * 0.62), 0, 1);
+    var eased = progress * progress * (3 - 2 * progress);
+    var scale = 1 + ((travelMetrics.scale - 1) * eased);
+
+    featuredCard.style.setProperty('--travel-x', (travelMetrics.x * eased).toFixed(1) + 'px');
+    featuredCard.style.setProperty('--travel-y', (travelMetrics.y * eased).toFixed(1) + 'px');
+    featuredCard.style.setProperty('--travel-scale', scale.toFixed(3));
+    featuredCard.style.setProperty('--travel-opacity', (1 - eased).toFixed(3));
+    featuredCard.style.pointerEvents = eased > 0.98 ? 'none' : '';
+    mangroveCard.style.setProperty('--slot-opacity', clamp((eased - 0.68) / 0.32, 0, 1).toFixed(3));
+  }
+
+  function requestMangroveTravel() {
+    if (travelFrame) return;
+    travelFrame = window.requestAnimationFrame(updateMangroveTravel);
   }
 
   projects.forEach(function (project, index) {
     var card = buildCard(project, index);
-    attachCardEffects(card);
     grid.appendChild(card);
+    if (project.n === '02') mangroveCard = card;
   });
 
   var featuredCard = document.querySelector('.featured-card');
-  var featuredSummary = document.getElementById('featured-summary');
-  if (featuredSummary) featuredSummary.textContent = projects[1].summary;
-  attachCardEffects(featuredCard);
+  var featuredDesc = document.getElementById('featured-desc');
+  if (featuredDesc) featuredDesc.textContent = projects[1].desc;
   if (nav && featuredCard) {
     nav.classList.add('hero-animation-pass');
     featuredCard.addEventListener('animationend', function (event) {
       if (event.animationName === 'hero-card-arrive' || event.animationName === 'hero-card-mobile') {
         nav.classList.remove('hero-animation-pass');
+        featuredCard.classList.add('travel-ready');
+        measureMangroveTravel();
+        requestMangroveTravel();
       }
     }, { once: true });
   }
@@ -1232,12 +1191,6 @@ body.academic-modal-active #main-nav {
   close.addEventListener('click', closeModal);
   [prev, next, close].forEach(function (control) {
     control.setAttribute('data-hover', '');
-    control.addEventListener('mouseenter', function () {
-      document.body.classList.add('academic-card-hover');
-    });
-    control.addEventListener('mouseleave', function () {
-      document.body.classList.remove('academic-card-hover');
-    });
   });
   modal.addEventListener('click', function (event) {
     if (event.target === modal) closeModal();
@@ -1248,10 +1201,17 @@ body.academic-modal-active #main-nav {
     if (event.key === 'ArrowLeft') setSlide(currentSlide - 1);
     if (event.key === 'ArrowRight') setSlide(currentSlide + 1);
   });
-  updateHeroExit();
-  window.addEventListener('scroll', requestHeroExit, { passive: true });
+  if (reduceMotion.matches) {
+    if (featuredCard) featuredCard.classList.add('travel-ready');
+    if (mangroveCard) mangroveCard.style.setProperty('--slot-opacity', '1');
+  } else if (featuredCard) {
+    window.addEventListener('load', requestMangroveTravel);
+  }
+  window.addEventListener('scroll', requestMangroveTravel, { passive: true });
   window.addEventListener('resize', function () {
-    requestHeroExit();
+    travelMetrics = null;
+    measureMangroveTravel();
+    requestMangroveTravel();
   });
 }());
 </script>
