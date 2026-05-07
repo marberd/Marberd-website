@@ -218,63 +218,88 @@
 }
 .work-card__sub { font-family: var(--sans); font-size: 11px; color: var(--muted); font-weight: 300; }
 
-/* ── MOBILE — NEW SECTIONS ─── */
-@media (max-width: 768px) {
-  .work-strip { padding: 56px 20px; }
-  .work-grid { grid-template-columns: 1fr; gap: 2px; }
-  .work-header { margin-bottom: 32px; }
-}
-
 /* ── MOBILE ─────────────────── */
 @media (max-width: 768px) {
-  .hero        { height: auto; min-height: 100svh; }
-  /* Image sits at the top, out of the way of the text */
+  /* Hero: full-bleed cinematic photo, text anchored to bottom */
+  .hero        { height: 100svh; min-height: 0; background: #0d0d0d; }
   .hero__photo { background-position: center top; background-size: cover; }
-  /* Bloom adds visual noise on mobile — gradient handles the fade */
   .hero__bloom { display: none; }
+  .hero__gradient {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 20%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.84) 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
   .hero__content {
     max-width: 100%;
-    padding: 0 20px 48px;
-    justify-content: flex-start;
-    min-height: 100svh;
-    background: var(--white);
+    padding: 0 24px 44px;
+    justify-content: flex-end;
+    min-height: 0;
+    height: 100%;
+    background: transparent;
   }
-  .hero__headline { margin-bottom: 14px; }
-  .hero__mobile-photo {
-    display: block;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    margin: 6px 0 18px;
-    background-image: url('assets/images/hero-studio.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    border: 1px solid var(--border);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-  }
-  .hero__eyebrow { margin: 0 0 18px; }
-  .hero__subhead { font-size: 15px; max-width: 100%; margin-bottom: 22px; }
-  .hero__stats   { flex-wrap: wrap; gap: 0; }
-  .hstat         { flex: 1 1 28%; min-width: 80px; padding: 0 16px 0 0; border: none; }
-  .hstat:not(:first-child) { padding-left: 16px; border-left: 1px solid var(--border); }
-  .hstat-n       { font-size: 26px; }
-  .hero__links   { flex-direction: column; gap: 10px; }
-  .h-link-primary,
-  .h-link-ghost {
-    width: 100%; text-align: center; padding: 13px 20px;
+  .hero__mobile-photo { display: none; }
+  .hero__headline     { margin-bottom: 10px; }
+  .hero__name    { color: #fff; }
+  .hero__surname { color: var(--gold); }
+  .hero__divider { display: none; }
+  .hero__eyebrow { color: rgba(200,170,100,0.9); margin: 0 0 12px; }
+  .hero__subhead { color: rgba(255,255,255,0.78); font-size: 13px; max-width: 100%; margin-bottom: 18px; line-height: 1.6; }
+
+  /* Stats: compact single row */
+  .hero__stats { flex-wrap: nowrap; gap: 0; margin-bottom: 22px; }
+  .hstat       { flex: 1; padding: 0 10px 0 0; border: none; min-width: 0; }
+  .hstat:not(:first-child) { padding-left: 10px; border-left: 1px solid rgba(255,255,255,0.18); }
+  .hstat-n     { font-size: 22px; color: #fff; }
+  .hstat-l     { font-size: 6.5px; color: rgba(255,255,255,0.48); line-height: 1.35; }
+
+  /* CTA: solid primary + ghost as subtle text row */
+  .hero__links    { flex-direction: column; gap: 8px; }
+  .h-link-primary {
+    width: 100%; text-align: center; padding: 14px 20px;
     min-height: 44px; display: flex; align-items: center;
     justify-content: center; box-sizing: border-box;
   }
+  .h-link-ghost {
+    width: 100%; display: flex; align-items: center; justify-content: center;
+    border: none; padding: 6px 0;
+    color: rgba(255,255,255,0.48); background: transparent;
+    font-size: 8.5px; letter-spacing: 1.5px; min-height: 0;
+  }
+  .h-link-ghost:hover { border: none; color: var(--gold); }
+
+  /* Selected Work: horizontal scroll strip */
+  .work-strip  { padding: 48px 0 48px 20px; }
+  .work-inner  { max-width: none; }
+  .work-header { padding-right: 20px; margin-bottom: 28px; }
+  .work-grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 2px;
+    padding-right: 20px;
+    scrollbar-width: none;
+  }
+  .work-grid::-webkit-scrollbar { display: none; }
+  .work-card {
+    flex: 0 0 80vw;
+    scroll-snap-align: start;
+  }
+
+  /* Footer: hide About */
+  .foot-link[href="/about/"] { display: none; }
 }
 
 /* ── SMALL PHONES (≤480px) ── */
 @media (max-width: 480px) {
-  .hero__content { padding: 0 16px 48px; }
-  .hero__headline { margin-bottom: 12px; }
-  .hero__mobile-photo { margin: 4px 0 16px; }
-  .hero__subhead { font-size: 14px; margin-bottom: 18px; }
-  .hero__stats   { gap: 16px; margin-bottom: 24px; }
-  .hstat-n       { font-size: 20px; }
+  .hero__content { padding: 0 20px 36px; }
+  .hero__subhead { font-size: 12px; margin-bottom: 14px; }
+  .hero__stats   { margin-bottom: 18px; }
+  .hstat-n       { font-size: 19px; }
 }
 </style>
 </head>
@@ -300,6 +325,7 @@
 <section id="hero" class="hero">
   <div class="hero__bloom" aria-hidden="true"></div>
   <div class="hero__photo" aria-hidden="true"></div>
+  <div class="hero__gradient" aria-hidden="true"></div>
   <div class="hero__content">
     <h1 class="hero__headline">
       <span class="hero__name">Marberd</span>

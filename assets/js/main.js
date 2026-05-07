@@ -64,7 +64,6 @@ if (nav) {
   const overlayNav = document.createElement('nav');
   overlayNav.className = 'overlay-nav';
   [
-    ['/about/', 'About'],
     ['/academic/', 'Academic'],
     ['/professional/', 'Professional'],
     ['/bim-ai/', 'BIM / AI'],
