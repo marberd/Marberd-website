@@ -12,31 +12,38 @@
 <meta property="og:description" content="Eight years of precision practice in New York City. Revit, BIM 360 / ACC, VDC, Columbia M.Arch 2024.">
 <meta property="og:url" content="https://marberd.com/professional/">
 <meta property="og:type" content="website">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/css/style.css">
 <style>
 
-/* ══════════════════════════════════════════
-   PROFESSIONAL PAGE
-══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════
+   PROFESSIONAL — REDESIGN
+═══════════════════════════════════════════════════ */
 
-:root {
-  --pr-gold:  #8a6f3e;
-  --pr-black: #1a1a1a;
-  --pr-cream: #f5f3ef;
-}
+/* ── NAV: white throughout this all-dark page ─────── */
+#main-nav .nav-links a,
+#main-nav.scrolled .nav-links a         { color: rgba(255,255,255,0.52); }
+#main-nav .nav-links a:hover,
+#main-nav.scrolled .nav-links a:hover   { color: rgba(255,255,255,0.95); }
+#main-nav .nav-links a.active,
+#main-nav.scrolled .nav-links a.active  { color: var(--gold); }
+#main-nav .nav-links a::after,
+#main-nav.scrolled .nav-links a::after  { background: rgba(255,255,255,0.28); }
+#main-nav .nav-links a.active::after,
+#main-nav.scrolled .nav-links a.active::after { background: var(--gold); }
+#main-nav .nav-icon,
+#main-nav.scrolled .nav-icon            { border-color: rgba(255,255,255,0.16); color: rgba(255,255,255,0.42); }
+#main-nav .nav-icon:hover,
+#main-nav.scrolled .nav-icon:hover      { border-color: var(--gold); color: var(--gold); }
 
-/* ── HERO ─────────────────────────────── */
+/* ══ HERO ═══════════════════════════════════════════ */
 .pr-hero {
   background: var(--black);
   min-height: 58vh;
   display: flex;
-  flex-direction: row;
   align-items: stretch;
-  justify-content: flex-start;
-  padding: 0;
   position: relative;
   overflow: hidden;
 }
@@ -45,8 +52,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
   background-size: 72px 72px;
   pointer-events: none;
 }
@@ -64,11 +71,16 @@
   pointer-events: none;
   user-select: none;
 }
-.pr-hero-content {
+.pr-hero-left {
+  flex: 0 0 62%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 96px 0 36px 60px;
   position: relative;
-  z-index: 1;
-  max-width: 100%;
+  z-index: 2;
 }
+.pr-hero-content { position: relative; z-index: 1; }
 .pr-h1 {
   font-family: var(--serif);
   font-size: clamp(44px, 5.8vw, 76px);
@@ -78,19 +90,24 @@
   color: var(--white);
   margin: 0 0 16px;
 }
-.pr-h1-line { display: block; overflow: hidden; }
-.pr-h1-inner {
-  display: block;
-  opacity: 0;
-  transform: translateY(34px);
-}
-.pr-h1-line:nth-child(1) .pr-h1-inner {
-  animation: pr-rise .92s .24s cubic-bezier(.16,1,.3,1) forwards;
-}
+.pr-h1-line  { display: block; overflow: hidden; }
+.pr-h1-inner { display: block; opacity: 0; transform: translateY(34px); }
+.pr-h1-line:nth-child(1) .pr-h1-inner { animation: pr-rise .92s .24s cubic-bezier(.16,1,.3,1) forwards; }
 .pr-h1-line:nth-child(2) .pr-h1-inner {
-  font-style: italic;
-  color: var(--gold-lt);
+  font-style: italic; color: var(--gold-lt);
   animation: pr-rise .92s .34s cubic-bezier(.16,1,.3,1) forwards;
+}
+.pr-hero-sub {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.50);
+  line-height: 1.68;
+  max-width: 520px;
+  margin: 20px 0 0;
+  opacity: 0;
+  transform: translateY(22px);
+  animation: pr-rise .82s .38s cubic-bezier(.16,1,.3,1) forwards;
 }
 .pr-hero-meta {
   display: flex;
@@ -122,37 +139,9 @@
   font-weight: 300;
   color: rgba(255,255,255,0.62);
 }
+@keyframes pr-rise { to { opacity: 1; transform: translateY(0); } }
 
-@keyframes pr-rise  { to { opacity: 1; transform: translateY(0); } }
-
-/* Nav — white on dark hero */
-#main-nav .nav-links a          { color: rgba(255,255,255,0.55); }
-#main-nav .nav-links a:hover    { color: rgba(255,255,255,0.95); }
-#main-nav .nav-links a.active   { color: var(--gold); }
-#main-nav .nav-links a::after   { background: rgba(255,255,255,0.35); }
-#main-nav .nav-links a.active::after { background: var(--gold); }
-#main-nav .nav-icon             { border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.45); }
-#main-nav .nav-icon:hover       { border-color: var(--gold); color: var(--gold); }
-#main-nav.scrolled .nav-links a          { color: var(--mid); }
-#main-nav.scrolled .nav-links a:hover    { color: var(--black); }
-#main-nav.scrolled .nav-links a.active   { color: var(--gold-dk); }
-#main-nav.scrolled .nav-links a::after   { background: var(--gold); }
-#main-nav.scrolled .nav-links a.active::after { background: var(--gold-dk); }
-#main-nav.scrolled .nav-icon            { border-color: var(--border); color: var(--muted); }
-#main-nav.scrolled .nav-icon:hover      { border-color: var(--gold); color: var(--gold-dk); }
-
-/* ── HERO COLUMNS ─────────────────────── */
-.pr-hero-left {
-  flex: 0 0 62%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 90px 0 22px 60px;
-  position: relative;
-  z-index: 2;
-}
-
-/* ── PROJECT REEL ─────────────────────── */
+/* ── VERTICAL REEL ─────────────────────────────────── */
 .pr-hero-reel {
   flex: 1;
   position: relative;
@@ -172,16 +161,14 @@
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s;
 }
 .pr-reel-card:hover { box-shadow: inset 0 0 0 1px rgba(184,150,62,0.7); }
 .pr-reel-card-img {
-  width: 100%;
-  height: 164px;
-  object-fit: cover;
-  display: block;
+  width: 100%; height: 164px;
+  object-fit: cover; display: block;
   filter: grayscale(100%);
-  transition: filter 0.4s ease;
+  transition: filter 0.4s;
 }
 .pr-reel-card:hover .pr-reel-card-img { filter: grayscale(0%); }
 .pr-reel-card-overlay {
@@ -204,17 +191,14 @@
 .pr-reel-card-year {
   font-family: var(--mono);
   font-size: 8px;
-  letter-spacing: 0.1em;
   color: var(--gold);
   flex-shrink: 0;
   margin-left: 10px;
 }
 .pr-reel-fade {
   position: absolute;
-  left: 0; right: 0;
-  height: 110px;
-  pointer-events: none;
-  z-index: 3;
+  left: 0; right: 0; height: 110px;
+  pointer-events: none; z-index: 3;
 }
 .pr-reel-fade--top { top: 0; background: linear-gradient(to bottom, var(--black), transparent); }
 .pr-reel-fade--bot { bottom: 0; background: linear-gradient(to top, var(--black), transparent); }
@@ -223,66 +207,313 @@
   to   { transform: translateY(-50%); }
 }
 
-/* ══ WORK EXPERIENCE ════════════════════ */
-.pr-wexp {
-  background: var(--black);
-  border-bottom: 0.5px solid #1e1e1e;
+/* ══ STATS BAND ══════════════════════════════════════ */
+.pr-stats {
+  background: #0c0c11;
+  border-top: 1px solid rgba(255,255,255,0.055);
+  border-bottom: 1px solid rgba(255,255,255,0.055);
+  display: flex;
 }
-.pr-wexp-inner {
+.pr-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 26px 20px;
+  text-align: center;
+}
+.pr-stat + .pr-stat { border-left: 1px solid rgba(255,255,255,0.055); }
+.pr-stat-n {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.pr-stat-l {
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.30);
+  line-height: 1.4;
+}
+
+/* ══ EXPERIENCE SECTION ══════════════════════════════ */
+.pr-exp { background: var(--black); }
+
+.pr-exp-head {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 64px 60px 80px;
-}
-.pr-wexp-head {
+  padding: 64px 60px 36px;
   display: flex;
   align-items: center;
   gap: 20px;
-  margin-bottom: 48px;
 }
-.pr-wexp-title {
-  font-family: var(--sans);
+.pr-exp-title {
+  font-family: var(--mono);
   font-size: 9px;
   font-variant-caps: small-caps;
-  text-transform: uppercase;
   letter-spacing: 0.32em;
+  text-transform: uppercase;
   color: rgba(232,226,217,0.22);
   white-space: nowrap;
 }
-.pr-wexp-hrule {
+.pr-exp-rule {
   flex: 1;
   height: 0.5px;
-  background: #222;
+  background: #1e1e1e;
 }
-.pr-wexp-group {
+
+/* Sub-group header (Formative Experience) */
+.pr-exp-group {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 52px 60px 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ── CHAPTER ───────────────────────────────────────── */
+.pr-chapter {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 52px 60px 72px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0 60px;
+  border-top: 0.5px solid #1c1c1c;
+}
+
+/* LEFT: sticky company info */
+.pr-chapter-left {
+  position: sticky;
+  top: 72px;
+  align-self: flex-start;
+  padding-right: 0;
+}
+.pr-ch-num {
+  display: block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(184,150,62,0.38);
+  margin-bottom: 18px;
+}
+.pr-ch-company {
   font-family: var(--sans);
-  font-size: 8px;
+  font-size: 10.5px;
   font-variant-caps: small-caps;
   text-transform: uppercase;
-  letter-spacing: 0.26em;
-  color: rgba(232,226,217,0.18);
-  padding-bottom: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin: 0 0 8px;
+  font-weight: 400;
 }
-.pr-wexp-group--previous { margin-top: 48px; }
-.pr-wexp-role {
+.pr-ch-role {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: #e8e2d9;
+  line-height: 1.25;
+  margin: 0 0 8px;
+}
+.pr-ch-period {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 300;
+  color: #686878;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.pr-ch-badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 0.5px solid rgba(184,150,62,0.32);
+  padding: 3px 8px;
+  margin-bottom: 22px;
+}
+.pr-ch-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.pr-ch-tag {
+  font-family: var(--sans);
+  font-size: 8px;
+  letter-spacing: 0.07em;
+  color: #787888;
+  border: 0.5px solid #2e2e3a;
+  border-radius: 2px;
+  padding: 3px 7px;
+  white-space: nowrap;
+}
+
+/* ── GALLERY ───────────────────────────────────────── */
+.pr-gallery { margin-bottom: 28px; }
+
+.pr-gallery-stage {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  background: #0a0a0e;
+  cursor: pointer;
+}
+
+/* All images stacked, crossfade via opacity */
+.pr-gallery-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.85s ease;
+  will-change: transform, opacity;
+}
+.pr-gallery-img.is-active { opacity: 1; }
+
+/* Ken Burns — 4 directional variants via nth-child */
+.pr-gallery-img:nth-child(4n+1) { animation: kb-1 16s ease-in-out infinite alternate; }
+.pr-gallery-img:nth-child(4n+2) { animation: kb-2 13s ease-in-out infinite alternate; }
+.pr-gallery-img:nth-child(4n+3) { animation: kb-3 18s ease-in-out infinite alternate; }
+.pr-gallery-img:nth-child(4n+4) { animation: kb-4 14s ease-in-out infinite alternate; }
+
+@keyframes kb-1 {
+  from { transform: scale(1.0) translate( 0%,  0%); }
+  to   { transform: scale(1.09) translate(-2%, -1%); }
+}
+@keyframes kb-2 {
+  from { transform: scale(1.07) translate(-1%,  0%); }
+  to   { transform: scale(1.0) translate( 1.5%, 1.5%); }
+}
+@keyframes kb-3 {
+  from { transform: scale(1.0) translate( 1%,  0%); }
+  to   { transform: scale(1.08) translate(-1.5%, -1.5%); }
+}
+@keyframes kb-4 {
+  from { transform: scale(1.05) translate( 0%, -1%); }
+  to   { transform: scale(1.0) translate( 1%,  1%); }
+}
+
+/* Bottom gradient + UI layer */
+.pr-gallery-ui {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 55%, rgba(0,0,0,0.55) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 16px 14px;
+  z-index: 4;
+  pointer-events: none;
+}
+.pr-gallery-counter {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.45);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.pr-gc-cur  { color: rgba(255,255,255,0.85); }
+.pr-gallery-hint {
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+
+/* Progress bar */
+.pr-gallery-prog-wrap {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: rgba(255,255,255,0.07);
+  z-index: 5;
+}
+.pr-gallery-prog {
+  height: 100%;
+  width: 0%;
+  background: var(--gold);
+}
+.pr-gallery-prog.running {
+  animation-name: pr-prog;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+@keyframes pr-prog { from { width: 0%; } to { width: 100%; } }
+
+/* ── BULLETS ───────────────────────────────────────── */
+.pr-bul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.pr-bul li {
+  display: flex;
+  gap: 12px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: #AAAAAA;
+  line-height: 1.7;
+}
+.pr-bul li::before {
+  content: '—';
+  color: var(--gold);
+  flex-shrink: 0;
+  font-size: 13px;
+  margin-top: 0.1em;
+}
+
+/* Compact chapter (AMA — no gallery) */
+.pr-chapter--compact .pr-chapter-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 4px;
+}
+
+/* ══ EDUCATION ════════════════════════════════════════ */
+.pr-edu {
+  background: var(--black);
+  border-top: 1px solid #191924;
+}
+.pr-edu-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 52px 60px 64px;
+}
+.pr-edu-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.pr-edu-grid {
   display: grid;
-  grid-template-columns: 200px 1px 1fr;
-  padding: 36px 0;
-  border-top: 0.5px solid #222;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
 }
-.pr-wexp-role--last {
-  border-bottom: 0.5px solid #222;
+.pr-edu-item {
+  padding: 22px 28px 22px 0;
+  border-right: 0.5px solid #222;
 }
-.pr-wexp-l { padding-right: 36px; }
-.pr-wexp-co {
+.pr-edu-item:last-child { border-right: none; }
+.pr-edu-co {
   font-family: var(--sans);
   font-size: 9.5px;
   font-variant-caps: small-caps;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: #b8963e;
+  color: var(--gold);
   margin-bottom: 7px;
 }
-.pr-wexp-rt {
+.pr-edu-title {
   font-family: var(--serif);
   font-size: 15px;
   font-weight: 400;
@@ -290,462 +521,15 @@
   line-height: 1.3;
   margin-bottom: 5px;
 }
-.pr-wexp-pd {
+.pr-edu-sub {
   font-family: var(--sans);
   font-size: 10px;
   font-weight: 300;
   color: #686878;
-  line-height: 1.5;
-  margin-bottom: 16px;
-}
-.pr-wexp-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-.pr-wtag {
-  font-family: var(--sans);
-  font-size: 8px;
-  font-variant-caps: small-caps;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #787888;
-  border: 0.5px solid #333340;
-  border-radius: 2px;
-  padding: 3px 7px;
-  white-space: nowrap;
-}
-.pr-wexp-vd { width: 1px; background: #222; position: relative; }
-.pr-wexp-dot {
-  position: absolute;
-  top: 0; left: 0;
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: #b8963e;
-  transform: translate(-50%, -50%);
-}
-.pr-wexp-r { padding-left: 36px; }
-
-/* Image strip row */
-.pr-wexp-imgrow {
-  display: flex;
-  align-items: stretch;
-  margin-bottom: 18px;
-}
-.pr-wexp-imgs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  flex: 1;
-}
-.pr-wexp-imgcard {
-  display: block;
-  width: 160px;
-  height: 108px;
-  border: 0.5px solid #2a2a2a;
-  border-radius: 2px;
-  overflow: hidden;
-  flex-shrink: 0;
-  cursor: pointer;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.pr-wexp-imgcard:hover {
-  border-color: rgba(184,150,62,0.5);
-  box-shadow: 0 0 0 1px rgba(184,150,62,0.2);
-}
-.pr-wexp-imgcard img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-  filter: grayscale(100%);
-  transition: filter 0.4s ease;
-}
-.pr-wexp-imgcard:hover img { filter: grayscale(0%); }
-
-/* Expand CTA */
-.pr-wexp-cta {
-  display: flex;
-  align-items: stretch;
-  padding-left: 14px;
-  background: none;
-  border: none;
-  flex-shrink: 0;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-.pr-wexp-cta:hover { opacity: 0.65; }
-.pr-wexp-cta-vr {
-  display: block;
-  width: 0.5px;
-  background: #2a2a2a;
-  align-self: stretch;
-  margin-right: 12px;
-  flex-shrink: 0;
-}
-.pr-wexp-cta-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-.pr-wexp-cta-arrow {
-  color: #b8963e;
-  font-size: 12px;
-  line-height: 1;
-  transform: rotate(45deg);
-  display: inline-block;
-}
-.pr-wexp-cta-text {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-family: var(--sans);
-  font-size: 9px;
-  font-variant-caps: small-caps;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: #b8963e;
-  white-space: nowrap;
-  line-height: 1;
+  line-height: 1.6;
 }
 
-/* Rule + bullets */
-.pr-wexp-brule { height: 0.5px; background: #222; margin-bottom: 16px; }
-.pr-wexp-bul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
-.pr-wexp-bul li {
-  display: flex;
-  gap: 10px;
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 300;
-  color: #AAAAAA;
-  line-height: 1.65;
-}
-.pr-wexp-bul li::before {
-  content: '—';
-  color: #b8963e;
-  flex-shrink: 0;
-  font-size: 13px;
-  margin-top: 0.1em;
-}
-
-/* ══ MODAL ══════════════════════════════ */
-.pr-modal-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(0,0,0,0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-.pr-modal-overlay.open {
-  opacity: 1;
-  visibility: visible;
-}
-.pr-modal-panel {
-  background: #141414;
-  border: 0.5px solid #2a2a2a;
-  border-radius: 3px;
-  padding: 32px;
-  max-width: 640px;
-  width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  transform: translateY(16px);
-  transition: transform 0.35s cubic-bezier(.16,1,.3,1);
-}
-.pr-modal-overlay.open .pr-modal-panel { transform: translateY(0); }
-.pr-modal-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-.pr-modal-company {
-  font-family: var(--sans);
-  font-size: 8.5px;
-  font-variant-caps: small-caps;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: #b8963e;
-  margin-bottom: 6px;
-}
-.pr-modal-title {
-  font-family: var(--serif);
-  font-size: 18px;
-  font-weight: 400;
-  color: #e8e2d9;
-  line-height: 1.2;
-}
-.pr-modal-close {
-  background: none;
-  border: none;
-  color: #505050;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 2px;
-  line-height: 1;
-  flex-shrink: 0;
-  margin-top: 2px;
-  transition: color 0.2s;
-}
-.pr-modal-close:hover { color: #e8e2d9; }
-.pr-modal-imgs {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  margin-bottom: 24px;
-}
-.pr-modal-img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  display: block;
-  border-radius: 2px;
-  border: 0.5px solid #2a2a2a;
-}
-.pr-modal-imgs.single { grid-template-columns: 1fr; }
-.pr-modal-imgs.triple { grid-template-columns: repeat(3, 1fr); }
-.pr-modal-rule { height: 0.5px; background: #2a2a2a; margin-bottom: 20px; }
-.pr-modal-desc {
-  font-family: var(--sans);
-  font-size: 12px;
-  color: #888;
-  line-height: 1.7;
-  margin: 0 0 20px;
-}
-.pr-modal-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-.pr-modal-tag {
-  font-family: var(--sans);
-  font-size: 8px;
-  font-variant-caps: small-caps;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #505050;
-  border: 0.5px solid #2a2a2a;
-  border-radius: 2px;
-  padding: 3px 7px;
-  white-space: nowrap;
-}
-
-/* ══ SCROLL HINT ════════════════════════ */
-.pr-hint {
-  position: fixed;
-  bottom: 36px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--sans);
-  font-size: 9px;
-  font-variant-caps: small-caps;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: #b8963e;
-  background: rgba(14,14,14,0.92);
-  padding: 10px 22px;
-  border-radius: 2px;
-  border: 0.5px solid rgba(184,150,62,0.25);
-  pointer-events: none;
-  z-index: 8000;
-  white-space: nowrap;
-  opacity: 0;
-}
-.pr-hint.visible { animation: pr-hint-anim 3.5s ease forwards; }
-@keyframes pr-hint-anim {
-  0%   { opacity: 0; }
-  11%  { opacity: 1; }
-  80%  { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-/* ── SCROLL REVEAL ────────────────────── */
-.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .72s cubic-bezier(.16,1,.3,1); }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* ── MOBILE ───────────────────────────── */
-@media (max-width: 900px) {
-  .pr-hero { flex-direction: column; align-items: flex-start; }
-  .pr-hero-left { flex: none; width: 100%; padding: 90px 24px 40px;
-                  display: flex; flex-direction: column; justify-content: flex-start; }
-  .pr-hero-reel { display: none; }
-  .pr-meta-item { padding-right: 28px; margin-right: 28px; }
-  .pr-wexp-inner { padding: 48px 24px 64px; }
-  .pr-wexp-role  { grid-template-columns: 1fr; gap: 24px; }
-  .pr-wexp-vd    { display: none; }
-  .pr-wexp-l     { padding-right: 0; }
-  .pr-wexp-r     { padding-left: 0; }
-  .pr-wexp-imgcard { width: 130px; height: 88px; }
-  .pr-wexp-cta   { display: none; }
-}
-@media (max-width: 600px) {
-  .pr-hero-left { padding: 84px 20px 36px; }
-  .pr-h1 { font-size: clamp(50px, 16vw, 70px); }
-  .pr-meta-item:last-child { display: none; }
-  .pr-wexp-inner { padding: 40px 20px 56px; }
-  .pr-wexp-imgcard { width: 130px; height: 88px; }
-}
-
-/* ══ HERO SUB-HEADLINE ══════════════════ */
-.pr-hero-sub {
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 300;
-  color: rgba(255,255,255,0.50);
-  line-height: 1.68;
-  max-width: 520px;
-  margin-top: 20px;
-  opacity: 0;
-  transform: translateY(22px);
-  animation: pr-rise .82s .38s cubic-bezier(.16,1,.3,1) forwards;
-}
-@media (max-width: 600px) {
-  .pr-hero-sub { font-size: 13.5px; }
-}
-
-/* ══ MOBILE PROJECT STRIP ═══════════════ */
-.pr-mobile-strip {
-  display: none;
-  background: var(--black);
-  border-bottom: 0.5px solid #1e1e1e;
-  overflow: hidden;
-}
-.pr-mobile-strip-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 20px 10px;
-}
-.pr-mobile-strip-label {
-  font-family: var(--mono);
-  font-size: 8px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.28);
-}
-.pr-mobile-strip-hint {
-  font-family: var(--mono);
-  font-size: 8px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: rgba(184,148,106,0.55);
-}
-.pr-mobile-strip-track {
-  overflow: hidden;
-  padding-bottom: 18px;
-}
-.pr-mobile-strip-scroller {
-  display: flex;
-  gap: 6px;
-  width: max-content;
-  animation: pr-strip-scroll 28s linear infinite;
-  padding-left: 20px;
-}
-.pr-mobile-strip:hover .pr-mobile-strip-scroller {
-  animation-play-state: paused;
-}
-@keyframes pr-strip-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-.pr-mobile-card {
-  flex-shrink: 0;
-  width: 200px;
-  height: 134px;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  border: 0.5px solid rgba(255,255,255,0.06);
-}
-.pr-mobile-card img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-  filter: grayscale(80%);
-  transition: filter 0.35s ease;
-}
-.pr-mobile-card:active img { filter: grayscale(0%); }
-.pr-mobile-card-overlay {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 28px 10px 8px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.72));
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-.pr-mobile-card-name {
-  font-family: var(--mono);
-  font-size: 7.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.82);
-  line-height: 1.4;
-}
-.pr-mobile-card-year {
-  font-family: var(--mono);
-  font-size: 7.5px;
-  color: var(--gold);
-  flex-shrink: 0;
-  margin-left: 6px;
-}
-@media (max-width: 900px) {
-  .pr-mobile-strip { display: block; }
-}
-
-/* ══ TAP AFFORDANCE ═════════════════════ */
-.pr-tap-hint {
-  display: none;
-  font-family: var(--mono);
-  font-size: 8px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: rgba(184,148,106,0.55);
-  padding: 8px 0 2px;
-  text-align: right;
-}
-@media (max-width: 900px) {
-  .pr-tap-hint { display: block; }
-}
-
-/* ══ FORMATIVE EXPERIENCE GROUP ═════════ */
-.pr-wexp-group--formative { margin-top: 48px; }
-
-/* ══ EDUCATION & CERTIFICATIONS ═════════ */
-.pr-edu {
-  background: var(--black);
-  border-top: 1px solid #1a1a22;
-}
-.pr-edu-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 52px 60px 60px;
-}
-.pr-edu-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  margin-top: 4px;
-}
-.pr-edu-item {
-  padding: 20px 28px 20px 0;
-  border-right: 0.5px solid #222;
-}
-.pr-edu-item:last-child { border-right: none; }
-.pr-edu-item .pr-wexp-co { font-size: 9px; }
-@media (max-width: 900px) {
-  .pr-edu-inner { padding: 44px 24px 52px; }
-  .pr-edu-grid { grid-template-columns: 1fr; }
-  .pr-edu-item {
-    border-right: none;
-    border-bottom: 0.5px solid #222;
-    padding: 18px 0;
-  }
-  .pr-edu-item:last-child { border-bottom: none; }
-}
-@media (max-width: 600px) {
-  .pr-edu-inner { padding: 36px 20px 44px; }
-}
-
-/* ══ CTA BAND ═══════════════════════════ */
+/* ══ CTA BAND ════════════════════════════════════════ */
 .pr-cta-band {
   background: var(--black);
   border-top: 1px solid #222;
@@ -779,9 +563,6 @@
   color: var(--white);
   letter-spacing: -0.5px;
 }
-.pr-cta-h2 em { font-style: italic; color: var(--gold-lt); }
-
-/* ── Role ticker ── */
 .pr-cta-ticker-wrap {
   display: inline-block;
   overflow: hidden;
@@ -803,17 +584,13 @@
   line-height: 1.05;
 }
 @keyframes pr-role-tick {
-  0%    { transform: translateY(0);       animation-timing-function: linear; }
-  25%   { transform: translateY(0);       animation-timing-function: cubic-bezier(.76,0,.24,1); }
-  33%   { transform: translateY(-25%);    animation-timing-function: linear; }
-  58%   { transform: translateY(-25%);    animation-timing-function: cubic-bezier(.76,0,.24,1); }
-  66%   { transform: translateY(-50%);    animation-timing-function: linear; }
-  91%   { transform: translateY(-50%);    animation-timing-function: cubic-bezier(.76,0,.24,1); }
-  100%  { transform: translateY(-75%); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .pr-cta-ticker { animation: none; }
-  .pr-mobile-strip-scroller { animation: none; }
+  0%   { transform: translateY(0);    animation-timing-function: linear; }
+  25%  { transform: translateY(0);    animation-timing-function: cubic-bezier(.76,0,.24,1); }
+  33%  { transform: translateY(-25%); animation-timing-function: linear; }
+  58%  { transform: translateY(-25%); animation-timing-function: cubic-bezier(.76,0,.24,1); }
+  66%  { transform: translateY(-50%); animation-timing-function: linear; }
+  91%  { transform: translateY(-50%); animation-timing-function: cubic-bezier(.76,0,.24,1); }
+  100% { transform: translateY(-75%); }
 }
 .pr-cta-actions {
   display: flex;
@@ -834,7 +611,6 @@
   text-transform: uppercase;
   text-decoration: none;
   transition: background .2s, border-color .2s, color .2s;
-  border-radius: 0;
 }
 .pr-cta-btn--primary {
   background: var(--gold);
@@ -842,29 +618,82 @@
   color: var(--black);
   font-weight: 500;
 }
-.pr-cta-btn--primary:hover {
-  background: var(--gold-lt);
-  border-color: var(--gold-lt);
-}
+.pr-cta-btn--primary:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
 .pr-cta-btn--secondary {
   background: transparent;
   border: 1px solid rgba(255,255,255,0.18);
   color: rgba(255,255,255,0.62);
 }
-.pr-cta-btn--secondary:hover {
-  border-color: var(--gold);
-  color: var(--gold-lt);
+.pr-cta-btn--secondary:hover { border-color: var(--gold); color: var(--gold-lt); }
+
+/* ── SCROLL REVEAL ─────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s, transform .72s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── REDUCED MOTION ────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .pr-h1-inner, .pr-hero-sub, .pr-hero-meta { animation: none; opacity: 1; transform: none; }
+  .pr-reel-track { animation: none; }
+  .pr-gallery-img { animation: none; }
+  .pr-gallery-prog { animation: none !important; }
+  .pr-cta-ticker { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* ══ MOBILE (≤ 900px) ════════════════════════════════ */
 @media (max-width: 900px) {
-  .pr-cta-inner {
+  /* Hero */
+  .pr-hero { flex-direction: column; }
+  .pr-hero-left { flex: none; width: 100%; padding: 90px 24px 40px; }
+  .pr-hero-reel { display: none; }
+  .pr-meta-item { padding-right: 28px; margin-right: 28px; }
+
+  /* Stats */
+  .pr-stats { flex-wrap: wrap; }
+  .pr-stat { flex: 1 1 30%; padding: 18px 16px; }
+
+  /* Experience */
+  .pr-exp-head { padding: 48px 24px 32px; }
+  .pr-exp-group { padding: 40px 24px 0; }
+  .pr-chapter {
     grid-template-columns: 1fr;
-    padding: 48px 24px 56px;
-    gap: 28px;
+    padding: 44px 24px 56px;
+    gap: 28px 0;
   }
+  .pr-chapter-left { position: static; }
+  .pr-ch-num { margin-bottom: 12px; }
+
+  /* Gallery */
+  .pr-gallery-stage { height: 300px; }
+
+  /* Education */
+  .pr-edu-inner { padding: 44px 24px 52px; }
+  .pr-edu-grid { grid-template-columns: 1fr; }
+  .pr-edu-item { border-right: none; border-bottom: 0.5px solid #222; padding: 18px 0; }
+  .pr-edu-item:last-child { border-bottom: none; }
+
+  /* CTA */
+  .pr-cta-inner { grid-template-columns: 1fr; padding: 48px 24px 56px; gap: 28px; }
   .pr-cta-actions { flex-direction: row; }
   .pr-cta-btn { flex: 1; }
 }
+
 @media (max-width: 600px) {
+  .pr-hero-left { padding: 84px 20px 36px; }
+  .pr-h1 { font-size: clamp(44px, 14vw, 66px); }
+  .pr-hero-sub { font-size: 13.5px; }
+  .pr-meta-item:last-child { display: none; }
+
+  .pr-stats { flex-wrap: wrap; }
+  .pr-stat { flex: 1 1 45%; padding: 16px 14px; }
+  .pr-stat-n { font-size: 24px; }
+
+  .pr-exp-head { padding: 40px 20px 28px; }
+  .pr-exp-group { padding: 32px 20px 0; }
+  .pr-chapter { padding: 36px 20px 48px; }
+  .pr-gallery-stage { height: 250px; }
+
+  .pr-edu-inner { padding: 36px 20px 44px; }
   .pr-cta-inner { padding: 44px 20px 52px; }
   .pr-cta-actions { flex-direction: column; }
   .pr-cta-btn { width: 100%; }
@@ -873,6 +702,7 @@
 </style>
 </head>
 <body>
+
 <nav id="main-nav">
   <a id="nav-logo" href="/" title="MARBERD">
     <span class="logo-wrap">
@@ -932,313 +762,231 @@
   </div>
 </section>
 
-<!-- ══ MOBILE PROJECT STRIP ════════════════════════════════ -->
-<div class="pr-mobile-strip" aria-label="Selected projects">
-  <div class="pr-mobile-strip-head">
-    <span class="pr-mobile-strip-label">Selected Projects</span>
-    <span class="pr-mobile-strip-hint">Tap to expand ↗</span>
+<!-- ══ STATS ═══════════════════════════════════════════ -->
+<div class="pr-stats" aria-label="Career highlights">
+  <div class="pr-stat">
+    <span class="pr-stat-n">300+</span>
+    <span class="pr-stat-l">BIM 360 / ACC<br>Projects</span>
   </div>
-  <div class="pr-mobile-strip-track">
-    <div class="pr-mobile-strip-scroller" id="pr-strip-scroller">
-      <!-- set A -->
-      <div class="pr-mobile-card" data-modal="tpg-1290">
-        <img src="../assets/images/projects/tpg-interior.jpg" alt="1290 Avenue of the Americas" loading="lazy">
-        <div class="pr-mobile-card-overlay">
-          <span class="pr-mobile-card-name">1290 Ave of the Americas</span>
-          <span class="pr-mobile-card-year">2023</span>
-        </div>
-      </div>
-      <div class="pr-mobile-card" data-modal="tpg-bmw-showroom">
-        <img src="../assets/images/projects/bmw-showroom-main.webp" alt="BMW Showroom" loading="lazy">
-        <div class="pr-mobile-card-overlay">
-          <span class="pr-mobile-card-name">BMW Showroom</span>
-          <span class="pr-mobile-card-year">2023</span>
-        </div>
-      </div>
-      <div class="pr-mobile-card" data-modal="archnim-burton">
-        <img src="../assets/images/projects/burton-in99-main.webp" alt="BURTON IN99 Flagship" loading="lazy">
-        <div class="pr-mobile-card-overlay">
-          <span class="pr-mobile-card-name">BURTON IN99 Flagship</span>
-          <span class="pr-mobile-card-year">2020</span>
-        </div>
-      </div>
-      <div class="pr-mobile-card" data-modal="archnim-alpena">
-        <img src="../assets/images/projects/alpena-prof.jpg" alt="Alpena Mixed-Use" loading="lazy">
-        <div class="pr-mobile-card-overlay">
-          <span class="pr-mobile-card-name">130K SF Mixed-Use</span>
-          <span class="pr-mobile-card-year">2021</span>
-        </div>
-      </div>
-      <div class="pr-mobile-card" data-modal="dyo-maoya">
-        <img src="../assets/images/projects/maoya-1.png" alt="Maoya Hotel" loading="lazy">
-        <div class="pr-mobile-card-overlay">
-          <span class="pr-mobile-card-name">Maoya Hotel</span>
-          <span class="pr-mobile-card-year">2022</span>
-        </div>
-      </div>
-      <div class="pr-mobile-card" data-modal="tpg-1290">
-        <img src="../assets/images/projects/tpg-terrace.jpg" alt="1290 Avenue — Terrace" loading="lazy">
-        <div class="pr-mobile-card-overlay">
-          <span class="pr-mobile-card-name">1290 Ave — Terrace</span>
-          <span class="pr-mobile-card-year">2023</span>
-        </div>
-      </div>
-      <!-- set B (duplicate for seamless loop) -->
-      <div class="pr-mobile-card" aria-hidden="true" data-modal="tpg-1290">
-        <img src="../assets/images/projects/tpg-interior.jpg" alt="" loading="lazy">
-        <div class="pr-mobile-card-overlay">
-          <span class="pr-mobile-card-name">1290 Ave of the Americas</span>
-          <span class="pr-mobile-card-year">2023</span>
-        </div>
-      </div>
-      <div class="pr-mobile-card" aria-hidden="true" data-modal="tpg-bmw-showroom">
-        <img src="../assets/images/projects/bmw-showroom-main.webp" alt="" loading="lazy">
-        <div class="pr-mobile-card-overlay">
-          <span class="pr-mobile-card-name">BMW Showroom</span>
-          <span class="pr-mobile-card-year">2023</span>
-        </div>
-      </div>
-      <div class="pr-mobile-card" aria-hidden="true" data-modal="archnim-burton">
-        <img src="../assets/images/projects/burton-in99-main.webp" alt="" loading="lazy">
-        <div class="pr-mobile-card-overlay">
-          <span class="pr-mobile-card-name">BURTON IN99 Flagship</span>
-          <span class="pr-mobile-card-year">2020</span>
-        </div>
-      </div>
-      <div class="pr-mobile-card" aria-hidden="true" data-modal="archnim-alpena">
-        <img src="../assets/images/projects/alpena-prof.jpg" alt="" loading="lazy">
-        <div class="pr-mobile-card-overlay">
-          <span class="pr-mobile-card-name">130K SF Mixed-Use</span>
-          <span class="pr-mobile-card-year">2021</span>
-        </div>
-      </div>
-      <div class="pr-mobile-card" aria-hidden="true" data-modal="dyo-maoya">
-        <img src="../assets/images/projects/maoya-1.png" alt="" loading="lazy">
-        <div class="pr-mobile-card-overlay">
-          <span class="pr-mobile-card-name">Maoya Hotel</span>
-          <span class="pr-mobile-card-year">2022</span>
-        </div>
-      </div>
-      <div class="pr-mobile-card" aria-hidden="true" data-modal="tpg-1290">
-        <img src="../assets/images/projects/tpg-terrace.jpg" alt="" loading="lazy">
-        <div class="pr-mobile-card-overlay">
-          <span class="pr-mobile-card-name">1290 Ave — Terrace</span>
-          <span class="pr-mobile-card-year">2023</span>
-        </div>
-      </div>
-    </div>
+  <div class="pr-stat">
+    <span class="pr-stat-n">119K SF</span>
+    <span class="pr-stat-l">CLEAR HQ<br>at 4 WTC</span>
+  </div>
+  <div class="pr-stat">
+    <span class="pr-stat-n">25+</span>
+    <span class="pr-stat-l">JPMorgan Chase<br>Locations</span>
+  </div>
+  <div class="pr-stat">
+    <span class="pr-stat-n">8 Yrs</span>
+    <span class="pr-stat-l">Active NYC<br>Practice</span>
+  </div>
+  <div class="pr-stat">
+    <span class="pr-stat-n">M.Arch</span>
+    <span class="pr-stat-l">Columbia Univ.<br>2024</span>
   </div>
 </div>
 
-<!-- ══ WORK EXPERIENCE ══════════════════════════════════════ -->
-<section class="pr-wexp">
-  <div class="pr-wexp-inner">
+<!-- ══ EXPERIENCE ═══════════════════════════════════════ -->
+<section class="pr-exp" aria-label="Work Experience">
 
-    <div class="pr-wexp-head">
-      <h2 class="pr-wexp-title">Work Experience</h2>
-      <div class="pr-wexp-hrule"></div>
-    </div>
-
-    <div class="pr-wexp-group">Current</div>
-
-    <div class="pr-wexp-role pr-wexp-role--last" id="wexp-tpg">
-      <div class="pr-wexp-l">
-        <h3 class="pr-wexp-co">TPG Architecture</h3>
-        <h4 class="pr-wexp-rt">BIM Manager · Project Lead</h4>
-        <div class="pr-wexp-pd">Apr 2019 – Present · New York, NY</div>
-        <div class="pr-wexp-tags">
-          <span class="pr-wtag">Revit</span>
-          <span class="pr-wtag">BIM 360 / ACC</span>
-          <span class="pr-wtag">Navisworks</span>
-          <span class="pr-wtag">Dynamo</span>
-          <span class="pr-wtag">Enscape</span>
-          <span class="pr-wtag">Const. Docs</span>
-          <span class="pr-wtag">MEP Coord.</span>
-        </div>
-      </div>
-      <div class="pr-wexp-vd"><span class="pr-wexp-dot"></span></div>
-      <div class="pr-wexp-r">
-        <div class="pr-wexp-imgrow">
-          <div class="pr-wexp-imgs">
-            <div class="pr-wexp-imgcard" data-modal="tpg-1290">
-              <img src="../assets/images/projects/tpg-interior.jpg" alt="1290 Avenue of the Americas — Interior" loading="lazy">
-            </div>
-            <div class="pr-wexp-imgcard" data-modal="tpg-1290">
-              <img src="../assets/images/projects/tpg-terrace.jpg" alt="1290 Avenue — Terrace" loading="lazy">
-            </div>
-            <div class="pr-wexp-imgcard" data-modal="tpg-bmw-showroom">
-              <img src="../assets/images/projects/bmw-showroom-main.webp" alt="BMW Showroom — Manhattan flagship interior" loading="lazy">
-            </div>
-          </div>
-          <button class="pr-wexp-cta" type="button" data-modal="tpg-1290" aria-label="Expand project details">
-            <span class="pr-wexp-cta-vr"></span>
-            <span class="pr-wexp-cta-body">
-              <span class="pr-wexp-cta-arrow">↑</span>
-              <span class="pr-wexp-cta-text">expand project</span>
-            </span>
-          </button>
-        </div>
-        <p class="pr-tap-hint">Tap any image to expand ↗</p>
-        <div class="pr-wexp-brule"></div>
-        <ul class="pr-wexp-bul">
-          <li>Led BIM strategy coordinating architecture, structure, and MEP across multiple simultaneous commercial projects.</li>
-          <li>Developed millwork details and full construction documentation for Capital One retail branches across NYC and Upstate New York, averaging 30,000 SF each.</li>
-          <li>Standardized BIM templates, family libraries, and coordination workflows for 25+ JPMorgan Chase locations spanning branch fitouts, executive floors, and client meeting environments.</li>
-          <li>Directed 3D modeling of complex ceiling geometries and coordinated architectural systems with structure and MEP for CLEAR's 119,226 SF headquarters at 4 World Trade Center.</li>
-          <li>Developed core and shell models, coordinated multi-floor ceiling systems, and produced phased drawing sets for Davis Wright Tremaine's 62,000 SF law firm relocation.</li>
-          <li>Designed FF&amp;E packages for BMW's flagship Manhattan showroom — parametric furniture models and stakeholder presentations.</li>
-          <li>Modeled existing conditions, produced casework elevations, and delivered Enscape renderings for First Sentier Investors' 21,000 SF NYC office.</li>
-          <li>Applied advanced Revit formulas to calculate seating capacity and egress distances for a 45,200 SF Rockefeller Group project, supporting code compliance and spatial planning.</li>
-          <li>Administered 300+ BIM 360 and Autodesk Construction Cloud projects — project setup, permissions management, model coordination, and issue tracking since 2018.</li>
-          <li>Led firmwide Revit training program annually, raising BIM proficiency and standards across all studio groups.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="pr-wexp-group pr-wexp-group--previous">Previous</div>
-
-    <div class="pr-wexp-role" id="wexp-archnim">
-      <div class="pr-wexp-l">
-        <h3 class="pr-wexp-co">Archnimations</h3>
-        <h4 class="pr-wexp-rt">Independent Architectural Designer</h4>
-        <div class="pr-wexp-pd">2018 – 2024 · Independent Practice, concurrent with TPG · New York, NY</div>
-        <div class="pr-wexp-tags">
-          <span class="pr-wtag">Revit</span>
-          <span class="pr-wtag">Rhino</span>
-          <span class="pr-wtag">Lumion</span>
-          <span class="pr-wtag">AutoCAD</span>
-          <span class="pr-wtag">Enscape</span>
-          <span class="pr-wtag">Visualization</span>
-        </div>
-      </div>
-      <div class="pr-wexp-vd"><span class="pr-wexp-dot"></span></div>
-      <div class="pr-wexp-r">
-        <div class="pr-wexp-imgrow">
-          <div class="pr-wexp-imgs">
-            <div class="pr-wexp-imgcard" data-modal="archnim-alpena">
-              <img src="../assets/images/projects/alpena-prof.jpg" alt="Alpena Mixed-Use" loading="lazy">
-            </div>
-            <div class="pr-wexp-imgcard" data-modal="archnim-burton">
-              <img src="../assets/images/projects/burton-in99-main.webp" alt="BURTON IN99 Flagship" loading="lazy">
-            </div>
-            <div class="pr-wexp-imgcard" data-modal="archnim-residences">
-              <img src="../assets/images/projects/dominican-residences.jpg" alt="Dominican Residences" loading="lazy">
-            </div>
-            <div class="pr-wexp-imgcard" data-modal="archnim-netzero">
-              <img src="../assets/images/projects/utah-netzero.jpg" alt="Utah Net Zero" loading="lazy">
-            </div>
-          </div>
-          <button class="pr-wexp-cta" type="button" data-modal="archnim-alpena" aria-label="Expand project details">
-            <span class="pr-wexp-cta-vr"></span>
-            <span class="pr-wexp-cta-body">
-              <span class="pr-wexp-cta-arrow">↑</span>
-              <span class="pr-wexp-cta-text">expand project</span>
-            </span>
-          </button>
-        </div>
-        <p class="pr-tap-hint">Tap any image to expand ↗</p>
-        <div class="pr-wexp-brule"></div>
-        <ul class="pr-wexp-bul">
-          <li>Ran an independent design and visualization practice over six years, delivering architectural services across residential, commercial, and mixed-use typologies in the US, China, and the Dominican Republic.</li>
-          <li>Designed and produced full visualization package for a 130,000 SF mixed-use development in Alpena, MI — Revit documentation, Lumion renders, and site coordination drawings.</li>
-          <li>Consulted on the BURTON IN99 flagship retail concept in Chengdu, shaping the proposal narrative around people, planet, sports, and sustainable reuse of construction and snowboarding materials.</li>
-          <li>Designed five ground-up single-family residences in the Dominican Republic — from schematic design through construction documentation, coordinating with local builders on materials and site constraints.</li>
-          <li>Produced net-zero residential master plan for a Utah development — passive solar orientation, high-performance envelope detailing, and energy modeling integrated into the design workflow.</li>
-          <li>Managed all client relationships, project scoping, scheduling, and deliverables independently across concurrent engagements.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="pr-wexp-group pr-wexp-group--formative">Formative Experience</div>
-
-    <div class="pr-wexp-role" id="wexp-ama">
-      <div class="pr-wexp-l">
-        <h3 class="pr-wexp-co">AMA Consulting Engineers</h3>
-        <h4 class="pr-wexp-rt">BIM / CAD Operator</h4>
-        <div class="pr-wexp-pd">May 2018 – 2019 · New York, NY</div>
-        <div class="pr-wexp-tags">
-          <span class="pr-wtag">Navisworks</span>
-          <span class="pr-wtag">Revit</span>
-          <span class="pr-wtag">Clash Detection</span>
-          <span class="pr-wtag">MEP Coord.</span>
-        </div>
-      </div>
-      <div class="pr-wexp-vd"><span class="pr-wexp-dot"></span></div>
-      <div class="pr-wexp-r">
-        <div class="pr-wexp-brule"></div>
-        <ul class="pr-wexp-bul">
-          <li>Collaborated across 100+ MEP coordination projects on landmark New York buildings — including Peloton HQ (300,000 SF) and Penn Station infrastructure (350,000 SF).</li>
-          <li>Conducted Navisworks clash detection across federated architectural, structural, and MEP models, resolving coordination issues prior to construction.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="pr-wexp-role pr-wexp-role--last" id="wexp-dyo">
-      <div class="pr-wexp-l">
-        <h3 class="pr-wexp-co">D-YO Studio</h3>
-        <h4 class="pr-wexp-rt">Assistant Designer</h4>
-        <div class="pr-wexp-pd">Jan 2016 – 2018 · New York, NY</div>
-        <div class="pr-wexp-tags">
-          <span class="pr-wtag">Revit</span>
-          <span class="pr-wtag">AutoCAD</span>
-          <span class="pr-wtag">DOB Filing</span>
-          <span class="pr-wtag">Energy Analysis</span>
-        </div>
-      </div>
-      <div class="pr-wexp-vd"><span class="pr-wexp-dot"></span></div>
-      <div class="pr-wexp-r">
-        <div class="pr-wexp-imgrow">
-          <div class="pr-wexp-imgs">
-            <div class="pr-wexp-imgcard" data-modal="dyo-maoya">
-              <img src="../assets/images/projects/maoya-1.png" alt="Maoya Hotel" loading="lazy">
-            </div>
-            <div class="pr-wexp-imgcard" data-modal="dyo-humeniks">
-              <img src="../assets/images/projects/humeniks-before-after.png" alt="Humenik's Building" loading="lazy">
-            </div>
-          </div>
-        </div>
-        <p class="pr-tap-hint">Tap any image to expand ↗</p>
-        <div class="pr-wexp-brule"></div>
-        <ul class="pr-wexp-bul">
-          <li>Initiated and executed firm-wide platform migration from AutoCAD to Revit; introduced material takeoffs to support cost estimation and project budgeting.</li>
-          <li>Independently transitioned Humenik's Building — a ground-up multifamily development in Brooklyn, NY — from AutoCAD into Revit mid-project, enabling rapid iteration and greater layout precision.</li>
-          <li>Prepared ADA compliance documentation, conducted energy analysis including fenestration and R-value calculations, and supported code-related decision-making across residential and commercial projects.</li>
-          <li>Led construction meetings and managed DOB filing, building code review, and energy analysis for residential and commercial projects.</li>
-        </ul>
-      </div>
-    </div>
-
+  <div class="pr-exp-head">
+    <h2 class="pr-exp-title">Work Experience</h2>
+    <div class="pr-exp-rule"></div>
   </div>
+
+  <!-- ── 01 — TPG Architecture ───────────────────────── -->
+  <article class="pr-chapter" id="wexp-tpg">
+    <div class="pr-chapter-left">
+      <span class="pr-ch-num">01</span>
+      <h3 class="pr-ch-company">TPG Architecture</h3>
+      <h4 class="pr-ch-role">BIM Manager &amp; Project Lead</h4>
+      <div class="pr-ch-period">Apr 2019 – Present<br>New York, NY</div>
+      <span class="pr-ch-badge">Current</span>
+      <div class="pr-ch-tags">
+        <span class="pr-ch-tag">Revit</span>
+        <span class="pr-ch-tag">BIM 360 / ACC</span>
+        <span class="pr-ch-tag">Navisworks</span>
+        <span class="pr-ch-tag">Dynamo</span>
+        <span class="pr-ch-tag">Enscape</span>
+        <span class="pr-ch-tag">Const. Docs</span>
+        <span class="pr-ch-tag">MEP Coord.</span>
+      </div>
+    </div>
+    <div class="pr-chapter-right">
+      <div class="pr-gallery" data-interval="3500">
+        <div class="pr-gallery-stage">
+          <img class="pr-gallery-img is-active" src="../assets/images/projects/bmw-showroom-main.webp"    alt="BMW Showroom — Manhattan flagship" loading="lazy">
+          <img class="pr-gallery-img"            src="../assets/images/projects/tpg-interior.jpg"          alt="1290 Avenue of the Americas — Interior" loading="lazy">
+          <img class="pr-gallery-img"            src="../assets/images/projects/bmw-showroom-spread.webp"  alt="BMW Showroom — layout overview" loading="lazy">
+          <img class="pr-gallery-img"            src="../assets/images/projects/tpg-terrace.jpg"           alt="1290 Avenue — Terrace" loading="lazy">
+          <div class="pr-gallery-ui" aria-hidden="true">
+            <div class="pr-gallery-counter">
+              <span class="pr-gc-cur">01</span>
+              <span style="opacity:0.35"> / </span>
+              <span class="pr-gc-tot">04</span>
+            </div>
+            <span class="pr-gallery-hint">Click to advance</span>
+          </div>
+          <div class="pr-gallery-prog-wrap" aria-hidden="true">
+            <div class="pr-gallery-prog"></div>
+          </div>
+        </div>
+      </div>
+      <ul class="pr-bul">
+        <li>Led BIM strategy across architecture, structure, and MEP on simultaneous high-profile commercial projects — standardizing templates, family libraries, and coordination workflows firm-wide.</li>
+        <li>Directed architectural systems coordination for CLEAR's 119,226 SF headquarters at 4 World Trade Center, resolving complex 3D ceiling geometry against structure and MEP under tight tolerances.</li>
+        <li>Produced BIM standards, documentation, and fitout coordination for 25+ JPMorgan Chase locations spanning branch fitouts, executive floors, and client environments across NYC and Upstate New York.</li>
+        <li>Designed FF&amp;E packages and parametric furniture models for BMW's flagship Manhattan showroom at 555 W 57th St., supporting specifications, finishes, and stakeholder presentations.</li>
+        <li>Administered 300+ BIM 360 / ACC projects since 2018 — setup, permissions, model coordination, issue tracking — and led firmwide Revit training annually, raising studio-wide BIM proficiency.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ── 02 — Archnimations ──────────────────────────── -->
+  <article class="pr-chapter" id="wexp-archnim">
+    <div class="pr-chapter-left">
+      <span class="pr-ch-num">02</span>
+      <h3 class="pr-ch-company">Archnimations</h3>
+      <h4 class="pr-ch-role">Independent Architectural Designer</h4>
+      <div class="pr-ch-period">2018 – 2024<br>Independent Practice<br>Concurrent with TPG · New York, NY</div>
+      <div class="pr-ch-tags">
+        <span class="pr-ch-tag">Revit</span>
+        <span class="pr-ch-tag">Rhino</span>
+        <span class="pr-ch-tag">Lumion</span>
+        <span class="pr-ch-tag">AutoCAD</span>
+        <span class="pr-ch-tag">Enscape</span>
+        <span class="pr-ch-tag">Visualization</span>
+      </div>
+    </div>
+    <div class="pr-chapter-right">
+      <div class="pr-gallery" data-interval="4000">
+        <div class="pr-gallery-stage">
+          <img class="pr-gallery-img is-active" src="../assets/images/projects/burton-in99-main.webp"     alt="BURTON IN99 Flagship — Chengdu" loading="lazy">
+          <img class="pr-gallery-img"            src="../assets/images/projects/alpena-prof.jpg"           alt="Alpena 130K SF Mixed-Use" loading="lazy">
+          <img class="pr-gallery-img"            src="../assets/images/projects/dominican-residences.jpg"  alt="Five Residences — Dominican Republic" loading="lazy">
+          <img class="pr-gallery-img"            src="../assets/images/projects/utah-netzero.jpg"          alt="Utah Net-Zero Residential" loading="lazy">
+          <div class="pr-gallery-ui" aria-hidden="true">
+            <div class="pr-gallery-counter">
+              <span class="pr-gc-cur">01</span>
+              <span style="opacity:0.35"> / </span>
+              <span class="pr-gc-tot">04</span>
+            </div>
+            <span class="pr-gallery-hint">Click to advance</span>
+          </div>
+          <div class="pr-gallery-prog-wrap" aria-hidden="true">
+            <div class="pr-gallery-prog"></div>
+          </div>
+        </div>
+      </div>
+      <ul class="pr-bul">
+        <li>Ran an independent design and visualization practice over six years, delivering across residential, commercial, and mixed-use typologies in the US, China, and the Dominican Republic.</li>
+        <li>Designed and produced full visualization package for a 130,000 SF mixed-use development in Alpena, MI — Revit documentation, Lumion renders, and site coordination drawings.</li>
+        <li>Consulted on the BURTON IN99 flagship retail concept in Chengdu — shaping the proposal narrative around sustainable reuse of construction materials and snowboarding gear across a 370 sqm space in a luxury mall.</li>
+        <li>Designed five ground-up single-family residences in the Dominican Republic — schematic design through construction documentation, coordinating with local builders on materials and site constraints.</li>
+        <li>Produced net-zero residential master plan for a Utah development — passive solar orientation, high-performance envelope detailing, and energy modeling integrated from early schematic phase.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ── Formative Experience header ─────────────────── -->
+  <div class="pr-exp-group">
+    <span class="pr-exp-title">Formative Experience</span>
+    <div class="pr-exp-rule"></div>
+  </div>
+
+  <!-- ── 03 — AMA Consulting ─────────────────────────── -->
+  <article class="pr-chapter pr-chapter--compact" id="wexp-ama">
+    <div class="pr-chapter-left">
+      <span class="pr-ch-num">03</span>
+      <h3 class="pr-ch-company">AMA Consulting Engineers</h3>
+      <h4 class="pr-ch-role">BIM / CAD Operator</h4>
+      <div class="pr-ch-period">May 2018 – Apr 2019<br>New York, NY</div>
+      <div class="pr-ch-tags">
+        <span class="pr-ch-tag">Navisworks</span>
+        <span class="pr-ch-tag">Revit</span>
+        <span class="pr-ch-tag">Clash Detection</span>
+        <span class="pr-ch-tag">MEP Coord.</span>
+      </div>
+    </div>
+    <div class="pr-chapter-right">
+      <ul class="pr-bul">
+        <li>Collaborated across 100+ MEP coordination projects on landmark New York buildings — including Peloton HQ (300,000 SF) and Penn Station infrastructure (350,000 SF).</li>
+        <li>Conducted Navisworks clash detection across federated architectural, structural, and MEP models, resolving coordination issues prior to construction.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ── 04 — D-YO Studio ─────────────────────────────── -->
+  <article class="pr-chapter" id="wexp-dyo">
+    <div class="pr-chapter-left">
+      <span class="pr-ch-num">04</span>
+      <h3 class="pr-ch-company">D-YO Studio</h3>
+      <h4 class="pr-ch-role">Assistant Designer</h4>
+      <div class="pr-ch-period">Jan 2016 – May 2018<br>New York, NY</div>
+      <div class="pr-ch-tags">
+        <span class="pr-ch-tag">Revit</span>
+        <span class="pr-ch-tag">AutoCAD</span>
+        <span class="pr-ch-tag">DOB Filing</span>
+        <span class="pr-ch-tag">Energy Analysis</span>
+      </div>
+    </div>
+    <div class="pr-chapter-right">
+      <div class="pr-gallery" data-interval="4500">
+        <div class="pr-gallery-stage">
+          <img class="pr-gallery-img is-active" src="../assets/images/projects/maoya-1.png"              alt="Maoya Hotel — Sichuan, China" loading="lazy">
+          <img class="pr-gallery-img"            src="../assets/images/projects/humeniks-exterior.png"   alt="Humenik's Building — Brooklyn, NY" loading="lazy">
+          <img class="pr-gallery-img"            src="../assets/images/projects/humeniks-before-after.png" alt="Humenik's Building — Before / After" loading="lazy">
+          <div class="pr-gallery-ui" aria-hidden="true">
+            <div class="pr-gallery-counter">
+              <span class="pr-gc-cur">01</span>
+              <span style="opacity:0.35"> / </span>
+              <span class="pr-gc-tot">03</span>
+            </div>
+            <span class="pr-gallery-hint">Click to advance</span>
+          </div>
+          <div class="pr-gallery-prog-wrap" aria-hidden="true">
+            <div class="pr-gallery-prog"></div>
+          </div>
+        </div>
+      </div>
+      <ul class="pr-bul">
+        <li>Initiated and executed firm-wide platform migration from AutoCAD to Revit; introduced material takeoffs to support cost estimation and project budgeting.</li>
+        <li>Independently transitioned Humenik's Building — a ground-up multifamily development in Brooklyn, NY — from AutoCAD into Revit mid-project, enabling rapid iteration and greater layout precision.</li>
+        <li>Prepared ADA compliance documentation, conducted energy analysis including fenestration and R-value calculations, and led DOB filing and construction meetings across residential and commercial projects.</li>
+      </ul>
+    </div>
+  </article>
+
 </section>
 
-<!-- ══ EDUCATION & CERTIFICATIONS ══════════════════════ -->
+<!-- ══ EDUCATION ═══════════════════════════════════════ -->
 <section class="pr-edu reveal">
   <div class="pr-edu-inner">
-    <div class="pr-wexp-head">
-      <h2 class="pr-wexp-title">Education &amp; Certifications</h2>
-      <div class="pr-wexp-hrule"></div>
+    <div class="pr-edu-head">
+      <h2 class="pr-exp-title">Education &amp; Certifications</h2>
+      <div class="pr-exp-rule"></div>
     </div>
     <div class="pr-edu-grid">
       <div class="pr-edu-item">
-        <h3 class="pr-wexp-co">Columbia University</h3>
-        <h4 class="pr-wexp-rt">Master of Architecture</h4>
-        <div class="pr-wexp-pd">2024 · Graduate School of Architecture · New York, NY</div>
+        <div class="pr-edu-co">Columbia University</div>
+        <div class="pr-edu-title">Master of Architecture</div>
+        <div class="pr-edu-sub">2024 · Graduate School of Architecture · New York, NY</div>
       </div>
       <div class="pr-edu-item">
-        <h3 class="pr-wexp-co">U.S. Green Building Council</h3>
-        <h4 class="pr-wexp-rt">LEED Green Associate</h4>
-        <div class="pr-wexp-pd">November 2024 · Credential ID on file</div>
+        <div class="pr-edu-co">U.S. Green Building Council</div>
+        <div class="pr-edu-title">LEED Green Associate</div>
+        <div class="pr-edu-sub">November 2024 · Credential ID on file</div>
       </div>
       <div class="pr-edu-item">
-        <h3 class="pr-wexp-co">Autodesk</h3>
-        <h4 class="pr-wexp-rt">Certified Professional — Revit</h4>
-        <div class="pr-wexp-pd">Certified 2019 &amp; 2024 · Architecture Specialty</div>
+        <div class="pr-edu-co">Autodesk</div>
+        <div class="pr-edu-title">Certified Professional — Revit</div>
+        <div class="pr-edu-sub">Certified 2019 &amp; 2024 · Architecture Specialty</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ CTA BAND ══════════════════════════════════════════ -->
+<!-- ══ CTA ══════════════════════════════════════════════ -->
 <section class="pr-cta-band reveal">
   <div class="pr-cta-inner">
     <div class="pr-cta-text">
@@ -1252,7 +1000,7 @@
   </div>
 </section>
 
-<!-- ══ FOOTER ═══════════════════════════════════════════ -->
+<!-- ══ FOOTER ════════════════════════════════════════════ -->
 <footer>
   <div class="foot-inner">
     <div class="foot-logo">
@@ -1268,253 +1016,104 @@
   </div>
 </footer>
 
-<!-- ══ MODAL ════════════════════════════════════════════ -->
-<div class="pr-modal-overlay" id="pr-modal" role="dialog" aria-modal="true" aria-labelledby="pr-modal-title-el">
-  <div class="pr-modal-panel">
-    <div class="pr-modal-header">
-      <div>
-        <div class="pr-modal-company" id="pr-modal-company-el"></div>
-        <div class="pr-modal-title" id="pr-modal-title-el"></div>
-      </div>
-      <button class="pr-modal-close" id="pr-modal-close" type="button" aria-label="Close">✕</button>
-    </div>
-    <div class="pr-modal-imgs" id="pr-modal-imgs"></div>
-    <div class="pr-modal-rule"></div>
-    <p class="pr-modal-desc" id="pr-modal-desc"></p>
-    <div class="pr-modal-tags" id="pr-modal-tags"></div>
-  </div>
-</div>
-
-<!-- ══ SCROLL HINT ═══════════════════════════════════════ -->
-<div class="pr-hint" id="pr-hint" aria-hidden="true">Click on any project to expand</div>
-
 <script src="../assets/js/main.js"></script>
-
-<!-- ══ PROFESSIONAL PAGE SCRIPT ══════════════════════════ -->
 <script>
 (function () {
   'use strict';
 
-  /* ── PROJECT DATA ──────────────────────────────────────── */
-  var PROJECTS = {
-    'tpg-1290': {
-      company: 'TPG Architecture',
-      title:   '1290 Avenue of the Americas',
-      images:  [
-        '../assets/images/projects/tpg-interior.jpg',
-        '../assets/images/projects/tpg-terrace.jpg'
-      ],
-      desc: 'Full-floor interior buildout, 130,000 SF mixed-use program. BIM lead coordinating architectural, structural, and MEP systems. Produced construction documentation, millwork details, and coordinated ceiling geometry under tight tolerances.',
-      tags: ['Commercial Interior', 'BIM Lead', 'Revit', 'MEP Coordination', '130,000 SF']
-    },
-    'tpg-bmw-showroom': {
-      company: 'TPG Architecture',
-      title:   'BMW Showroom',
-      images:  [
-        '../assets/images/projects/bmw-showroom-main.webp',
-        '../assets/images/projects/bmw-showroom-restroom.webp',
-        '../assets/images/projects/bmw-showroom-furniture.webp',
-        '../assets/images/projects/bmw-showroom-spread.webp'
-      ],
-      desc: 'Luxury BMW showroom at 555 W. 57th St. in New York, NY, designed to express the brand through refined architectural language and elevated materiality. Contributed to visualization and documentation by leading Revit modeling for intricate custom furniture pieces and specialty lighting elements, while supporting FF&E coordination for specifications, finishes, and procurement documentation under an accelerated schedule.',
-      tags: ['Automotive Retail', 'BMW Showroom', 'Revit', 'Parametric Families', 'FF&E', 'Specialty Lighting', 'New York, NY']
-    },
-    'dyo-maoya': {
-      company: 'D-YO Studio',
-      title:   'Maoya Hotel',
-      images:  [
-        '../assets/images/projects/maoya-1.png',
-        '../assets/images/projects/maoya-2.png'
-      ],
-      desc: 'Three-level terraced boutique hotel on the Maoya Grasslands, Sichuan, China. Road-facing side integrated into the hillside; guest areas open to the grasslands through full-height curtain wall glazing. Design collaboration with D-YO Studio.',
-      tags: ['Boutique Hotel', 'Design Collaboration', 'Rhino', 'Visualization', 'Sichuan, China']
-    },
-    'dyo-humeniks': {
-      company: 'D-YO Studio',
-      title:   "Humenik's Building",
-      images:  [
-        '../assets/images/projects/humeniks-before-after.png',
-        '../assets/images/projects/humeniks-kitchen.png',
-        '../assets/images/projects/humeniks-exterior.png'
-      ],
-      desc: "Ground-up multifamily development on a tightly constrained urban lot in Brooklyn, NY. Independently transitioned the project from AutoCAD into Revit mid-design, enabling rapid iteration and greater layout precision. Prepared ADA compliance documentation, conducted energy analysis including fenestration and R-value calculations, and supported code-related decision-making throughout design development.",
-      tags: ['Multifamily', 'Ground-Up', 'Brooklyn, NY', 'Revit', 'ADA Compliance', 'Energy Analysis', 'D-YO Studio']
-    },
-    'archnim-alpena': {
-      company: 'Archnimations',
-      title:   'Alpena Mixed-Use Development',
-      images:  [
-        '../assets/images/projects/alpena-prof.jpg'
-      ],
-      desc: '130,000 SF mixed-use development in Alpena, MI. Full visualization package including Revit documentation, Lumion renders, and site coordination drawings delivered as independent practice engagement.',
-      tags: ['Mixed-Use', 'Independent Practice', 'Revit', 'Lumion', '130,000 SF', 'Alpena, MI']
-    },
-    'archnim-burton': {
-      company: 'Archnimations',
-      title:   'BURTON IN99 Flagship',
-      images:  [
-        '../assets/images/projects/burton-in99-main.webp',
-        '../assets/images/projects/burton-in99-detail-1.webp',
-        '../assets/images/projects/burton-in99-detail-2.webp',
-        '../assets/images/projects/burton-in99-spread.webp'
-      ],
-      desc: 'Consulted during SA&BOO Studio’s response to BURTON’s RFP for its first flagship store in Western China, located in Chengdu’s IN99 luxury mall. Supported the early design phase by helping shape the concept narrative around BURTON’s ethos of people, planet, and sports, positioning the 370 sqm store as a sustainable and culturally grounded retail landmark. The proposal reused waste construction materials from the previous tenant and damaged snowboarding gear supplied by BURTON to form a distinctive facade aligned with the brand message.',
-      tags: ['Fashion Retail', 'Flagship Store', 'Concept Narrative', 'Sustainable Reuse', 'Chengdu, Sichuan', '370 sqm']
-    },
-    'archnim-residences': {
-      company: 'Archnimations',
-      title:   'Five Ground-Up Residences',
-      images:  [
-        '../assets/images/projects/dominican-residences.jpg'
-      ],
-      desc: 'Five single-family ground-up residences in the Dominican Republic — schematic design through construction documentation, coordinating with local builders on materials, site constraints, and regional code requirements.',
-      tags: ['Residential', 'Ground-Up', 'Independent Practice', 'AutoCAD', 'Revit', 'Dominican Republic']
-    },
-    'archnim-netzero': {
-      company: 'Archnimations',
-      title:   'Utah Net-Zero Development',
-      images:  [
-        '../assets/images/projects/utah-netzero.jpg'
-      ],
-      desc: 'Net-zero residential master plan for a Utah development. Passive solar orientation, high-performance envelope detailing, and energy modeling integrated into the design workflow from early schematic phase.',
-      tags: ['Residential', 'Net Zero', 'Sustainability', 'Independent Practice', 'Enscape', 'Utah']
-    }
-  };
-
-  /* ── REEL PROJECTS ─────────────────────────────────────── */
-  var REEL_PROJECTS = [
-    { name: '1290 Avenue of the Americas', year: '2023', img: '../assets/images/projects/tpg-interior.jpg',         modal: 'tpg-1290'  },
-    { name: '1290 Avenue — Terrace',       year: '2023', img: '../assets/images/projects/tpg-terrace.jpg',          modal: 'tpg-1290'  },
-    { name: 'BMW Showroom',                year: '2023', img: '../assets/images/projects/bmw-showroom-main.webp',   modal: 'tpg-bmw-showroom' },
-    { name: 'Maoya Hotel',                 year: '2022', img: '../assets/images/projects/maoya-1.png',             modal: 'dyo-maoya' },
-    { name: '130K SF Mixed-Use',           year: '2021', img: '../assets/images/projects/alpena-prof.jpg',          modal: 'archnim-alpena'     },
-    { name: 'BURTON IN99 Flagship',        year: '2020', img: '../assets/images/projects/burton-in99-main.webp',    modal: 'archnim-burton'     },
-    { name: 'Five Ground-Up Residences',   year: '2019', img: '../assets/images/projects/dominican-residences.jpg', modal: 'archnim-residences' },
-    { name: 'Net Zero Development',        year: '2018', img: '../assets/images/projects/utah-netzero.jpg',         modal: 'archnim-netzero'    }
+  /* ── VERTICAL REEL ─────────────────────────────────── */
+  var REEL = [
+    { name: 'BMW Showroom',              year: '2023', img: '../assets/images/projects/bmw-showroom-main.webp'    },
+    { name: '1290 Ave of the Americas',  year: '2023', img: '../assets/images/projects/tpg-interior.jpg'          },
+    { name: 'BURTON IN99 Flagship',      year: '2020', img: '../assets/images/projects/burton-in99-main.webp'     },
+    { name: 'Alpena 130K SF Mixed-Use',  year: '2021', img: '../assets/images/projects/alpena-prof.jpg'           },
+    { name: 'Dominican Residences',      year: '2019', img: '../assets/images/projects/dominican-residences.jpg'  },
+    { name: 'Utah Net-Zero Dev.',        year: '2018', img: '../assets/images/projects/utah-netzero.jpg'          },
+    { name: 'Maoya Hotel, Sichuan',      year: '2022', img: '../assets/images/projects/maoya-1.png'               },
+    { name: '1290 Ave — Terrace',        year: '2023', img: '../assets/images/projects/tpg-terrace.jpg'           }
   ];
 
-  /* ── MODAL ─────────────────────────────────────────────── */
-  var overlay   = document.getElementById('pr-modal');
-  var closeBtn  = document.getElementById('pr-modal-close');
-  var elCompany = document.getElementById('pr-modal-company-el');
-  var elTitle   = document.getElementById('pr-modal-title-el');
-  var elImgs    = document.getElementById('pr-modal-imgs');
-  var elDesc    = document.getElementById('pr-modal-desc');
-  var elTags    = document.getElementById('pr-modal-tags');
-
-  function openModal(id) {
-    var p = PROJECTS[id];
-    if (!p || !overlay) return;
-
-    elCompany.textContent = p.company;
-    elTitle.textContent   = p.title;
-    elDesc.textContent    = p.desc;
-
-    elImgs.innerHTML = '';
-    elImgs.className = 'pr-modal-imgs';
-    if (p.images.length === 1) elImgs.classList.add('single');
-    else if (p.images.length === 3) elImgs.classList.add('triple');
-    p.images.forEach(function (src) {
-      var img = document.createElement('img');
-      img.src = src; img.className = 'pr-modal-img'; img.alt = p.title;
-      elImgs.appendChild(img);
-    });
-
-    elTags.innerHTML = '';
-    p.tags.forEach(function (t) {
-      var span = document.createElement('span');
-      span.className = 'pr-modal-tag'; span.textContent = t;
-      elTags.appendChild(span);
-    });
-
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    if (!overlay) return;
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  if (overlay) overlay.addEventListener('click', function (e) {
-    if (e.target === overlay) closeModal();
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) closeModal();
-  });
-
-  /* Delegate: any [data-modal] element opens the modal */
-  document.addEventListener('click', function (e) {
-    var el = e.target.closest('[data-modal]');
-    if (!el) return;
-    var id = el.dataset.modal;
-    if (id && PROJECTS[id]) openModal(id);
-  });
-
-  /* ── PROJECT REEL ──────────────────────────────────────── */
-  var track = document.getElementById('pr-reel-track');
-  var reel  = document.getElementById('pr-reel');
-  if (track && reel) {
-    function makeCard(p) {
-      var card = document.createElement('div');
-      var img = document.createElement('img');
-      var overlay = document.createElement('div');
-      var name = document.createElement('span');
-      var year = document.createElement('span');
-
+  var reelTrack = document.getElementById('pr-reel-track');
+  if (reelTrack) {
+    REEL.concat(REEL).forEach(function (p) {
+      var card  = document.createElement('div');
       card.className = 'pr-reel-card';
-      if (p.modal) card.dataset.modal = p.modal;
-
+      var img   = document.createElement('img');
       img.className = 'pr-reel-card-img';
-      img.src = p.img;
-      img.alt = p.name;
-      img.loading = 'lazy';
-
-      overlay.className = 'pr-reel-card-overlay';
-      name.className = 'pr-reel-card-name';
-      year.className = 'pr-reel-card-year';
-      name.textContent = p.name;
-      year.textContent = p.year;
-
-      overlay.appendChild(name);
-      overlay.appendChild(year);
-      card.appendChild(img);
-      card.appendChild(overlay);
-      return card;
-    }
-    REEL_PROJECTS.concat(REEL_PROJECTS).forEach(function (p) {
-      track.appendChild(makeCard(p));
+      img.src   = p.img; img.alt = p.name; img.loading = 'lazy';
+      var ov    = document.createElement('div');
+      ov.className = 'pr-reel-card-overlay';
+      var name  = document.createElement('span');
+      name.className = 'pr-reel-card-name'; name.textContent = p.name;
+      var year  = document.createElement('span');
+      year.className = 'pr-reel-card-year'; year.textContent = p.year;
+      ov.appendChild(name); ov.appendChild(year);
+      card.appendChild(img); card.appendChild(ov);
+      reelTrack.appendChild(card);
     });
   }
 
-  /* ── SCROLL HINT ────────────────────────────────────────── */
-  var hint = document.getElementById('pr-hint');
-  var wexp = document.querySelector('.pr-wexp');
-  if (hint && wexp && !sessionStorage.getItem('pr-hint-shown')) {
-    var hintObs = new IntersectionObserver(function (entries) {
-      if (!entries[0].isIntersecting) return;
-      hintObs.disconnect();
-      sessionStorage.setItem('pr-hint-shown', '1');
-      hint.classList.add('visible');
-    }, { threshold: 0.25 });
-    hintObs.observe(wexp);
-  }
+  /* ── GALLERIES ─────────────────────────────────────── */
+  document.querySelectorAll('.pr-gallery').forEach(function (gallery) {
+    var stage    = gallery.querySelector('.pr-gallery-stage');
+    var imgs     = Array.prototype.slice.call(gallery.querySelectorAll('.pr-gallery-img'));
+    var curEl    = gallery.querySelector('.pr-gc-cur');
+    var progEl   = gallery.querySelector('.pr-gallery-prog');
+    var ms       = parseInt(gallery.dataset.interval || '3500', 10);
+    var current  = 0;
+    var timer    = null;
 
-  /* ── MOBILE STRIP: pause on touch ──────────────────────── */
-  var stripScroller = document.getElementById('pr-strip-scroller');
-  var stripEl = document.querySelector('.pr-mobile-strip');
-  if (stripEl && stripScroller) {
-    stripEl.addEventListener('touchstart', function () {
-      stripScroller.style.animationPlayState = 'paused';
-    }, { passive: true });
-    stripEl.addEventListener('touchend', function () {
-      setTimeout(function () {
-        stripScroller.style.animationPlayState = 'running';
-      }, 1200);
-    }, { passive: true });
-  }
+    if (imgs.length <= 1) return;
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function startProg() {
+      if (!progEl) return;
+      progEl.style.animationDuration = ms + 'ms';
+      progEl.classList.remove('running');
+      void progEl.offsetWidth;
+      progEl.classList.add('running');
+    }
+
+    function showImg(i) {
+      imgs[current].classList.remove('is-active');
+      current = (i + imgs.length) % imgs.length;
+      imgs[current].classList.add('is-active');
+      if (curEl) curEl.textContent = pad(current + 1);
+      startProg();
+    }
+
+    function advance() { showImg(current + 1); }
+
+    function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(advance, ms);
+    }
+
+    function stopTimer() { clearInterval(timer); timer = null; }
+
+    /* kick off */
+    startProg();
+    startTimer();
+
+    if (stage) {
+      /* click advances image */
+      stage.addEventListener('click', function () {
+        stopTimer();
+        advance();
+        startTimer();
+      });
+      /* pause on hover */
+      stage.addEventListener('mouseenter', function () {
+        stopTimer();
+        if (progEl) progEl.classList.remove('running');
+      });
+      stage.addEventListener('mouseleave', function () {
+        startProg();
+        startTimer();
+      });
+    }
+  });
 
 }());
 </script>
