@@ -272,7 +272,7 @@
   appearance: none;
   border-radius: 0;
   padding: 0;
-  cursor: none;
+  cursor: pointer;
 }
 .bim-video-launch:hover,
 .bim-video-launch:focus-visible {
@@ -357,20 +357,6 @@
   letter-spacing: 1.4px;
   text-transform: uppercase;
   color: var(--gold-lt);
-}
-body.bim-video-cursor #cur::after {
-  content: 'PLAY';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) rotate(-45deg);
-  font-family: var(--mono);
-  font-size: 7px;
-  letter-spacing: 1px;
-  color: var(--gold);
-}
-body.bim-video-cursor #cur-dot {
-  transform: translate(-50%, -50%) scale(0);
 }
 .bim-video-modal {
   position: fixed;
@@ -613,7 +599,7 @@ body.bim-video-cursor #cur-dot {
   text-align: left;
   color: inherit;
   font: inherit;
-  cursor: none;
+  cursor: pointer;
   transition: background .2s, border-color .2s, transform .2s, box-shadow .2s;
 }
 .sw-tool-card:hover,
@@ -1229,14 +1215,7 @@ body.bim-video-cursor #cur-dot {
   }
 
   triggers.forEach(function (trigger) {
-    trigger.addEventListener('mouseenter', function () {
-      document.body.classList.add('bim-video-cursor');
-    });
-    trigger.addEventListener('mouseleave', function () {
-      document.body.classList.remove('bim-video-cursor');
-    });
     trigger.addEventListener('click', function () {
-      document.body.classList.remove('bim-video-cursor');
       openVideo(trigger);
     });
   });

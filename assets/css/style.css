@@ -35,69 +35,9 @@ body {
 }
 a, button { cursor: pointer; touch-action: manipulation; }
 
-/* ── CURSOR ─────────────────────────────── */
-#cur {
-  position: fixed;
-  width: 44px; height: 44px;
-  top: 0; left: 0;
-  transform: translate3d(var(--cursor-x, -200px), var(--cursor-y, -200px), 0) translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 50000;
-  will-change: transform;
-  scale: 1;
-  rotate: 0deg;
-  transition: scale .35s cubic-bezier(.16,1,.3,1), rotate .35s cubic-bezier(.16,1,.3,1);
-}
-#cur.hovering {
-  scale: 1.5;
-  rotate: 45deg;
-}
-#cur circle.cur-ring {
-  transition: stroke .22s, stroke-width .22s;
-}
-#cur.hovering circle.cur-ring {
-  stroke: var(--gold);
-  stroke-width: 1.5;
-}
-#cur line {
-  transition: stroke .22s;
-}
-#cur.hovering line {
-  stroke: var(--gold);
-}
-#cur-dot {
-  position: fixed;
-  width: 5px; height: 5px;
-  background: var(--gold);
-  border-radius: 50%;
-  top: 0; left: 0;
-  transform: translate3d(var(--cursor-x, -200px), var(--cursor-y, -200px), 0) translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 50001;
-  will-change: transform;
-  scale: 1;
-  transition: scale .1s;
-}
-#cur-dot.pressing {
-  scale: 2.5;
-  background: var(--gold-dk);
-}
-
 #cur,
 #cur-dot {
   display: none;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  body.has-custom-cursor,
-  body.has-custom-cursor * {
-    cursor: none !important;
-  }
-
-  body.has-custom-cursor #cur,
-  body.has-custom-cursor #cur-dot {
-    display: block;
-  }
 }
 
 /* ── NAVIGATION ─────────────────────────── */
