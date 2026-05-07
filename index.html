@@ -27,9 +27,9 @@
 .hero__photo {
   position: absolute;
   inset: 0;
-  background-image: url('assets/images/projects/tpg-terrace.jpg');
-  background-size: cover;
-  background-position: 66% center;
+  background-image: url('assets/images/hero-studio.jpg');
+  background-size: auto 100%;
+  background-position: right center;
   background-repeat: no-repeat;
   z-index: 2;
   opacity: 0;
@@ -40,28 +40,28 @@
 .hero__bloom {
   position: absolute;
   inset: -50px;
-  background-image: url('assets/images/projects/tpg-terrace.jpg');
-  background-size: cover;
-  background-position: 66% center;
+  background-image: url('assets/images/hero-studio.jpg');
+  background-size: auto 110%;
+  background-position: right center;
   background-repeat: no-repeat;
-  filter: blur(34px) brightness(0.92) saturate(0.72);
-  mix-blend-mode: soft-light;
+  filter: blur(32px) brightness(1.5) saturate(0.2);
+  mix-blend-mode: screen;
   z-index: 1;
-  opacity: 0.44;
+  opacity: 0;
   pointer-events: none; /* decorative — never intercepts clicks */
   will-change: opacity;
-  animation: bloomFade 1.8s ease 0.95s forwards;
+  animation: bloomFade 2s ease 1s forwards;
 }
 .hero__gradient { display: none; }
 @keyframes heroSettle {
   0%   { opacity:0;   transform:scale(1.07) translateX(44px);
-         filter:brightness(1.5) saturate(0.84) contrast(0.9); }
+         filter:brightness(2.6) saturate(0) contrast(0.72); }
   20%  { opacity:1;   transform:scale(1.04) translateX(22px);
-         filter:brightness(1.18) saturate(0.9) contrast(0.96); }
+         filter:brightness(1.9) saturate(0.07) contrast(0.86); }
   55%  {              transform:scale(1.015) translateX(7px);
-         filter:brightness(1.03) saturate(0.96) contrast(1); }
+         filter:brightness(1.18) saturate(0.52) contrast(0.97); }
   82%  {              transform:scale(1.003) translateX(1px);
-         filter:brightness(1) saturate(1) contrast(1); }
+         filter:brightness(1.03) saturate(0.9) contrast(1); }
   100% { opacity:1;   transform:scale(1) translateX(0);
          filter:brightness(1) saturate(1) contrast(1); }
 }
@@ -248,7 +248,7 @@
 @media (max-width: 768px) {
   .hero        { height: auto; min-height: 100svh; }
   /* Image sits at the top, out of the way of the text */
-  .hero__photo { background-position: center center; background-size: cover; }
+  .hero__photo { background-position: center top; background-size: cover; }
   /* Bloom adds visual noise on mobile — gradient handles the fade */
   .hero__bloom { display: none; }
   .hero__content {
@@ -264,7 +264,7 @@
     width: 100%;
     aspect-ratio: 4 / 3;
     margin: 6px 0 18px;
-    background-image: url('assets/images/projects/tpg-terrace.jpg');
+    background-image: url('assets/images/hero-studio.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;

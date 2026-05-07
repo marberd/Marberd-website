@@ -76,7 +76,9 @@
   padding: 84px 60px 76px;
   border-bottom: none;
   background:
-    linear-gradient(90deg, rgba(17,17,24,0.98) 0%, rgba(17,17,24,0.94) 54%, rgba(17,17,24,0.82) 100%),
+    radial-gradient(circle at 82% 26%, rgba(184,148,106,0.10), transparent 18vw),
+    radial-gradient(circle at 18% 18%, rgba(47,111,115,0.10), transparent 20vw),
+    linear-gradient(90deg, rgba(12,12,18,0.98) 0%, rgba(17,17,24,0.94) 54%, rgba(17,17,24,0.86) 100%),
     linear-gradient(180deg, rgba(17,17,24,0.96) 0%, rgba(17,17,24,0.90) 100%);
   position: relative;
   overflow: hidden;
@@ -86,19 +88,19 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 64px 64px;
-  -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 78%);
-  mask-image: linear-gradient(90deg, #000 0%, transparent 78%);
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 96px 96px;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 70%);
+  mask-image: linear-gradient(90deg, #000 0%, transparent 70%);
   pointer-events: none;
 }
 .contact-page .page-hero::after {
   content: '';
   position: absolute;
   inset: auto 0 0;
-  height: 20%;
-  background: linear-gradient(180deg, transparent, rgba(17,17,24,0.96));
+  height: 24%;
+  background: linear-gradient(180deg, transparent, rgba(12,12,18,0.98));
   pointer-events: none;
 }
 .contact-shell {
@@ -216,35 +218,33 @@
 }
 .contact-wireframe {
   position: absolute;
-  right: -18px;
-  top: 32px;
-  width: min(420px, 44vw);
-  height: 280px;
+  right: -24px;
+  top: 18px;
+  width: min(470px, 46vw);
+  height: 320px;
   z-index: 0;
-  border-radius: 6px;
-  opacity: 0.12;
+  border-radius: 10px;
+  opacity: 0.08;
   overflow: hidden;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(212,184,150,0.10) 1px, transparent 1px),
-    linear-gradient(rgba(212,184,150,0.10) 1px, transparent 1px),
-    linear-gradient(135deg, transparent 47%, rgba(212,184,150,0.12) 48%, transparent 49%),
+    linear-gradient(90deg, rgba(212,184,150,0.08) 1px, transparent 1px),
+    linear-gradient(rgba(212,184,150,0.08) 1px, transparent 1px),
     linear-gradient(180deg, rgba(255,255,255,0.04), transparent 60%);
-  background-size: 120px 120px, 120px 120px, 240px 240px, 100% 100%;
-  border: 1px solid rgba(212,184,150,0.18);
+  background-size: 128px 128px, 128px 128px, 100% 100%;
+  border: 1px solid rgba(212,184,150,0.14);
 }
 .contact-wireframe::before,
 .contact-wireframe::after {
   content: '';
   position: absolute;
-  border: 1px solid rgba(212,184,150,0.28);
+  border: 1px solid rgba(212,184,150,0.22);
 }
 .contact-wireframe::before {
-  inset: 18% 12% 28% 16%;
+  inset: 16% 14% 24% 14%;
 }
 .contact-wireframe::after {
-  inset: 28% 22% 20% 8%;
-  transform: skewY(-12deg);
+  inset: 30% 18% 18% 10%;
 }
 
 .contact-form-card {
