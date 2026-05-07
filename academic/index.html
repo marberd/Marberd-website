@@ -730,7 +730,7 @@ body.academic-modal-active #main-nav {
 
 .modal-meta {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 18px;
   margin-top: 28px;
   padding-top: 22px;
@@ -955,6 +955,7 @@ body.academic-modal-active #main-nav {
       <div class="modal-meta">
         <div><span class="meta-label">Studio</span><strong id="modal-studio"></strong></div>
         <div><span class="meta-label">Critic</span><strong id="modal-critic"></strong></div>
+        <div><span class="meta-label">Team</span><strong id="modal-team"></strong></div>
         <div><span class="meta-label">Tools</span><strong id="modal-tools"></strong></div>
       </div>
       <div class="modal-links" id="modal-links"></div>
@@ -974,9 +975,10 @@ body.academic-modal-active #main-nav {
       category: 'Architecture Studio III · Fall 2022',
       studio: 'Architecture Studio III',
       critic: 'Erica Goetz',
+      team: 'Marberd Bernard · Marika Falco',
       tag: 'Housing / Water Systems',
-      desc: 'A riverfront housing project developed with Marika Falco. Inspired by Venice and the portego typology, the design uses stepping reciprocal frames to organize apartments, welcome gardens, circulation, and extended living spaces facing the river. The building also treats water as an environmental system, drawing river water through structural pipe chases for heating, cooling, and radiant floors while centering water awareness and swim education for residents and neighbors.',
-      tools: 'Housing Design · Environmental Systems · Reciprocal Frames',
+      desc: 'A riverfront housing project developed as a team effort between Marika Falco and Marberd Bernard. Marika led the creative concept development, drawing from Venice and the portego typology, while Marberd led research, technical execution, environmental analysis, and BIM production. The proposal uses stepping reciprocal frames to organize apartments, welcome gardens, circulation, and extended living spaces facing the river, while treating water as an environmental system through structural pipe chases for heating, cooling, and radiant floors.',
+      tools: 'Revit · Revit Insight · Adobe Suite · Lumion',
       images: [
         '../assets/images/academic/optimized/little-mott-haven/day-exterior.webp',
         '../assets/images/academic/optimized/little-mott-haven/october-night.webp',
@@ -994,6 +996,7 @@ body.academic-modal-active #main-nav {
       category: 'Architecture Studio IV · Spring 2023',
       studio: 'Architecture Studio IV',
       critic: 'Robert Marino',
+      team: 'Marberd Bernard',
       tag: 'Environmental / Biomimetic',
       desc: 'A waterfront civic structure whose branching network of Ipe wood functions simultaneously as facade, structure, and foundation, drawing from mangrove ecosystems to mediate land, water, and light.',
       tools: 'Revit · Lumion · Luban',
@@ -1018,6 +1021,7 @@ body.academic-modal-active #main-nav {
       category: 'Re-Thinking BIM · Spring 2023',
       studio: 'Re-Thinking BIM',
       critic: 'Joseph Brennan',
+      team: 'Marberd Bernard',
       tag: 'BIM / Urban Systems',
       desc: 'A BIM and urban systems study for Hudson Yards translating special district zoning, lot envelopes, solar exposure, public space requirements, and tower massing into a coordinated mixed-use proposal.',
       tools: 'BIM · Zoning Analysis · Massing',
@@ -1029,9 +1033,7 @@ body.academic-modal-active #main-nav {
       ],
       thumb: '../assets/images/academic/thumbs/final-layout-01.webp',
       links: [
-        { label: 'Columbia GSAPP', href: 'https://www.arch.columbia.edu/student-work/11962' },
-        { label: 'Final Layout PDF', href: '../assets/pdfs/academic/mas-hudson-yards/final-layout.pdf' },
-        { label: 'Final Render Board PDF', href: '../assets/pdfs/academic/mas-hudson-yards/final-render-board.pdf' }
+        { label: 'Columbia GSAPP', href: 'https://www.arch.columbia.edu/student-work/11962' }
       ]
     },
     {
@@ -1040,6 +1042,7 @@ body.academic-modal-active #main-nav {
       category: 'Material Research · Spring 2024',
       studio: 'Material Kitchens + Architecture Studio VI',
       critic: 'Lola Ben-Alon / David Benjamin',
+      team: 'Marberd Bernard',
       tag: 'Carbon / Biodegradable Systems',
       desc: 'A hybrid material investigation testing loofah as reinforcement, carbon storage, and biodegradable structure through adobe and clay brick prototypes.',
       tools: 'Adobe · Clay · Loofah · Material Testing',
@@ -1066,6 +1069,7 @@ body.academic-modal-active #main-nav {
       category: 'Architecture Studio V · Fall 2023',
       studio: 'ARCH4105-17',
       critic: 'Jorge Otero-Pailos / Mark Rakatansky',
+      team: 'Marberd Bernard',
       tag: 'Civic Infrastructure',
       desc: 'A Core V proposal for a water museum in Venice, shaped by the discovery of an overlooked pool building and its triangular woven structure. The project turns freshwater history into a sequence of exhibition islands, moving visitors through architecture, infrastructure, and civic memory.',
       tools: 'Rhino · AutoCAD · V-Ray · InDesign',
@@ -1093,6 +1097,7 @@ body.academic-modal-active #main-nav {
       category: 'Architecture Studio V · Spring 2023',
       studio: 'A4115-1',
       critic: 'Lola Ben-Alon',
+      team: 'Marberd Bernard',
       tag: 'Life Cycle Systems',
       desc: 'A technical studio project that studies a single case study building through material geographies, environmental and social life cycles, construction sequencing, and project management. The final work combines analysis with a full-scale mock-up of a selected detail.',
       tools: 'Rhino · AutoCAD · InDesign · Model Making',
@@ -1214,6 +1219,7 @@ body.academic-modal-active #main-nav {
     document.getElementById('modal-desc').textContent = project.desc;
     document.getElementById('modal-studio').textContent = project.studio;
     document.getElementById('modal-critic').textContent = project.critic;
+    document.getElementById('modal-team').textContent = project.team || 'Marberd Bernard';
     document.getElementById('modal-tools').textContent = project.tools;
 
     currentImages = project.images || [];
