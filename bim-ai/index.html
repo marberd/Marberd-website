@@ -851,7 +851,6 @@
   }
 }
 @media (max-width: 600px) {
-  .bim-ai-grid { grid-template-columns: 1fr 1fr; }
   .bim-hero-h1 { font-size: clamp(50px, 16vw, 70px); }
   .bim-hero-sub { font-size: 15px; }
   .bim-hero-actions { align-items: stretch; }
@@ -904,12 +903,23 @@
     transform: translateX(-50%) scale(.94);
     transform-origin: center;
   }
-  .ai-card-featured { grid-column: span 2; }
   .sw-card-grid { grid-template-columns: 1fr; }
   .sw-detail-panel { min-height: 260px; }
+
+  /* ── AI cards: tiny & cute 3-column grid ── */
+  .bim-ai-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+  .ai-card { min-height: 0; padding: 10px 10px 9px; }
+  .ai-name { font-size: 10.5px; margin-bottom: 3px; }
+  .ai-maker { font-size: 6px; letter-spacing: 1px; margin-bottom: 0; }
+  .ai-use { display: none; }
+  .ai-tool-list { gap: 4px; margin-top: 8px; }
+  .ai-tool-list span { min-height: 18px; padding: 0 6px; font-size: 6px; letter-spacing: 0.8px; }
+  .ai-card-featured { grid-column: span 2; }
+  .ai-card-copilot { grid-column: auto; }
 }
 @media (max-width: 420px) {
-  .bim-ai-grid { grid-template-columns: 1fr; }
+  /* keep 3-column layout even on small phones */
+  .bim-ai-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
   .bim-hero-h1,
