@@ -757,6 +757,9 @@ body.academic-modal-active #main-nav {
 </style>
 </head>
 <body>
+<svg id="cur" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg"><circle class="cur-ring" cx="22" cy="22" r="16" stroke="#111118" stroke-width="1"/><line x1="22" y1="3" x2="22" y2="9" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="35" x2="22" y2="41" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="22" x2="9" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="22" x2="41" y2="22" stroke="#B8946A" stroke-width="1.5" stroke-linecap="round"/></svg>
+<div id="cur-dot"></div>
+
 <nav id="main-nav">
   <a id="nav-logo" href="/" title="MARBERD">
     <span class="logo-wrap">
@@ -1026,7 +1029,7 @@ body.academic-modal-active #main-nav {
     if (project.n === '02') button.classList.add('is-mangrove');
 
     var media = project.images.length
-      ? '<img src="' + project.images[0] + '" alt="' + plainTitle(project) + '" loading="' + (index > 2 ? 'lazy' : 'eager') + '">'
+      ? '<img src="' + project.images[0] + '" alt="' + plainTitle(project) + '" loading="lazy" decoding="async">'
       : '<div class="project-placeholder"><span>' + project.n + '</span></div>';
 
     button.innerHTML =
@@ -1053,6 +1056,7 @@ body.academic-modal-active #main-nav {
     if (!slides.length) return;
     currentSlide = (index + slides.length) % slides.length;
     slides.forEach(function (img, i) {
+      if (i === currentSlide && !img.src) img.src = img.dataset.src;
       img.classList.toggle('active', i === currentSlide);
     });
   }
@@ -1076,9 +1080,14 @@ body.academic-modal-active #main-nav {
     if (currentImages.length) {
       currentImages.forEach(function (src, i) {
         var img = document.createElement('img');
-        img.src = src;
+        img.dataset.src = src;
         img.alt = plainTitle(project);
-        if (i === 0) img.className = 'active';
+        img.loading = i === 0 ? 'eager' : 'lazy';
+        img.decoding = 'async';
+        if (i === 0) {
+          img.src = src;
+          img.className = 'active';
+        }
         gallery.insertBefore(img, prev);
       });
     } else {

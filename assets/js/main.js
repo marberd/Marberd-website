@@ -10,23 +10,35 @@
 
   // Start offscreen so it doesn't flash at 0,0
   let mx = -200, my = -200, cx = -200, cy = -200;
+  let cursorFrame = 0;
+
+  function setCursorPosition(el, x, y) {
+    el.style.setProperty('--cursor-x', x.toFixed(1) + 'px');
+    el.style.setProperty('--cursor-y', y.toFixed(1) + 'px');
+  }
+
+  function tick() {
+    cursorFrame = 0;
+
+    cx += (mx - cx) * 0.22;
+    cy += (my - cy) * 0.22;
+    setCursorPosition(cur, cx, cy);
+    setCursorPosition(curDot, mx, my);
+
+    if (Math.abs(mx - cx) > 0.2 || Math.abs(my - cy) > 0.2) {
+      cursorFrame = requestAnimationFrame(tick);
+    }
+  }
+
+  function requestCursorTick() {
+    if (!cursorFrame) cursorFrame = requestAnimationFrame(tick);
+  }
 
   document.addEventListener('mousemove', e => {
     mx = e.clientX;
     my = e.clientY;
+    requestCursorTick();
   });
-
-  (function tick() {
-    // Lagged ring follows mouse at 13% per frame
-    cx += (mx - cx) * 0.22;
-    cy += (my - cy) * 0.22;
-    cur.style.left    = cx + 'px';
-    cur.style.top     = cy + 'px';
-    // Dot snaps exactly
-    curDot.style.left = mx + 'px';
-    curDot.style.top  = my + 'px';
-    requestAnimationFrame(tick);
-  })();
 
   // Hover state — scale + rotate via CSS class
   document.querySelectorAll('a, button, [data-hover]').forEach(el => {
