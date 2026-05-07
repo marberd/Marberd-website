@@ -218,6 +218,63 @@
 }
 .work-card__sub { font-family: var(--sans); font-size: 11px; color: var(--muted); font-weight: 300; }
 
+/* ── PROJECT BOTTOM SHEET (mobile) ── */
+.wm-overlay {
+  position: fixed; inset: 0; z-index: 8000;
+  background: rgba(0,0,0,0.55);
+  display: flex; align-items: flex-end;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .28s ease, visibility .28s ease;
+}
+.wm-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; }
+.wm-panel {
+  background: var(--white);
+  width: 100%; max-height: 88svh; overflow-y: auto;
+  border-radius: 14px 14px 0 0;
+  transform: translateY(32px);
+  transition: transform .38s cubic-bezier(.16,1,.3,1);
+  position: relative;
+}
+.wm-overlay.open .wm-panel { transform: translateY(0); }
+.wm-handle {
+  width: 36px; height: 4px; background: rgba(0,0,0,0.12);
+  border-radius: 2px; margin: 12px auto 0;
+}
+.wm-close {
+  position: absolute; top: 12px; right: 14px;
+  background: none; border: none;
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--muted);
+  transition: background .2s, color .2s;
+}
+.wm-close:hover { background: rgba(0,0,0,0.06); color: var(--black); }
+.wm-close svg { width: 16px; height: 16px; }
+.wm-img { width: 100%; height: 230px; object-fit: cover; display: block; margin-top: 8px; }
+.wm-body { padding: 20px 24px 36px; }
+.wm-type {
+  font-family: var(--mono); font-size: 8px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold-dk); margin-bottom: 8px;
+}
+.wm-name {
+  font-family: var(--serif); font-size: 26px; font-weight: 400;
+  color: var(--black); line-height: 1.1; margin-bottom: 5px;
+}
+.wm-sub { font-family: var(--sans); font-size: 11px; color: var(--muted); font-weight: 300; margin-bottom: 16px; }
+.wm-desc {
+  font-family: var(--sans); font-size: 13px; font-weight: 300;
+  color: var(--mid); line-height: 1.72; margin: 0 0 24px;
+}
+.wm-cta {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; min-height: 44px; padding: 0 24px; box-sizing: border-box;
+  background: var(--black); color: var(--white);
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: 1.8px;
+  text-transform: uppercase; text-decoration: none;
+  transition: background .2s;
+}
+.wm-cta:hover { background: var(--gold-dk); }
+
 /* ── MOBILE ─────────────────── */
 @media (max-width: 768px) {
   /* Hero: full-bleed cinematic photo, text anchored to bottom */
@@ -270,25 +327,17 @@
   }
   .h-link-ghost:hover { border: none; color: var(--gold); }
 
-  /* Selected Work: horizontal scroll strip */
-  .work-strip  { padding: 48px 0 48px 20px; }
+  /* Selected Work: 3 compact cards in a row, tap to expand */
+  .work-strip  { padding: 44px 20px 52px; }
   .work-inner  { max-width: none; }
-  .work-header { padding-right: 20px; margin-bottom: 28px; }
-  .work-grid {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 2px;
-    padding-right: 20px;
-    scrollbar-width: none;
-  }
-  .work-grid::-webkit-scrollbar { display: none; }
-  .work-card {
-    flex: 0 0 80vw;
-    scroll-snap-align: start;
-  }
+  .work-header { margin-bottom: 20px; padding-right: 0; }
+  .work-grid   { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .work-card   { flex: none; scroll-snap-align: unset; }
+  .work-card__img { aspect-ratio: 2 / 3; }
+  .work-card__info { padding: 8px 10px 12px; gap: 2px; }
+  .work-card__type { display: none; }
+  .work-card__name { font-family: var(--mono); font-size: 9px; font-weight: 400; line-height: 1.3; letter-spacing: 0.04em; }
+  .work-card__sub  { display: none; }
 
   /* Footer: hide About */
   .foot-link[href="/about/"] { display: none; }
@@ -373,7 +422,7 @@
       <a href="/professional/" class="work-see-all">View All Projects &rarr;</a>
     </div>
     <div class="work-grid">
-      <a class="work-card reveal" href="/professional/#wexp-tpg">
+      <a class="work-card reveal" href="/professional/#wexp-tpg" data-project="bmw">
         <div class="work-card__img">
           <img src="assets/images/projects/bmw-showroom-main.webp" alt="BMW Showroom Manhattan flagship interior" loading="lazy">
         </div>
@@ -383,7 +432,7 @@
           <span class="work-card__sub">Automotive Retail &nbsp;&middot;&nbsp; New York, NY</span>
         </div>
       </a>
-      <a class="work-card reveal" href="/professional/#wexp-archnim">
+      <a class="work-card reveal" href="/professional/#wexp-archnim" data-project="burton">
         <div class="work-card__img">
           <img src="assets/images/projects/burton-in99-main.webp" alt="BURTON IN99 Flagship Chengdu storefront" loading="lazy">
         </div>
@@ -393,7 +442,7 @@
           <span class="work-card__sub">370 sqm Retail &nbsp;&middot;&nbsp; Chengdu, China</span>
         </div>
       </a>
-      <a class="work-card reveal" href="/academic/">
+      <a class="work-card reveal" href="/academic/" data-project="mott">
         <div class="work-card__img">
           <img src="assets/images/academic/thumbs/day-exterior.webp" alt="Little Mott Haven riverfront housing rendering" loading="lazy">
         </div>
@@ -422,6 +471,105 @@
     </div>
   </div>
 </footer>
+<!-- PROJECT BOTTOM SHEET -->
+<div class="wm-overlay" id="wm-overlay" role="dialog" aria-modal="true" aria-label="Project details">
+  <div class="wm-panel" id="wm-panel">
+    <div class="wm-handle"></div>
+    <button class="wm-close" id="wm-close" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <img class="wm-img" id="wm-img" src="" alt="">
+    <div class="wm-body">
+      <div class="wm-type" id="wm-type"></div>
+      <div class="wm-name" id="wm-name"></div>
+      <div class="wm-sub"  id="wm-sub"></div>
+      <p  class="wm-desc"  id="wm-desc"></p>
+      <a  class="wm-cta"   id="wm-cta" href="#">View full project &rarr;</a>
+    </div>
+  </div>
+</div>
+
 <script src="assets/js/main.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var PROJECTS = {
+    bmw: {
+      img:  'assets/images/projects/bmw-showroom-main.webp',
+      type: 'Professional · TPG Architecture',
+      name: 'BMW Showroom',
+      sub:  'Automotive Retail · New York, NY',
+      desc: 'Luxury BMW flagship at 555 W 57th St, Manhattan. BIM lead for custom parametric furniture families and specialty lighting; FF&E coordination across finishes, specifications, and procurement under an accelerated delivery schedule.',
+      href: '/professional/#wexp-tpg'
+    },
+    burton: {
+      img:  'assets/images/projects/burton-in99-main.webp',
+      type: 'Professional · Independent',
+      name: 'BURTON IN99 Flagship',
+      sub:  '370 sqm Retail · Chengdu, China',
+      desc: "BURTON's first flagship store in Western China, inside Chengdu's IN99 luxury mall. Concept narrative built around sustainable reuse of construction debris and damaged snowboarding gear — people, planet, sport as architectural language.",
+      href: '/professional/#wexp-archnim'
+    },
+    mott: {
+      img:  'assets/images/academic/thumbs/day-exterior.webp',
+      type: 'Academic · Columbia University GSAPP',
+      name: 'Little Mott Haven',
+      sub:  'Housing / Water Systems · Bronx, NY',
+      desc: 'Graduate studio project at Columbia GSAPP. A mixed-use riverfront development integrating housing density with ecological water system restoration and community infrastructure along the Harlem River in the South Bronx.',
+      href: '/academic/'
+    }
+  };
+
+  var overlay = document.getElementById('wm-overlay');
+  var imgEl   = document.getElementById('wm-img');
+  var typeEl  = document.getElementById('wm-type');
+  var nameEl  = document.getElementById('wm-name');
+  var subEl   = document.getElementById('wm-sub');
+  var descEl  = document.getElementById('wm-desc');
+  var ctaEl   = document.getElementById('wm-cta');
+  var closeEl = document.getElementById('wm-close');
+
+  function openSheet(id) {
+    var p = PROJECTS[id];
+    if (!p || !overlay) return;
+    imgEl.src         = p.img;
+    imgEl.alt         = p.name;
+    typeEl.textContent = p.type;
+    nameEl.textContent = p.name;
+    subEl.textContent  = p.sub;
+    descEl.textContent = p.desc;
+    ctaEl.href         = p.href;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSheet() {
+    if (!overlay) return;
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (closeEl) closeEl.addEventListener('click', closeSheet);
+  if (overlay) overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeSheet();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSheet();
+  });
+
+  /* Intercept work card clicks on mobile only */
+  document.querySelectorAll('.work-card[data-project]').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (window.innerWidth > 768) return; /* desktop: navigate normally */
+      e.preventDefault();
+      openSheet(card.dataset.project);
+    });
+  });
+
+}());
+</script>
 </body>
 </html>
