@@ -630,22 +630,29 @@
   color: rgba(184,148,106,0.55);
 }
 .pr-mobile-strip-track {
+  overflow: hidden;
+  padding-bottom: 18px;
+}
+.pr-mobile-strip-scroller {
   display: flex;
   gap: 6px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding: 0 20px 18px;
+  width: max-content;
+  animation: pr-strip-scroll 28s linear infinite;
+  padding-left: 20px;
 }
-.pr-mobile-strip-track::-webkit-scrollbar { display: none; }
+.pr-mobile-strip:hover .pr-mobile-strip-scroller {
+  animation-play-state: paused;
+}
+@keyframes pr-strip-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 .pr-mobile-card {
   flex-shrink: 0;
   width: 200px;
   height: 134px;
   position: relative;
   overflow: hidden;
-  scroll-snap-align: start;
   cursor: pointer;
   border: 0.5px solid rgba(255,255,255,0.06);
 }
@@ -773,6 +780,41 @@
   letter-spacing: -0.5px;
 }
 .pr-cta-h2 em { font-style: italic; color: var(--gold-lt); }
+
+/* ── Role ticker ── */
+.pr-cta-ticker-wrap {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.05em;
+  vertical-align: bottom;
+  line-height: 1.05;
+}
+.pr-cta-ticker {
+  display: flex;
+  flex-direction: column;
+  animation: pr-role-tick 10s infinite;
+}
+.pr-cta-ticker em {
+  display: block;
+  height: 1.05em;
+  white-space: nowrap;
+  font-style: italic;
+  color: var(--gold-lt);
+  line-height: 1.05;
+}
+@keyframes pr-role-tick {
+  0%    { transform: translateY(0);       animation-timing-function: linear; }
+  25%   { transform: translateY(0);       animation-timing-function: cubic-bezier(.76,0,.24,1); }
+  33%   { transform: translateY(-25%);    animation-timing-function: linear; }
+  58%   { transform: translateY(-25%);    animation-timing-function: cubic-bezier(.76,0,.24,1); }
+  66%   { transform: translateY(-50%);    animation-timing-function: linear; }
+  91%   { transform: translateY(-50%);    animation-timing-function: cubic-bezier(.76,0,.24,1); }
+  100%  { transform: translateY(-75%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pr-cta-ticker { animation: none; }
+  .pr-mobile-strip-scroller { animation: none; }
+}
 .pr-cta-actions {
   display: flex;
   flex-direction: column;
@@ -897,39 +939,92 @@
     <span class="pr-mobile-strip-hint">Tap to expand ↗</span>
   </div>
   <div class="pr-mobile-strip-track">
-    <div class="pr-mobile-card" data-modal="tpg-1290">
-      <img src="../assets/images/projects/tpg-interior.jpg" alt="1290 Avenue of the Americas" loading="lazy">
-      <div class="pr-mobile-card-overlay">
-        <span class="pr-mobile-card-name">1290 Ave of the Americas</span>
-        <span class="pr-mobile-card-year">2023</span>
+    <div class="pr-mobile-strip-scroller" id="pr-strip-scroller">
+      <!-- set A -->
+      <div class="pr-mobile-card" data-modal="tpg-1290">
+        <img src="../assets/images/projects/tpg-interior.jpg" alt="1290 Avenue of the Americas" loading="lazy">
+        <div class="pr-mobile-card-overlay">
+          <span class="pr-mobile-card-name">1290 Ave of the Americas</span>
+          <span class="pr-mobile-card-year">2023</span>
+        </div>
       </div>
-    </div>
-    <div class="pr-mobile-card" data-modal="tpg-bmw-showroom">
-      <img src="../assets/images/projects/bmw-showroom-main.webp" alt="BMW Showroom" loading="lazy">
-      <div class="pr-mobile-card-overlay">
-        <span class="pr-mobile-card-name">BMW Showroom</span>
-        <span class="pr-mobile-card-year">2023</span>
+      <div class="pr-mobile-card" data-modal="tpg-bmw-showroom">
+        <img src="../assets/images/projects/bmw-showroom-main.webp" alt="BMW Showroom" loading="lazy">
+        <div class="pr-mobile-card-overlay">
+          <span class="pr-mobile-card-name">BMW Showroom</span>
+          <span class="pr-mobile-card-year">2023</span>
+        </div>
       </div>
-    </div>
-    <div class="pr-mobile-card" data-modal="archnim-burton">
-      <img src="../assets/images/projects/burton-in99-main.webp" alt="BURTON IN99 Flagship" loading="lazy">
-      <div class="pr-mobile-card-overlay">
-        <span class="pr-mobile-card-name">BURTON IN99 Flagship</span>
-        <span class="pr-mobile-card-year">2020</span>
+      <div class="pr-mobile-card" data-modal="archnim-burton">
+        <img src="../assets/images/projects/burton-in99-main.webp" alt="BURTON IN99 Flagship" loading="lazy">
+        <div class="pr-mobile-card-overlay">
+          <span class="pr-mobile-card-name">BURTON IN99 Flagship</span>
+          <span class="pr-mobile-card-year">2020</span>
+        </div>
       </div>
-    </div>
-    <div class="pr-mobile-card" data-modal="archnim-alpena">
-      <img src="../assets/images/projects/alpena-prof.jpg" alt="Alpena Mixed-Use" loading="lazy">
-      <div class="pr-mobile-card-overlay">
-        <span class="pr-mobile-card-name">130K SF Mixed-Use</span>
-        <span class="pr-mobile-card-year">2021</span>
+      <div class="pr-mobile-card" data-modal="archnim-alpena">
+        <img src="../assets/images/projects/alpena-prof.jpg" alt="Alpena Mixed-Use" loading="lazy">
+        <div class="pr-mobile-card-overlay">
+          <span class="pr-mobile-card-name">130K SF Mixed-Use</span>
+          <span class="pr-mobile-card-year">2021</span>
+        </div>
       </div>
-    </div>
-    <div class="pr-mobile-card" data-modal="dyo-maoya">
-      <img src="../assets/images/projects/maoya-1.png" alt="Maoya Hotel" loading="lazy">
-      <div class="pr-mobile-card-overlay">
-        <span class="pr-mobile-card-name">Maoya Hotel</span>
-        <span class="pr-mobile-card-year">2022</span>
+      <div class="pr-mobile-card" data-modal="dyo-maoya">
+        <img src="../assets/images/projects/maoya-1.png" alt="Maoya Hotel" loading="lazy">
+        <div class="pr-mobile-card-overlay">
+          <span class="pr-mobile-card-name">Maoya Hotel</span>
+          <span class="pr-mobile-card-year">2022</span>
+        </div>
+      </div>
+      <div class="pr-mobile-card" data-modal="tpg-1290">
+        <img src="../assets/images/projects/tpg-terrace.jpg" alt="1290 Avenue — Terrace" loading="lazy">
+        <div class="pr-mobile-card-overlay">
+          <span class="pr-mobile-card-name">1290 Ave — Terrace</span>
+          <span class="pr-mobile-card-year">2023</span>
+        </div>
+      </div>
+      <!-- set B (duplicate for seamless loop) -->
+      <div class="pr-mobile-card" aria-hidden="true" data-modal="tpg-1290">
+        <img src="../assets/images/projects/tpg-interior.jpg" alt="" loading="lazy">
+        <div class="pr-mobile-card-overlay">
+          <span class="pr-mobile-card-name">1290 Ave of the Americas</span>
+          <span class="pr-mobile-card-year">2023</span>
+        </div>
+      </div>
+      <div class="pr-mobile-card" aria-hidden="true" data-modal="tpg-bmw-showroom">
+        <img src="../assets/images/projects/bmw-showroom-main.webp" alt="" loading="lazy">
+        <div class="pr-mobile-card-overlay">
+          <span class="pr-mobile-card-name">BMW Showroom</span>
+          <span class="pr-mobile-card-year">2023</span>
+        </div>
+      </div>
+      <div class="pr-mobile-card" aria-hidden="true" data-modal="archnim-burton">
+        <img src="../assets/images/projects/burton-in99-main.webp" alt="" loading="lazy">
+        <div class="pr-mobile-card-overlay">
+          <span class="pr-mobile-card-name">BURTON IN99 Flagship</span>
+          <span class="pr-mobile-card-year">2020</span>
+        </div>
+      </div>
+      <div class="pr-mobile-card" aria-hidden="true" data-modal="archnim-alpena">
+        <img src="../assets/images/projects/alpena-prof.jpg" alt="" loading="lazy">
+        <div class="pr-mobile-card-overlay">
+          <span class="pr-mobile-card-name">130K SF Mixed-Use</span>
+          <span class="pr-mobile-card-year">2021</span>
+        </div>
+      </div>
+      <div class="pr-mobile-card" aria-hidden="true" data-modal="dyo-maoya">
+        <img src="../assets/images/projects/maoya-1.png" alt="" loading="lazy">
+        <div class="pr-mobile-card-overlay">
+          <span class="pr-mobile-card-name">Maoya Hotel</span>
+          <span class="pr-mobile-card-year">2022</span>
+        </div>
+      </div>
+      <div class="pr-mobile-card" aria-hidden="true" data-modal="tpg-1290">
+        <img src="../assets/images/projects/tpg-terrace.jpg" alt="" loading="lazy">
+        <div class="pr-mobile-card-overlay">
+          <span class="pr-mobile-card-name">1290 Ave — Terrace</span>
+          <span class="pr-mobile-card-year">2023</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1148,7 +1243,7 @@
   <div class="pr-cta-inner">
     <div class="pr-cta-text">
       <p class="pr-cta-eyebrow">Currently open to</p>
-      <h2 class="pr-cta-h2">Senior BIM and VDC<br><em>leadership roles in New York.</em></h2>
+      <h2 class="pr-cta-h2">Senior roles in<br><span class="pr-cta-ticker-wrap"><span class="pr-cta-ticker"><em>BIM Management.</em><em>VDC Leadership.</em><em>Architectural Design.</em><em aria-hidden="true">BIM Management.</em></span></span></h2>
     </div>
     <div class="pr-cta-actions">
       <a class="pr-cta-btn pr-cta-btn--primary" href="/contact/">Get in touch</a>
@@ -1405,6 +1500,20 @@
       hint.classList.add('visible');
     }, { threshold: 0.25 });
     hintObs.observe(wexp);
+  }
+
+  /* ── MOBILE STRIP: pause on touch ──────────────────────── */
+  var stripScroller = document.getElementById('pr-strip-scroller');
+  var stripEl = document.querySelector('.pr-mobile-strip');
+  if (stripEl && stripScroller) {
+    stripEl.addEventListener('touchstart', function () {
+      stripScroller.style.animationPlayState = 'paused';
+    }, { passive: true });
+    stripEl.addEventListener('touchend', function () {
+      setTimeout(function () {
+        stripScroller.style.animationPlayState = 'running';
+      }, 1200);
+    }, { passive: true });
   }
 
 }());
