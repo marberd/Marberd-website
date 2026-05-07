@@ -221,32 +221,35 @@ footer {
   background: rgba(250,250,248,0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  padding-top: 68px; /* clear the nav bar */
-  align-items: flex-start; justify-content: flex-start;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   touch-action: auto;
   pointer-events: auto;
+  padding-top: 68px; /* clear the nav bar */
 }
 #nav-overlay.open { display: flex; }
 /* Hard-lock: overlay must never show on desktop regardless of JS state */
 @media (min-width: 769px) { #nav-overlay { display: none !important; } }
 .overlay-nav {
   display: flex; flex-direction: column;
-  align-items: center; gap: 0; width: 100%;
+  align-items: stretch;
+  width: 100%; flex: 1;
   pointer-events: auto;
 }
 .overlay-nav a {
-  font-family: var(--mono); font-size: 11px;
-  letter-spacing: 3px; text-transform: uppercase;
-  color: var(--mid); text-decoration: none;
-  padding: 18px 40px; width: 100%; text-align: center;
-  min-height: 56px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif);
+  font-size: clamp(38px, 12vw, 56px);
+  font-weight: 300; font-style: italic;
+  color: var(--black); text-decoration: none;
+  flex: 1; min-height: 72px;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
   transition: color .2s;
-  border-bottom: 1px solid var(--border);
   pointer-events: auto;
 }
-.overlay-nav a:first-child { border-top: 1px solid var(--border); }
 .overlay-nav a:hover,
 .overlay-nav a.active { color: var(--gold-dk); }
 
