@@ -1391,16 +1391,28 @@ body.academic-modal-active #main-nav {
   }
 
   if (mangroveCard && featuredCard && !reduceMotion.matches) {
-    createCoinClone();
-    hideMangroveSlot();
-    window.addEventListener('scroll', requestCoinUpdate, { passive: true });
-    window.addEventListener('resize', resetCoinMetrics);
-    if (featuredCard.getAnimations) {
-      Promise.all(featuredCard.getAnimations().map(function (animation) {
-        return animation.finished.catch(function () {});
-      })).then(resetCoinMetrics);
+    if (window.innerWidth <= 760) {
+      /* Mobile: slot reveals when card scrolls 50% into view */
+      hideMangroveSlot();
+      var mObs = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        revealMangroveSlot();
+        mObs.disconnect();
+      }, { threshold: 0.5 });
+      mObs.observe(mangroveCard);
+    } else {
+      /* Desktop: full coin-flip scroll animation */
+      createCoinClone();
+      hideMangroveSlot();
+      window.addEventListener('scroll', requestCoinUpdate, { passive: true });
+      window.addEventListener('resize', resetCoinMetrics);
+      if (featuredCard.getAnimations) {
+        Promise.all(featuredCard.getAnimations().map(function (animation) {
+          return animation.finished.catch(function () {});
+        })).then(resetCoinMetrics);
+      }
+      resetCoinMetrics();
     }
-    resetCoinMetrics();
   } else {
     revealMangroveSlot();
   }
