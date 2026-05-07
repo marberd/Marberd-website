@@ -170,9 +170,98 @@
   z-index: 12000;
   pointer-events: none;
   transform-origin: top left;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
   will-change: transform, opacity;
+  perspective: 1400px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.coin-flight-card::before,
+.coin-flight-card::after {
+  content: none;
+}
+
+.coin-inner {
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.coin-face {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  background: #f8f4ec;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 32px 90px rgba(0,0,0,0.36);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.coin-face--front {
+  position: relative;
+  z-index: 2;
+}
+
+.coin-face--back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 26px 28px;
+  color: #f8f4ec;
+  background:
+    linear-gradient(135deg, rgba(184,148,106,0.18), transparent 44%),
+    #111118;
+  border-color: rgba(184,148,106,0.42);
+  transform: rotateY(180deg);
+}
+
+.coin-back-number {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+}
+
+.coin-back-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(34px, 4vw, 54px);
+  font-weight: 400;
+  line-height: 0.96;
+  color: var(--white);
+}
+
+.coin-back-title em {
+  color: var(--gold-lt);
+  font-style: italic;
+}
+
+.coin-back-copy {
+  margin: 18px 0 0;
+  font-size: 13px;
+  line-height: 1.62;
+  color: rgba(255,255,255,0.62);
+}
+
+.coin-back-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(184,148,106,0.35);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.42);
 }
 
 .project-card.is-coin-target-pending {
@@ -1192,13 +1281,39 @@ body.academic-modal-active #main-nav {
 
   function createCoinClone() {
     if (coinClone || !featuredCard) return;
-    coinClone = featuredCard.cloneNode(true);
+    var front = featuredCard.cloneNode(true);
+    cleanCloneIds(front);
+    front.classList.remove('featured-card', 'is-coin-source-hidden');
+    front.classList.add('coin-face', 'coin-face--front');
+    front.style.margin = '0';
+    front.style.opacity = '1';
+    front.style.animation = 'none';
+
+    var project = projects[1];
+    var back = document.createElement('div');
+    back.className = 'coin-face coin-face--back';
+    back.innerHTML =
+      '<div>' +
+        '<div class="coin-back-number">N&deg; ' + project.n + '</div>' +
+        '<h3 class="coin-back-title">' + project.title + '</h3>' +
+        '<p class="coin-back-copy">' + shortText(project.desc) + '</p>' +
+      '</div>' +
+      '<div class="coin-back-foot">' +
+        '<span>' + project.tools + '</span>' +
+        '<span>' + project.tag + '</span>' +
+      '</div>';
+
+    var inner = document.createElement('div');
+    inner.className = 'coin-inner';
+    inner.appendChild(front);
+    inner.appendChild(back);
+
+    coinClone = document.createElement('div');
     cleanCloneIds(coinClone);
-    coinClone.classList.remove('featured-card', 'is-coin-source-hidden');
-    coinClone.classList.add('featured-card', 'coin-flight-card');
+    coinClone.className = 'coin-flight-card';
     coinClone.style.margin = '0';
     coinClone.style.opacity = '0';
-    coinClone.style.animation = 'none';
+    coinClone.appendChild(inner);
     document.body.appendChild(coinClone);
   }
 
@@ -1254,7 +1369,8 @@ body.academic-modal-active #main-nav {
     coinClone.style.width = coinMetrics.startWidth + 'px';
     coinClone.style.transform =
       'translate3d(' + x.toFixed(1) + 'px, ' + viewportY.toFixed(1) + 'px, 0) ' +
-      'scale(' + scale.toFixed(3) + ') rotateY(' + rotate.toFixed(1) + 'deg)';
+      'scale(' + scale.toFixed(3) + ')';
+    coinClone.querySelector('.coin-inner').style.transform = 'rotateY(' + rotate.toFixed(1) + 'deg)';
     coinClone.style.filter = 'blur(' + (Math.sin(Math.PI * progress) * 0.8).toFixed(2) + 'px) saturate(' + (1 + (Math.sin(Math.PI * progress) * 0.08)).toFixed(2) + ')';
   }
 
