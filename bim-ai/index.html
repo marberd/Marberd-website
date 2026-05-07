@@ -437,7 +437,7 @@
 
 /* Scroll wheel */
 .bim-exp-wheel {
-  --bim-wheel-rotation: 0deg;
+  --bim-wheel-rotation: -90deg;
   position: sticky;
   top: 88px;
   min-height: 512px;
@@ -528,18 +528,20 @@
 .bim-exp-wheel-note {
   position: absolute;
   left: 50%;
-  bottom: -2px;
+  bottom: -34px;
   transform: translateX(-50%);
-  width: min(280px, 72%);
+  width: max-content;
+  max-width: calc(100vw - 40px);
   font-size: 12px;
   line-height: 1.5;
   text-align: center;
   color: var(--mid);
+  white-space: nowrap;
 }
 .bim-hero-wheel {
   position: relative;
   top: auto;
-  min-height: 514px;
+  min-height: 552px;
   z-index: 4;
   transform: translateY(30px);
   opacity: 0;
@@ -563,13 +565,33 @@
   border-color: rgba(212,184,150,0.58);
 }
 .bim-hero-wheel .bim-exp-hub span {
-  font-size: 9px;
-  letter-spacing: 1.25px;
+  font-size: 8px;
+  letter-spacing: 1.1px;
   color: var(--gold-lt);
-  line-height: 1.1;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  transform: translateY(1px);
+  line-height: 1.25;
+  writing-mode: horizontal-tb;
+  text-orientation: initial;
+  transform: none;
+}
+.bim-hero-wheel .bim-exp-hub strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--white);
+}
+.bim-hero-wheel .bim-exp-hub small {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 1.2px;
+  line-height: 1.35;
+  text-transform: uppercase;
+  color: rgba(212,184,150,0.78);
 }
 .bim-hero-wheel .bim-exp-chip {
   background: rgba(250,250,248,0.96);
@@ -806,6 +828,11 @@
   .bim-ai-grid { grid-template-columns: repeat(2, 1fr); }
   .sw-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .bim-hero { min-height: auto; }
+  .bim-hero-wheel {
+    min-height: 540px;
+    margin-top: 8px;
+    transform: translateY(18px);
+  }
   .bim-yt-stack { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
@@ -817,6 +844,11 @@
   .bim-ai-sub { text-align: left; max-width: 100%; }
   .bim-sec-label { margin-bottom: 16px; }
   .bim-hero-actions { margin-top: 24px; }
+  .bim-hero-wheel .bim-exp-wheel-note {
+    bottom: -28px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
 }
 @media (max-width: 600px) {
   .bim-ai-grid { grid-template-columns: 1fr 1fr; }
@@ -825,6 +857,53 @@
   .bim-hero-actions { align-items: stretch; }
   .bim-cta { width: 100%; }
   .bim-pill { width: 100%; justify-content: center; }
+  .bim-hero-wheel {
+    min-height: 430px;
+    margin-top: 0;
+  }
+  .bim-hero-wheel .bim-exp-wheel-frame {
+    width: min(100%, 360px);
+  }
+  .bim-hero-wheel .bim-exp-wheel-rotor {
+    inset: 18px;
+  }
+  .bim-hero-wheel .bim-exp-wheel-rotor::before {
+    inset: 42px;
+  }
+  .bim-hero-wheel .bim-exp-wheel-rotor::after {
+    inset: 96px;
+  }
+  .bim-hero-wheel .bim-exp-hub {
+    width: 126px;
+    height: 126px;
+  }
+  .bim-hero-wheel .bim-exp-hub strong {
+    font-size: 26px;
+  }
+  .bim-hero-wheel .bim-exp-hub small {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .bim-hero-wheel .bim-exp-orbit {
+    width: 118px;
+    min-height: 34px;
+    margin: -17px 0 0 -59px;
+    transform: rotate(var(--angle)) translate(112px) rotate(calc(-1 * var(--angle))) rotate(calc(-1 * var(--bim-wheel-rotation)));
+  }
+  .bim-hero-wheel .bim-exp-chip {
+    min-height: 32px;
+    padding: 0 9px;
+    font-size: 6px;
+    letter-spacing: .8px;
+  }
+  .bim-hero-wheel .bim-exp-wheel-note {
+    bottom: -18px;
+    font-size: 9px;
+    letter-spacing: 0;
+    white-space: nowrap;
+    transform: translateX(-50%) scale(.94);
+    transform-origin: center;
+  }
   .ai-card-featured { grid-column: span 2; }
   .sw-card-grid { grid-template-columns: 1fr; }
   .sw-detail-panel { min-height: 260px; }
@@ -882,7 +961,7 @@
     <aside class="bim-exp-wheel bim-hero-wheel" data-bim-wheel aria-label="BIM capability wheel">
       <div class="bim-exp-wheel-frame">
         <div class="bim-exp-wheel-rotor">
-          <div class="bim-exp-hub"><span>BIM<br>Practice</span></div>
+          <div class="bim-exp-hub"><span><strong>BIM</strong><small>Building information modeling</small></span></div>
           <div class="bim-exp-orbit" style="--angle: 0deg;"><span class="bim-exp-chip">Family Systems</span></div>
           <div class="bim-exp-orbit" style="--angle: 60deg;"><span class="bim-exp-chip">ACC Admin</span></div>
           <div class="bim-exp-orbit" style="--angle: 120deg;"><span class="bim-exp-chip">Coordination</span></div>
@@ -1122,10 +1201,7 @@
   var ticking = false;
   function updateWheel() {
     ticking = false;
-    var rect = wheel.getBoundingClientRect();
-    var vh = window.innerHeight || 1;
-    var progress = (vh - rect.top) / (vh + rect.height);
-    var rotation = Math.max(-80, Math.min(520, progress * 520 - 80));
+    var rotation = Math.max(-90, Math.min(430, -90 + window.scrollY * 0.32));
     wheel.style.setProperty('--bim-wheel-rotation', rotation.toFixed(2) + 'deg');
   }
 
