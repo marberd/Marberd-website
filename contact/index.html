@@ -120,11 +120,36 @@
   padding: 6px 0 0;
   overflow: visible;
 }
+.contact-title-portrait {
+  position: absolute;
+  z-index: 0;
+  top: -64px;
+  right: -92px;
+  width: min(430px, 38vw);
+  max-width: none;
+  opacity: 0.2;
+  filter: grayscale(28%) saturate(0.72) contrast(0.96);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  user-select: none;
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, #000 18%, #000 70%, transparent 100%),
+    linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
+  mask-image:
+    linear-gradient(90deg, transparent 0%, #000 18%, #000 70%, transparent 100%),
+    linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
 .contact-page .page-title {
+  position: relative;
+  z-index: 1;
   color: var(--white);
   max-width: 7ch;
 }
 .contact-hero-copy {
+  position: relative;
+  z-index: 1;
   font-size: 14px;
   line-height: 1.75;
   color: rgba(255,255,255,0.66);
@@ -132,12 +157,16 @@
   margin-top: 18px;
 }
 .contact-hero-actions {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 24px;
 }
 .contact-hero-meta {
+  position: relative;
+  z-index: 1;
   margin-top: 26px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -368,6 +397,12 @@
   .form-input, .form-textarea { font-size: 16px; }
   .contact-page .page-hero { min-height: auto; padding: 96px 20px 0; }
   .contact-shell { grid-template-columns: 1fr; gap: 20px; }
+  .contact-title-portrait {
+    top: -34px;
+    right: -42px;
+    width: min(270px, 64vw);
+    opacity: 0.14;
+  }
   .contact-hero-copy { max-width: 100%; }
   .contact-hero-actions { margin-top: 22px; }
   .contact-hero-meta { grid-template-columns: 1fr; margin-top: 18px; }
@@ -455,6 +490,7 @@
 <div class="page-hero load-fade">
   <div class="contact-shell">
       <div class="contact-hero-copyblock">
+      <img class="contact-title-portrait" src="../assets/images/contact/contact-page-cutout.webp" alt="" aria-hidden="true" decoding="async">
       <h1 class="page-title">Let’s discuss<br>what you’re<br>building.</h1>
       <p class="contact-hero-copy">I work directly with architects, consultants, and teams on BIM, Revit, and VDC workflows, project coordination, and technical problem-solving. Send a clear brief for inquiries, collaborations, or senior opportunities.</p>
       <div class="contact-hero-actions">
