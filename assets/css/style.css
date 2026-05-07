@@ -35,11 +35,6 @@ body {
 }
 a, button { cursor: pointer; touch-action: manipulation; }
 
-#cur,
-#cur-dot {
-  display: none;
-}
-
 /* ── NAVIGATION ─────────────────────────── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 10001;
@@ -125,6 +120,13 @@ footer {
 }
 .foot-logo { display: flex; align-items: center; gap: 16px; }
 .foot-logo svg { width: 36px; height: 36px; }
+.foot-mark {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  display: block;
+  opacity: 0.78;
+}
 .foot-copy {
   font-family: var(--mono); font-size: 9px;
   letter-spacing: 1px; color: rgba(255,255,255,0.25); text-transform: uppercase;
@@ -264,28 +266,6 @@ footer {
   /* Shared page hero padding */
   .page-hero { padding: 110px 20px 48px; }
   .content-wrap { padding: 48px 20px; }
-}
-
-/* ── MINIMAL FOOTER ─────────────────────── */
-.footer-minimal {
-  padding: 60px 60px 40px;
-  text-align: center;
-}
-.footer-rule {
-  max-width: 1200px;
-  margin: 0 auto 32px;
-  height: 1px;
-  background: rgba(138, 111, 62, 0.4);
-}
-.footer-minimal p {
-  font-family: var(--serif);
-  font-size: 12px;
-  letter-spacing: 0.05em;
-  color: var(--text);
-  margin: 0;
-}
-@media (max-width: 768px) {
-  .footer-minimal { padding: 40px 20px 32px; }
 }
 
 /* ── SCROLL REVEAL ──────────────────────── */

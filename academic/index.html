@@ -577,17 +577,6 @@
   color: rgba(17,17,24,0.46);
 }
 
-.academic-footer {
-  background: #111118;
-  padding: 44px 24px;
-  text-align: center;
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-}
-
 .academic-modal {
   position: fixed;
   inset: 0;
@@ -936,7 +925,20 @@ body.academic-modal-active #main-nav {
   </section>
 </main>
 
-<footer class="academic-footer">&copy; 2026 Marberd Bernard · New York, NY</footer>
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">
+      <img class="foot-mark" src="/assets/images/logo-gold.png" alt="MARBERD">
+      <span class="foot-copy">© 2026 Marberd Bernard · New York, NY</span>
+    </div>
+    <div class="foot-links">
+      <a class="foot-link" href="/about/">About</a>
+      <a class="foot-link" href="/professional/">Work</a>
+      <a class="foot-link" href="/contact/">Contact</a>
+      <a class="foot-link" href="https://linkedin.com/in/marberd-bernard" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+  </div>
+</footer>
 
 <div class="academic-modal" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-panel">
