@@ -903,8 +903,13 @@
     transform: translateX(-50%) scale(.94);
     transform-origin: center;
   }
-  .sw-card-grid { grid-template-columns: 1fr; }
-  .sw-detail-panel { min-height: 260px; }
+  /* Software stack: tiny 2-col grid matching AI card scale */
+  .sw-card-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .sw-tool-card { min-height: 0; padding: 10px 10px 9px; }
+  .sw-tool-cat { font-size: 6px; letter-spacing: 1px; margin-bottom: 5px; }
+  .sw-tool-name { font-size: 11px; }
+  .sw-tool-hint { display: none; }
+  .sw-detail-panel { min-height: 220px; }
 
   /* ── AI cards: tiny & cute 3-column grid ── */
   .bim-ai-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
