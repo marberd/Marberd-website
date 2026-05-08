@@ -106,6 +106,13 @@ nav.nav-hidden {
 .nav-icon:hover { border-color: var(--gold); color: var(--gold-dk); }
 .nav-icon svg { width: 13px; height: 13px; }
 
+/* ── MUSIC NAV BUTTON ───────────────────── */
+#music-nav-btn { background: none; }
+#music-nav-btn .ic-mpause { display: none; }
+#music-nav-btn.mb-playing .ic-mplay  { display: none; }
+#music-nav-btn.mb-playing .ic-mpause { display: block; }
+#music-nav-btn.mb-playing { border-color: var(--gold); color: var(--gold); }
+
 /* ── FOOTER ─────────────────────────────── */
 footer {
   background: var(--black);

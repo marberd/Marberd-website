@@ -402,23 +402,16 @@
 }
 .pr-pp-link:hover { color: #fff; }
 
-/* ── MUSIC PLAYER ───────────────────────── */
-#music-btn {
-  position: fixed; bottom: 28px; right: 28px; z-index: 9999;
-  width: 40px; height: 40px; border-radius: 50%;
-  border: 1px solid rgba(184,148,106,0.35);
-  background: rgba(17,17,24,0.82);
-  backdrop-filter: blur(12px);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: border-color .2s, background .2s;
-  color: var(--muted);
+/* ── PROJECT EXTERNAL LINKS (outside slideshow) ── */
+.pr-proj-links-wrap { min-height: 28px; margin: 12px 0 0; }
+.pr-proj-link {
+  display: none; margin-top: 0;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 1.8px;
+  text-transform: uppercase; color: var(--gold-dk);
+  text-decoration: none; transition: color .2s;
 }
-#music-btn:hover { border-color: var(--gold); color: var(--gold); }
-#music-btn svg { width: 15px; height: 15px; }
-#music-btn .ic-pause { display: none; }
-#music-btn.playing .ic-play  { display: none; }
-#music-btn.playing .ic-pause { display: block; }
-#music-btn.playing { border-color: rgba(184,148,106,0.6); color: var(--gold-lt); }
+.pr-proj-link.is-active { display: inline-block; }
+.pr-proj-link:hover { color: var(--gold); }
 
 /* ── GALLERY ───────────────────────────────────────── */
 .pr-gallery { margin-bottom: 36px; }
@@ -859,6 +852,11 @@
     <a class="nav-icon" href="https://linkedin.com/in/marberd-bernard" target="_blank" rel="noopener noreferrer" title="LinkedIn">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
     </a>
+    
+    <button class="nav-icon" id="music-nav-btn" aria-label="Background music" title="Background music">
+      <svg class="ic-mplay"  viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <svg class="ic-mpause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </button>
     <a class="nav-icon" href="mailto:marberdb@gmail.com" title="Email">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
     </a>
@@ -994,6 +992,9 @@
           </div>
         </div>
       </div>
+      <div class="pr-proj-links-wrap">
+        <a class="pr-proj-link" data-proj="tpg-other" href="/bim-ai/">See BIM in action ↗</a>
+      </div>
       <ul class="pr-bul">
         <li><span class="pr-bul-t">Led BIM strategy across architecture, structure, and MEP on simultaneous high-profile commercial projects — standardizing templates, family libraries, and coordination workflows firm-wide.</span></li>
         <li><span class="pr-bul-t">Directed architectural systems coordination for CLEAR's 119,226 SF headquarters at 4 World Trade Center, resolving complex 3D ceiling geometry against structure and MEP under tight tolerances.</span></li>
@@ -1073,7 +1074,6 @@
             <div class="pr-proj-panel" data-proj="beachy">
               <div class="pr-pp-name">Beachy Apartments</div>
               <div class="pr-pp-desc">Nigua, San Cristobal, DR — 6-unit building inspired by water clashing onto beach rocks. Ground up 2020–present.</div>
-              <a class="pr-pp-link" href="https://www.archnimations.com/residential-projects" target="_blank" rel="noopener">View animation ↗</a>
             </div>
             <div class="pr-gallery-ui" aria-hidden="true">
               <div class="pr-gallery-counter">
@@ -1087,6 +1087,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="pr-proj-links-wrap">
+        <a class="pr-proj-link" data-proj="beachy" href="https://www.archnimations.com/residential-projects" target="_blank" rel="noopener">View animation ↗</a>
       </div>
       <ul class="pr-bul">
         <li><span class="pr-bul-t">Ran an independent design and visualization practice over six years, delivering across residential, commercial, and mixed-use typologies in the US, China, and the Dominican Republic.</span></li>
@@ -1404,6 +1407,11 @@
       allImgs.forEach(function (img) { img.classList.remove('is-active'); });
       panels.forEach(function (p) { p.classList.remove('is-active'); });
       tsItems.forEach(function (btn) { btn.classList.toggle('is-active', btn.dataset.proj === projId); });
+      if (chapter) {
+        chapter.querySelectorAll('.pr-proj-link').forEach(function (link) {
+          link.classList.toggle('is-active', link.dataset.proj === projId);
+        });
+      }
       projImgs = projects[projId] || [];
       projCurr = 0;
       if (!projImgs.length) return;
@@ -1438,65 +1446,6 @@
 }());
 </script>
 
-<!-- ── MUSIC PLAYER ─────────────────────────────────── -->
-<div id="yt-player-wrap" style="display:none;pointer-events:none;position:fixed;bottom:0;right:0;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
-  <div id="yt-player"></div>
-</div>
-
-<button id="music-btn" aria-label="Toggle background music" title="Toggle music">
-  <!-- play icon -->
-  <svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-  <!-- pause icon -->
-  <svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-</button>
-
-<script>
-(function () {
-  var btn    = document.getElementById('music-btn');
-  var player = null;
-  var ready  = false;
-
-  /* Load YouTube IFrame API */
-  var tag = document.createElement('script');
-  tag.src = 'https://www.youtube.com/iframe_api';
-  document.head.appendChild(tag);
-
-  window.onYouTubeIframeAPIReady = function () {
-    player = new YT.Player('yt-player', {
-      height: '1', width: '1',
-      videoId: '1IIyzob_yi8',
-      playerVars: {
-        listType: 'playlist',
-        list: 'RD1IIyzob_yi8',
-        autoplay: 0,
-        controls: 0,
-        loop: 1,
-        playsinline: 1
-      },
-      events: {
-        onReady: function () { ready = true; },
-        onStateChange: function (e) {
-          if (e.data === YT.PlayerState.PLAYING) {
-            btn.classList.add('playing');
-          } else {
-            btn.classList.remove('playing');
-          }
-        }
-      }
-    });
-  };
-
-  btn.addEventListener('click', function () {
-    if (!ready || !player) return;
-    var state = player.getPlayerState();
-    if (state === YT.PlayerState.PLAYING) {
-      player.pauseVideo();
-    } else {
-      player.playVideo();
-    }
-  });
-}());
-</script>
 
 </body>
 </html>
