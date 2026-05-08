@@ -402,6 +402,24 @@
 }
 .pr-pp-link:hover { color: #fff; }
 
+/* ── MUSIC PLAYER ───────────────────────── */
+#music-btn {
+  position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(184,148,106,0.35);
+  background: rgba(17,17,24,0.82);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: border-color .2s, background .2s;
+  color: var(--muted);
+}
+#music-btn:hover { border-color: var(--gold); color: var(--gold); }
+#music-btn svg { width: 15px; height: 15px; }
+#music-btn .ic-pause { display: none; }
+#music-btn.playing .ic-play  { display: none; }
+#music-btn.playing .ic-pause { display: block; }
+#music-btn.playing { border-color: rgba(184,148,106,0.6); color: var(--gold-lt); }
+
 /* ── GALLERY ───────────────────────────────────────── */
 .pr-gallery { margin-bottom: 36px; }
 
@@ -942,17 +960,18 @@
             <img class="pr-gallery-img"            data-proj="bmw" src="../assets/images/projects/bmw-showroom-spread.webp"   alt="BMW Showroom — layout overview" loading="lazy">
             <img class="pr-gallery-img"            data-proj="bmw" src="../assets/images/projects/bmw-showroom-restroom.webp" alt="BMW Showroom — finishes" loading="lazy">
             <img class="pr-gallery-img"            data-proj="bmw" src="../assets/images/projects/bmw-showroom-furniture.webp"alt="BMW Showroom — FF&amp;E" loading="lazy">
-            <img class="pr-gallery-img"            data-proj="1290" src="../assets/images/projects/tpg-interior.jpg"          alt="1290 Avenue — Interior" loading="lazy">
-            <img class="pr-gallery-img"            data-proj="1290" src="../assets/images/projects/tpg-terrace.jpg"           alt="1290 Avenue — Terrace" loading="lazy">
+            <img class="pr-gallery-img"            data-proj="fsi" src="../assets/images/projects/fsi-open-plan.jpg"  alt="First Sentier Investors — Open plan office" loading="lazy">
+            <img class="pr-gallery-img"            data-proj="fsi" src="../assets/images/projects/fsi-building.jpg"  alt="First Sentier Investors — 1290 Ave of the Americas" loading="lazy">
+            <img class="pr-gallery-img"            data-proj="fsi" src="../assets/images/projects/fsi-terrace.jpg"   alt="First Sentier Investors — Private terrace" loading="lazy">
             <img class="pr-gallery-img"            data-proj="tpg-other" src="../assets/images/projects/tpg-overview.jpg"       alt="TPG Architecture — additional projects" loading="lazy">
             <img class="pr-gallery-img"            data-proj="dwt"       src="../assets/images/projects/davis-wright-tremaine.jpg" alt="Davis Wright Tremaine — law firm fit-out" loading="lazy">
             <div class="pr-proj-panel is-active" data-proj="bmw">
               <div class="pr-pp-name">BMW Showroom</div>
               <div class="pr-pp-desc">555 W 57th St. — FF&amp;E packages and fitout documentation for BMW's Manhattan flagship.</div>
             </div>
-            <div class="pr-proj-panel" data-proj="1290">
-              <div class="pr-pp-name">1290 Avenue of the Americas</div>
-              <div class="pr-pp-desc">Interior fitout and terrace coordination at 1290 Avenue of the Americas.</div>
+            <div class="pr-proj-panel" data-proj="fsi">
+              <div class="pr-pp-name">First Sentier Investors</div>
+              <div class="pr-pp-desc">1290 Ave of the Americas — high-end workplace interiors for an asset management firm. Revit modeling, consultant coordination, and outdoor terrace redesign.</div>
             </div>
             <div class="pr-proj-panel" data-proj="tpg-other">
               <div class="pr-pp-name">Additional Projects</div>
@@ -985,7 +1004,7 @@
     </div>
     <div class="pr-chapter-thumb">
       <button class="pr-ts-item is-active" data-proj="bmw"><img src="../assets/images/projects/bmw-showroom-main.webp" alt="" loading="lazy"></button>
-      <button class="pr-ts-item" data-proj="1290"><img src="../assets/images/projects/tpg-interior.jpg" alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-proj="fsi"><img src="../assets/images/projects/fsi-open-plan.jpg"  alt="" loading="lazy"></button>
       <button class="pr-ts-item" data-proj="tpg-other"><img src="../assets/images/projects/tpg-overview.jpg"         alt="" loading="lazy"></button>
       <button class="pr-ts-item" data-proj="dwt"><img       src="../assets/images/projects/davis-wright-tremaine.jpg" alt="" loading="lazy"></button>
     </div>
@@ -1036,7 +1055,6 @@
             <img class="pr-gallery-img"            data-proj="sansurs" src="../assets/images/projects/sansurs-p04.jpg"           alt="Sansurs Residence — 04" loading="lazy">
             <img class="pr-gallery-img"            data-proj="sansurs" src="../assets/images/projects/sansurs-p05.jpg"           alt="Sansurs Residence — 05" loading="lazy">
             <img class="pr-gallery-img"            data-proj="sansurs" src="../assets/images/projects/sansurs-interior.jpg"      alt="Sansurs Residence — Interior" loading="lazy">
-            <img class="pr-gallery-img"            data-proj="utah"   src="../assets/images/projects/utah-netzero.jpg"           alt="Utah Net-Zero Residential" loading="lazy">
             <img class="pr-gallery-img"            data-proj="beachy" src="../assets/images/projects/beachy-exterior.jpg"         alt="Beachy Apartments — Exterior render" loading="lazy">
             <img class="pr-gallery-img"            data-proj="beachy" src="../assets/images/projects/beachy-concept.jpg"          alt="Beachy Apartments — Design concept" loading="lazy">
             <img class="pr-gallery-img"            data-proj="beachy" src="../assets/images/projects/beachy-site.jpg"             alt="Beachy Apartments — Site July 2020" loading="lazy">
@@ -1052,10 +1070,6 @@
             <div class="pr-proj-panel" data-proj="sansurs">
               <div class="pr-pp-name">Sansurs Residence</div>
               <div class="pr-pp-desc">Dominican Republic — Ground-up single-family residence, schematic through construction documentation.</div>
-            </div>
-            <div class="pr-proj-panel" data-proj="utah">
-              <div class="pr-pp-name">Utah Net-Zero</div>
-              <div class="pr-pp-desc">Utah — Net-zero residential master plan with passive solar and high-performance envelope detailing.</div>
             </div>
             <div class="pr-proj-panel" data-proj="beachy">
               <div class="pr-pp-name">Beachy Apartments</div>
@@ -1088,7 +1102,6 @@
       <button class="pr-ts-item is-active" data-proj="burton"><img src="../assets/images/projects/burton-in99-main.webp"  alt="" loading="lazy"></button>
       <button class="pr-ts-item" data-proj="alpena"><img src="../assets/images/projects/alpena-exterior.jpg"      alt="" loading="lazy"></button>
       <button class="pr-ts-item" data-proj="sansurs"><img src="../assets/images/projects/sansurs-p01.jpg"           alt="" loading="lazy"></button>
-      <button class="pr-ts-item" data-proj="utah"><img src="../assets/images/projects/utah-netzero.jpg"          alt="" loading="lazy"></button>
       <button class="pr-ts-item" data-proj="beachy"><img src="../assets/images/projects/beachy-exterior.jpg"      alt="" loading="lazy"></button>
     </div>
   </article>
@@ -1146,6 +1159,7 @@
             <img class="pr-gallery-img"            data-proj="humeniks" src="../assets/images/projects/humeniks-exterior.png"     alt="Humenik's Building — Brooklyn" loading="lazy">
             <img class="pr-gallery-img"            data-proj="humeniks" src="../assets/images/projects/humeniks-kitchen.png"      alt="Humenik's Building — kitchen" loading="lazy">
             <img class="pr-gallery-img"            data-proj="humeniks" src="../assets/images/projects/humeniks-before-after.png" alt="Humenik's Building — before/after" loading="lazy">
+            <img class="pr-gallery-img"            data-proj="humeniks" src="../assets/images/projects/newell-street-brooklyn.jpg"  alt="166 Newell Street — Brooklyn CD set" loading="lazy">
             <img class="pr-gallery-img"            data-proj="dyo-studio" src="../assets/images/projects/dyo-studio-overview.jpg"  alt="D-YO Studio — overview" loading="lazy">
             <img class="pr-gallery-img"            data-proj="air-island" src="../assets/images/projects/air-island-tagong.jpg"     alt="Air Island — Tagong Hotel, Garze Province" loading="lazy">
             <div class="pr-proj-panel is-active" data-proj="maoya">
@@ -1269,13 +1283,12 @@
   /* ── VERTICAL REEL ─────────────────────────────────── */
   var REEL = [
     { name: 'BMW Showroom',              year: '2023', img: '../assets/images/projects/bmw-showroom-main.webp'    },
-    { name: '1290 Ave of the Americas',  year: '2023', img: '../assets/images/projects/tpg-interior.jpg'          },
+    { name: 'First Sentier Investors',    year: '2023', img: '../assets/images/projects/fsi-open-plan.jpg'         },
     { name: 'BURTON IN99 Flagship',      year: '2020', img: '../assets/images/projects/burton-in99-main.webp'     },
     { name: 'Sunset Aurora — Alpena',     year: '2025', img: '../assets/images/projects/alpena-exterior.jpg'      },
     { name: 'Dominican Residences',      year: '2019', img: '../assets/images/projects/dominican-residences.jpg'  },
-    { name: 'Utah Net-Zero Dev.',        year: '2018', img: '../assets/images/projects/utah-netzero.jpg'          },
     { name: 'Maoya Hotel, Sichuan',      year: '2022', img: '../assets/images/projects/maoya-1.png'               },
-    { name: '1290 Ave — Terrace',        year: '2023', img: '../assets/images/projects/tpg-terrace.jpg'           }
+    { name: 'First Sentier — Terrace',   year: '2023', img: '../assets/images/projects/fsi-terrace.jpg'          }
   ];
 
   var reelTrack = document.getElementById('pr-reel-track');
@@ -1426,6 +1439,65 @@
 }());
 </script>
 
+<!-- ── MUSIC PLAYER ─────────────────────────────────── -->
+<div id="yt-player-wrap" style="display:none;pointer-events:none;position:fixed;bottom:0;right:0;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+  <div id="yt-player"></div>
+</div>
+
+<button id="music-btn" aria-label="Toggle background music" title="Toggle music">
+  <!-- play icon -->
+  <svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+  <!-- pause icon -->
+  <svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+</button>
+
+<script>
+(function () {
+  var btn    = document.getElementById('music-btn');
+  var player = null;
+  var ready  = false;
+
+  /* Load YouTube IFrame API */
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+
+  window.onYouTubeIframeAPIReady = function () {
+    player = new YT.Player('yt-player', {
+      height: '1', width: '1',
+      videoId: '1IIyzob_yi8',
+      playerVars: {
+        listType: 'playlist',
+        list: 'RD1IIyzob_yi8',
+        autoplay: 0,
+        controls: 0,
+        loop: 1,
+        playsinline: 1
+      },
+      events: {
+        onReady: function () { ready = true; },
+        onStateChange: function (e) {
+          if (e.data === YT.PlayerState.PLAYING) {
+            btn.classList.add('playing');
+          } else {
+            btn.classList.remove('playing');
+          }
+        }
+      }
+    });
+  };
+
+  btn.addEventListener('click', function () {
+    if (!ready || !player) return;
+    var state = player.getPlayerState();
+    if (state === YT.PlayerState.PLAYING) {
+      player.pauseVideo();
+    } else {
+      player.playVideo();
+    }
+  });
+}());
+</script>
 
 </body>
 </html>
