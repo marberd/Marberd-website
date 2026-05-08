@@ -174,7 +174,7 @@
 
 .ab-timeline-sec {
   background: var(--ab-cream);
-  padding: 64px 60px;
+  padding: 64px 60px 40px;
   border-top: 0.5px solid rgba(0,0,0,0.1);
 }
 .ab-tl-inner { max-width: 1200px; margin: 0 auto; }
@@ -198,7 +198,7 @@
 
 .ab-tl-chart { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .ab-tl-chart-inner {
-  min-width: 680px;
+  min-width: 520px;
   position: relative;
   padding-bottom: 44px; /* space for axis */
 }
@@ -208,7 +208,7 @@
   width: 0; border-left: 1px dashed rgba(0,0,0,0.09);
 }
 .ab-tl-rows { position: relative; z-index: 1; }
-.ab-tl-row { position: relative; height: 50px; margin-bottom: 2px; }
+.ab-tl-row { position: relative; height: 42px; margin-bottom: 2px; }
 .ab-tl-row-label {
   position: absolute; top: 5px;
   font-family: var(--sans); font-size: 11px; font-weight: 500;
@@ -831,22 +831,6 @@
       </div>
     </div>
 
-    <div class="ab-tl-certs reveal">
-      <div class="ab-col-label" style="margin-bottom:16px;">Certifications</div>
-      <div class="ab-cert-row">
-        <div class="ab-cert-title">Autodesk Certified Professional</div>
-        <div class="ab-cert-sub">Revit Architecture &nbsp;·&nbsp; 2019 and 2024</div>
-      </div>
-      <div class="ab-cert-row">
-        <div class="ab-cert-title">LEED Green Associate</div>
-        <div class="ab-cert-sub">U.S. Green Building Council &nbsp;·&nbsp; November 2024</div>
-      </div>
-      <div class="ab-cert-row ab-cert-row--last">
-        <div class="ab-cert-title">Peri-Urban Water Management Workshop</div>
-        <div class="ab-cert-sub">Scholarship recipient &nbsp;·&nbsp; Ahmedabad, India &nbsp;·&nbsp; July 2023</div>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -1054,7 +1038,7 @@
 <script>
 /* ── TIMELINE ─────────────────────────────────────────── */
 (function () {
-  var START = 2012, END = 2026, RANGE = END - START;
+  var START = 2013, END = 2026, RANGE = END - START;
 
   var ENTRIES = [
     { label: 'B.Tech, City Tech',        type: 'edu',  start: 2013, end: 2018,
@@ -1069,7 +1053,7 @@
       role: 'BIM Manager', loc: 'New York, NY' },
     { label: 'Arch-Nimations',            type: 'work', start: 2018, end: 2024,
       role: 'Founder & Architectural Designer', loc: 'Independent Practice' },
-    { label: 'Volunteering & Church',     type: 'vol',  start: 2012, end: 2026,
+    { label: 'Volunteering & Church',     type: 'vol',  start: 2013, end: 2026,
       role: 'Choir Director & Community Service', loc: 'New York, NY' },
   ];
 
