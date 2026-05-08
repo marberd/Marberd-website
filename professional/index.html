@@ -348,7 +348,67 @@
 }
 
 /* ── GALLERY ───────────────────────────────────────── */
-.pr-gallery { margin-bottom: 28px; }
+.pr-gallery { margin-bottom: 40px; }
+
+/* ── STACK ─────────────────────────────────────────── */
+.pr-stack { position: relative; }
+.pr-stack-card {
+  position: absolute;
+  inset: 0;
+  background: #0d0d13;
+  border: 0.5px solid rgba(255,255,255,0.07);
+}
+.pr-stack-card--1 { transform: rotate(0.8deg) translate(7px, 7px); z-index: 0; }
+.pr-stack-card--2 { transform: rotate(1.8deg) translate(14px, 13px); z-index: -1; }
+.pr-stack .pr-gallery-stage { position: relative; z-index: 2; cursor: zoom-in; }
+
+/* ── LIGHTBOX ──────────────────────────────────────── */
+.pr-lightbox {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,0.93);
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+.pr-lightbox.is-open { opacity: 1; pointer-events: all; }
+.pr-lightbox-img {
+  max-width: 88vw;
+  max-height: 86vh;
+  object-fit: contain;
+  display: block;
+  cursor: default;
+  box-shadow: 0 16px 80px rgba(0,0,0,0.85);
+}
+.pr-lightbox-close {
+  position: absolute; top: 20px; right: 24px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.4);
+  background: none; border: 0.5px solid rgba(255,255,255,0.16);
+  padding: 7px 16px; cursor: pointer;
+  transition: color .18s, border-color .18s;
+}
+.pr-lightbox-close:hover { color: var(--white); border-color: rgba(255,255,255,0.5); }
+.pr-lightbox-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: none; border: 0.5px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.4); font-size: 18px; line-height: 1;
+  padding: 16px 18px; cursor: pointer;
+  transition: color .18s, border-color .18s;
+}
+.pr-lightbox-nav:hover { color: var(--white); border-color: rgba(255,255,255,0.5); }
+.pr-lightbox-prev { left: 20px; }
+.pr-lightbox-next { right: 20px; }
+.pr-lightbox-caption {
+  position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+  font-family: var(--mono); font-size: 8px; letter-spacing: 2.5px;
+  color: rgba(255,255,255,0.28); white-space: nowrap;
+}
 
 .pr-gallery-stage {
   position: relative;
@@ -630,6 +690,7 @@
   .pr-gallery-prog { animation: none !important; }
   .pr-cta-ticker { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .pr-stack-card { transform: none !important; }
 }
 
 /* ══ MOBILE (≤ 900px) ════════════════════════════════ */
@@ -816,21 +877,25 @@
     </div>
     <div class="pr-chapter-right">
       <div class="pr-gallery" data-interval="3500">
-        <div class="pr-gallery-stage">
-          <img class="pr-gallery-img is-active" src="../assets/images/projects/bmw-showroom-main.webp"    alt="BMW Showroom — Manhattan flagship" loading="lazy">
-          <img class="pr-gallery-img"            src="../assets/images/projects/tpg-interior.jpg"          alt="1290 Avenue of the Americas — Interior" loading="lazy">
-          <img class="pr-gallery-img"            src="../assets/images/projects/bmw-showroom-spread.webp"  alt="BMW Showroom — layout overview" loading="lazy">
-          <img class="pr-gallery-img"            src="../assets/images/projects/tpg-terrace.jpg"           alt="1290 Avenue — Terrace" loading="lazy">
-          <div class="pr-gallery-ui" aria-hidden="true">
-            <div class="pr-gallery-counter">
-              <span class="pr-gc-cur">01</span>
-              <span style="opacity:0.35"> / </span>
-              <span class="pr-gc-tot">04</span>
+        <div class="pr-stack">
+          <div class="pr-stack-card pr-stack-card--2" aria-hidden="true"></div>
+          <div class="pr-stack-card pr-stack-card--1" aria-hidden="true"></div>
+          <div class="pr-gallery-stage">
+            <img class="pr-gallery-img is-active" src="../assets/images/projects/bmw-showroom-main.webp"    alt="BMW Showroom — Manhattan flagship" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/tpg-interior.jpg"          alt="1290 Avenue of the Americas — Interior" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/bmw-showroom-spread.webp"  alt="BMW Showroom — layout overview" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/tpg-terrace.jpg"           alt="1290 Avenue — Terrace" loading="lazy">
+            <div class="pr-gallery-ui" aria-hidden="true">
+              <div class="pr-gallery-counter">
+                <span class="pr-gc-cur">01</span>
+                <span style="opacity:0.35"> / </span>
+                <span class="pr-gc-tot">04</span>
+              </div>
+              <span class="pr-gallery-hint">Click to expand</span>
             </div>
-            <span class="pr-gallery-hint">Click to advance</span>
-          </div>
-          <div class="pr-gallery-prog-wrap" aria-hidden="true">
-            <div class="pr-gallery-prog"></div>
+            <div class="pr-gallery-prog-wrap" aria-hidden="true">
+              <div class="pr-gallery-prog"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -862,22 +927,26 @@
     </div>
     <div class="pr-chapter-right">
       <div class="pr-gallery" data-interval="4000">
-        <div class="pr-gallery-stage">
-          <img class="pr-gallery-img is-active" src="../assets/images/projects/burton-in99-main.webp"     alt="BURTON IN99 Flagship — Chengdu" loading="lazy">
-          <img class="pr-gallery-img"            src="../assets/images/projects/alpena-prof.jpg"           alt="Alpena 130K SF Mixed-Use" loading="lazy">
-          <img class="pr-gallery-img"            src="../assets/images/projects/dominican-residences.jpg"  alt="Five Residences — Dominican Republic" loading="lazy">
-          <img class="pr-gallery-img"            src="../assets/images/projects/utah-netzero.jpg"          alt="Utah Net-Zero Residential" loading="lazy">
-          <img class="pr-gallery-img"            src="../assets/images/projects/beachy-apartments.jpg"    alt="Beachy Apartments — San Cristobal, Dominican Republic" loading="lazy">
-          <div class="pr-gallery-ui" aria-hidden="true">
-            <div class="pr-gallery-counter">
-              <span class="pr-gc-cur">01</span>
-              <span style="opacity:0.35"> / </span>
-              <span class="pr-gc-tot">05</span>
+        <div class="pr-stack">
+          <div class="pr-stack-card pr-stack-card--2" aria-hidden="true"></div>
+          <div class="pr-stack-card pr-stack-card--1" aria-hidden="true"></div>
+          <div class="pr-gallery-stage">
+            <img class="pr-gallery-img is-active" src="../assets/images/projects/burton-in99-main.webp"     alt="BURTON IN99 Flagship — Chengdu" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/alpena-prof.jpg"           alt="Alpena 130K SF Mixed-Use" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/dominican-residences.jpg"  alt="Five Residences — Dominican Republic" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/utah-netzero.jpg"          alt="Utah Net-Zero Residential" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/beachy-apartments.jpg"    alt="Beachy Apartments — San Cristobal, Dominican Republic" loading="lazy">
+            <div class="pr-gallery-ui" aria-hidden="true">
+              <div class="pr-gallery-counter">
+                <span class="pr-gc-cur">01</span>
+                <span style="opacity:0.35"> / </span>
+                <span class="pr-gc-tot">05</span>
+              </div>
+              <span class="pr-gallery-hint">Click to expand</span>
             </div>
-            <span class="pr-gallery-hint">Click to advance</span>
-          </div>
-          <div class="pr-gallery-prog-wrap" aria-hidden="true">
-            <div class="pr-gallery-prog"></div>
+            <div class="pr-gallery-prog-wrap" aria-hidden="true">
+              <div class="pr-gallery-prog"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -936,20 +1005,24 @@
     </div>
     <div class="pr-chapter-right">
       <div class="pr-gallery" data-interval="4500">
-        <div class="pr-gallery-stage">
-          <img class="pr-gallery-img is-active" src="../assets/images/projects/maoya-1.png"              alt="Maoya Hotel — Sichuan, China" loading="lazy">
-          <img class="pr-gallery-img"            src="../assets/images/projects/humeniks-exterior.png"   alt="Humenik's Building — Brooklyn, NY" loading="lazy">
-          <img class="pr-gallery-img"            src="../assets/images/projects/humeniks-before-after.png" alt="Humenik's Building — Before / After" loading="lazy">
-          <div class="pr-gallery-ui" aria-hidden="true">
-            <div class="pr-gallery-counter">
-              <span class="pr-gc-cur">01</span>
-              <span style="opacity:0.35"> / </span>
-              <span class="pr-gc-tot">03</span>
+        <div class="pr-stack">
+          <div class="pr-stack-card pr-stack-card--2" aria-hidden="true"></div>
+          <div class="pr-stack-card pr-stack-card--1" aria-hidden="true"></div>
+          <div class="pr-gallery-stage">
+            <img class="pr-gallery-img is-active" src="../assets/images/projects/maoya-1.png"              alt="Maoya Hotel — Sichuan, China" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/humeniks-exterior.png"   alt="Humenik's Building — Brooklyn, NY" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/humeniks-before-after.png" alt="Humenik's Building — Before / After" loading="lazy">
+            <div class="pr-gallery-ui" aria-hidden="true">
+              <div class="pr-gallery-counter">
+                <span class="pr-gc-cur">01</span>
+                <span style="opacity:0.35"> / </span>
+                <span class="pr-gc-tot">03</span>
+              </div>
+              <span class="pr-gallery-hint">Click to expand</span>
             </div>
-            <span class="pr-gallery-hint">Click to advance</span>
-          </div>
-          <div class="pr-gallery-prog-wrap" aria-hidden="true">
-            <div class="pr-gallery-prog"></div>
+            <div class="pr-gallery-prog-wrap" aria-hidden="true">
+              <div class="pr-gallery-prog"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1004,6 +1077,15 @@
   </div>
 </section>
 
+<!-- ══ LIGHTBOX ══════════════════════════════════════════ -->
+<div class="pr-lightbox" id="pr-lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="pr-lightbox-close" id="pr-lb-close" aria-label="Close">Close ×</button>
+  <button class="pr-lightbox-nav pr-lightbox-prev" id="pr-lb-prev" aria-label="Previous">&#8592;</button>
+  <img class="pr-lightbox-img" id="pr-lb-img" src="" alt="">
+  <button class="pr-lightbox-nav pr-lightbox-next" id="pr-lb-next" aria-label="Next">&#8594;</button>
+  <span class="pr-lightbox-caption" id="pr-lb-caption"></span>
+</div>
+
 <!-- ══ FOOTER ════════════════════════════════════════════ -->
 <footer>
   <div class="foot-inner">
@@ -1025,6 +1107,8 @@
 (function () {
   'use strict';
 
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
   /* ── VERTICAL REEL ─────────────────────────────────── */
   var REEL = [
     { name: 'BMW Showroom',              year: '2023', img: '../assets/images/projects/bmw-showroom-main.webp'    },
@@ -1040,16 +1124,16 @@
   var reelTrack = document.getElementById('pr-reel-track');
   if (reelTrack) {
     REEL.concat(REEL).forEach(function (p) {
-      var card  = document.createElement('div');
+      var card = document.createElement('div');
       card.className = 'pr-reel-card';
-      var img   = document.createElement('img');
+      var img  = document.createElement('img');
       img.className = 'pr-reel-card-img';
-      img.src   = p.img; img.alt = p.name; img.loading = 'lazy';
-      var ov    = document.createElement('div');
+      img.src = p.img; img.alt = p.name; img.loading = 'lazy';
+      var ov   = document.createElement('div');
       ov.className = 'pr-reel-card-overlay';
-      var name  = document.createElement('span');
+      var name = document.createElement('span');
       name.className = 'pr-reel-card-name'; name.textContent = p.name;
-      var year  = document.createElement('span');
+      var year = document.createElement('span');
       year.className = 'pr-reel-card-year'; year.textContent = p.year;
       ov.appendChild(name); ov.appendChild(year);
       card.appendChild(img); card.appendChild(ov);
@@ -1057,19 +1141,67 @@
     });
   }
 
+  /* ── LIGHTBOX ──────────────────────────────────────── */
+  var lightbox  = document.getElementById('pr-lightbox');
+  var lbImg     = document.getElementById('pr-lb-img');
+  var lbClose   = document.getElementById('pr-lb-close');
+  var lbPrev    = document.getElementById('pr-lb-prev');
+  var lbNext    = document.getElementById('pr-lb-next');
+  var lbCaption = document.getElementById('pr-lb-caption');
+  var lbImgs = [], lbCur = 0;
+
+  function openLightbox(imgs, cur) {
+    lbImgs = imgs; lbCur = cur;
+    lbImg.src = imgs[cur].src;
+    lbImg.alt = imgs[cur].alt;
+    if (lbCaption) lbCaption.textContent = pad(cur + 1) + ' / ' + pad(imgs.length);
+    lightbox.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  function lbNav(dir) {
+    lbCur = (lbCur + dir + lbImgs.length) % lbImgs.length;
+    lbImg.src = lbImgs[lbCur].src;
+    lbImg.alt = lbImgs[lbCur].alt;
+    if (lbCaption) lbCaption.textContent = pad(lbCur + 1) + ' / ' + pad(lbImgs.length);
+  }
+
+  if (lightbox) {
+    lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+    lbClose.addEventListener('click', closeLightbox);
+    lbPrev.addEventListener('click', function (e) { e.stopPropagation(); lbNav(-1); });
+    lbNext.addEventListener('click', function (e) { e.stopPropagation(); lbNav(1); });
+    lbImg.addEventListener('click', function (e) { e.stopPropagation(); });
+    document.addEventListener('keydown', function (e) {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape')      closeLightbox();
+      if (e.key === 'ArrowLeft')   lbNav(-1);
+      if (e.key === 'ArrowRight')  lbNav(1);
+    });
+  }
+
   /* ── GALLERIES ─────────────────────────────────────── */
   document.querySelectorAll('.pr-gallery').forEach(function (gallery) {
-    var stage    = gallery.querySelector('.pr-gallery-stage');
-    var imgs     = Array.prototype.slice.call(gallery.querySelectorAll('.pr-gallery-img'));
-    var curEl    = gallery.querySelector('.pr-gc-cur');
-    var progEl   = gallery.querySelector('.pr-gallery-prog');
-    var ms       = parseInt(gallery.dataset.interval || '3500', 10);
-    var current  = 0;
-    var timer    = null;
+    var stage   = gallery.querySelector('.pr-gallery-stage');
+    var imgs    = Array.prototype.slice.call(gallery.querySelectorAll('.pr-gallery-img'));
+    var curEl   = gallery.querySelector('.pr-gc-cur');
+    var progEl  = gallery.querySelector('.pr-gallery-prog');
+    var ms      = parseInt(gallery.dataset.interval || '3500', 10);
+    var current = 0;
+    var timer   = null;
 
     if (imgs.length <= 1) return;
 
-    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    function randomNext() {
+      var r;
+      do { r = Math.floor(Math.random() * imgs.length); } while (r === current);
+      return r;
+    }
 
     function startProg() {
       if (!progEl) return;
@@ -1087,27 +1219,15 @@
       startProg();
     }
 
-    function advance() { showImg(current + 1); }
+    function advance() { showImg(randomNext()); }
+    function startTimer() { clearInterval(timer); timer = setInterval(advance, ms); }
+    function stopTimer()  { clearInterval(timer); timer = null; }
 
-    function startTimer() {
-      clearInterval(timer);
-      timer = setInterval(advance, ms);
-    }
-
-    function stopTimer() { clearInterval(timer); timer = null; }
-
-    /* kick off */
     startProg();
     startTimer();
 
     if (stage) {
-      /* click advances image */
-      stage.addEventListener('click', function () {
-        stopTimer();
-        advance();
-        startTimer();
-      });
-      /* pause on hover */
+      stage.addEventListener('click', function () { openLightbox(imgs, current); });
       stage.addEventListener('mouseenter', function () {
         stopTimer();
         if (progEl) progEl.classList.remove('running');
