@@ -120,30 +120,28 @@ document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
 // ── MUSIC PLAYER ────────────────
 (function () {
-  var LS_KEY  = 'mb_music';
-  var VID     = '1IIyzob_yi8';
-  var LIST    = 'RD1IIyzob_yi8';
-  var btn     = document.getElementById('music-nav-btn');
-  var player  = null;
+  var LS_KEY   = 'mb_music';
+  var VID      = '1IIyzob_yi8';
+  var btn      = document.getElementById('music-nav-btn');
+  var player   = null;
   var wantPlay = localStorage.getItem(LS_KEY) === '1';
 
-  // Set initial button visual state immediately (before API loads)
   if (btn && wantPlay) btn.classList.add('mb-playing');
 
-  // Inject hidden 1×1 player container
+  // Off-screen at real size — YouTube blocks playback in 1×1 clipped iframes
   var wrap = document.createElement('div');
-  wrap.style.cssText = 'position:fixed;width:1px;height:1px;bottom:0;right:0;overflow:hidden;pointer-events:none;opacity:0;';
+  wrap.style.cssText = 'position:fixed;width:200px;height:113px;bottom:-300px;right:-300px;pointer-events:none;';
   var pdiv = document.createElement('div');
   pdiv.id = 'mb-yt-player';
   wrap.appendChild(pdiv);
   document.body.appendChild(wrap);
 
-  // YouTube IFrame API callback
   window.onYouTubeIframeAPIReady = function () {
     player = new YT.Player('mb-yt-player', {
-      height: '1', width: '1',
+      height: '113', width: '200',
       videoId: VID,
-      playerVars: { listType:'playlist', list:LIST, autoplay:0, controls:0, loop:1, playsinline:1 },
+      // loop:1 requires playlist set to the same VID — YouTube API quirk
+      playerVars: { autoplay:0, controls:0, loop:1, playlist:VID, playsinline:1, fs:0, disablekb:1 },
       events: {
         onReady: function (e) {
           if (wantPlay) e.target.playVideo();
@@ -152,17 +150,19 @@ document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
           var playing = (e.data === YT.PlayerState.PLAYING);
           localStorage.setItem(LS_KEY, playing ? '1' : '0');
           if (btn) btn.classList.toggle('mb-playing', playing);
+        },
+        onError: function () {
+          localStorage.setItem(LS_KEY, '0');
+          if (btn) btn.classList.remove('mb-playing');
         }
       }
     });
   };
 
-  // Inject YouTube IFrame API script
   var tag = document.createElement('script');
   tag.src = 'https://www.youtube.com/iframe_api';
   document.head.appendChild(tag);
 
-  // Button click
   if (btn) {
     btn.addEventListener('click', function () {
       if (!player || typeof player.getPlayerState !== 'function') return;
