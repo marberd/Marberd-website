@@ -351,15 +351,15 @@
 .pr-gallery { margin-bottom: 40px; }
 
 /* ── STACK ─────────────────────────────────────────── */
-.pr-stack { position: relative; }
+.pr-stack { position: relative; isolation: isolate; }
 .pr-stack-card {
   position: absolute;
   inset: 0;
   background: #0d0d13;
-  border: 0.5px solid rgba(255,255,255,0.07);
+  border: 0.5px solid rgba(255,255,255,0.08);
 }
-.pr-stack-card--1 { transform: rotate(0.8deg) translate(7px, 7px); z-index: 0; }
-.pr-stack-card--2 { transform: rotate(1.8deg) translate(14px, 13px); z-index: -1; }
+.pr-stack-card--1 { transform: rotate(0.8deg) translate(7px, 7px); z-index: 1; }
+.pr-stack-card--2 { transform: rotate(1.8deg) translate(14px, 13px); z-index: 0; }
 .pr-stack .pr-gallery-stage { position: relative; z-index: 2; cursor: zoom-in; }
 
 /* ── LIGHTBOX ──────────────────────────────────────── */
