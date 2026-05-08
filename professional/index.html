@@ -278,10 +278,11 @@
 .pr-chapter {
   padding: 52px 60px 72px;
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 0 60px;
+  grid-template-columns: 280px 1fr 160px;
+  gap: 0 36px;
   border-top: 0.5px solid #1c1c1c;
 }
+.pr-chapter--compact { grid-template-columns: 280px 1fr; }
 
 /* LEFT: sticky company info */
 .pr-chapter-left {
@@ -347,8 +348,32 @@
   white-space: nowrap;
 }
 
+/* ── THUMBNAIL STRIP (right column, sticky) ─────────── */
+.pr-chapter-thumb {
+  position: sticky; top: 88px; align-self: flex-start;
+  display: flex; flex-direction: column; gap: 5px;
+  max-height: calc(100vh - 110px); overflow-y: auto;
+  scrollbar-width: none;
+}
+.pr-chapter-thumb::-webkit-scrollbar { display: none; }
+.pr-ts-item {
+  display: block; width: 100%; height: 76px; flex-shrink: 0;
+  overflow: hidden; cursor: pointer; padding: 0;
+  border: 0.5px solid rgba(255,255,255,0.07); background: #0d0d13;
+  transition: border-color .2s;
+}
+.pr-ts-item img {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  opacity: 0.45; transition: opacity .25s;
+}
+.pr-ts-item:hover { border-color: rgba(184,148,106,0.35); }
+.pr-ts-item:hover img { opacity: 0.72; }
+.pr-ts-item.is-active { border-color: var(--gold); }
+.pr-ts-item.is-active img { opacity: 1; }
+
 /* ── GALLERY ───────────────────────────────────────── */
-.pr-gallery { margin-bottom: 40px; }
+.pr-gallery { margin-bottom: 36px; }
 
 /* ── STACK ─────────────────────────────────────────── */
 .pr-stack { position: relative; isolation: isolate; }
@@ -708,7 +733,7 @@
   /* Experience */
   .pr-exp-head { padding: 48px 24px 32px; }
   .pr-exp-group { padding: 40px 24px 0; }
-  .pr-chapter {
+  .pr-chapter, .pr-chapter--compact {
     grid-template-columns: 1fr;
     padding: 44px 24px 56px;
     gap: 28px 0;
@@ -716,9 +741,9 @@
   .pr-chapter-left { position: static; }
   .pr-ch-num { margin-bottom: 12px; }
 
-  /* Gallery & desktop thumbnail */
+  /* Gallery & thumbnail strip */
   .pr-gallery-stage { height: 300px; }
-  .pr-ch-thumb { display: none; }
+  .pr-chapter-thumb { display: none; }
 
   /* Education */
   .pr-edu-inner { padding: 44px 24px 52px; }
@@ -763,38 +788,6 @@
   .pr-cta-btn { width: 100%; }
 }
 
-/* ── CHAPTER THUMBNAILS (desktop only) ─────────────────── */
-.pr-ch-thumb {
-  position: relative; overflow: hidden;
-  height: 340px; cursor: zoom-in;
-  margin-bottom: 28px; background: #0d0d13;
-  border: 0.5px solid rgba(255,255,255,0.1);
-}
-.pr-th-cover {
-  display: block; width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-  opacity: 0.85;
-  transition: opacity .3s ease, transform .55s ease;
-}
-.pr-ch-thumb:hover .pr-th-cover { opacity: 1; transform: scale(1.025); }
-.pr-th-overlay {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 44px 20px 16px;
-  background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 100%);
-  display: flex; align-items: flex-end; justify-content: space-between;
-  pointer-events: none;
-}
-.pr-th-count {
-  font-family: var(--mono); font-size: 8px; letter-spacing: 1.5px;
-  text-transform: uppercase; color: rgba(255,255,255,0.38);
-}
-.pr-th-cta {
-  font-family: var(--mono); font-size: 8px; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--gold-lt);
-}
-
-/* on desktop: swap gallery → thumbnail */
-@media (min-width: 901px) { .pr-gallery { display: none; } }
 
 </style>
 </head>
@@ -909,14 +902,7 @@
         <span class="pr-ch-tag">MEP Coord.</span>
       </div>
     </div>
-    <div class="pr-chapter-right">
-      <div class="pr-ch-thumb" tabindex="0" role="button" aria-label="View TPG Architecture project images">
-        <img class="pr-th-cover" src="../assets/images/projects/bmw-showroom-main.webp" alt="TPG Architecture — BMW Showroom flagship" loading="eager">
-        <div class="pr-th-overlay">
-          <span class="pr-th-count">9 images</span>
-          <span class="pr-th-cta">Expand ↗</span>
-        </div>
-      </div>
+    <div class="pr-chapter-mid">
       <div class="pr-gallery" data-interval="3500">
         <div class="pr-stack">
           <div class="pr-stack-card pr-stack-card--2" aria-hidden="true"></div>
@@ -953,6 +939,17 @@
         <li><span class="pr-bul-t">Administered 300+ BIM 360 / ACC projects since 2018 — setup, permissions, model coordination, issue tracking — and led firmwide Revit training annually, raising studio-wide BIM proficiency.</span></li>
       </ul>
     </div>
+    <div class="pr-chapter-thumb" aria-label="Project images">
+      <button class="pr-ts-item is-active" data-idx="0"><img src="../assets/images/projects/bmw-showroom-main.webp"     alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="1"><img src="../assets/images/projects/tpg-interior.jpg"           alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="2"><img src="../assets/images/projects/bmw-showroom-spread.webp"   alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="3"><img src="../assets/images/projects/tpg-terrace.jpg"            alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="4"><img src="../assets/images/projects/bmw-showroom-restroom.webp" alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="5"><img src="../assets/images/projects/bmw-showroom-furniture.webp"alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="6"><img src="../assets/images/projects/burton-in99-main.webp"      alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="7"><img src="../assets/images/projects/burton-in99-detail-1.webp" alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="8"><img src="../assets/images/projects/burton-in99-spread.webp"   alt="" loading="lazy"></button>
+    </div>
   </article>
 
   <!-- ── 02 — Archnimations ──────────────────────────── -->
@@ -971,14 +968,7 @@
         <span class="pr-ch-tag">Visualization</span>
       </div>
     </div>
-    <div class="pr-chapter-right">
-      <div class="pr-ch-thumb" tabindex="0" role="button" aria-label="View Archnimations project images">
-        <img class="pr-th-cover" src="../assets/images/projects/sansurs-p01.jpg" alt="Archnimations — Sansurs Residence" loading="eager">
-        <div class="pr-th-overlay">
-          <span class="pr-th-count">9 images</span>
-          <span class="pr-th-cta">Expand ↗</span>
-        </div>
-      </div>
+    <div class="pr-chapter-mid">
       <div class="pr-gallery" data-interval="4000">
         <div class="pr-stack">
           <div class="pr-stack-card pr-stack-card--2" aria-hidden="true"></div>
@@ -986,13 +976,13 @@
           <div class="pr-gallery-stage">
             <img class="pr-gallery-img is-active" src="../assets/images/projects/burton-in99-main.webp"     alt="BURTON IN99 Flagship — Chengdu" loading="lazy">
             <img class="pr-gallery-img"            src="../assets/images/projects/alpena-prof.jpg"           alt="Alpena 130K SF Mixed-Use" loading="lazy">
-            <img class="pr-gallery-img"            src="../assets/images/projects/sansurs-p01.jpg"            alt="Sansurs Residence — Render 01" loading="lazy">
-            <img class="pr-gallery-img"            src="../assets/images/projects/sansurs-p02.jpg"            alt="Sansurs Residence — Render 02" loading="lazy">
-            <img class="pr-gallery-img"            src="../assets/images/projects/sansurs-p03.jpg"            alt="Sansurs Residence — Render 03" loading="lazy">
-            <img class="pr-gallery-img"            src="../assets/images/projects/sansurs-p04.jpg"            alt="Sansurs Residence — Render 04" loading="lazy">
-            <img class="pr-gallery-img"            src="../assets/images/projects/sansurs-p05.jpg"            alt="Sansurs Residence — Render 05" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/sansurs-p01.jpg"           alt="Sansurs Residence — Render 01" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/sansurs-p02.jpg"           alt="Sansurs Residence — Render 02" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/sansurs-p03.jpg"           alt="Sansurs Residence — Render 03" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/sansurs-p04.jpg"           alt="Sansurs Residence — Render 04" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/sansurs-p05.jpg"           alt="Sansurs Residence — Render 05" loading="lazy">
             <img class="pr-gallery-img"            src="../assets/images/projects/utah-netzero.jpg"          alt="Utah Net-Zero Residential" loading="lazy">
-            <img class="pr-gallery-img"            src="../assets/images/projects/beachy-apartments.jpg"    alt="Beachy Apartments — San Cristobal, Dominican Republic" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/beachy-apartments.jpg"     alt="Beachy Apartments — San Cristobal, Dominican Republic" loading="lazy">
             <div class="pr-gallery-ui" aria-hidden="true">
               <div class="pr-gallery-counter">
                 <span class="pr-gc-cur">01</span>
@@ -1015,6 +1005,17 @@
         <li><span class="pr-bul-t">Produced net-zero residential master plan for a Utah development — passive solar orientation, high-performance envelope detailing, and energy modeling integrated from early schematic phase.</span></li>
         <li><span class="pr-bul-t">Designed Beachy Apartments — a 6-unit residential building in San Cristobal, Dominican Republic, inspired by water dynamics along coastal rock formations, 40 minutes south of the beach.</span></li>
       </ul>
+    </div>
+    <div class="pr-chapter-thumb" aria-label="Project images">
+      <button class="pr-ts-item is-active" data-idx="0"><img src="../assets/images/projects/burton-in99-main.webp"  alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="1"><img src="../assets/images/projects/alpena-prof.jpg"           alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="2"><img src="../assets/images/projects/sansurs-p01.jpg"           alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="3"><img src="../assets/images/projects/sansurs-p02.jpg"           alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="4"><img src="../assets/images/projects/sansurs-p03.jpg"           alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="5"><img src="../assets/images/projects/sansurs-p04.jpg"           alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="6"><img src="../assets/images/projects/sansurs-p05.jpg"           alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="7"><img src="../assets/images/projects/utah-netzero.jpg"          alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="8"><img src="../assets/images/projects/beachy-apartments.jpg"     alt="" loading="lazy"></button>
     </div>
   </article>
 
@@ -1060,14 +1061,7 @@
         <span class="pr-ch-tag">Energy Analysis</span>
       </div>
     </div>
-    <div class="pr-chapter-right">
-      <div class="pr-ch-thumb" tabindex="0" role="button" aria-label="View D-YO Studio project images">
-        <img class="pr-th-cover" src="../assets/images/projects/maoya-1.png" alt="D-YO Studio — Maoya Hotel, Sichuan" loading="eager">
-        <div class="pr-th-overlay">
-          <span class="pr-th-count">5 images</span>
-          <span class="pr-th-cta">Expand ↗</span>
-        </div>
-      </div>
+    <div class="pr-chapter-mid">
       <div class="pr-gallery" data-interval="4500">
         <div class="pr-stack">
           <div class="pr-stack-card pr-stack-card--2" aria-hidden="true"></div>
@@ -1097,6 +1091,13 @@
         <li><span class="pr-bul-t">Independently transitioned Humenik's Building — a ground-up multifamily development in Brooklyn, NY — from AutoCAD into Revit mid-project, enabling rapid iteration and greater layout precision.</span></li>
         <li><span class="pr-bul-t">Prepared ADA compliance documentation, conducted energy analysis including fenestration and R-value calculations, and led DOB filing and construction meetings across residential and commercial projects.</span></li>
       </ul>
+    </div>
+    <div class="pr-chapter-thumb" aria-label="Project images">
+      <button class="pr-ts-item is-active" data-idx="0"><img src="../assets/images/projects/maoya-1.png"                alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="1"><img src="../assets/images/projects/maoya-2.png"                alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="2"><img src="../assets/images/projects/humeniks-exterior.png"     alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="3"><img src="../assets/images/projects/humeniks-kitchen.png"      alt="" loading="lazy"></button>
+      <button class="pr-ts-item" data-idx="4"><img src="../assets/images/projects/humeniks-before-after.png" alt="" loading="lazy"></button>
     </div>
   </article>
 
@@ -1251,8 +1252,9 @@
     });
   }
 
-  /* ── GALLERIES ─────────────────────────────────────── */
+  /* ── GALLERIES + THUMBNAIL STRIPS ──────────────────────── */
   document.querySelectorAll('.pr-gallery').forEach(function (gallery) {
+    var chapter = gallery.closest('.pr-chapter');
     var stage   = gallery.querySelector('.pr-gallery-stage');
     var imgs    = Array.prototype.slice.call(gallery.querySelectorAll('.pr-gallery-img'));
     var curEl   = gallery.querySelector('.pr-gc-cur');
@@ -1260,6 +1262,7 @@
     var ms      = parseInt(gallery.dataset.interval || '3500', 10);
     var current = 0;
     var timer   = null;
+    var tsItems = chapter ? Array.prototype.slice.call(chapter.querySelectorAll('.pr-ts-item')) : [];
 
     if (imgs.length <= 1) return;
 
@@ -1277,12 +1280,17 @@
       progEl.classList.add('running');
     }
 
+    function syncThumb(i) {
+      tsItems.forEach(function (el, j) { el.classList.toggle('is-active', j === i); });
+    }
+
     function showImg(i) {
       imgs[current].classList.remove('is-active');
       current = (i + imgs.length) % imgs.length;
       imgs[current].classList.add('is-active');
       if (curEl) curEl.textContent = pad(current + 1);
       startProg();
+      syncThumb(current);
     }
 
     function advance() { showImg(randomNext()); }
@@ -1291,6 +1299,12 @@
 
     startProg();
     startTimer();
+    syncThumb(0);
+
+    /* thumbnail strip clicks */
+    tsItems.forEach(function (btn, i) {
+      btn.addEventListener('click', function () { stopTimer(); showImg(i); startTimer(); });
+    });
 
     if (stage) {
       stage.addEventListener('click', function () { openLightbox(imgs, current); });
@@ -1303,20 +1317,6 @@
         startTimer();
       });
     }
-  });
-
-  /* ── DESKTOP THUMBNAILS → LIGHTBOX ─────────────────────── */
-  document.querySelectorAll('.pr-ch-thumb').forEach(function (thumb) {
-    var right = thumb.closest('.pr-chapter-right') || thumb.parentElement;
-    var gallery = right.querySelector('.pr-gallery');
-    if (!gallery) return;
-    var imgs = Array.prototype.slice.call(gallery.querySelectorAll('.pr-gallery-img'));
-    if (!imgs.length) return;
-    function open() { openLightbox(imgs, 0); }
-    thumb.addEventListener('click', open);
-    thumb.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-    });
   });
 
 }());
