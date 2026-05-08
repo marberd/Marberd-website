@@ -107,7 +107,7 @@ nav.nav-hidden {
 .nav-icon svg { width: 13px; height: 13px; }
 
 /* ── MUSIC NAV BUTTON ───────────────────── */
-#music-nav-btn { background: none; }
+#music-nav-btn { background: transparent; -webkit-appearance: none; appearance: none; }
 #music-nav-btn .ic-mpause { display: none; }
 #music-nav-btn.mb-playing .ic-mplay  { display: none; }
 #music-nav-btn.mb-playing .ic-mpause { display: block; }
