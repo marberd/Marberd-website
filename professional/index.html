@@ -762,161 +762,42 @@
   .pr-cta-btn { width: 100%; }
 }
 
-/* ── DESKTOP PROJECT SHOWCASE ─────────────────────────────── */
-.pr-showcase { display: none; }
+/* ── DESKTOP CHAPTER THUMBNAILS ──────────────────────────── */
+.pr-ch-thumb { display: none; }
 
 @media (min-width: 901px) {
-  /* Hide per-chapter galleries — showcase replaces them on desktop */
+  /* Hide mobile galleries on desktop — thumbnails take their place */
   .pr-gallery { display: none; }
 
-  .pr-showcase {
-    display: block;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 64px 60px 72px;
-    border-bottom: 1px solid var(--border);
-  }
-  .pr-showcase-label {
-    font-family: var(--mono); font-size: 9px; letter-spacing: 3px;
-    text-transform: uppercase; color: var(--gold-dk);
-    margin-bottom: 28px; display: flex; align-items: center; gap: 10px;
-  }
-  .pr-showcase-label::after { content:''; width:28px; height:1px; background: rgba(184,148,106,0.4); }
-
-  .pr-showcase-inner {
-    display: grid;
-    grid-template-columns: 1fr 228px;
-    gap: 20px;
-    height: 520px;
-  }
-
-  /* ── viewer ──────────── */
-  .pr-showcase-viewer {
-    position: relative;
+  .pr-ch-thumb {
+    display: block; position: relative;
+    overflow: hidden; height: 340px;
+    cursor: zoom-in; margin-bottom: 28px;
     background: #0d0d13;
-    overflow: hidden;
   }
-  .pr-showcase-stage {
-    position: absolute; inset: 0;
-  }
-  .pr-showcase-img {
-    position: absolute; inset: 0;
+  .pr-th-cover {
     width: 100%; height: 100%;
     object-fit: cover; object-position: center;
-    opacity: 0;
-    transition: opacity 0.55s ease;
+    display: block; opacity: 0.85;
+    transition: opacity .3s ease, transform .55s ease;
   }
-  .pr-showcase-img.is-active { opacity: 1; }
-
-  /* ── info overlay ── */
-  .pr-showcase-info {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    padding: 56px 28px 20px;
-    background: linear-gradient(to top, rgba(0,0,0,0.84) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
-    pointer-events: none;
-    z-index: 3;
-  }
-  .pr-sc-company {
-    font-family: var(--mono); font-size: 8px; letter-spacing: 2.5px;
-    text-transform: uppercase; color: var(--gold-lt);
-    margin-bottom: 5px;
-  }
-  .pr-sc-badge {
-    display: inline-block;
-    font-family: var(--mono); font-size: 7px; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--gold);
-    border: 0.5px solid rgba(184,148,106,0.5); padding: 2px 8px;
-    margin-bottom: 6px;
-  }
-  .pr-sc-role {
-    font-family: var(--serif); font-size: clamp(18px, 2vw, 24px);
-    font-weight: 400; color: #fff; line-height: 1.2;
-    margin-bottom: 6px;
-  }
-  .pr-sc-meta {
-    font-family: var(--mono); font-size: 7.5px; letter-spacing: 1.5px;
-    color: rgba(255,255,255,0.38); text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .pr-sc-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-  .pr-sc-tag {
-    font-family: var(--mono); font-size: 7px; letter-spacing: 1px;
-    text-transform: uppercase; color: rgba(255,255,255,0.45);
-    border: 0.5px solid rgba(255,255,255,0.15); padding: 3px 8px;
-  }
-
-  /* ── controls ── */
-  .pr-showcase-controls {
-    position: absolute; bottom: 20px; right: 20px;
-    display: flex; align-items: center; gap: 8px;
-    z-index: 4;
-  }
-  .pr-sc-nav {
-    width: 30px; height: 30px;
-    background: rgba(255,255,255,0.07); border: 0.5px solid rgba(255,255,255,0.16);
-    color: rgba(255,255,255,0.65); font-size: 13px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all .2s; font-family: var(--mono);
-  }
-  .pr-sc-nav:hover { background: rgba(255,255,255,0.14); color: #fff; border-color: rgba(255,255,255,0.35); }
-  .pr-sc-counter {
-    font-family: var(--mono); font-size: 9px; letter-spacing: 1px;
-    color: rgba(255,255,255,0.4); min-width: 44px; text-align: center;
-  }
-
-  /* ── progress bar ── */
-  .pr-sc-prog-wrap {
+  .pr-ch-thumb:hover .pr-th-cover { opacity: 1; transform: scale(1.025); }
+  .pr-th-overlay {
     position: absolute; bottom: 0; left: 0; right: 0;
-    height: 2px; background: rgba(255,255,255,0.07); z-index: 4;
-  }
-  .pr-sc-prog {
-    height: 100%; width: 0; background: var(--gold);
-  }
-  .pr-sc-prog.running {
-    animation: scProgFill linear forwards;
-  }
-  @keyframes scProgFill {
-    from { width: 0; }
-    to   { width: 100%; }
-  }
-
-  /* ── queue ── */
-  .pr-showcase-queue {
-    display: flex; flex-direction: column; gap: 6px;
-    overflow-y: auto;
-  }
-  .pr-queue-item {
-    position: relative; flex-shrink: 0;
-    height: 122px; overflow: hidden;
-    background: #0d0d13; border: 0.5px solid rgba(255,255,255,0.07);
-    cursor: pointer; text-align: left; padding: 0;
-    transition: border-color .22s;
-  }
-  .pr-queue-item img {
-    width: 100%; height: 100%; object-fit: cover; object-position: center;
-    opacity: 0.5; transition: opacity .3s; display: block;
-  }
-  .pr-queue-item:hover { border-color: rgba(184,148,106,0.4); }
-  .pr-queue-item:hover img { opacity: 0.75; }
-  .pr-queue-item.is-active { border-color: var(--gold); }
-  .pr-queue-item.is-active img { opacity: 0.82; }
-  .pr-queue-label {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 24px 10px 8px;
+    padding: 44px 20px 16px;
     background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 100%);
+    display: flex; align-items: flex-end; justify-content: space-between;
     pointer-events: none;
   }
-  .pr-queue-co {
-    font-family: var(--mono); font-size: 7px; letter-spacing: 1.5px;
-    text-transform: uppercase; color: rgba(255,255,255,0.5);
-    display: block; line-height: 1.3;
+  .pr-th-count {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.38);
   }
-  .pr-queue-num {
-    font-family: var(--mono); font-size: 6.5px; letter-spacing: 1px;
-    color: rgba(255,255,255,0.28); display: block; margin-top: 2px;
+  .pr-th-cta {
+    font-family: var(--mono); font-size: 8px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--gold-lt);
   }
-  .pr-queue-item.is-active .pr-queue-co { color: var(--gold-lt); }
+
 }
 
 </style>
@@ -1006,28 +887,6 @@
   </div>
 </div>
 
-<!-- ══ DESKTOP PROJECT SHOWCASE ══════════════════════════════ -->
-<section class="pr-showcase" id="pr-showcase" aria-label="Project Showcase">
-  <div class="pr-showcase-label">Projects</div>
-  <div class="pr-showcase-inner">
-    <!-- viewer -->
-    <div class="pr-showcase-viewer">
-      <div class="pr-showcase-stage" id="pr-sc-stage"></div>
-      <div class="pr-showcase-info" id="pr-sc-info"></div>
-      <div class="pr-showcase-controls">
-        <button class="pr-sc-nav" id="pr-sc-prev" aria-label="Previous image">&#8592;</button>
-        <span class="pr-sc-counter" id="pr-sc-counter">01 / 01</span>
-        <button class="pr-sc-nav" id="pr-sc-next" aria-label="Next image">&#8594;</button>
-      </div>
-      <div class="pr-sc-prog-wrap" aria-hidden="true">
-        <div class="pr-sc-prog" id="pr-sc-prog"></div>
-      </div>
-    </div>
-    <!-- queue -->
-    <div class="pr-showcase-queue" id="pr-sc-queue"></div>
-  </div>
-</section>
-
 <!-- ══ EXPERIENCE ═══════════════════════════════════════ -->
 <section class="pr-exp" aria-label="Work Experience">
 
@@ -1055,20 +914,32 @@
       </div>
     </div>
     <div class="pr-chapter-right">
+      <div class="pr-ch-thumb" tabindex="0" role="button" aria-label="View TPG Architecture project images">
+        <img class="pr-th-cover" src="../assets/images/projects/bmw-showroom-main.webp" alt="TPG Architecture — BMW Showroom flagship">
+        <div class="pr-th-overlay">
+          <span class="pr-th-count">9 images</span>
+          <span class="pr-th-cta">Expand ↗</span>
+        </div>
+      </div>
       <div class="pr-gallery" data-interval="3500">
         <div class="pr-stack">
           <div class="pr-stack-card pr-stack-card--2" aria-hidden="true"></div>
           <div class="pr-stack-card pr-stack-card--1" aria-hidden="true"></div>
           <div class="pr-gallery-stage">
-            <img class="pr-gallery-img is-active" src="../assets/images/projects/bmw-showroom-main.webp"    alt="BMW Showroom — Manhattan flagship" loading="lazy">
-            <img class="pr-gallery-img"            src="../assets/images/projects/tpg-interior.jpg"          alt="1290 Avenue of the Americas — Interior" loading="lazy">
-            <img class="pr-gallery-img"            src="../assets/images/projects/bmw-showroom-spread.webp"  alt="BMW Showroom — layout overview" loading="lazy">
-            <img class="pr-gallery-img"            src="../assets/images/projects/tpg-terrace.jpg"           alt="1290 Avenue — Terrace" loading="lazy">
+            <img class="pr-gallery-img is-active" src="../assets/images/projects/bmw-showroom-main.webp"     alt="BMW Showroom — Manhattan flagship" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/tpg-interior.jpg"           alt="1290 Avenue of the Americas — Interior" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/bmw-showroom-spread.webp"   alt="BMW Showroom — layout overview" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/tpg-terrace.jpg"            alt="1290 Avenue — Terrace" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/bmw-showroom-restroom.webp" alt="BMW Showroom — finishes" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/bmw-showroom-furniture.webp"alt="BMW Showroom — FF&amp;E" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/burton-in99-main.webp"      alt="BURTON IN99 Flagship — Chengdu" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/burton-in99-detail-1.webp" alt="BURTON IN99 — detail" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/burton-in99-spread.webp"   alt="BURTON IN99 — floor plan" loading="lazy">
             <div class="pr-gallery-ui" aria-hidden="true">
               <div class="pr-gallery-counter">
                 <span class="pr-gc-cur">01</span>
                 <span style="opacity:0.35"> / </span>
-                <span class="pr-gc-tot">04</span>
+                <span class="pr-gc-tot">09</span>
               </div>
               <span class="pr-gallery-hint">Click to expand</span>
             </div>
@@ -1105,6 +976,13 @@
       </div>
     </div>
     <div class="pr-chapter-right">
+      <div class="pr-ch-thumb" tabindex="0" role="button" aria-label="View Archnimations project images">
+        <img class="pr-th-cover" src="../assets/images/projects/sansurs-p01.jpg" alt="Archnimations — Sansurs Residence">
+        <div class="pr-th-overlay">
+          <span class="pr-th-count">9 images</span>
+          <span class="pr-th-cta">Expand ↗</span>
+        </div>
+      </div>
       <div class="pr-gallery" data-interval="4000">
         <div class="pr-stack">
           <div class="pr-stack-card pr-stack-card--2" aria-hidden="true"></div>
@@ -1187,19 +1065,28 @@
       </div>
     </div>
     <div class="pr-chapter-right">
+      <div class="pr-ch-thumb" tabindex="0" role="button" aria-label="View D-YO Studio project images">
+        <img class="pr-th-cover" src="../assets/images/projects/maoya-1.png" alt="D-YO Studio — Maoya Hotel, Sichuan">
+        <div class="pr-th-overlay">
+          <span class="pr-th-count">5 images</span>
+          <span class="pr-th-cta">Expand ↗</span>
+        </div>
+      </div>
       <div class="pr-gallery" data-interval="4500">
         <div class="pr-stack">
           <div class="pr-stack-card pr-stack-card--2" aria-hidden="true"></div>
           <div class="pr-stack-card pr-stack-card--1" aria-hidden="true"></div>
           <div class="pr-gallery-stage">
-            <img class="pr-gallery-img is-active" src="../assets/images/projects/maoya-1.png"              alt="Maoya Hotel — Sichuan, China" loading="lazy">
-            <img class="pr-gallery-img"            src="../assets/images/projects/humeniks-exterior.png"   alt="Humenik's Building — Brooklyn, NY" loading="lazy">
+            <img class="pr-gallery-img is-active" src="../assets/images/projects/maoya-1.png"                alt="Maoya Hotel — Sichuan, China" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/maoya-2.png"                alt="Maoya Hotel — interior view" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/humeniks-exterior.png"     alt="Humenik's Building — Brooklyn, NY" loading="lazy">
+            <img class="pr-gallery-img"            src="../assets/images/projects/humeniks-kitchen.png"      alt="Humenik's Building — kitchen" loading="lazy">
             <img class="pr-gallery-img"            src="../assets/images/projects/humeniks-before-after.png" alt="Humenik's Building — Before / After" loading="lazy">
             <div class="pr-gallery-ui" aria-hidden="true">
               <div class="pr-gallery-counter">
                 <span class="pr-gc-cur">01</span>
                 <span style="opacity:0.35"> / </span>
-                <span class="pr-gc-tot">03</span>
+                <span class="pr-gc-tot">05</span>
               </div>
               <span class="pr-gallery-hint">Click to expand</span>
             </div>
@@ -1422,205 +1309,23 @@
     }
   });
 
-}());
-</script>
-
-<script>
-/* ── DESKTOP PROJECT SHOWCASE ─────────────────────────── */
-(function () {
-  'use strict';
-  if (!window.matchMedia('(min-width: 901px)').matches) return;
-
-  var PROJECTS = [
-    {
-      company: 'TPG Architecture',
-      role: 'BIM Manager &amp; Project Lead',
-      date: 'Apr 2019 – Present',
-      location: 'New York, NY',
-      status: 'Current',
-      tags: ['Revit','BIM 360 / ACC','Navisworks','Dynamo','Enscape','Const. Docs','MEP Coord.'],
-      thumb: '../assets/images/projects/bmw-showroom-main.webp',
-      images: [
-        { src: '../assets/images/projects/bmw-showroom-main.webp',     alt: 'BMW Showroom — Manhattan flagship' },
-        { src: '../assets/images/projects/bmw-showroom-spread.webp',   alt: 'BMW Showroom — layout overview' },
-        { src: '../assets/images/projects/bmw-showroom-restroom.webp', alt: 'BMW Showroom — finishes' },
-        { src: '../assets/images/projects/bmw-showroom-furniture.webp',alt: 'BMW Showroom — FF&E' },
-        { src: '../assets/images/projects/tpg-interior.jpg',           alt: '1290 Avenue — Interior' },
-        { src: '../assets/images/projects/tpg-terrace.jpg',            alt: '1290 Avenue — Terrace' },
-        { src: '../assets/images/projects/burton-in99-main.webp',      alt: 'BURTON IN99 — Chengdu flagship' },
-        { src: '../assets/images/projects/burton-in99-detail-1.webp',  alt: 'BURTON IN99 — detail' },
-        { src: '../assets/images/projects/burton-in99-spread.webp',    alt: 'BURTON IN99 — floor plan' }
-      ]
-    },
-    {
-      company: 'Archnimations',
-      role: 'Independent Architectural Designer',
-      date: '2018 – 2024',
-      location: 'New York, NY',
-      status: null,
-      tags: ['Revit','Rhino','Lumion','AutoCAD','Enscape','Visualization'],
-      thumb: '../assets/images/projects/sansurs-p01.jpg',
-      images: [
-        { src: '../assets/images/projects/sansurs-p01.jpg',         alt: 'Sansurs Residence — Render 01' },
-        { src: '../assets/images/projects/sansurs-p02.jpg',         alt: 'Sansurs Residence — Render 02' },
-        { src: '../assets/images/projects/sansurs-p03.jpg',         alt: 'Sansurs Residence — Render 03' },
-        { src: '../assets/images/projects/sansurs-p04.jpg',         alt: 'Sansurs Residence — Render 04' },
-        { src: '../assets/images/projects/sansurs-p05.jpg',         alt: 'Sansurs Residence — Render 05' },
-        { src: '../assets/images/projects/alpena-prof.jpg',         alt: 'Alpena 130K SF Mixed-Use' },
-        { src: '../assets/images/projects/utah-netzero.jpg',        alt: 'Utah Net-Zero Residential' },
-        { src: '../assets/images/projects/beachy-apartments.jpg',   alt: 'Beachy Apartments — San Cristobal, DR' }
-      ]
-    },
-    {
-      company: 'D-YO Studio',
-      role: 'Assistant Designer',
-      date: 'Jan 2016 – May 2018',
-      location: 'New York, NY',
-      status: null,
-      tags: ['Revit','AutoCAD','DOB Filing','Energy Analysis'],
-      thumb: '../assets/images/projects/maoya-1.png',
-      images: [
-        { src: '../assets/images/projects/maoya-1.png',               alt: 'Maoya Hotel — Sichuan, China' },
-        { src: '../assets/images/projects/maoya-2.png',               alt: 'Maoya Hotel — interior view' },
-        { src: '../assets/images/projects/humeniks-exterior.png',     alt: "Humenik's Building — Brooklyn" },
-        { src: '../assets/images/projects/humeniks-kitchen.png',      alt: "Humenik's Building — kitchen" },
-        { src: '../assets/images/projects/humeniks-before-after.png', alt: "Humenik's Building — before / after" }
-      ]
-    },
-    {
-      company: 'AMA Consulting Engineers',
-      role: 'BIM / CAD / MEP Operator',
-      date: 'May 2018 – Apr 2019',
-      location: 'New York, NY',
-      status: null,
-      tags: ['Navisworks','Revit','Clash Detection','MEP Coord.'],
-      thumb: '../assets/images/projects/tpg-interior.jpg',
-      images: [
-        { src: '../assets/images/projects/tpg-interior.jpg', alt: 'MEP coordination — interior systems' }
-      ]
-    }
-  ];
-
-  var stageEl   = document.getElementById('pr-sc-stage');
-  var infoEl    = document.getElementById('pr-sc-info');
-  var counterEl = document.getElementById('pr-sc-counter');
-  var progEl    = document.getElementById('pr-sc-prog');
-  var prevBtn   = document.getElementById('pr-sc-prev');
-  var nextBtn   = document.getElementById('pr-sc-next');
-  var queueEl   = document.getElementById('pr-sc-queue');
-  var lightbox  = document.getElementById('pr-lightbox');
-
-  var activeProj  = 0;
-  var activeImg   = 0;
-  var imgTimer    = null;
-  var IMG_MS      = 4200;
-
-  function pad(n) { return n < 10 ? '0' + n : '' + n; }
-
-  /* ── progress ── */
-  function startProg() {
-    progEl.classList.remove('running');
-    progEl.style.animationDuration = '';
-    void progEl.offsetWidth;
-    progEl.style.animationDuration = IMG_MS + 'ms';
-    progEl.classList.add('running');
-  }
-
-  /* ── show image at index ── */
-  function showImg(idx) {
-    var imgs = stageEl.querySelectorAll('.pr-showcase-img');
+  /* ── DESKTOP THUMBNAILS → LIGHTBOX ─────────────────────── */
+  document.querySelectorAll('.pr-ch-thumb').forEach(function (thumb) {
+    var right = thumb.closest('.pr-chapter-right') || thumb.parentElement;
+    var gallery = right.querySelector('.pr-gallery');
+    if (!gallery) return;
+    var imgs = Array.prototype.slice.call(gallery.querySelectorAll('.pr-gallery-img'));
     if (!imgs.length) return;
-    imgs[activeImg].classList.remove('is-active');
-    activeImg = (idx + imgs.length) % imgs.length;
-    imgs[activeImg].classList.add('is-active');
-    counterEl.textContent = pad(activeImg + 1) + ' / ' + pad(imgs.length);
-    startProg();
-  }
-
-  function startTimer() {
-    clearInterval(imgTimer);
-    if (PROJECTS[activeProj].images.length > 1) {
-      imgTimer = setInterval(function () { showImg(activeImg + 1); }, IMG_MS);
-    }
-  }
-
-  /* ── build viewer for project ── */
-  function buildViewer(proj) {
-    stageEl.innerHTML = '';
-    proj.images.forEach(function (img, i) {
-      var el = document.createElement('img');
-      el.className = 'pr-showcase-img' + (i === 0 ? ' is-active' : '');
-      el.src = img.src;
-      el.alt = img.alt;
-      el.setAttribute('loading', 'lazy');
-      stageEl.appendChild(el);
+    function open() { openLightbox(imgs, 0); }
+    thumb.addEventListener('click', open);
+    thumb.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
     });
-  }
-
-  /* ── build info overlay for project ── */
-  function buildInfo(proj) {
-    var tags = (proj.tags || []).map(function (t) {
-      return '<span class="pr-sc-tag">' + t + '</span>';
-    }).join('');
-    var badge = proj.status ? '<div><span class="pr-sc-badge">' + proj.status + '</span></div>' : '';
-    infoEl.innerHTML =
-      '<div class="pr-sc-company">' + proj.company + '</div>' +
-      badge +
-      '<div class="pr-sc-role">' + proj.role + '</div>' +
-      '<div class="pr-sc-meta">' + proj.date + ' &nbsp;·&nbsp; ' + proj.location + '</div>' +
-      (tags ? '<div class="pr-sc-tags">' + tags + '</div>' : '');
-  }
-
-  /* ── activate project ── */
-  function activateProject(idx) {
-    clearInterval(imgTimer);
-    activeProj = idx;
-    activeImg  = 0;
-    var proj = PROJECTS[idx];
-    buildViewer(proj);
-    buildInfo(proj);
-    counterEl.textContent = pad(1) + ' / ' + pad(proj.images.length);
-    startProg();
-    startTimer();
-    queueEl.querySelectorAll('.pr-queue-item').forEach(function (el, i) {
-      el.classList.toggle('is-active', i === idx);
-    });
-  }
-
-  /* ── build queue ── */
-  PROJECTS.forEach(function (proj, i) {
-    var btn = document.createElement('button');
-    btn.className = 'pr-queue-item' + (i === 0 ? ' is-active' : '');
-    btn.setAttribute('aria-label', proj.company);
-    btn.innerHTML =
-      '<img src="' + proj.thumb + '" alt="" loading="lazy">' +
-      '<div class="pr-queue-label">' +
-        '<span class="pr-queue-co">' + proj.company + '</span>' +
-        '<span class="pr-queue-num">' + pad(i + 1) + '</span>' +
-      '</div>';
-    btn.addEventListener('click', function () { activateProject(i); });
-    queueEl.appendChild(btn);
-  });
-
-  /* ── init ── */
-  activateProject(0);
-
-  /* ── control buttons ── */
-  prevBtn.addEventListener('click', function () {
-    clearInterval(imgTimer); showImg(activeImg - 1); startTimer();
-  });
-  nextBtn.addEventListener('click', function () {
-    clearInterval(imgTimer); showImg(activeImg + 1); startTimer();
-  });
-
-  /* ── keyboard ── */
-  document.addEventListener('keydown', function (e) {
-    if (lightbox && lightbox.classList.contains('is-open')) return;
-    if (e.key === 'ArrowLeft')  { clearInterval(imgTimer); showImg(activeImg - 1); startTimer(); }
-    if (e.key === 'ArrowRight') { clearInterval(imgTimer); showImg(activeImg + 1); startTimer(); }
   });
 
 }());
 </script>
+
+
 </body>
 </html>
