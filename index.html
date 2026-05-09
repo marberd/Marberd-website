@@ -302,12 +302,12 @@
     background: transparent;
   }
   .hero__mobile-photo { display: none; }
-  .hero__headline     { margin-bottom: 10px; }
-  .hero__name    { color: #fff; }
+  .hero__headline     { margin-top: 22px; margin-bottom: 10px; }
+  .hero__name    { color: #cdc6be; text-shadow: 0 1px 12px rgba(0,0,0,0.18); }
   .hero__surname { color: var(--gold); }
   .hero__divider { display: none; }
   .hero__eyebrow { color: rgba(200,170,100,0.9); margin: auto 0 12px; }
-  .hero__subhead { color: rgba(255,255,255,0.78); font-size: 13px; max-width: 100%; margin-bottom: 18px; line-height: 1.6; }
+  .hero__subhead { color: rgba(255,255,255,0.78); font-size: 13px; max-width: 100%; margin-top: 10px; margin-bottom: 18px; line-height: 1.6; }
 
   /* Stats: compact single row */
   .hero__stats { flex-wrap: nowrap; gap: 0; margin-bottom: 22px; }
@@ -349,8 +349,9 @@
 
 /* ── SMALL PHONES (≤480px) ── */
 @media (max-width: 480px) {
-  .hero__content { padding: 0 20px 36px; }
-  .hero__subhead { font-size: 12px; margin-bottom: 14px; }
+  .hero__content { padding: 72px 20px 36px; }
+  .hero__headline { margin-top: 16px; }
+  .hero__subhead { font-size: 12px; margin-top: 8px; margin-bottom: 14px; }
   .hero__stats   { margin-bottom: 18px; }
   .hstat-n       { font-size: 19px; }
 }
