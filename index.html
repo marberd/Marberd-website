@@ -282,28 +282,36 @@
 /* ── MOBILE ─────────────────── */
 @media (max-width: 768px) {
   /* Hero: full-bleed cinematic photo, text anchored to bottom */
-  .hero        { height: 100svh; min-height: 0; background: #0d0d0d; }
-  .hero__photo {
-    background-position: center 20%;
-    background-size: auto 88%;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 11%, black 83%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 11%, black 83%, transparent 100%);
-  }
-  .hero__bloom {
-    display: block;
-    inset: 0;
-    background-position: center 20%;
-    background-size: auto 88%;
-    filter: blur(28px) brightness(0.82) saturate(1.15);
-    mix-blend-mode: normal;
-  }
+  .hero        { height: 100svh; min-height: 0; background: #0a0705; }
+  .hero__photo { background-position: center 22%; background-size: cover; }
+  .hero__bloom { display: none; }
   .hero__gradient {
     display: block;
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.18) 65%, rgba(0,0,0,0.62) 100%);
+    background:
+      linear-gradient(to bottom, rgba(8,5,3,0.58) 0%, transparent 18%, transparent 48%, rgba(8,5,3,0.70) 80%, rgba(8,5,3,0.88) 100%),
+      linear-gradient(to right,  rgba(8,5,3,0.22) 0%, transparent 14%, transparent 86%, rgba(8,5,3,0.22) 100%);
     z-index: 2;
     pointer-events: none;
+  }
+  .hero__gradient::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 18%;
+    backdrop-filter: blur(10px) saturate(1.4);
+    -webkit-backdrop-filter: blur(10px) saturate(1.4);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  }
+  .hero__gradient::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 26%;
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-mask-image: linear-gradient(to top, black 30%, transparent 100%);
+    mask-image: linear-gradient(to top, black 30%, transparent 100%);
   }
   .hero__content {
     max-width: 100%;
@@ -315,24 +323,33 @@
   }
   .hero__mobile-photo { display: none; }
   .hero__headline     { margin-top: 22px; margin-bottom: 10px; }
-  .hero__name    {
-    font-family: var(--mono);
-    font-size: 9px;
-    font-weight: 400;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    color: rgba(210,195,170,0.7);
+  .hero__name {
+    font-family: var(--serif);
+    font-size: clamp(14px, 3.8vw, 19px);
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 4px;
+    color: rgba(214,193,160,0.82);
     text-shadow: none;
     display: block;
-    line-height: 1;
-    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .hero__name::after {
+    content: '';
+    display: block;
+    width: 22px; height: 1px;
+    background: rgba(184,148,106,0.55);
+    margin-top: 10px; margin-bottom: 10px;
   }
   .hero__surname {
-    font-size: clamp(50px, 13vw, 68px);
-    letter-spacing: -2px;
-    color: rgba(255,255,255,0.95);
-    line-height: 0.86;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    font-family: var(--serif);
+    font-size: clamp(54px, 14vw, 72px);
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: -1.5px;
+    color: rgba(255,255,255,0.97);
+    line-height: 0.88;
+    text-shadow: 0 4px 28px rgba(0,0,0,0.18);
   }
   .hero__divider { display: none; }
   .hero__eyebrow { color: rgba(200,170,100,0.9); margin: auto 0 12px; }
