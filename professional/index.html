@@ -824,6 +824,108 @@
   .pr-cta-btn { width: 100%; }
 }
 
+/* ── CAREER TIMELINE ───────────────────────────────── */
+.ab-col-label {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+  color: var(--gold-dk); text-transform: uppercase; margin-bottom: 20px;
+}
+.ab-timeline-sec {
+  background: #F4F0E8; padding: 64px 60px 48px;
+  border-top: 0.5px solid rgba(0,0,0,0.1);
+}
+.ab-tl-inner { max-width: 1200px; margin: 0 auto; }
+.ab-tl-legend { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 36px; }
+.ab-tl-legend-item {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.18em;
+  color: #909099; text-transform: uppercase;
+}
+.ab-tl-legend-pip { width: 20px; height: 4px; border-radius: 1px; flex-shrink: 0; }
+.ab-tl-legend-pip--edu  { background: var(--gold); }
+.ab-tl-legend-pip--work { background: #1a1a1a; }
+.ab-tl-legend-pip--vol  { background: #909099; }
+.ab-tl-legend-pip--cert { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+.ab-tl-chart { overflow: hidden; }
+.ab-tl-chart-inner {
+  width: 100%; position: relative; padding-bottom: 44px;
+}
+.ab-tl-gridlines { position: absolute; inset: 0; bottom: 0; pointer-events: none; z-index: 0; }
+.ab-tl-gridline {
+  position: absolute; top: 0; bottom: 44px;
+  width: 0; border-left: 1px dashed rgba(0,0,0,0.09);
+}
+.ab-tl-rows { position: relative; z-index: 1; }
+.ab-tl-row { position: relative; height: 36px; margin-bottom: 2px; }
+.ab-tl-row-label {
+  position: absolute; top: 4px;
+  font-family: var(--sans); font-size: 9.5px; font-weight: 500;
+  color: #1a1a1a; white-space: nowrap; pointer-events: none;
+  z-index: 2; line-height: 1; max-width: 30%; overflow: hidden; text-overflow: ellipsis;
+}
+.ab-tl-bar {
+  position: absolute; bottom: 7px; height: 9px; border-radius: 1px;
+  cursor: crosshair; width: 0;
+  transition: width .85s cubic-bezier(.16,1,.3,1), opacity .2s, transform .2s;
+  transition-delay: var(--bar-delay, 0s);
+}
+.ab-tl-chart-inner.tl-go .ab-tl-bar { width: var(--bar-w); }
+.ab-tl-bar:hover { opacity: .75; transform: scaleY(1.4); transform-origin: bottom; }
+.ab-tl-bar--edu  { background: var(--gold); }
+.ab-tl-bar--work { background: #1a1a1a; }
+.ab-tl-bar--vol  { background: rgba(144,144,153,0.45); }
+.ab-tl-cert-mark {
+  position: absolute; bottom: 50px; z-index: 3;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--gold); transform: translateX(-50%);
+  cursor: crosshair; transition: transform .18s;
+}
+.ab-tl-cert-mark:hover { transform: translateX(-50%) scale(1.6); }
+.ab-tl-axis {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 44px; border-top: 1.5px solid #1a1a1a;
+}
+.ab-tl-year {
+  position: absolute; top: 8px;
+  font-family: var(--mono); font-size: 7.5px; letter-spacing: 0.06em;
+  color: #909099; transform: translateX(-50%); white-space: nowrap;
+}
+.ab-tl-year--now { color: #1a1a1a; font-weight: 700; font-size: 8px; }
+.ab-tl-swipe-hint {
+  display: none; font-family: var(--mono); font-size: 8px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: #909099; text-align: center; margin-bottom: 14px;
+}
+.ab-tl-tooltip {
+  position: fixed; z-index: 10002;
+  background: #1a1a1a; color: #fff;
+  border: 0.5px solid rgba(184,148,106,0.3);
+  padding: 14px 18px; pointer-events: none;
+  max-width: 290px; opacity: 0;
+  transition: opacity .14s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+}
+.ab-tl-tooltip.tt-on { opacity: 1; }
+.ab-tt-name {
+  font-family: var(--serif); font-style: italic;
+  font-size: 17px; font-weight: 400; color: #fff;
+  line-height: 1.2; margin-bottom: 6px;
+}
+.ab-tt-role { font-family: var(--sans); font-size: 11px; color: rgba(255,255,255,0.55); margin-bottom: 2px; }
+.ab-tt-loc  { font-family: var(--sans); font-size: 10.5px; color: rgba(255,255,255,0.4); }
+.ab-tt-period {
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: 1.2px;
+  color: var(--gold-lt); margin-top: 10px; text-transform: uppercase;
+}
+@media (max-width: 900px) {
+  .ab-timeline-sec { padding: 48px 24px 40px; }
+  .ab-tl-legend { gap: 16px; }
+  .ab-tl-chart { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .ab-tl-chart-inner { min-width: 640px; }
+  .ab-tl-swipe-hint { display: block; }
+}
+@media (max-width: 600px) {
+  .ab-timeline-sec { padding: 40px 20px 32px; }
+}
 
 </style>
   <script data-goatcounter="https://marberd.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -917,6 +1019,33 @@
     <span class="pr-stat-n">M.Arch</span>
     <span class="pr-stat-l">Columbia Univ.<br>2024</span>
   </div>
+</div>
+
+<!-- ══ TIMELINE ════════════════════════════════════════ -->
+<section class="ab-timeline-sec">
+  <div class="ab-tl-inner">
+    <div class="ab-col-label reveal">Academic &amp; Professional Timeline</div>
+    <div class="ab-tl-legend reveal">
+      <div class="ab-tl-legend-item"><span class="ab-tl-legend-pip ab-tl-legend-pip--edu"></span>Education</div>
+      <div class="ab-tl-legend-item"><span class="ab-tl-legend-pip ab-tl-legend-pip--work"></span>Work Experience</div>
+      <div class="ab-tl-legend-item"><span class="ab-tl-legend-pip ab-tl-legend-pip--vol"></span>Volunteering</div>
+      <div class="ab-tl-legend-item"><span class="ab-tl-legend-pip ab-tl-legend-pip--cert"></span>Certification</div>
+    </div>
+    <div class="ab-tl-chart reveal">
+      <p class="ab-tl-swipe-hint" aria-hidden="true">swipe to explore</p>
+      <div class="ab-tl-chart-inner" id="pr-tl-chart">
+        <div class="ab-tl-gridlines" id="pr-tl-grid"></div>
+        <div class="ab-tl-rows"      id="pr-tl-rows"></div>
+        <div class="ab-tl-axis"      id="pr-tl-axis"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="ab-tl-tooltip" id="pr-tt" aria-hidden="true">
+  <div class="ab-tt-name"   id="pr-tt-name"></div>
+  <div class="ab-tt-role"   id="pr-tt-role"></div>
+  <div class="ab-tt-loc"    id="pr-tt-loc"></div>
+  <div class="ab-tt-period" id="pr-tt-period"></div>
 </div>
 
 <!-- ══ EXPERIENCE ═══════════════════════════════════════ -->
@@ -1415,6 +1544,114 @@
     }
   });
 
+}());
+</script>
+
+<script>
+/* ── CAREER TIMELINE ───────────────────────────────── */
+(function () {
+  var START = 2013, END = 2026, RANGE = END - START;
+  var ENTRIES = [
+    { label: 'B.Tech, City Tech',       type: 'edu',  start: 2013, end: 2018,
+      role: 'Bachelor of Architectural Technology', loc: 'NYC College of Technology · Brooklyn, NY' },
+    { label: 'M.Arch, Columbia',         type: 'edu',  start: 2020, end: 2024,
+      role: 'Master of Architecture', loc: 'Columbia University · New York, NY' },
+    { label: 'D-YO Studio',              type: 'work', start: 2016, end: 2018,
+      role: 'Assistant Designer', loc: 'New York, NY' },
+    { label: 'AMA Consulting Engineers', type: 'work', start: 2018, end: 2019,
+      role: 'BIM / CAD / MEP Operator', loc: 'New York, NY' },
+    { label: 'TPG Architecture',         type: 'work', start: 2019, end: 2026,
+      role: 'BIM Manager', loc: 'New York, NY' },
+    { label: 'Arch-Nimations',           type: 'work', start: 2018, end: 2024,
+      role: 'Founder & Architectural Designer', loc: 'Independent Practice' },
+    { label: 'Volunteering & Church',    type: 'vol',  start: 2013, end: 2026,
+      role: 'Choir Director & Community Service', loc: 'New York, NY' },
+  ];
+  var CERTS = [
+    { year: 2019, label: 'Autodesk Certified Professional, Revit Architecture' },
+    { year: 2023, label: 'Peri-Urban Water Management Workshop · Ahmedabad, India' },
+    { year: 2024, label: 'Autodesk Recertification + LEED Green Associate' },
+  ];
+  function p(yr) { return ((yr - START) / RANGE * 100).toFixed(3) + '%'; }
+
+  var grid = document.getElementById('pr-tl-grid');
+  if (!grid) return;
+  for (var y = START; y <= END; y++) {
+    var gl = document.createElement('div');
+    gl.className = 'ab-tl-gridline';
+    gl.style.left = p(y);
+    grid.appendChild(gl);
+  }
+  var rowsEl = document.getElementById('pr-tl-rows');
+  ENTRIES.forEach(function (e, i) {
+    var row = document.createElement('div');
+    row.className = 'ab-tl-row';
+    var lbl = document.createElement('div');
+    lbl.className = 'ab-tl-row-label';
+    lbl.textContent = e.label;
+    lbl.style.left = p(e.start);
+    var barW = ((e.end - e.start) / RANGE * 100).toFixed(3) + '%';
+    var bar  = document.createElement('div');
+    bar.className = 'ab-tl-bar ab-tl-bar--' + e.type;
+    bar.style.left = p(e.start);
+    bar.style.setProperty('--bar-w', barW);
+    bar.style.setProperty('--bar-delay', (i * 0.07) + 's');
+    bar.dataset.name   = e.label;
+    bar.dataset.role   = e.role;
+    bar.dataset.loc    = e.loc;
+    bar.dataset.period = e.start + ' – ' + (e.end >= 2026 ? 'Present' : e.end);
+    row.appendChild(lbl);
+    row.appendChild(bar);
+    rowsEl.appendChild(row);
+  });
+  CERTS.forEach(function (c) {
+    var m = document.createElement('div');
+    m.className = 'ab-tl-cert-mark';
+    m.style.left = p(c.year);
+    m.dataset.name   = c.label;
+    m.dataset.period = String(c.year);
+    rowsEl.appendChild(m);
+  });
+  var axisEl = document.getElementById('pr-tl-axis');
+  for (var yr = START; yr <= END; yr++) {
+    var tick = document.createElement('div');
+    tick.className = 'ab-tl-year' + (yr >= 2026 ? ' ab-tl-year--now' : '');
+    tick.style.left = p(yr);
+    tick.textContent = yr;
+    axisEl.appendChild(tick);
+  }
+  var chart = document.getElementById('pr-tl-chart');
+  var fired = false;
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting && !fired) { fired = true; chart.classList.add('tl-go'); obs.disconnect(); }
+    });
+  }, { threshold: 0.15 });
+  if (chart) obs.observe(chart);
+
+  var tt = document.getElementById('pr-tt');
+  var ttName = document.getElementById('pr-tt-name');
+  var ttRole = document.getElementById('pr-tt-role');
+  var ttLoc  = document.getElementById('pr-tt-loc');
+  var ttPer  = document.getElementById('pr-tt-period');
+  function moveTT(x, y) {
+    var left = x + 18;
+    if (left + 310 > window.innerWidth) left = x - 318;
+    tt.style.left = left + 'px';
+    tt.style.top  = (y - 10) + 'px';
+  }
+  document.querySelectorAll('#pr-tl-rows .ab-tl-bar, #pr-tl-rows .ab-tl-cert-mark').forEach(function (el) {
+    el.addEventListener('mouseenter', function (e) {
+      ttName.textContent = el.dataset.name || '';
+      ttRole.textContent = el.dataset.role || '';
+      ttLoc.textContent  = el.dataset.loc  || '';
+      ttPer.textContent  = el.dataset.period || '';
+      moveTT(e.clientX, e.clientY);
+      tt.classList.add('tt-on');
+    });
+    el.addEventListener('mousemove',  function (e) { moveTT(e.clientX, e.clientY); });
+    el.addEventListener('mouseleave', function ()  { tt.classList.remove('tt-on'); });
+  });
 }());
 </script>
 
