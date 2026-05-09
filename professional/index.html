@@ -947,6 +947,130 @@
   .ab-timeline-sec { padding: 16px 16px 12px; }
 }
 
+/* ══ MOBILE PROJECT GALLERY: thumbnail grid + modal ════ */
+
+/* Thumbnail grid — hidden by default on desktop */
+.pr-mob-thumbgrid { display: none; }
+
+.pr-mob-thumb {
+  display: block; width: 100%; padding: 0; border: none; appearance: none;
+  background: #0a0a10; overflow: hidden; cursor: pointer; position: relative;
+  aspect-ratio: 4 / 5; -webkit-tap-highlight-color: transparent;
+}
+.pr-mob-thumb--featured { aspect-ratio: 16 / 9; }
+.pr-mob-thumb img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.36s cubic-bezier(.16,1,.3,1);
+}
+.pr-mob-thumb:active img { transform: scale(1.04); }
+.pr-mob-thumb-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 32px 13px 11px;
+  background: linear-gradient(transparent, rgba(4,2,1,0.86));
+}
+.pr-mob-thumb-name {
+  font-family: var(--serif); font-style: italic;
+  font-size: 14px; color: #e8e2d9; line-height: 1.2;
+  display: block; margin-bottom: 3px;
+}
+.pr-mob-thumb-count {
+  font-family: var(--mono); font-size: 6.5px; letter-spacing: 1.6px;
+  text-transform: uppercase; color: var(--gold); display: block;
+}
+
+/* Project modal — full-screen sheet */
+.pr-proj-modal {
+  position: fixed; inset: 0; z-index: 9500;
+  display: flex; align-items: flex-end;
+  background: rgba(4,2,1,0.72);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.26s ease, visibility 0.26s ease;
+}
+.pr-proj-modal.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
+.pr-proj-modal-panel {
+  position: relative; width: 100%; max-height: 92svh;
+  background: #0c0c14; border-radius: 14px 14px 0 0;
+  display: flex; flex-direction: column;
+  transform: translateY(52px);
+  transition: transform 0.38s cubic-bezier(.16,1,.3,1);
+  overflow: hidden;
+}
+.pr-proj-modal.is-open .pr-proj-modal-panel { transform: translateY(0); }
+.pr-proj-modal-handle {
+  width: 36px; height: 4px; background: rgba(255,255,255,0.11);
+  border-radius: 2px; margin: 12px auto 0; flex-shrink: 0;
+}
+.pr-proj-modal-close {
+  position: absolute; top: 10px; right: 12px; z-index: 10;
+  width: 36px; height: 36px; border-radius: 50%; border: none;
+  background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.64);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background .2s; -webkit-tap-highlight-color: transparent;
+}
+.pr-proj-modal-close:active { background: rgba(255,255,255,0.18); color: #fff; }
+.pr-proj-modal-img-wrap {
+  position: relative; width: 100%; aspect-ratio: 4 / 3;
+  flex-shrink: 0; background: #06060c; overflow: hidden; margin-top: 6px;
+}
+.pr-proj-modal-img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: opacity 0.20s ease;
+}
+.pr-proj-modal-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(0,0,0,0.52); border: 0.5px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.80); font-size: 24px; line-height: 1;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background .18s;
+  -webkit-tap-highlight-color: transparent;
+}
+.pr-proj-modal-prev { left: 0; border-radius: 0 3px 3px 0; }
+.pr-proj-modal-next { right: 0; border-radius: 3px 0 0 3px; }
+.pr-proj-modal-nav:active { background: rgba(0,0,0,0.80); color: #fff; }
+.pr-proj-modal-nav.is-hidden { display: none; }
+.pr-proj-modal-counter {
+  position: absolute; bottom: 9px; left: 50%; transform: translateX(-50%);
+  font-family: var(--mono); font-size: 7px; letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.35); white-space: nowrap;
+}
+.pr-proj-modal-body {
+  padding: 18px 20px 44px; overflow-y: auto; flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+.pr-proj-modal-company {
+  font-family: var(--mono); font-size: 7.5px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--gold-dk); margin-bottom: 8px;
+}
+.pr-proj-modal-title {
+  font-family: var(--serif); font-style: italic;
+  font-size: 22px; font-weight: 400; color: #e8e2d9; line-height: 1.15;
+  margin-bottom: 12px;
+}
+.pr-proj-modal-desc {
+  font-family: var(--sans); font-size: 12.5px; font-weight: 300;
+  color: rgba(255,255,255,0.46); line-height: 1.72;
+}
+
+@media (max-width: 900px) {
+  /* Hide the passive slideshow, show the thumbnail grid instead */
+  .pr-gallery         { display: none !important; }
+  .pr-proj-links-wrap { display: none; }
+  .pr-mob-thumbgrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+    margin-bottom: 28px;
+  }
+  /* First card: full-width featured (landscape) */
+  .pr-mob-thumb--featured { grid-column: 1 / -1; }
+  /* Last card if it falls alone in a row: also full-width landscape */
+  .pr-mob-thumb:not(.pr-mob-thumb--featured):last-child:nth-child(even) {
+    grid-column: 1 / -1;
+    aspect-ratio: 4 / 3;
+  }
+}
+
 </style>
   <script data-goatcounter="https://marberd.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
   <meta property="og:type"        content="website">
@@ -1372,6 +1496,27 @@
   </div>
 </section>
 
+<!-- ══ MOBILE PROJECT MODAL ══════════════════════════════ -->
+<div class="pr-proj-modal" id="pr-proj-modal" role="dialog" aria-modal="true" aria-label="Project gallery" aria-hidden="true">
+  <div class="pr-proj-modal-panel">
+    <div class="pr-proj-modal-handle" aria-hidden="true"></div>
+    <button class="pr-proj-modal-close" id="pr-pmod-close" aria-label="Close project gallery">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="pr-proj-modal-img-wrap">
+      <img class="pr-proj-modal-img" id="pr-pmod-img" src="" alt="">
+      <button class="pr-proj-modal-nav pr-proj-modal-prev is-hidden" id="pr-pmod-prev" aria-label="Previous image">&#8249;</button>
+      <button class="pr-proj-modal-nav pr-proj-modal-next is-hidden" id="pr-pmod-next" aria-label="Next image">&#8250;</button>
+      <span class="pr-proj-modal-counter" id="pr-pmod-counter" aria-hidden="true"></span>
+    </div>
+    <div class="pr-proj-modal-body">
+      <div class="pr-proj-modal-company" id="pr-pmod-company"></div>
+      <div class="pr-proj-modal-title" id="pr-pmod-title"></div>
+      <p class="pr-proj-modal-desc" id="pr-pmod-desc"></p>
+    </div>
+  </div>
+</div>
+
 <!-- ══ LIGHTBOX ══════════════════════════════════════════ -->
 <div class="pr-lightbox" id="pr-lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
   <button class="pr-lightbox-close" id="pr-lb-close" aria-label="Close">Close ×</button>
@@ -1675,7 +1820,161 @@
   });
 }());
 </script>
+<script>
+/* ── MOBILE PROJECT GALLERY ───────────────────────────── */
+(function () {
+  'use strict';
 
+  var modal    = document.getElementById('pr-proj-modal');
+  var modImg   = document.getElementById('pr-pmod-img');
+  var modPrev  = document.getElementById('pr-pmod-prev');
+  var modNext  = document.getElementById('pr-pmod-next');
+  var modCtr   = document.getElementById('pr-pmod-counter');
+  var modClose = document.getElementById('pr-pmod-close');
+  var modCo    = document.getElementById('pr-pmod-company');
+  var modTitle = document.getElementById('pr-pmod-title');
+  var modDesc  = document.getElementById('pr-pmod-desc');
+
+  if (!modal) return;
+
+  var state = { images: [], idx: 0 };
+
+  function renderModal() {
+    var imgs = state.images;
+    var i    = state.idx;
+    modImg.src = imgs[i].src;
+    modImg.alt = imgs[i].alt;
+    modCtr.textContent = imgs.length > 1 ? (i + 1) + ' / ' + imgs.length : '';
+    modPrev.classList.toggle('is-hidden', i === 0);
+    modNext.classList.toggle('is-hidden', i === imgs.length - 1);
+  }
+
+  function showIdx(i) {
+    state.idx = Math.max(0, Math.min(i, state.images.length - 1));
+    modImg.style.opacity = '0';
+    setTimeout(function () { renderModal(); modImg.style.opacity = '1'; }, 80);
+  }
+
+  function openModal(images, company, name, desc) {
+    state.images = images;
+    state.idx    = 0;
+    modCo.textContent    = company.toUpperCase();
+    modTitle.textContent = name;
+    modDesc.textContent  = desc;
+    renderModal();
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  modClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function (e) {
+    if (!modal.classList.contains('is-open')) return;
+    if (e.key === 'Escape')      closeModal();
+    if (e.key === 'ArrowLeft')   showIdx(state.idx - 1);
+    if (e.key === 'ArrowRight')  showIdx(state.idx + 1);
+  });
+  modPrev.addEventListener('click', function () { showIdx(state.idx - 1); });
+  modNext.addEventListener('click', function () { showIdx(state.idx + 1); });
+
+  var imgWrap = modImg.parentElement;
+  var tx0 = 0, ty0 = 0;
+  imgWrap.addEventListener('touchstart', function (e) {
+    tx0 = e.changedTouches[0].clientX;
+    ty0 = e.changedTouches[0].clientY;
+  }, { passive: true });
+  imgWrap.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - tx0;
+    var dy = e.changedTouches[0].clientY - ty0;
+    if (Math.abs(dx) > 36 && Math.abs(dx) > Math.abs(dy)) {
+      showIdx(dx < 0 ? state.idx + 1 : state.idx - 1);
+    }
+  }, { passive: true });
+
+  /* build one thumbnail grid per chapter that has a gallery */
+  document.querySelectorAll('.pr-chapter').forEach(function (chapter) {
+    var stage = chapter.querySelector('.pr-gallery-stage');
+    if (!stage) return;
+
+    var company = (chapter.querySelector('.pr-ch-company') || {}).textContent || '';
+    var mid     = chapter.querySelector('.pr-chapter-mid');
+    var bul     = chapter.querySelector('.pr-bul');
+    if (!mid) return;
+
+    /* collect ordered unique projects and their images */
+    var seen   = [];
+    var projMap = {};
+    stage.querySelectorAll('.pr-gallery-img').forEach(function (img) {
+      var p = img.dataset.proj;
+      if (!projMap[p]) { projMap[p] = { images: [] }; seen.push(p); }
+      projMap[p].images.push({ src: img.src, alt: img.alt });
+    });
+
+    /* pull name + desc from panels */
+    stage.querySelectorAll('.pr-proj-panel').forEach(function (panel) {
+      var p = panel.dataset.proj;
+      if (!projMap[p]) return;
+      var ne = panel.querySelector('.pr-pp-name');
+      var de = panel.querySelector('.pr-pp-desc');
+      projMap[p].name = ne ? ne.textContent : '';
+      projMap[p].desc = de ? de.textContent : '';
+    });
+
+    /* build grid */
+    var grid = document.createElement('div');
+    grid.className = 'pr-mob-thumbgrid';
+
+    seen.forEach(function (pk, pi) {
+      (function (pk, pi) {
+        var proj = projMap[pk];
+        var imgs = proj.images;
+
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'pr-mob-thumb' + (pi === 0 ? ' pr-mob-thumb--featured' : '');
+        btn.setAttribute('aria-label', 'Open ' + proj.name);
+
+        var thumb = document.createElement('img');
+        thumb.src      = imgs[0].src;
+        thumb.alt      = '';
+        thumb.loading  = 'lazy';
+        thumb.decoding = 'async';
+
+        var lbl = document.createElement('span');
+        lbl.className = 'pr-mob-thumb-label';
+
+        var ns = document.createElement('span');
+        ns.className   = 'pr-mob-thumb-name';
+        ns.textContent = proj.name;
+
+        var cs = document.createElement('span');
+        cs.className   = 'pr-mob-thumb-count';
+        cs.textContent = imgs.length + (imgs.length === 1 ? ' image' : ' images');
+
+        lbl.appendChild(ns);
+        lbl.appendChild(cs);
+        btn.appendChild(thumb);
+        btn.appendChild(lbl);
+
+        btn.addEventListener('click', function () {
+          openModal(imgs, company, proj.name, proj.desc);
+        });
+
+        grid.appendChild(btn);
+      }(pk, pi));
+    });
+
+    if (bul) { mid.insertBefore(grid, bul); } else { mid.appendChild(grid); }
+  });
+}());
+</script>
 
 </body>
 </html>
