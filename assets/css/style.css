@@ -314,8 +314,8 @@ footer {
 }
 .overlay-nav a:hover::after,
 .overlay-nav a.active::after { transform: scaleX(1); }
-.overlay-nav a:hover,
-.overlay-nav a.active { color: var(--gold-dk); letter-spacing: .02em; }
+.overlay-nav a:hover { color: var(--gold-dk); letter-spacing: .02em; }
+.overlay-nav a.active { color: rgba(17,17,24,0.40); letter-spacing: .02em; }
 
 /* ── MOBILE — GLOBAL ────────────────────── */
 @media (max-width: 768px) {

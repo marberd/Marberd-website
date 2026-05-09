@@ -689,8 +689,35 @@ body.academic-modal-active #main-nav {
 .gallery-prev { left: 14px; }
 .gallery-next { right: 14px; }
 
+.modal-gallery img { cursor: zoom-in; }
+
+.modal-gallery:fullscreen,
+.modal-gallery:-webkit-full-screen {
+  background: #000;
+  display: flex; align-items: center; justify-content: center;
+  aspect-ratio: auto;
+}
+.modal-gallery:fullscreen img,
+.modal-gallery:-webkit-full-screen img {
+  position: static; width: auto; height: auto;
+  max-width: 100vw; max-height: 100vh;
+  object-fit: contain; inset: auto; cursor: zoom-out;
+}
+.modal-gallery:fullscreen .gallery-nav,
+.modal-gallery:-webkit-full-screen .gallery-nav {
+  position: fixed; top: 50%; transform: translateY(-50%); z-index: 99999;
+}
+.modal-gallery:fullscreen .gallery-prev,
+.modal-gallery:-webkit-full-screen .gallery-prev { left: 14px; right: auto; }
+.modal-gallery:fullscreen .gallery-next,
+.modal-gallery:-webkit-full-screen .gallery-next { right: 14px; left: auto; }
+
+.modal-header {
+  padding: 34px 40px 20px;
+}
+
 .modal-body {
-  padding: 34px 40px 42px;
+  padding: 20px 40px 42px;
 }
 
 .modal-category {
@@ -774,32 +801,37 @@ body.academic-modal-active #main-nav {
 }
 
 @media (max-width: 760px) {
+  /* ── Hero: taller, image zoomed in, lighter overlay ── */
   .academic-hero {
-    min-height: auto;
-    padding: 90px 20px 72px;
-    /* Mangrove image ghosted behind the dark grid — visible at ~28% through overlay */
+    min-height: 78vh;
+    padding: 90px 20px 130px;
     background:
       linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
       linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(17,17,24,0.70) 0%, rgba(17,17,24,0.60) 50%, rgba(17,17,24,0.82) 100%),
-      url('../assets/images/academic/thumbs/mangrove-hero.webp') 68% 22% / cover no-repeat;
+      linear-gradient(to bottom, rgba(17,17,24,0.50) 0%, rgba(17,17,24,0.42) 50%, rgba(17,17,24,0.64) 100%),
+      url('../assets/images/academic/thumbs/mangrove-hero.webp') 50% 35% / cover no-repeat;
     background-color: #111118;
-    background-size: 86px 86px, 86px 86px, auto, cover;
+    background-size: 86px 86px, 86px 86px, auto, 140%;
+    border-bottom: none;
   }
 
-  /* Hide the featured Mangrove card — the image lives in the hero now */
+  /* Bottom fade: hero dark melts into page cream */
+  .academic-hero::before {
+    background: linear-gradient(180deg, transparent 52%, rgba(244,240,232,0.55) 76%, #f4f0e8 100%);
+  }
+
   .featured-card { display: none; }
+  .hero-copy { transform: none; }
 
-  .hero-copy {
-    transform: none;
-  }
-
+  /* Breathing room between title and paragraph so image shows through */
   .hero-title {
     font-size: clamp(50px, 16vw, 70px);
+    margin-bottom: 36px;
   }
 
   .hero-intro {
     font-size: 15px;
+    margin-bottom: 32px;
   }
 
   /* Meta: 3 stats in a single compact row */
@@ -807,43 +839,72 @@ body.academic-modal-active #main-nav {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
     max-width: none;
-    margin-top: 20px;
+    margin-top: 0;
   }
-  .hero-meta div   { padding-top: 8px; }
+  .hero-meta div    { padding-top: 8px; }
   .hero-meta strong { font-size: clamp(18px, 5vw, 26px); }
-  .hero-meta span  { font-size: 6.5px; letter-spacing: 0.10em; margin-top: 4px; }
+  .hero-meta span   { font-size: 6.5px; letter-spacing: 0.10em; margin-top: 4px; }
 
-  /* Project grid & modal stay stacked */
-  .project-grid,
-  .modal-meta {
-    grid-template-columns: 1fr;
+  /* ── Projects section: breathing room after the hero fade ── */
+  .projects-section { padding: 52px 16px 76px; }
+
+  /* ── Project grid: 2 columns ── */
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
-  .projects-section {
-    padding: 56px 20px 76px;
+  /* Tighter card copy for 2-col width */
+  .project-copy {
+    min-height: 0;
+    padding: 14px 14px 16px;
   }
 
+  .project-title {
+    font-size: 17px;
+    margin-top: 12px;
+  }
+
+  .project-desc {
+    font-size: 11.5px;
+    line-height: 1.56;
+    margin-top: 10px;
+  }
+
+  /* Ambient shadow + stronger gloss film on cards */
+  .project-card {
+    box-shadow: 0 6px 24px rgba(17,17,24,0.10), 0 1px 6px rgba(17,17,24,0.06);
+  }
+  .project-card::before { opacity: 0.60; }
+
+  .project-foot {
+    padding-top: 12px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .project-tools { max-width: none; }
+
+  /* ── Quote (now after projects) ── */
   .transition-quote {
     min-height: auto;
     padding: 30px 20px 24px;
   }
 
-  .project-copy {
-    min-height: 0;
+  /* ── Modal: full-width panel, top+bottom dark area to click out ── */
+  .academic-modal {
+    padding: 72px 0 56px;
+  }
+  .modal-panel {
+    width: 100%;
+    max-height: calc(100svh - 128px);
   }
 
-  .project-foot {
-    align-items: flex-start;
-    flex-direction: column;
-  }
+  .modal-header { padding: 20px 20px 14px; }
+  .modal-body   { padding: 18px 20px 32px; }
 
-  .project-tools {
-    max-width: none;
-  }
-
-  .modal-body {
-    padding: 28px 22px 34px;
-  }
+  /* Modal meta: 2×2 grid instead of stacked */
+  .modal-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -955,16 +1016,16 @@ body.academic-modal-active #main-nav {
     </button>
   </section>
 
-  <section class="transition-quote" aria-label="Design statement">
-    <p>I research what exists, <em>design what is missing,</em> and build the systems that bring complex ideas into form.</p>
-  </section>
-
   <section class="projects-section" aria-label="Academic projects">
     <div class="projects-header">
       <div class="section-kicker">Academic archive</div>
     </div>
 
     <div class="project-grid" id="project-grid"></div>
+  </section>
+
+  <section class="transition-quote" aria-label="Design statement">
+    <p>I research what exists, <em>design what is missing,</em> and build the systems that bring complex ideas into form.</p>
   </section>
 </main>
 
@@ -986,14 +1047,16 @@ body.academic-modal-active #main-nav {
 <div class="academic-modal" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-panel">
     <button class="modal-close" id="modal-close" type="button" aria-label="Close modal">&times;</button>
+    <div class="modal-header">
+      <div class="card-number" id="modal-number"></div>
+      <div class="modal-category card-tag" id="modal-category"></div>
+      <h2 class="modal-title" id="modal-title"></h2>
+    </div>
     <div class="modal-gallery" id="modal-gallery">
       <button class="gallery-nav gallery-prev hidden" id="gallery-prev" type="button" aria-label="Previous image">&#8249;</button>
       <button class="gallery-nav gallery-next hidden" id="gallery-next" type="button" aria-label="Next image">&#8250;</button>
     </div>
     <div class="modal-body">
-      <div class="card-number" id="modal-number"></div>
-      <div class="modal-category card-tag" id="modal-category"></div>
-      <h2 class="modal-title" id="modal-title"></h2>
       <p class="modal-desc" id="modal-desc"></p>
       <div class="modal-meta">
         <div><span class="meta-label">Studio</span><strong id="modal-studio"></strong></div>
@@ -1238,6 +1301,15 @@ body.academic-modal-active #main-nav {
     img.loading = 'eager';
     img.decoding = 'async';
     img.className = 'active';
+    img.addEventListener('click', function () {
+      if (document.fullscreenElement || document.webkitFullscreenElement) {
+        (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+      } else if (gallery.requestFullscreen) {
+        gallery.requestFullscreen();
+      } else if (gallery.webkitRequestFullscreen) {
+        gallery.webkitRequestFullscreen();
+      }
+    });
     gallery.insertBefore(img, prev);
   }
 
