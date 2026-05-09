@@ -254,8 +254,8 @@ footer {
   to   { opacity: 1; }
 }
 @keyframes navLinkIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateX(-44px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 /* Hard-lock: overlay must never show on desktop regardless of JS state */
 @media (min-width: 769px) { #nav-overlay { display: none !important; } }
@@ -264,36 +264,43 @@ footer {
 }
 .overlay-nav {
   display: flex; flex-direction: column;
-  align-items: stretch;
-  width: 100%; flex: 1;
+  align-items: center; justify-content: center;
+  width: 100%;
   pointer-events: auto;
+  gap: 4px;
 }
 .overlay-nav a {
   font-family: var(--serif);
-  font-size: clamp(28px, 9vw, 42px);
+  font-size: clamp(30px, 9vw, 44px);
   font-weight: 300; font-style: italic;
   color: var(--black); text-decoration: none;
-  flex: 1; min-height: 60px;
+  padding: 10px 48px;
   display: flex; align-items: center; justify-content: center;
   text-align: center;
-  transition: color .2s;
+  transition: color .2s, letter-spacing .2s;
   pointer-events: auto;
+  position: relative;
 }
+.overlay-nav a::after {
+  content: ''; position: absolute; bottom: 6px; left: 48px; right: 48px;
+  height: 1px; background: var(--gold); transform: scaleX(0);
+  transform-origin: left; transition: transform .28s ease;
+}
+.overlay-nav a:hover::after,
+.overlay-nav a.active::after { transform: scaleX(1); }
 .overlay-nav a:hover,
-.overlay-nav a.active { color: var(--gold-dk); }
+.overlay-nav a.active { color: var(--gold-dk); letter-spacing: .02em; }
 
 /* ── MOBILE — GLOBAL ────────────────────── */
 @media (max-width: 768px) {
   html { overflow-x: hidden; }
 
-  /* Nav: hide center links, show burger, logo pushes icons+burger right */
-  nav { padding: 0 8px 0 16px; }
+  /* Nav: hide center links and all right icons, show only burger */
+  nav { padding: 0 16px 0 16px; }
   .nav-links { display: none; }
   #nav-logo { margin-right: auto; }
-  .nav-right { gap: 4px; }
+  .nav-right { display: none; }
   #nav-burger { display: flex; }
-  /* Larger touch targets on mobile */
-  .nav-icon { width: 44px; height: 44px; }
 
   /* Shared page hero padding */
   .page-hero { padding: 110px 20px 48px; }
