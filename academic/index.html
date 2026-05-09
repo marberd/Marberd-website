@@ -776,8 +776,19 @@ body.academic-modal-active #main-nav {
 @media (max-width: 760px) {
   .academic-hero {
     min-height: auto;
-    padding: 90px 20px 52px;
+    padding: 90px 20px 72px;
+    /* Mangrove image ghosted behind the dark grid — visible at ~28% through overlay */
+    background:
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(17,17,24,0.70) 0%, rgba(17,17,24,0.60) 50%, rgba(17,17,24,0.82) 100%),
+      url('../assets/images/academic/thumbs/mangrove-hero.webp') 68% 22% / cover no-repeat;
+    background-color: #111118;
+    background-size: 86px 86px, 86px 86px, auto, cover;
   }
+
+  /* Hide the featured Mangrove card — the image lives in the hero now */
+  .featured-card { display: none; }
 
   .hero-copy {
     transform: none;
@@ -791,7 +802,18 @@ body.academic-modal-active #main-nav {
     font-size: 15px;
   }
 
-  .hero-meta,
+  /* Meta: 3 stats in a single compact row */
+  .hero-meta {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    max-width: none;
+    margin-top: 20px;
+  }
+  .hero-meta div   { padding-top: 8px; }
+  .hero-meta strong { font-size: clamp(18px, 5vw, 26px); }
+  .hero-meta span  { font-size: 6.5px; letter-spacing: 0.10em; margin-top: 4px; }
+
+  /* Project grid & modal stay stacked */
   .project-grid,
   .modal-meta {
     grid-template-columns: 1fr;
