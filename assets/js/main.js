@@ -84,16 +84,47 @@ if (nav) {
     if (href === path) a.classList.add('active');
   });
 
+  function spawnDiamonds() {
+    const r = burger.getBoundingClientRect();
+    const bx = r.left + r.width  / 2;
+    const by = r.top  + r.height / 2;
+    const gems = [
+      { tx: '-100px', ty:  '140px', size: 14, delay: 0.00, rot:  '45deg', bg: 'rgba(184,148,106,0.65)' },
+      { tx: '-190px', ty:   '70px', size:  9, delay: 0.06, rot:  '20deg', bg: 'rgba(240,225,200,0.55)' },
+      { tx:  '-55px', ty:  '280px', size: 22, delay: 0.03, rot:  '35deg', bg: 'rgba(184,148,106,0.45)' },
+      { tx: '-260px', ty:  '160px', size: 11, delay: 0.09, rot:  '60deg', bg: 'rgba(255,255,255,0.40)' },
+      { tx: '-150px', ty:  '400px', size: 17, delay: 0.05, rot:  '25deg', bg: 'rgba(184,148,106,0.55)' },
+      { tx: '-330px', ty:  '100px', size:  7, delay: 0.12, rot:  '50deg', bg: 'rgba(240,225,200,0.45)' },
+      { tx: '-210px', ty:  '490px', size: 13, delay: 0.02, rot:  '15deg', bg: 'rgba(255,255,255,0.35)' },
+      { tx:  '-40px', ty:  '530px', size:  8, delay: 0.08, rot:  '40deg', bg: 'rgba(184,148,106,0.50)' },
+    ];
+    gems.forEach(g => {
+      const d = document.createElement('div');
+      d.className = 'nav-diamond';
+      d.style.cssText =
+        `left:${bx - g.size/2}px;top:${by - g.size/2}px;` +
+        `width:${g.size}px;height:${g.size}px;` +
+        `background:${g.bg};` +
+        `--tx:${g.tx};--ty:${g.ty};--rot:${g.rot};` +
+        `animation-delay:${g.delay}s;`;
+      document.body.appendChild(d);
+      d.addEventListener('animationend', () => d.remove(), { once: true });
+    });
+  }
+
   function openMenu() {
+    document.querySelectorAll('.nav-diamond').forEach(d => d.remove());
     nav.classList.remove('nav-hidden');
     overlay.classList.add('open');
     burger.classList.add('open');
     burger.setAttribute('aria-expanded', 'true');
     burger.setAttribute('aria-label', 'Close navigation');
     document.body.style.overflow = 'hidden';
+    spawnDiamonds();
   }
 
   function closeMenu() {
+    document.querySelectorAll('.nav-diamond').forEach(d => d.remove());
     overlay.classList.remove('open');
     burger.classList.remove('open');
     burger.setAttribute('aria-expanded', 'false');
