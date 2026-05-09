@@ -826,74 +826,74 @@
 
 /* ── CAREER TIMELINE ───────────────────────────────── */
 .ab-col-label {
-  font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
-  color: var(--gold-dk); text-transform: uppercase; margin-bottom: 20px;
+  font-family: var(--mono); font-size: 8px; letter-spacing: 0.22em;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 14px;
 }
 .ab-timeline-sec {
-  background: #F4F0E8; padding: 64px 60px 48px;
-  border-top: 0.5px solid rgba(0,0,0,0.1);
+  background: var(--black); padding: 36px 60px 28px;
+  border-top: 0.5px solid rgba(255,255,255,0.05);
 }
 .ab-tl-inner { max-width: 1200px; margin: 0 auto; }
-.ab-tl-legend { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 36px; }
+.ab-tl-legend { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
 .ab-tl-legend-item {
-  display: flex; align-items: center; gap: 8px;
-  font-family: var(--mono); font-size: 8.5px; letter-spacing: 0.18em;
-  color: #909099; text-transform: uppercase;
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 7.5px; letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.38); text-transform: uppercase;
 }
-.ab-tl-legend-pip { width: 20px; height: 4px; border-radius: 1px; flex-shrink: 0; }
+.ab-tl-legend-pip { width: 12px; height: 2px; border-radius: 1px; flex-shrink: 0; }
 .ab-tl-legend-pip--edu  { background: var(--gold); }
-.ab-tl-legend-pip--work { background: #1a1a1a; }
-.ab-tl-legend-pip--vol  { background: #909099; }
-.ab-tl-legend-pip--cert { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+.ab-tl-legend-pip--work { background: rgba(255,255,255,0.65); }
+.ab-tl-legend-pip--vol  { background: rgba(255,255,255,0.25); }
+.ab-tl-legend-pip--cert { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
 .ab-tl-chart { overflow: hidden; }
 .ab-tl-chart-inner {
-  width: 100%; position: relative; padding-bottom: 44px;
+  width: 100%; position: relative; padding-bottom: 22px;
 }
 .ab-tl-gridlines { position: absolute; inset: 0; bottom: 0; pointer-events: none; z-index: 0; }
 .ab-tl-gridline {
-  position: absolute; top: 0; bottom: 44px;
-  width: 0; border-left: 1px dashed rgba(0,0,0,0.09);
+  position: absolute; top: 0; bottom: 22px;
+  width: 0; border-left: 1px dashed rgba(255,255,255,0.07);
 }
 .ab-tl-rows { position: relative; z-index: 1; }
-.ab-tl-row { position: relative; height: 36px; margin-bottom: 2px; }
+.ab-tl-row { position: relative; height: 18px; margin-bottom: 1px; }
 .ab-tl-row-label {
-  position: absolute; top: 4px;
-  font-family: var(--sans); font-size: 9.5px; font-weight: 500;
-  color: #1a1a1a; white-space: nowrap; pointer-events: none;
+  position: absolute; top: 2px;
+  font-family: var(--sans); font-size: 7.5px; font-weight: 500;
+  color: rgba(255,255,255,0.55); white-space: nowrap; pointer-events: none;
   z-index: 2; line-height: 1; max-width: 30%; overflow: hidden; text-overflow: ellipsis;
 }
 .ab-tl-bar {
-  position: absolute; bottom: 7px; height: 9px; border-radius: 1px;
+  position: absolute; bottom: 3px; height: 5px; border-radius: 1px;
   cursor: crosshair; width: 0;
   transition: width .85s cubic-bezier(.16,1,.3,1), opacity .2s, transform .2s;
   transition-delay: var(--bar-delay, 0s);
 }
 .ab-tl-chart-inner.tl-go .ab-tl-bar { width: var(--bar-w); }
-.ab-tl-bar:hover { opacity: .75; transform: scaleY(1.4); transform-origin: bottom; }
+.ab-tl-bar:hover { opacity: .65; transform: scaleY(1.6); transform-origin: bottom; }
 .ab-tl-bar--edu  { background: var(--gold); }
-.ab-tl-bar--work { background: #1a1a1a; }
-.ab-tl-bar--vol  { background: rgba(144,144,153,0.45); }
+.ab-tl-bar--work { background: rgba(255,255,255,0.6); }
+.ab-tl-bar--vol  { background: rgba(255,255,255,0.18); }
 .ab-tl-cert-mark {
-  position: absolute; bottom: 50px; z-index: 3;
-  width: 7px; height: 7px; border-radius: 50%;
+  position: absolute; bottom: 26px; z-index: 3;
+  width: 5px; height: 5px; border-radius: 50%;
   background: var(--gold); transform: translateX(-50%);
   cursor: crosshair; transition: transform .18s;
 }
 .ab-tl-cert-mark:hover { transform: translateX(-50%) scale(1.6); }
 .ab-tl-axis {
   position: absolute; bottom: 0; left: 0; right: 0;
-  height: 44px; border-top: 1.5px solid #1a1a1a;
+  height: 22px; border-top: 1px solid rgba(255,255,255,0.12);
 }
 .ab-tl-year {
-  position: absolute; top: 8px;
-  font-family: var(--mono); font-size: 7.5px; letter-spacing: 0.06em;
-  color: #909099; transform: translateX(-50%); white-space: nowrap;
+  position: absolute; top: 5px;
+  font-family: var(--mono); font-size: 6.5px; letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.28); transform: translateX(-50%); white-space: nowrap;
 }
-.ab-tl-year--now { color: #1a1a1a; font-weight: 700; font-size: 8px; }
+.ab-tl-year--now { color: rgba(255,255,255,0.82); font-weight: 700; font-size: 7px; }
 .ab-tl-swipe-hint {
   display: none; font-family: var(--mono); font-size: 8px;
   letter-spacing: 2px; text-transform: uppercase;
-  color: #909099; text-align: center; margin-bottom: 14px;
+  color: rgba(255,255,255,0.3); text-align: center; margin-bottom: 14px;
 }
 .ab-tl-tooltip {
   position: fixed; z-index: 10002;
@@ -917,14 +917,14 @@
   color: var(--gold-lt); margin-top: 10px; text-transform: uppercase;
 }
 @media (max-width: 900px) {
-  .ab-timeline-sec { padding: 48px 24px 40px; }
-  .ab-tl-legend { gap: 16px; }
+  .ab-timeline-sec { padding: 28px 24px 22px; }
+  .ab-tl-legend { gap: 14px; }
   .ab-tl-chart { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .ab-tl-chart-inner { min-width: 640px; }
+  .ab-tl-chart-inner { min-width: 540px; }
   .ab-tl-swipe-hint { display: block; }
 }
 @media (max-width: 600px) {
-  .ab-timeline-sec { padding: 40px 20px 32px; }
+  .ab-timeline-sec { padding: 22px 20px 18px; }
 }
 
 </style>
@@ -1021,32 +1021,6 @@
   </div>
 </div>
 
-<!-- ══ TIMELINE ════════════════════════════════════════ -->
-<section class="ab-timeline-sec">
-  <div class="ab-tl-inner">
-    <div class="ab-col-label reveal">Academic &amp; Professional Timeline</div>
-    <div class="ab-tl-legend reveal">
-      <div class="ab-tl-legend-item"><span class="ab-tl-legend-pip ab-tl-legend-pip--edu"></span>Education</div>
-      <div class="ab-tl-legend-item"><span class="ab-tl-legend-pip ab-tl-legend-pip--work"></span>Work Experience</div>
-      <div class="ab-tl-legend-item"><span class="ab-tl-legend-pip ab-tl-legend-pip--vol"></span>Volunteering</div>
-      <div class="ab-tl-legend-item"><span class="ab-tl-legend-pip ab-tl-legend-pip--cert"></span>Certification</div>
-    </div>
-    <div class="ab-tl-chart reveal">
-      <p class="ab-tl-swipe-hint" aria-hidden="true">swipe to explore</p>
-      <div class="ab-tl-chart-inner" id="pr-tl-chart">
-        <div class="ab-tl-gridlines" id="pr-tl-grid"></div>
-        <div class="ab-tl-rows"      id="pr-tl-rows"></div>
-        <div class="ab-tl-axis"      id="pr-tl-axis"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="ab-tl-tooltip" id="pr-tt" aria-hidden="true">
-  <div class="ab-tt-name"   id="pr-tt-name"></div>
-  <div class="ab-tt-role"   id="pr-tt-role"></div>
-  <div class="ab-tt-loc"    id="pr-tt-loc"></div>
-  <div class="ab-tt-period" id="pr-tt-period"></div>
-</div>
 
 <!-- ══ EXPERIENCE ═══════════════════════════════════════ -->
 <section class="pr-exp" aria-label="Work Experience">
@@ -1338,6 +1312,33 @@
 <!-- ══ EDUCATION ═══════════════════════════════════════ -->
 
 <!-- ══ CTA ══════════════════════════════════════════════ -->
+<!-- ══ TIMELINE ════════════════════════════════════════ -->
+<section class="ab-timeline-sec">
+  <div class="ab-tl-inner">
+    <div class="ab-col-label reveal">Academic &amp; Professional Timeline</div>
+    <div class="ab-tl-legend reveal">
+      <div class="ab-tl-legend-item"><span class="ab-tl-legend-pip ab-tl-legend-pip--edu"></span>Education</div>
+      <div class="ab-tl-legend-item"><span class="ab-tl-legend-pip ab-tl-legend-pip--work"></span>Work Experience</div>
+      <div class="ab-tl-legend-item"><span class="ab-tl-legend-pip ab-tl-legend-pip--vol"></span>Volunteering</div>
+      <div class="ab-tl-legend-item"><span class="ab-tl-legend-pip ab-tl-legend-pip--cert"></span>Certification</div>
+    </div>
+    <div class="ab-tl-chart reveal">
+      <p class="ab-tl-swipe-hint" aria-hidden="true">swipe to explore</p>
+      <div class="ab-tl-chart-inner" id="pr-tl-chart">
+        <div class="ab-tl-gridlines" id="pr-tl-grid"></div>
+        <div class="ab-tl-rows"      id="pr-tl-rows"></div>
+        <div class="ab-tl-axis"      id="pr-tl-axis"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="ab-tl-tooltip" id="pr-tt" aria-hidden="true">
+  <div class="ab-tt-name"   id="pr-tt-name"></div>
+  <div class="ab-tt-role"   id="pr-tt-role"></div>
+  <div class="ab-tt-loc"    id="pr-tt-loc"></div>
+  <div class="ab-tt-period" id="pr-tt-period"></div>
+</div>
+
 <section class="pr-cta-band reveal">
   <div class="pr-cta-inner">
     <div class="pr-cta-text">
