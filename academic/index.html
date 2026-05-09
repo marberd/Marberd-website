@@ -801,17 +801,17 @@ body.academic-modal-active #main-nav {
 }
 
 @media (max-width: 760px) {
-  /* ── Hero: taller, image zoomed in, lighter overlay ── */
+  /* ── Hero: taller, image zoomed in, ghost opacity ── */
   .academic-hero {
     min-height: 78vh;
     padding: 90px 20px 130px;
     background:
       linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
       linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(17,17,24,0.50) 0%, rgba(17,17,24,0.42) 50%, rgba(17,17,24,0.64) 100%),
-      url('../assets/images/academic/thumbs/mangrove-hero.webp') 50% 35% / cover no-repeat;
+      linear-gradient(to bottom, rgba(17,17,24,0.84) 0%, rgba(17,17,24,0.80) 50%, rgba(17,17,24,0.90) 100%),
+      url('../assets/images/academic/thumbs/mangrove-hero.webp') 50% 40% / cover no-repeat;
     background-color: #111118;
-    background-size: 86px 86px, 86px 86px, auto, 140%;
+    background-size: 86px 86px, 86px 86px, auto, 260%;
     border-bottom: none;
   }
 
@@ -826,7 +826,7 @@ body.academic-modal-active #main-nav {
   /* Breathing room between title and paragraph so image shows through */
   .hero-title {
     font-size: clamp(50px, 16vw, 70px);
-    margin-bottom: 36px;
+    margin-bottom: 100px;
   }
 
   .hero-intro {
