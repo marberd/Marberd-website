@@ -283,13 +283,25 @@
 @media (max-width: 768px) {
   /* Hero: full-bleed cinematic photo, text anchored to bottom */
   .hero        { height: 100svh; min-height: 0; background: #0d0d0d; }
-  .hero__photo { background-position: center 20%; background-size: auto 72%; }
-  .hero__bloom { display: none; }
+  .hero__photo {
+    background-position: center 20%;
+    background-size: auto 88%;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 11%, black 83%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 11%, black 83%, transparent 100%);
+  }
+  .hero__bloom {
+    display: block;
+    inset: 0;
+    background-position: center 20%;
+    background-size: auto 88%;
+    filter: blur(28px) brightness(0.82) saturate(1.15);
+    mix-blend-mode: normal;
+  }
   .hero__gradient {
     display: block;
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.38) 0%, transparent 22%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.84) 100%);
+    background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.18) 65%, rgba(0,0,0,0.62) 100%);
     z-index: 2;
     pointer-events: none;
   }
@@ -303,8 +315,25 @@
   }
   .hero__mobile-photo { display: none; }
   .hero__headline     { margin-top: 22px; margin-bottom: 10px; }
-  .hero__name    { color: #cdc6be; text-shadow: 0 1px 12px rgba(0,0,0,0.18); }
-  .hero__surname { color: var(--gold); }
+  .hero__name    {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: rgba(210,195,170,0.7);
+    text-shadow: none;
+    display: block;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .hero__surname {
+    font-size: clamp(50px, 13vw, 68px);
+    letter-spacing: -2px;
+    color: rgba(255,255,255,0.95);
+    line-height: 0.86;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
   .hero__divider { display: none; }
   .hero__eyebrow { color: rgba(200,170,100,0.9); margin: auto 0 12px; }
   .hero__subhead { color: rgba(255,255,255,0.78); font-size: 13px; max-width: 100%; margin-top: 10px; margin-bottom: 18px; line-height: 1.6; }
