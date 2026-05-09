@@ -333,6 +333,11 @@ footer {
   .content-wrap { padding: 48px 20px; }
 }
 
+/* ── SMALL PHONES (≤480px) — GLOBAL ────── */
+@media (max-width: 480px) {
+  nav { padding: 0 12px; }
+}
+
 /* ── SCROLL REVEAL ──────────────────────── */
 .reveal {
   opacity: 0; transform: translateY(22px);
