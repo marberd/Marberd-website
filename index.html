@@ -282,7 +282,7 @@
 /* ── MOBILE ─────────────────── */
 @media (max-width: 768px) {
   /* Hero: full-bleed cinematic photo, text anchored to bottom */
-  .hero        { height: auto; min-height: 100svh; background: #060402; overflow: visible; }
+  .hero        { height: 100svh; min-height: 0; background: #060402; }
   .hero__photo { background-position: center 20%; background-size: cover; }
   .hero__bloom { display: none; }
   .hero__gradient {
@@ -299,10 +299,10 @@
   .hero__gradient::after  { content: none; }
   .hero__content {
     max-width: 100%;
-    padding: 68svh 24px 44px;
+    padding: 110px 24px 44px;
     justify-content: flex-start;
     min-height: 0;
-    height: auto;
+    height: 100%;
     background: transparent;
   }
   .hero__mobile-photo { display: none; }
@@ -377,7 +377,7 @@
 
 /* ── SMALL PHONES (≤480px) ── */
 @media (max-width: 480px) {
-  .hero__content { padding: 68svh 20px 36px; }
+  .hero__content { padding: 72px 20px 36px; }
   .hero__headline { margin-top: 16px; }
   .hero__subhead { font-size: 12px; margin-top: 8px; margin-bottom: 14px; }
   .hero__stats   { margin-bottom: 18px; }
