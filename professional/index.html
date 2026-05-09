@@ -923,8 +923,28 @@
   .ab-tl-chart-inner { min-width: 540px; }
   .ab-tl-swipe-hint { display: block; }
 }
+@media (max-width: 768px) {
+  /* Full-width, no scroll — bars are % so they scale naturally */
+  .ab-timeline-sec { padding: 20px 20px 14px; }
+  .ab-tl-legend { gap: 10px; margin-bottom: 12px; }
+  .ab-tl-legend-item { font-size: 6px; letter-spacing: 0.12em; }
+  .ab-tl-legend-pip { width: 10px; }
+  .ab-tl-chart { overflow-x: hidden; }
+  .ab-tl-chart-inner { min-width: 0; padding-bottom: 18px; }
+  .ab-tl-gridline { bottom: 18px; }
+  .ab-tl-row-label { display: none; }
+  .ab-tl-swipe-hint { display: none; }
+  .ab-tl-row { height: 9px; margin-bottom: 1px; }
+  .ab-tl-bar { height: 3px; bottom: 1px; border-radius: 0; }
+  .ab-tl-cert-mark { width: 4px; height: 4px; bottom: 22px; }
+  .ab-tl-axis { height: 18px; border-top-width: 0.5px; }
+  .ab-tl-year { font-size: 5.5px; top: 4px; letter-spacing: 0; }
+  .ab-tl-year--now { font-size: 6px; }
+  /* Show only odd-position years, always keep 'now' marker */
+  .ab-tl-axis .ab-tl-year:nth-child(2n):not(.ab-tl-year--now) { display: none; }
+}
 @media (max-width: 600px) {
-  .ab-timeline-sec { padding: 22px 20px 18px; }
+  .ab-timeline-sec { padding: 16px 16px 12px; }
 }
 
 </style>
