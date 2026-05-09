@@ -290,104 +290,80 @@
 
 /* ── BEYOND THE WORK ── */
 .ab-beyond {
-  background: var(--ab-cream);
-  padding: 64px 60px;
+  background: var(--white);
+  padding: 72px 60px 80px;
+  border-top: 1px solid var(--border);
 }
 .ab-beyond-inner { max-width: 1200px; margin: 0 auto; }
 .ab-beyond-eyebrow {
   font-family: var(--mono);
   font-size: 9px;
-  letter-spacing: 0.22em;
-  color: var(--ab-gold);
+  letter-spacing: 0.28em;
+  color: var(--gold-dk);
   text-transform: uppercase;
-  margin-bottom: 28px;
+  margin-bottom: 40px;
+  display: flex; align-items: center; gap: 12px;
 }
+.ab-beyond-eyebrow::after { content:''; flex:1; height:1px; background:rgba(184,148,106,0.25); }
 .ab-beyond-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
 }
 .ab-card {
-  background: #fff;
-  border: 0.5px solid rgba(0,0,0,0.1);
-  padding: 28px;
+  background: var(--white);
+  padding: 28px 24px 24px;
+  position: relative;
+  transition: background .2s;
 }
-.ab-card-icon {
-  width: 22px;
-  height: 22px;
-  margin-bottom: 14px;
-  display: block;
+.ab-card:hover { background: var(--paper); }
+.ab-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background .2s;
+}
+.ab-card:hover::before { background: var(--gold); }
+.ab-card-index {
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 18px;
 }
 .ab-card-title {
   font-family: var(--serif);
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 400;
-  color: var(--ab-black);
+  font-style: italic;
+  color: var(--black);
   margin-bottom: 10px;
+  line-height: 1.1;
 }
 .ab-card-text {
   font-family: var(--sans);
-  font-size: 12.5px;
-  line-height: 1.75;
-  color: var(--ab-muted);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--mid);
 }
 .ab-lang-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
+  gap: 6px;
+  margin-top: 14px;
 }
 .ab-lang-pill {
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 7.5px;
   letter-spacing: 0.14em;
-  color: var(--ab-gold);
-  border: 1px solid var(--ab-gold);
+  color: var(--gold-dk);
+  border: 1px solid rgba(184,148,106,0.4);
   background: none;
-  padding: 4px 10px;
+  padding: 3px 8px;
 }
-.ab-card-dark {
-  grid-column: 1 / -1;
-  background: var(--ab-black);
-  border: none;
-  padding: 40px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-}
-.ab-card-dark-text {
-  font-family: var(--serif);
-  font-size: clamp(18px, 2.2vw, 26px);
-  font-style: italic;
-  font-weight: 400;
-  color: var(--ab-cream);
-  line-height: 1.35;
-  flex: 1;
-}
-.ab-card-dark-text em {
-  font-style: normal;
-  color: var(--ab-gold);
-}
-.ab-cta-link {
-  font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ab-black);
-  background: var(--ab-gold);
-  padding: 12px 24px;
-  text-decoration: none;
-  white-space: nowrap;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  transition: background 0.2s;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-.ab-cta-link:hover { background: #6d5830; }
 
 /* ── BLEW UP ANIMATION ── */
 .blew-up-word {
@@ -655,10 +631,8 @@
 
   .ab-tl-legend { gap: 14px; }
 
-  .ab-beyond { padding: 48px 20px; }
-  .ab-beyond-grid { grid-template-columns: 1fr; }
-  .ab-card-dark { flex-direction: column; align-items: flex-start; gap: 20px; padding: 28px 20px; }
-  .ab-cta-link { width: 100%; justify-content: center; }
+  .ab-beyond { padding: 48px 20px 56px; }
+  .ab-beyond-grid { grid-template-columns: 1fr 1fr; }
 
   .ab-pills { gap: 8px; }
   .ab-pill { font-size: 8px; padding: 6px 12px; }
@@ -856,90 +830,45 @@
 <!-- ══ SECTION 6, BEYOND THE WORK ══════════════════ --><span id="ab-beyond" style="display:block;position:relative;top:-80px;visibility:hidden"></span>
 <section class="ab-beyond">
   <div class="ab-beyond-inner">
-    <div class="ab-beyond-eyebrow">BEYOND THE WORK</div>
+    <div class="ab-beyond-eyebrow reveal">Beyond the Work</div>
     <div class="ab-beyond-grid">
 
       <!-- CARD 1: Choir Director -->
       <div class="ab-card reveal">
-        <svg class="ab-card-icon" viewBox="0 0 22 22" fill="none" stroke="#8a6f3e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="14" cy="4" r="2"/>
-          <path d="M14 6v8"/>
-          <path d="M14 10l-6 2v4"/>
-          <circle cx="8" cy="18" r="2"/>
-          <circle cx="14" cy="16" r="2"/>
-        </svg>
+        <div class="ab-card-index">01</div>
         <div class="ab-card-title">Choir Director</div>
-        <p class="ab-card-text">Leading the Spanish choir at The Church of St. Catherine of Genoa, New York since 2021. Music as architecture: structure, rhythm, and humanity in every rehearsal.</p>
+        <p class="ab-card-text">Leading the Spanish choir in New York since 2021. Structure, rhythm, and precision — the same disciplines that make a good building make a good ensemble.</p>
       </div>
 
       <!-- CARD 2: Traveler -->
       <div class="ab-card reveal">
-        <svg class="ab-card-icon" viewBox="0 0 22 22" fill="none" stroke="#8a6f3e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="4" y="8" width="14" height="11"/>
-          <path d="M8 8V6h6v2"/>
-          <line x1="4" y1="13" x2="18" y2="13"/>
-        </svg>
+        <div class="ab-card-index">02</div>
         <div class="ab-card-title">Traveler</div>
-        <p class="ab-card-text">Twenty-two countries and counting. Travel is fieldwork for an architect. Every city is a built argument about how people should live, gather, and move, and every culture leaves its fingerprints on the way space is made. The notebooks fill faster than the passport stamps.</p>
+        <p class="ab-card-text">Every city is a built argument about how people should live. The notebooks fill faster than the passport stamps.</p>
         <div class="ab-lang-pills">
           <span class="ab-lang-pill">22 COUNTRIES</span>
           <span class="ab-lang-pill">5 CONTINENTS</span>
         </div>
       </div>
 
-      <!-- CARD 3: Painter -->
-      <div class="ab-card reveal">
-        <svg class="ab-card-icon" viewBox="0 0 22 22" fill="none" stroke="#8a6f3e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 17l9-9 4 4-9 9-4-4z"/>
-          <path d="M12 8l2-2 2 2-2 2-2-2z"/>
-          <path d="M18 3l1 1-1 1-1-1 1-1z"/>
-          <path d="M3 21l1-3"/>
-        </svg>
-        <div class="ab-card-title">Painter</div>
-        <p class="ab-card-text">Visual art as a second language. The same eye that reads a Revit model finds meaning in color, form, and composition on canvas.</p>
-      </div>
-
       <!-- CARD 3: Polyglot -->
       <div class="ab-card reveal">
-        <svg class="ab-card-icon" viewBox="0 0 22 22" fill="none" stroke="#8a6f3e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="9"/>
-          <path d="M11 2a14 14 0 010 18M11 2a14 14 0 000 18"/>
-          <path d="M2 11h18"/>
-        </svg>
+        <div class="ab-card-index">03</div>
         <div class="ab-card-title">Polyglot</div>
-        <p class="ab-card-text">Four languages are not just a skill, they are a worldview. Every project benefits from the ability to think, negotiate, and connect across cultures.</p>
+        <p class="ab-card-text">Four languages are a worldview. Every project benefits from the ability to think, negotiate, and connect across cultures without a translator.</p>
         <div class="ab-lang-pills">
-          <span class="ab-lang-pill">ENGLISH</span>
-          <span class="ab-lang-pill">ESPAÑOL</span>
-          <span class="ab-lang-pill">ITALIANO</span>
-          <span class="ab-lang-pill">ΕΛΛΗΝΙΚΆ</span>
+          <span class="ab-lang-pill">EN</span>
+          <span class="ab-lang-pill">ES</span>
+          <span class="ab-lang-pill">IT</span>
+          <span class="ab-lang-pill">EL</span>
         </div>
       </div>
 
-      <!-- CARD 4: Dancer -->
+      <!-- CARD 4: Mentor -->
       <div class="ab-card reveal">
-        <svg class="ab-card-icon" viewBox="0 0 22 22" fill="none" stroke="#8a6f3e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="13" cy="3.5" r="1.5"/>
-          <path d="M11 6l-3 5 3 2"/>
-          <path d="M11 6l2 3 3 1"/>
-          <path d="M8 11l-1 5"/>
-          <path d="M14 10l1 4-2 3"/>
-        </svg>
-        <div class="ab-card-title">Dancer</div>
-        <p class="ab-card-text">Movement, timing, and spatial awareness on the floor and in the model. Dance is the discipline of knowing where your body is in space at all times.</p>
-      </div>
-
-      <!-- CARD 5: Mentor -->
-      <div class="ab-card reveal">
-        <svg class="ab-card-icon" viewBox="0 0 22 22" fill="none" stroke="#8a6f3e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="7" cy="4" r="2"/>
-          <path d="M7 6v5M4 11h6"/>
-          <circle cx="15" cy="6" r="1.5"/>
-          <path d="M15 8v4M13 12h4"/>
-          <path d="M5 17l2-3 3 3M13 17l1-2 3 2"/>
-        </svg>
+        <div class="ab-card-index">04</div>
         <div class="ab-card-title">Mentor</div>
-        <p class="ab-card-text">Mentor, ACE Mentorship Program, New York, 2018 to 2020. Two years guiding high school students exploring careers in architecture, construction, and engineering. The next generation needs to see this work is for them too.</p>
+        <p class="ab-card-text">ACE Mentorship Program, New York, 2018–2020. Two years guiding high school students toward careers in architecture and engineering. The next generation needs to see this work is for them.</p>
       </div>
 
     </div>
