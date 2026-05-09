@@ -290,8 +290,8 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 150% 62% at 50% 112%, rgba(4,2,1,0.97) 0%, rgba(4,2,1,0.58) 34%, transparent 56%),
-      linear-gradient(to bottom, rgba(5,3,1,0.42) 0%, transparent 22%);
+      linear-gradient(to top, rgba(4,2,1,0.97) 0%, rgba(4,2,1,0.82) 28%, rgba(4,2,1,0.38) 50%, transparent 66%),
+      linear-gradient(to bottom, rgba(5,3,1,0.48) 0%, transparent 20%);
     z-index: 2;
     pointer-events: none;
   }
@@ -299,14 +299,14 @@
   .hero__gradient::after  { content: none; }
   .hero__content {
     max-width: 100%;
-    padding: 110px 24px 44px;
-    justify-content: flex-start;
+    padding: 0 24px 52px;
+    justify-content: flex-end;
     min-height: 0;
     height: 100%;
     background: transparent;
   }
   .hero__mobile-photo { display: none; }
-  .hero__headline     { margin-top: 28px; margin-bottom: 12px; }
+  .hero__headline     { margin: 0 0 10px; }
   .hero__name {
     font-family: var(--mono);
     font-size: 8px;
@@ -334,11 +334,11 @@
       0 5px 22px rgba(0,0,0,0.55);
   }
   .hero__divider { display: none; }
-  .hero__eyebrow { color: rgba(200,170,100,0.9); margin: 0 0 12px; }
-  .hero__subhead { color: rgba(255,255,255,0.78); font-size: 13px; max-width: 100%; margin-top: 32px; margin-bottom: 18px; line-height: 1.6; }
+  .hero__eyebrow { color: rgba(200,170,110,0.82); margin: 0; }
+  .hero__subhead { display: none; }
 
-  /* Stats: compact single row */
-  .hero__stats { flex-wrap: nowrap; gap: 0; margin-top: auto; margin-bottom: 22px; }
+  /* Stats: separated by hairline, anchored above CTA */
+  .hero__stats { flex-wrap: nowrap; gap: 0; margin-top: 20px; margin-bottom: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.12); }
   .hstat       { flex: 1; padding: 0 10px 0 0; border: none; min-width: 0; }
   .hstat:not(:first-child) { padding-left: 10px; border-left: 1px solid rgba(255,255,255,0.18); }
   .hstat-n     { font-size: 22px; color: #fff; }
@@ -377,10 +377,9 @@
 
 /* ── SMALL PHONES (≤480px) ── */
 @media (max-width: 480px) {
-  .hero__content { padding: 72px 20px 36px; }
-  .hero__headline { margin-top: 16px; }
-  .hero__subhead { font-size: 12px; margin-top: 8px; margin-bottom: 14px; }
-  .hero__stats   { margin-bottom: 18px; }
+  .hero__content { padding: 0 20px 40px; }
+  .hero__headline { margin: 0 0 8px; }
+  .hero__stats   { margin-top: 16px; margin-bottom: 16px; }
   .hstat-n       { font-size: 19px; }
 }
 
