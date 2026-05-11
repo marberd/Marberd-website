@@ -1032,7 +1032,7 @@
 }
 .pr-proj-modal-img {
   width: 100%; height: 100%; object-fit: cover; display: block;
-  transition: opacity 0.20s ease;
+  will-change: transform;
 }
 .pr-pmod-swipe-hint {
   position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
@@ -1921,40 +1921,64 @@
   });
   var imgWrap = modImg.parentElement;
   var imgDrag = null;
+  var imgAnimCleanup = null;
+
+  function cancelImgAnim() {
+    if (imgAnimCleanup) { modImg.removeEventListener('transitionend', imgAnimCleanup); imgAnimCleanup = null; }
+    modImg.style.transition = 'none';
+    modImg.style.transform = '';
+  }
 
   function imgSnapBack() {
-    modImg.style.transition = 'transform 0.32s cubic-bezier(.16,1,.3,1)';
+    cancelImgAnim();
+    modImg.style.transition = 'transform 0.3s cubic-bezier(.16,1,.3,1)';
     modImg.style.transform = 'translateX(0)';
-    setTimeout(function () { modImg.style.transition = ''; modImg.style.transform = ''; }, 340);
+    imgAnimCleanup = function () {
+      modImg.removeEventListener('transitionend', imgAnimCleanup);
+      imgAnimCleanup = null;
+      modImg.style.transition = '';
+      modImg.style.transform = '';
+    };
+    modImg.addEventListener('transitionend', imgAnimCleanup);
   }
 
   function imgSlide(dx) {
     var goNext = dx < 0;
-    var newIdx = state.idx + (goNext ? 1 : -1);
-    newIdx = Math.max(0, Math.min(newIdx, state.images.length - 1));
+    var newIdx = Math.max(0, Math.min(state.idx + (goNext ? 1 : -1), state.images.length - 1));
     if (newIdx === state.idx) { imgSnapBack(); return; }
-    var exitX = goNext ? -window.innerWidth : window.innerWidth;
-    modImg.style.transition = 'transform 0.22s cubic-bezier(.4,0,.2,1), opacity 0.18s ease';
+    var vw = imgWrap.offsetWidth;
+    var exitX = goNext ? -vw : vw;
+    cancelImgAnim();
+    modImg.style.transition = 'transform 0.18s cubic-bezier(.4,0,.6,1)';
     modImg.style.transform = 'translateX(' + exitX + 'px)';
-    modImg.style.opacity = '0';
-    setTimeout(function () {
+    imgAnimCleanup = function () {
+      modImg.removeEventListener('transitionend', imgAnimCleanup);
+      imgAnimCleanup = null;
       state.idx = newIdx;
       renderModal();
       modImg.style.transition = 'none';
       modImg.style.transform = 'translateX(' + (-exitX) + 'px)';
-      modImg.style.opacity = '0';
-      void modImg.offsetWidth;
-      modImg.style.transition = 'transform 0.28s cubic-bezier(.16,1,.3,1), opacity 0.2s ease';
-      modImg.style.transform = 'translateX(0)';
-      modImg.style.opacity = '1';
-      setTimeout(function () { modImg.style.transition = ''; modImg.style.opacity = ''; }, 300);
-    }, 200);
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          modImg.style.transition = 'transform 0.24s cubic-bezier(.16,1,.3,1)';
+          modImg.style.transform = 'translateX(0)';
+          imgAnimCleanup = function () {
+            modImg.removeEventListener('transitionend', imgAnimCleanup);
+            imgAnimCleanup = null;
+            modImg.style.transition = '';
+            modImg.style.transform = '';
+          };
+          modImg.addEventListener('transitionend', imgAnimCleanup);
+        });
+      });
+    };
+    modImg.addEventListener('transitionend', imgAnimCleanup);
   }
 
   imgWrap.addEventListener('touchstart', function (e) {
     if (e.touches.length !== 1) return;
+    cancelImgAnim();
     imgDrag = { x0: e.touches[0].clientX, y0: e.touches[0].clientY, isHoriz: null };
-    modImg.style.transition = 'none';
   }, { passive: true });
 
   imgWrap.addEventListener('touchmove', function (e) {
@@ -1963,7 +1987,7 @@
     var dy = e.touches[0].clientY - imgDrag.y0;
     var adx = Math.abs(dx), ady = Math.abs(dy);
     if (imgDrag.isHoriz === null && (adx > 3 || ady > 3)) imgDrag.isHoriz = adx >= ady;
-    if (imgDrag.isHoriz === false) { imgDrag = null; modImg.style.transition = ''; return; }
+    if (imgDrag.isHoriz === false) { imgDrag = null; return; }
     e.preventDefault();
     var atEdge = (dx > 0 && state.idx === 0) || (dx < 0 && state.idx === state.images.length - 1);
     modImg.style.transform = 'translateX(' + (atEdge ? dx * 0.25 : dx) + 'px)';
