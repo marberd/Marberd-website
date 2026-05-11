@@ -1002,7 +1002,7 @@
   background: rgba(4,2,1,0.72);
   opacity: 0; visibility: hidden; pointer-events: none;
   transition: opacity 0.26s ease, visibility 0.26s ease;
-  touch-action: none;
+  touch-action: manipulation;
 }
 .pr-proj-modal.is-open { opacity: 1; visibility: visible; pointer-events: auto; }
 .pr-proj-modal-panel {
@@ -1029,6 +1029,7 @@
 .pr-proj-modal-img-wrap {
   position: relative; width: 100%; aspect-ratio: 4 / 3;
   flex-shrink: 0; background: #06060c; overflow: hidden; margin-top: 6px;
+  touch-action: pan-y;
 }
 .pr-proj-modal-img {
   width: 100%; height: 100%; object-fit: cover; display: block;
@@ -1986,8 +1987,11 @@
     var dx = e.touches[0].clientX - imgDrag.x0;
     var dy = e.touches[0].clientY - imgDrag.y0;
     var adx = Math.abs(dx), ady = Math.abs(dy);
-    if (imgDrag.isHoriz === null && (adx > 3 || ady > 3)) imgDrag.isHoriz = adx >= ady;
-    if (imgDrag.isHoriz === false) { imgDrag = null; return; }
+    if (imgDrag.isHoriz === null) {
+      if (adx <= 3 && ady <= 3) return;
+      imgDrag.isHoriz = adx >= ady;
+      if (!imgDrag.isHoriz) { imgDrag = null; return; }
+    }
     e.preventDefault();
     var atEdge = (dx > 0 && state.idx === 0) || (dx < 0 && state.idx === state.images.length - 1);
     modImg.style.transform = 'translateX(' + (atEdge ? dx * 0.25 : dx) + 'px)';
@@ -2131,8 +2135,16 @@
       var dx = t.clientX - dragState.startX;
       var dy = t.clientY - dragState.startY;
       var adx = Math.abs(dx), ady = Math.abs(dy);
-      if (dragState.isHoriz === null && (adx > 3 || ady > 3)) dragState.isHoriz = adx >= ady;
-      if (dragState.isHoriz === false) { dragState = null; track.classList.remove('is-paused'); track.style.removeProperty('transform'); return; }
+      if (dragState.isHoriz === null) {
+        if (adx <= 3 && ady <= 3) return;
+        dragState.isHoriz = adx >= ady;
+        if (!dragState.isHoriz) {
+          dragState = null;
+          track.classList.remove('is-paused');
+          track.style.removeProperty('transform');
+          return;
+        }
+      }
       e.preventDefault();
       dragState.moved = true;
       track.style.transform = 'translateX(' + (dragState.baseX + dx) + 'px)';
