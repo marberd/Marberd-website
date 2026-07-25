@@ -166,7 +166,14 @@
 
 
 /* ── SELECTED WORK ──────────── */
-.work-strip { padding: 80px 60px; background: var(--paper); }
+.work-strip { padding: 80px 60px; background: linear-gradient(to bottom, var(--white) 0, var(--paper) 220px); }
+
+/* Page-bottom CTA */
+.page-cta {
+  background: var(--paper);
+  padding: 8px 60px 72px;
+}
+.page-cta__links { justify-content: center; }
 .work-inner { max-width: 1200px; margin: 0 auto; }
 .work-header {
   display: flex; justify-content: space-between; align-items: baseline;
@@ -348,6 +355,11 @@
   }
   .h-link-ghost:hover { border: none; color: var(--gold); }
 
+  /* Page-bottom CTA sits on paper, not the dark hero photo */
+  .page-cta { padding: 0 20px 56px; }
+  .page-cta .h-link-ghost { color: var(--muted); }
+  .page-cta .h-link-ghost:hover { color: var(--gold-dk); }
+
   /* Selected Work: 3 compact cards in a row, tap to expand */
   .work-strip  { padding: 44px 20px 52px; }
   .work-inner  { max-width: none; }
@@ -448,10 +460,6 @@
       <div class="hstat"><span class="hstat-n">300+</span><span class="hstat-l">Active BIM 360 / ACC<br>Projects Administered</span></div>
       <div class="hstat"><span class="hstat-n">550K+</span><span class="hstat-l">SF Designed<br>Across Projects</span></div>
     </div>
-    <div class="hero__links">
-      <a class="h-link-primary" href="/professional/">View Work</a>
-      <a class="h-link-ghost" href="/contact/">Get in Touch</a>
-    </div>
   </div>
 </section>
 
@@ -524,6 +532,14 @@
         </div>
       </a>
     </div>
+  </div>
+</section>
+
+<!-- PAGE CTA -->
+<section class="page-cta">
+  <div class="hero__links page-cta__links">
+    <a class="h-link-primary" href="/professional/">View Work</a>
+    <a class="h-link-ghost" href="/contact/">Get in Touch</a>
   </div>
 </section>
 
