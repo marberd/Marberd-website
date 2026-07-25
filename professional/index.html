@@ -480,6 +480,29 @@
   cursor: pointer;
 }
 
+/* Throbbing click cursor over gallery images */
+@media (hover: hover) and (pointer: fine) {
+  .pr-gallery-stage,
+  .pr-stack .pr-gallery-stage { cursor: none; }
+  .pr-click-cursor {
+    position: fixed; top: 0; left: 0; z-index: 900;
+    width: 54px; height: 54px; margin: -27px 0 0 -27px;
+    border: 1px solid var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 8px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--gold);
+    background: rgba(10,10,14,0.55);
+    pointer-events: none; opacity: 0;
+    transition: opacity .18s ease;
+    animation: pr-cursor-throb 1.2s ease-in-out infinite;
+  }
+  .pr-click-cursor.is-visible { opacity: 1; }
+  @keyframes pr-cursor-throb {
+    0%, 100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(184,148,106,0.45); }
+    50%      { transform: scale(1.15); box-shadow: 0 0 0 12px rgba(184,148,106,0); }
+  }
+}
+
 /* All images stacked, crossfade via opacity */
 .pr-gallery-img {
   position: absolute;
@@ -1201,7 +1224,7 @@
       <span class="pr-ch-num">01</span>
       <h3 class="pr-ch-company">TPG Architecture</h3>
       <h4 class="pr-ch-role">BIM Manager &amp; Project Lead</h4>
-      <div class="pr-ch-period">Apr 2019 – Present<br>New York, NY</div>
+      <div class="pr-ch-period">Apr 2019 – Jul 2026<br>New York, NY</div>
       <span class="pr-ch-badge">Current</span>
       <div class="pr-ch-tags">
         <span class="pr-ch-tag">Revit</span>
@@ -1737,6 +1760,23 @@
     }
   });
 
+  /* ── THROBBING CLICK CURSOR OVER GALLERIES ────────────── */
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var clickCursor = document.createElement('div');
+    clickCursor.className = 'pr-click-cursor';
+    clickCursor.textContent = 'Click';
+    clickCursor.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(clickCursor);
+    document.querySelectorAll('.pr-gallery-stage').forEach(function (stage) {
+      stage.addEventListener('mouseenter', function () { clickCursor.classList.add('is-visible'); });
+      stage.addEventListener('mouseleave', function () { clickCursor.classList.remove('is-visible'); });
+      stage.addEventListener('mousemove', function (e) {
+        clickCursor.style.left = e.clientX + 'px';
+        clickCursor.style.top  = e.clientY + 'px';
+      });
+    });
+  }
+
 }());
 </script>
 
@@ -1753,7 +1793,7 @@
       role: 'Assistant Designer', loc: 'New York, NY' },
     { label: 'AMA Consulting Engineers', type: 'work', start: 2018, end: 2019,
       role: 'BIM / CAD / MEP Operator', loc: 'New York, NY' },
-    { label: 'TPG Architecture',         type: 'work', start: 2019, end: 2026,
+    { label: 'TPG Architecture',         type: 'work', start: 2019, end: 2026, endLabel: 'Jul 2026',
       role: 'BIM Manager', loc: 'New York, NY' },
     { label: 'Arch-Nimations',           type: 'work', start: 2018, end: 2024,
       role: 'Founder & Architectural Designer', loc: 'Independent Practice' },
@@ -1791,7 +1831,7 @@
     bar.dataset.name   = e.label;
     bar.dataset.role   = e.role;
     bar.dataset.loc    = e.loc;
-    bar.dataset.period = e.start + ' – ' + (e.end >= 2026 ? 'Present' : e.end);
+    bar.dataset.period = e.start + ' – ' + (e.endLabel || (e.end >= 2026 ? 'Present' : e.end));
     row.appendChild(lbl);
     row.appendChild(bar);
     rowsEl.appendChild(row);
